@@ -59,7 +59,7 @@ function UtilService($window) {
   return Util;
 }
 
-angular.module('petzioConsoleApp.util')
+angular.module('petzApp.util')
   .factory('Util', UtilService);
 
 })();

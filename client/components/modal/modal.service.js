@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('petzioConsoleApp')
+angular.module('petzApp')
   .factory('Modal', function($rootScope, $modal) {
     /**
      * Opens a modal

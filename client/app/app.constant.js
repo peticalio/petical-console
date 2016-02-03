@@ -1,5 +1,5 @@
 (function(angular, undefined) {
-  angular.module("petzioConsoleApp.constants", [])
+  angular.module("petzApp.constants", [])
 
 .constant("appConfig", {
 	"userRoles": [

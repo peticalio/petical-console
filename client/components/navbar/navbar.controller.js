@@ -14,5 +14,5 @@ class NavbarController {
     }
 }
 
-angular.module('petzioConsoleApp')
+angular.module('petzApp')
   .controller('NavbarController', NavbarController);

@@ -3,7 +3,7 @@
 describe('Controller: MainController', function() {
 
   // load the controller's module
-  beforeEach(module('petzioConsoleApp'));
+  beforeEach(module('petzApp'));
   beforeEach(module('stateMock'));
 
   var scope;

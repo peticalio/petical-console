@@ -1,16 +1,16 @@
 'use strict';
 
-angular.module('petzioConsoleApp', [
-  'petzioConsoleApp.constants',
-  'ngCookies',
-  'ngResource',
-  'ngSanitize',
-  'ui.router',
-  'ui.bootstrap'
-])
-  .config(function($urlRouterProvider, $locationProvider) {
-    $urlRouterProvider
-      .otherwise('/');
+angular
+  .module('petzApp', [
+    'petzApp.constants',
+    'ngCookies',
+    'ngResource',
+    'ngSanitize',
+    'ui.router',
+    'ui.bootstrap'
+  ])
 
+  .config(function($urlRouterProvider, $locationProvider) {
+    $urlRouterProvider.otherwise('/');
     $locationProvider.html5Mode(true);
   });

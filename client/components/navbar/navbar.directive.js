@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('petzioConsoleApp')
+angular.module('petzApp')
   .directive('navbar', () => ({
     templateUrl: 'components/navbar/navbar.html',
     restrict: 'E',

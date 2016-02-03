@@ -14,7 +14,7 @@ class MainController {
   }
 }
 
-angular.module('petzioConsoleApp')
+angular.module('petzApp')
   .controller('MainController', MainController);
 
 })();

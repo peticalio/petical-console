@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('petzioConsoleApp')
+angular.module('petzApp')
   .config(function($stateProvider) {
     $stateProvider
       .state('main', {

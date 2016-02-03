@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('petzioConsoleApp')
+angular.module('petzApp')
   .directive('footer', function() {
     return {
       templateUrl: 'components/footer/footer.html',
