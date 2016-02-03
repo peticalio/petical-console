@@ -27,8 +27,7 @@ angular
       .primaryPalette('cyan')
       .accentPalette('orange')
       .warnPalette('pink')
-      .backgroundPalette('grey')
-      .dark();
+      .backgroundPalette('grey');
     $mdThemingProvider.setDefaultTheme('console');
   }])
 ;
