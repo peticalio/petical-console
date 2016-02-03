@@ -8,11 +8,15 @@
   routesConfig.$inject = ['$stateProvider', '$locationProvider', '$urlRouterProvider'];
   function routesConfig($stateProvider, $locationProvider, $urlRouterProvider){
     $stateProvider
-      .state('app', {
-        abstract: true,
-        templateUrl:      'app/main/main.html',
-        controller:       'MainController',
-        controllerAs:     'ctrl'
+      .state('app.home', {
+        url: '^/',
+        views: {
+          '@app': {
+            templateUrl:  'app/home/home.html',
+            controller:   'HomeController',
+            controllerAs: 'ctrl'
+          }
+        }
       })
     ;
   }

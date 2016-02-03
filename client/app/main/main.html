@@ -1,121 +1,33 @@
-<navbar></navbar>
-<md-content flex layout-padding ng-controller="AppCtrl">
-  <div layout="column" layout-fill layout-align="top center">
-    <p>
-    The left sidenav will 'lock open' on a medium (>=960px wide) device.
-    </p>
-    <p>
-    The right sidenav will focus on a specific child element.
-    </p>
-    <div>
-      <md-button ng-click="toggleLeft()"
-        class="md-primary" hide-gt-md>
-        Toggle left
-      </md-button>
-    </div>
-    <div>
-      <md-button ng-click="toggleRight()"
-        ng-hide="isOpenRight()"
-        class="md-primary">
-        Toggle right
-      </md-button>
-    </div>
-  </div>
-  <div flex></div>
-</md-content>
-<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
-  <md-toolbar>
-    <h1 class="md-toolbar-tools">Sidenav Right</h1>
-  </md-toolbar>
-  <md-content ng-controller="RightCtrl" layout-padding>
-    <form>
-      <md-input-container>
-        <label for="testInput">Test input</label>
-        <input type="text" id="testInput"
-               ng-model="data" md-autofocus>
-      </md-input-container>
-    </form>
-    <md-button ng-click="close()" class="md-primary">
-      Close Sidenav Right
+<!-- main toolbar (navbar) -->
+<md-toolbar class="md-primary white md-whiteframe-z1">
+  <div class="md-toolbar-tools">
+    <md-button class="md-icon-button" aria-label="Settings">
+      <md-icon class="material-icons white" aria-label="Menu">menu</md-icon>
     </md-button>
-  </md-content>
-</md-sidenav>
-
-<!-- <div ng-controller="AppCtrl" layout="column" ng-cloak>
-  <section layout="row" flex>
-    <md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
-      <md-toolbar>
-        <h1 class="md-toolbar-tools">Sidenav Left</h1>
-      </md-toolbar>
-      <md-content layout-padding ng-controller="LeftCtrl">
-        <md-button ng-click="close()" class="md-primary" hide-gt-md>
-          Close Sidenav Left
-        </md-button>
-        <p hide-md show-gt-md>
-          This sidenav is locked open on your device. To go back to the default behavior,
-          narrow your display.
-        </p>
-      </md-content>
-    </md-sidenav>
-    <md-content flex layout-padding>
-      <div layout="column" layout-fill layout-align="top center">
-        <p>
-        The left sidenav will 'lock open' on a medium (>=960px wide) device.
-        </p>
-        <p>
-        The right sidenav will focus on a specific child element.
-        </p>
-        <div>
-          <md-button ng-click="toggleLeft()"
-            class="md-primary" hide-gt-md>
-            Toggle left
-          </md-button>
-        </div>
-        <div>
-          <md-button ng-click="toggleRight()"
-            ng-hide="isOpenRight()"
-            class="md-primary">
-            Toggle right
-          </md-button>
-        </div>
-      </div>
-      <div flex></div>
-    </md-content>
-    <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
-      <md-toolbar>
-        <h1 class="md-toolbar-tools">Sidenav Right</h1>
-      </md-toolbar>
-      <md-content ng-controller="RightCtrl" layout-padding>
-        <form>
-          <md-input-container>
-            <label for="testInput">Test input</label>
-            <input type="text" id="testInput"
-                   ng-model="data" md-autofocus>
-          </md-input-container>
-        </form>
-        <md-button ng-click="close()" class="md-primary">
-          Close Sidenav Right
-        </md-button>
-      </md-content>
-    </md-sidenav>
-  </section>
-</div> -->
-
-<!-- <header class="hero-unit" id="banner">
-  <div class="container">
-    <h1>'Allo, 'Allo!</h1>
-    <p class="lead">Kick-start your next web app with Angular Fullstack</p>
-    <img src="assets/images/yeoman.png" alt="I'm Yeoman">
+    <h3>ペティオアニマルクリニック</h3>
+    <span flex></span>
+    <md-button class="md-icon-button" aria-label="Home" ui-sref="app.home">
+      <md-icon class="material-icons white" aria-label="Home">home</md-icon>
+    </md-button>
+    <md-button class="md-icon-button" aria-label="More">
+      <!-- <md-icon>more_vert</md-icon> -->
+      <md-icon md-font-set="fa" class="fa fa-envelope" style="font-size:23px;"></md-icon>
+    </md-button>
   </div>
-</header>
-
-<div class="container">
-  <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header">Features:</h1>
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in main.awesomeThings">
-        <li><a href="#" tooltip="{{thing.info}}">{{thing.name}}</a></li>
-      </ul>
-    </div>
+</md-toolbar>
+<!-- sub toolbar -->
+<md-toolbar class="md-primary white" md-scroll-shrink="">
+  <div class="md-toolbar-tools">
+    <h3>ホーム > ダッシュボード</h3>
   </div>
-</div> -->
+</md-toolbar>
+<!-- main content -->
+<md-content layout="column" flex="">
+  <div flex="noshrink" layout-padding="" ui-view="">
+  </div>
+  <div flex="" layout-padding="" layout-align="center">
+    <p class="md-caption">
+      © 2016 petz.io - Produced by <a href="https://majimena.co.jp">majimena, Inc.</a>
+    </p>
+  </div>
+</md-content>
