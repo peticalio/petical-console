@@ -25,15 +25,30 @@
     <link rel='stylesheet' href='//fonts.googleapis.com/css?family=Roboto:900,400'/>
     <link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/notosansjapanese.css"/>
   </head>
-  <body ng-app="petzApp">
+  <body class="layout" layout="row" ng-app="petzApp">
     <!--[if lt IE 7]>
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <navbar></navbar>
-    <div ui-view=""></div>
-    <footer></footer>
+    <div style="display:flex; position:static;">
+      <md-sidenav class="md-sidenav-left md-whiteframe-z1" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+          <md-toolbar class="md-tall">
+            <h1 class="md-toolbar-tools">Sidenav Left</h1>
+          </md-toolbar>
+          <md-content layout-padding ng-controller="LeftCtrl">
+            <md-button ng-click="close()" class="md-primary" hide-gt-md>
+              Close Sidenav Left
+            </md-button>
+            <p hide-md show-gt-md>
+              This sidenav is locked open on your device. To go back to the default behavior,
+              narrow your display.
+            </p>
+          </md-content>
+      </md-sidenav>
+    </div>
+    <div ui-view="" layout="column" flex></div>
+    <!-- <footer></footer> -->
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
     <script>
