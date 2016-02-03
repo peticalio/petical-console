@@ -20,3 +20,8 @@ $fa-font-path: "../bower_components/font-awesome/fonts";
 @import '../components/footer/footer';
 @import '../components/modal/modal';
 // endinjector
+
+body {
+  font-family: 'Roboto', 'Noto Sans Japanese', sans-serif;
+  font-weight: 400;
+}

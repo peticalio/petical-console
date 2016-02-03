@@ -3,7 +3,7 @@
 angular.module('petzApp')
   .config(function($stateProvider) {
     $stateProvider
-      .state('main', {
+      .state('app', {
         url: '/',
         templateUrl: 'app/main/main.html',
         controller: 'MainController',

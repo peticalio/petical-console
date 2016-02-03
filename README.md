@@ -24,6 +24,14 @@ This project was generated with the [Angular Full-Stack Generator](https://githu
 
 Run `grunt build` for building and `grunt serve` for preview.
 
+## Build Module Running
+
+```
+gulp build
+cd dist/
+NODE_ENV=development node server/app.js
+```
+
 ## Testing
 
 Running `npm test` will run the unit tests with karma.
