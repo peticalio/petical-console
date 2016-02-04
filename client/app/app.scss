@@ -16,7 +16,6 @@ $fa-font-path: "../bower_components/font-awesome/fonts";
 
 // Component styles are injected through grunt
 // injector
-@import '../components/footer/footer';
 @import '../components/modal/modal';
 // endinjector
 
@@ -27,4 +26,38 @@ body {
 
 .white {
   color: #fff !important;
+}
+.bb {
+  border-bottom: 1px solid #ddd;
+}
+
+.side-menu {
+  padding: 8px 0;
+}
+.side-menu li {
+  margin: 0px;
+}
+md-sidenav {
+  max-width: 270px;
+}
+md-sidenav md-content ul {
+  margin: 0;
+  padding: 0;
+}
+md-sidenav md-content ul li {
+  margin: 0;
+  padding: 0;
+}
+md-sidenav md-content ul li md-icon {
+  width: 46px;
+}
+.side-menu .md-button {
+  border-radius: 0px;
+  padding: 6px 16px;
+  margin: 0;
+  max-height: 48px;
+  min-height: 48px;
+  display: block;
+  width: 100%;
+  text-align: left;
 }

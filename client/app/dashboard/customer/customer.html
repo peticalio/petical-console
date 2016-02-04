@@ -1,0 +1,8 @@
+<md-subheader class="md-no-sticky">2 line item</md-subheader>
+<md-list-item class="md-2-line bb" ng-repeat="customer in ctrl.customers">
+  <img ng-src="{{customer.face}}?20" class="md-avatar" alt="{{customer.who}}" />
+        <div class="md-list-item-text">
+          <h3>{{customer.lastName}} {{customer.firstName}} 様</h3>
+          <p>{{customer.address}}</p>
+        </div>
+</md-list-item>
