@@ -446,6 +446,7 @@ gulp.task('build', cb => {
             'build:images',
             'copy:extras',
             'copy:assets',
+            'copy:bower',
             'copy:server',
             'transpile:server',
             'build:client'
@@ -537,6 +538,11 @@ gulp.task('copy:extras', () => {
 gulp.task('copy:assets', () => {
     return gulp.src([paths.client.assets, '!' + paths.client.images])
         .pipe(gulp.dest(`${paths.dist}/${clientPath}/assets`));
+});
+
+gulp.task('copy:bower', () => {
+    return gulp.src([paths.client.bower + '**/*'])
+        .pipe(gulp.dest(`${paths.dist}/${clientPath}/bower_components`));
 });
 
 gulp.task('copy:server', () => {
