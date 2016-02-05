@@ -5,6 +5,7 @@
 class CustomerController {
   constructor($state, $stateParams, customers) {
     this.customers = customers;
+    this.selected = [];
   }
 }
 

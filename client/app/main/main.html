@@ -1,7 +1,7 @@
 <!-- main toolbar (navbar) -->
-<md-toolbar class="md-primary white md-whiteframe-z1">
+<md-toolbar class="md-primary white" ng-controller="AppCtrl">
   <div class="md-toolbar-tools">
-    <md-button class="md-icon-button" aria-label="Settings">
+    <md-button class="md-icon-button" aria-label="Menu" ng-click="toggleLeft()" hide-gt-md>
       <md-icon class="material-icons white" aria-label="Menu">menu</md-icon>
     </md-button>
     <h3>ダッシュボード</h3>
@@ -10,24 +10,17 @@
       <md-icon class="material-icons white" aria-label="Home">home</md-icon>
     </md-button>
     <md-button class="md-icon-button" aria-label="More">
-      <!-- <md-icon>more_vert</md-icon> -->
-      <md-icon md-font-set="fa" class="fa fa-envelope" style="font-size:23px;"></md-icon>
+      <md-icon class="material-icons white">more_vert</md-icon>
     </md-button>
   </div>
 </md-toolbar>
-<!-- sub toolbar -->
-<!-- <md-toolbar class="md-primary white md-whiteframe-z1" md-scroll-shrink="">
-  <div class="md-toolbar-tools">
-    <h3>ホーム > ダッシュボード</h3>
-  </div>
-</md-toolbar> -->
 <!-- main content -->
 <md-content layout="column" flex="">
   <div flex="noshrink" layout-padding="" ui-view="">
   </div>
   <div flex="" layout-padding="" layout-align="center">
     <p class="md-caption">
-      © 2016 petz.io - Produced by <a href="https://majimena.co.jp">majimena, Inc.</a>
+      © 2016 <a href="https://petz.io">petz.io</a> - Produced by <a href="https://majimena.co.jp" target="_blank">majimena, Inc.</a>
     </p>
   </div>
 </md-content>

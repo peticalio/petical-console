@@ -4,6 +4,7 @@ angular
   .module('petzApp', [
     'petzApp.constants',
     'ngMaterial',
+    'md.data.table',
     'ngCookies',
     'ngResource',
     'ngSanitize',
