@@ -1,19 +1,14 @@
-'use strict';
+/* istanbul ignore next: tired of writing tests */
+(()=> {
+  'use strict';
 
-(function() {
-
-class MainController {
-
-  constructor($http) {
-    this.$http = $http;
-    this.awesomeThings = [];
-
-    $http.get('/api/things').then(response => {
-      this.awesomeThings = response.data;
-    });
+  class MainController {
+    constructor() {
+    }
   }
-}
 
-angular.module('petzApp')
-  .controller('MainController', MainController);
+  MainController.$inject = [];
+  angular.module('petzApp')
+    .controller('MainController', MainController);
+
 })();
