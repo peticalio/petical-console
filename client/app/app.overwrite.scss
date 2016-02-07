@@ -1,0 +1,39 @@
+// overwrite angular material styles
+
+// form
+form {
+  width: 100%;
+}
+form .hint {
+  position: absolute;
+  left: 2px;
+  right: auto;
+  bottom: 7px;
+  font-size: 12px;
+  line-height: 14px;
+  transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
+  color: grey;
+}
+label {
+  font-weight: inherit;
+  font-size: 16px;
+  margin: 0;
+}
+input, textarea {
+  font-size: 16px;
+}
+
+// checkbox
+md-checkbox {
+  font-size: 14px;
+}
+md-checkbox .description {
+  font-size: 12px;
+  line-height: 14px;
+  color: grey;
+}
+
+// button
+a.md-button:hover {
+  color: inherit;
+}

@@ -32,6 +32,17 @@
           customer:       getEmpty
         }
       })
+      // 飼い主インポート
+      .state('app.dashboard.customer.import', {
+        url: '/import',
+        views: {
+          '@app': {
+            templateUrl:  'app/dashboard/customer/import/import.html',
+            controller:   'CustomerImportController',
+            controllerAs: 'ctrl'
+          }
+        }
+      })
       // 飼い主詳細
       .state('app.dashboard.customer.detail', {
         url: '/:customerId',

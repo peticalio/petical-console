@@ -1,0 +1,113 @@
+<md-card class="p0" ng-if="!ctrl.customer.user">
+  <md-toolbar class="md-table-toolbar md-default">
+    <div class="md-toolbar-tools">
+      <h2 class="md-title">飼い主さまのインポート</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ui-sref="app.dashboard.customer.form">
+        <md-tooltip>新規追加</md-tooltip>
+        <md-icon class="material-icons">add</md-icon>
+      </md-button>
+      <md-button class="md-icon-button" ui-sref="app.dashboard.customer">
+        <md-tooltip>一覧</md-tooltip>
+        <md-icon class="material-icons">list</md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-card-content layout="row" class="p3 pt0">
+    <form name="form" novalidate>
+      <div layout-gt-xs="row">
+        <md-input-container class="md-block" flex>
+          <label>petz.io ログイン ID</label>
+          <input name="login" type="email" ng-model="ctrl.token.login" maxlength="100" ng-required="true" ng-maxlength="100"/>
+          <div ng-show="form.login.$invalid" ng-messages="form.login.$error">
+            <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+              <span>100 文字以内で有効なメールアドレスを入力してください。</span>
+            </div>
+          </div>
+        </md-input-container>
+      </div>
+      <div layout-gt-xs="row">
+        <md-input-container class="md-block" flex>
+          <label>お名前（姓）</label>
+          <input name="lastName" ng-model="ctrl.token.lastName" maxlength="50" ng-required="true" ng-maxlength="50"/>
+          <div ng-if="form.lastName.$invalid" ng-messages="form.lastName.$error">
+            <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+              <span>50 文字以内で入力してください。</span>
+            </div>
+          </div>
+        </md-input-container>
+        <md-input-container class="md-block" flex>
+          <label>お名前（名）</label>
+          <input name="firstName" ng-model="ctrl.token.firstName" maxlength="50" ng-required="true" ng-maxlength="50"/>
+          <div ng-if="form.firstName.$invalid" ng-messages="form.firstName.$error">
+            <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+              <span>50 文字以内で入力してください。</span>
+            </div>
+          </div>
+        </md-input-container>
+      </div>
+      <div layout-gt-xs="row">
+        <md-input-container class="md-block" flex>
+          <label>電話番号（自宅または携帯）</label>
+          <input name="phoneNo" ng-model="ctrl.token.phoneNo" maxlength="15" ng-required="true" ng-maxlength="15" ng-pattern="/^\d+$/"/>
+          <div ng-show="form.phoneNo.$invalid" ng-messages="form.phoneNo.$error">
+            <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+              <span>15 文字以内の半角数字で入力してください。</span>
+            </div>
+          </div>
+        </md-input-container>
+        <div flex hide-xs></div>
+      </div>
+    </form>
+  </md-card-content>
+  <md-card-actions layout="row" layout-align="end center">
+    <md-button class="md-primary" ng-disabled="form.$invalid" ng-click="ctrl.authenticate(ctrl.token)">認証する</md-button>
+    <md-button ui-sref="app.dashboard.customer">キャンセル</md-button>
+  </md-card-actions>
+</md-card>
+
+<md-card class="p0" ng-if="ctrl.customer.user">
+  <md-toolbar class="md-table-toolbar md-default">
+    <div class="md-toolbar-tools">
+      <h2 class="md-title">飼い主さまのインポート</h2>
+      <span flex></span>
+    </div>
+  </md-toolbar>
+  <md-card-content layout="column" class="p pt0">
+    <ng-include src="'app/dashboard/customer/detail/detail.inc.html'"/>
+  </md-card-content>
+  <md-card-actions layout="row" layout-align="end center">
+    <md-button class="md-primary" ng-disabled="form.$invalid" ng-click="ctrl.imp(ctrl.token)">インポート</md-button>
+    <md-button ng-click="ctrl.clear()">キャンセル</md-button>
+  </md-card-actions>
+</md-card>
+
+
+
+
+<!-- <form name="form" role="form" class="form-horizontal" novalidate ng-if="ctrl.customer.user">
+  <fieldset>
+    <h4 class="legend"><i class="fa fa-cloud-upload fa-light mr"></i>インポート</h4>
+    <div class="alert alert-warning">
+      <p><strong><i class="fa fa-exclamation-triangle mr"></i>インポートする内容に誤りがないことを確認してください</strong></p>
+      <p>
+        Petz.io アカウント <strong>{{ctrl.customer.user.login}}</strong> を <strong>{{ctrl.customer.clinic.name}}</strong> の顧客として新規登録します。<br/>
+        問題がなければ、インポートボタンをクリックしてください。
+      </p>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div ng-include="'app/dashboard/customer/detail/basic.include.html'"></div>
+      </div>
+      <div class="col-md-6">
+        <div ng-include="'app/dashboard/customer/detail/contact.include.html'"></div>
+      </div>
+    </div>
+  </fieldset>
+  <fieldset>
+    <section class="form-group text-right">
+      <button type="submit" class="btn btn-primary" ng-disabled="form.$invalid" ng-click="ctrl.imp(ctrl.token)"><span>インポート</span></button>
+      <button type="button" class="btn btn-link" ng-click="ctrl.clear()"><span>キャンセル</span></button>
+    </section>
+  </fieldset>
+</form> -->

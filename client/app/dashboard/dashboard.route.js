@@ -18,10 +18,25 @@
           }
         },
         resolve: {
-          clinics:        function() {return [];},
-          clinic:         function() {return {};}
+          clinics:        getClinics,
+          clinic:         getClinic
         }
       })
     ;
   }
+
+  function getClinics(Clinic) {
+    return Clinic.query().$promise
+      .then(function(response) {
+        return response;
+      });
+  }
+
+  function getClinic($stateParams, Clinic) {
+    return Clinic.load({clinicId: $stateParams.clinicId}).$promise
+      .then(function(response) {
+        return response;
+      });
+  }
+
 })();
