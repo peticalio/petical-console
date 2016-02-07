@@ -1,0 +1,86 @@
+// common utility style
+$base-size: 8px;
+
+// color
+.white {
+  color: #fff !important;
+}
+
+// padding and margin
+.p0 {
+  padding: 0 !important;
+}
+.pt0 {
+  padding-top: 0 !important;
+}
+.pb0 {
+  padding-bottom: 0 !important;
+}
+.pl0 {
+  padding-left: 0 !important;
+}
+.pr0 {
+  padding-right: 0 !important;
+}
+
+.p {
+  padding: $base-size;
+}
+.pt {
+  padding-top: $base-size;
+}
+.pl {
+  padding-left: $base-size;
+}
+.pr {
+  padding-right: $base-size;
+}
+.pb {
+  padding-bottom: $base-size;
+}
+
+.p2 {
+  padding: $base-size * 2;
+}
+.pt2 {
+  padding-top: $base-size * 2;
+}
+.pl2 {
+  padding-left: $base-size * 2;
+}
+.pr2 {
+  padding-right: $base-size * 2;
+}
+.pb2 {
+  padding-bottom: $base-size * 2;
+}
+
+.p3 {
+  padding: $base-size * 3;
+}
+.pt3 {
+  padding-top: $base-size * 3;
+}
+.pl3 {
+  padding-left: $base-size * 3;
+}
+.pr3 {
+  padding-right: $base-size * 3;
+}
+.pb3 {
+  padding-bottom: $base-size * 3;
+}
+
+.m0 {
+  margin: 0;
+}
+
+// border
+.bb {
+  border-bottom: 1px solid #ddd;
+}
+
+// table (extend bootstrap table)
+table.table-clickable > tbody > tr {
+  cursor: pointer;
+}

@@ -1,0 +1,155 @@
+<md-card class="p0">
+  <md-toolbar class="md-table-toolbar md-default">
+    <div class="md-toolbar-tools">
+      <h2 class="md-title">{{ctrl.customer.user.lastName}} {{ctrl.customer.user.firstName}} 様</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ui-sref="app.dashboard.customer.detail.form">
+        <md-tooltip>編集する</md-tooltip>
+        <md-icon class="material-icons">create</md-icon>
+      </md-button>
+      <md-button class="md-icon-button" ng-click="ctrl.delete(ctrl.customer)">
+        <md-tooltip>削除する</md-tooltip>
+        <md-icon class="material-icons">delete</md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-card-content layout="column" class="p pt0">
+    <div layout-gt-xs="row">
+      <md-list flex>
+        <md-subheader class="md-no-sticky">飼い主さま基本情報</md-subheader>
+        <md-list-item>
+          <md-icon class="material-icons">
+            local_hospital
+            <md-tooltip>所属動物病院</md-tooltip>
+          </md-icon>
+          <p>{{ctrl.customer.clinic.name}}</p>
+        </md-list-item>
+        <md-list-item>
+          <md-icon class="material-icons">
+            person
+            <md-tooltip>氏名</md-tooltip>
+          </md-icon>
+          <p>{{ctrl.customer.user.lastName}} {{ctrl.customer.user.firstName}}</p>
+        </md-list-item>
+        <md-list-item>
+          <md-icon class="material-icons">
+            person_outline
+            <md-tooltip>氏名（フリガナ）</md-tooltip>
+          </md-icon>
+          <p ng-show="ctrl.customer.user.lastNameKana">{{ctrl.customer.user.lastNameKana}} {{ctrl.customer.user.firstNameKana}}</p>
+          <p ng-show="!ctrl.customer.user.lastNameKana">未登録</p>
+        </md-list-item>
+        <md-list-item>
+          <md-icon class="material-icons">
+            account_box
+            <md-tooltip>ログインID</md-tooltip>
+          </md-icon>
+          <p>{{ctrl.customer.user.login}}</p>
+        </md-list-item>
+      </md-list>
+      <md-list flex>
+        <md-subheader class="md-no-sticky">飼い主さま連絡先</md-subheader>
+        <md-list-item>
+          <md-icon class="material-icons">
+            location_on
+            <md-tooltip>郵便番号</md-tooltip>
+          </md-icon>
+          <p>〒 {{ctrl.customer.user.zipCode}}</p>
+        </md-list-item>
+        <md-list-item>
+          <md-icon class="material-icons">
+            import_contacts
+            <md-tooltip>住所</md-tooltip>
+          </md-icon>
+          <p>{{ctrl.customer.user.state}}{{ctrl.customer.user.city}}{{ctrl.customer.user.street}}</p>
+        </md-list-item>
+        <md-list-item>
+          <md-icon class="material-icons">
+            phone
+            <md-tooltip>電話番号（自宅）</md-tooltip>
+          </md-icon>
+          <p>{{ctrl.customer.user.phoneNo}}</p>
+        </md-list-item>
+        <md-list-item>
+          <md-icon class="material-icons">
+            phone_android
+            <md-tooltip>電話番号（携帯）</md-tooltip>
+          </md-icon>
+          <p ng-show="ctrl.customer.user.mobilePhoneNo">{{ctrl.customer.user.mobilePhoneNo}}</p>
+          <p ng-show="!ctrl.customer.user.mobilePhoneNo">未登録</p>
+        </md-list-item>
+        <md-list-item>
+          <md-icon class="material-icons">
+            mail_outline
+            <md-tooltip>メールアドレス</md-tooltip>
+          </md-icon>
+          <p>{{ctrl.customer.user.email}}</p>
+        </md-list-item>
+      </md-list>
+    </div>
+  </md-card-content>
+</md-card>
+
+<md-card class="pl0 pr0 pt0">
+  <md-toolbar class="md-table-toolbar md-default">
+    <div class="md-toolbar-tools">
+      <h2 class="md-title">飼育ペット</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ui-sref="app.dashboard.customer.form">
+        <md-tooltip>追加する</md-tooltip>
+        <md-icon class="material-icons">add</md-icon>
+      </md-button>
+      <md-button class="md-icon-button">
+        <md-tooltip>更新する</md-tooltip>
+        <md-icon class="material-icons">refresh</md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-table-container>
+    <table md-table class="table-hover table-clickable">
+      <thead md-head>
+        <tr md-row>
+          <th md-column></th>
+          <th md-column>カルテ番号</th>
+          <th md-column>ペットのお名前</th>
+          <th md-column>色</th>
+          <th md-column>性別</th>
+          <th md-column>生年月日</th>
+          <th md-column></th>
+        </tr>
+      </thead>
+      <tbody md-body>
+        <tr md-row ng-repeat="pet in ctrl.pets">
+          <td md-cell>
+            <span class="label label-info" ng-show="pet.chart">カルテ作成済</span>
+            <span class="label label-default" ng-show="!pet.chart">カルテ未作成</span>
+          </td>
+          <td md-cell>
+            <strong>{{pet.chart.chartNo}}</strong>
+          </td>
+          <td md-cell>
+            <strong>{{pet.name}}</strong>
+            ちゃん<br/>
+            <small>{{pet.type}}</small>
+          </td>
+          <td md-cell>
+            <span class="label label-default-outline">{{pet.color}}</span>
+          </td>
+          <td md-cell>
+            <i class="fa fa-mars mr" ng-show="pet.sex === 'MALE'"></i>
+            <i class="fa fa-venus mr" ng-show="pet.sex === 'FEMALE'"></i>
+            <span ng-show="pet.sex === 'MALE'">オス</span>
+            <span ng-show="pet.sex === 'FEMALE'">メス</span>
+          </td>
+          <td md-cell>
+            {{pet.birthDate | date:'yyyy/MM/dd'}}
+          </td>
+          <td md-cell>
+            <a ui-sref-ignore ui-sref="app.dashboard.chart.list.detail({chartId:pet.chart.id})" uib-tooltip="カルテを見る" ng-show="pet.chart"><i class="fa fa-eye fa-fw"></i></a>
+            <a ui-sref-ignore ui-sref="app.dashboard.chart.form.pet({customerId:ctrl.customer.id, petId:pet.id})" uib-tooltip="カルテを作成" ng-show="!pet.chart"><i class="fa fa-plus fa-fw"></i></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </md-table-container>
+</md-card>

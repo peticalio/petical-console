@@ -3,6 +3,10 @@
 angular
   .module('petzApp', [
     'petzApp.constants',
+    'petz.core',
+    'petz.api',
+    'petz.vendor',
+    'petz.constants',
     'ngMaterial',
     'md.data.table',
     'ngCookies',
@@ -12,9 +16,11 @@ angular
     'ui.bootstrap'
   ])
 
-  .config(function($urlRouterProvider, $locationProvider) {
+  .config(function($urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider.otherwise('/');
     $locationProvider.html5Mode(true);
+
+    $httpProvider.interceptors.push('AuthInterceptor');
   })
   .config(['$mdIconProvider', '$mdThemingProvider', function($mdIconProvider, $mdThemingProvider) {
     $mdIconProvider
@@ -26,8 +32,8 @@ angular
     $mdThemingProvider
       .theme('console')
       .primaryPalette('cyan')
-      .accentPalette('orange')
-      .warnPalette('pink')
+      .accentPalette('pink')
+      .warnPalette('red')
       .backgroundPalette('grey');
     $mdThemingProvider.setDefaultTheme('console');
   }])

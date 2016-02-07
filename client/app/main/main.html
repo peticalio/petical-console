@@ -1,5 +1,5 @@
 <!-- main toolbar (navbar) -->
-<md-toolbar class="md-primary white" ng-controller="AppCtrl">
+<md-toolbar class="md-primary md-whiteframe-z2 white" ng-controller="AppCtrl">
   <div class="md-toolbar-tools">
     <md-button class="md-icon-button" aria-label="Menu" ng-click="toggleLeft()" hide-gt-md>
       <md-icon class="material-icons white" aria-label="Menu">menu</md-icon>
@@ -15,12 +15,12 @@
   </div>
 </md-toolbar>
 <!-- main content -->
-<md-content layout="column" flex="">
+<md-content layout="column" flex="" class="bg-color">
   <div flex="noshrink" layout-padding="" ui-view="">
   </div>
-  <div flex="" layout-padding="" layout-align="center">
+  <div flex="" layout-padding="" layout-align="center" class="pt0">
     <p class="md-caption">
-      © 2016 <a href="https://petz.io">petz.io</a> - Produced by <a href="https://majimena.co.jp" target="_blank">majimena, Inc.</a>
+      © 2016 <a href="https://petz.io">petz.io</a> - Produced by <a href="https://majimena.co.jp" target="_blank">majimena Inc,.</a>
     </p>
   </div>
 </md-content>

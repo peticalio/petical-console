@@ -72,18 +72,31 @@
     <!-- build:js(.tmp) app/app.js -->
       <script src="app/app.js"></script>
       <!-- injector:js -->
+      <script src="components/api/api.module.js"></script>
+      <script src="components/core/core.module.js"></script>
       <script src="components/util/util.module.js"></script>
+      <script src="components/vendor/vendor.module.js"></script>
       <script src="app/app.constant.js"></script>
+      <script src="app/app.constants.js"></script>
       <script src="app/dashboard/customer/customer.controller.js"></script>
       <script src="app/dashboard/customer/customer.route.js"></script>
+      <script src="app/dashboard/customer/detail/detail.controller.js"></script>
+      <script src="app/dashboard/customer/form/form.controller.js"></script>
       <script src="app/dashboard/dashboard.controller.js"></script>
       <script src="app/dashboard/dashboard.route.js"></script>
       <script src="app/home/home.controller.js"></script>
       <script src="app/home/home.route.js"></script>
       <script src="app/main/main.controller.js"></script>
       <script src="app/main/main.js"></script>
-      <script src="components/modal/modal.service.js"></script>
+      <script src="components/api/clinic/customer/ClinicCustomer.service.js"></script>
+      <script src="components/api/clinic/customer/chart/ClinicCustomerChart.service.js"></script>
+      <script src="components/api/user/pet/UserPet.service.js"></script>
+      <script src="components/core/account/MyAccount.factory.js"></script>
+      <script src="components/core/auth/Auth.factory.js"></script>
+      <script src="components/core/auth/Auth.interceptor.js"></script>
       <script src="components/util/util.service.js"></script>
+      <script src="components/vendor/resource/resource.factory.js"></script>
+      <script src="components/vendor/toaster/toaster.service.js"></script>
       <!-- endinjector -->
     <!-- endbuild -->
   </body>

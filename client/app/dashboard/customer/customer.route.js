@@ -1,9 +1,10 @@
 (function() {
   'use strict';
 
-  routesConfig.$inject = ['$stateProvider'];
-  function routesConfig($stateProvider){
+  RouteConfig.$inject = ['$stateProvider'];
+  function RouteConfig($stateProvider){
     $stateProvider
+      // 飼い主一覧
       .state('app.dashboard.customer', {
         url: '^/clinics/:clinicId/customers',
         views: {
@@ -17,19 +18,86 @@
           customers:      getCustomers
         }
       })
+      // 飼い主新規登録フォーム
+      .state('app.dashboard.customer.form', {
+        url: '/form',
+        views: {
+          '@app': {
+            templateUrl:  'app/dashboard/customer/form/form.html',
+            controller:   'CustomerFormController',
+            controllerAs: 'ctrl'
+          }
+        },
+        resolve: {
+          customer:       getEmpty
+        }
+      })
+      // 飼い主詳細
+      .state('app.dashboard.customer.detail', {
+        url: '/:customerId',
+        views: {
+          '@app': {
+            templateUrl:  'app/dashboard/customer/detail/detail.html',
+            controller:   'CustomerDetailController',
+            controllerAs: 'ctrl'
+          }
+        },
+        resolve: {
+          customer:       getCustomer,
+          pets:           getPets,
+          charts:         getCharts
+        }
+      })
+      // 飼い主変更
+      .state('app.dashboard.customer.detail.form', {
+        url: '/form',
+        views: {
+          '@app': {
+            templateUrl:  'app/dashboard/customer/form/form.html',
+            controller:   'CustomerFormController',
+            controllerAs: 'ctrl'
+          }
+        },
+        resolve: {
+          customer:       getCustomer
+        }
+      })
     ;
   }
 
-  function getCustomers() {
-    return [
-      {id:1, firstName:'太郎', lastName:'山田', zipCode:'123-0000', address:'東京都新宿区歌舞伎町１−１−１', user:{login:'hoge@example.com'}},
-      {id:2, firstName:'二郎', lastName:'斎藤', zipCode:'123-0000', address:'東京都新宿区歌舞伎町１−１−１', user:{login:'hoge@example.com'}},
-      {id:3, firstName:'三四郎', lastName:'後藤', zipCode:'123-0000', address:'東京都新宿区歌舞伎町１−１−１', user:{login:'hoge@example.com'}},
-      {id:4, firstName:'五郎', lastName:'野口', zipCode:'123-0000', address:'東京都新宿区歌舞伎町１−１−１', user:{login:'hoge@example.com'}}
-    ];
+  function getEmpty(clinic) {
+    return {clinic: clinic};
+  }
+
+  function getCustomers($stateParams, ClinicCustomer) {
+    return ClinicCustomer.query({clinicId: $stateParams.clinicId}).$promise
+      .then(function(response) {
+        return response;
+      });
+  }
+
+  function getCustomer($stateParams, ClinicCustomer) {
+    return ClinicCustomer.load({clinicId: $stateParams.clinicId, customerId: $stateParams.customerId}).$promise
+      .then(function(response) {
+        return response;
+      });
+  }
+
+  function getPets(customer, UserPet) {
+    return UserPet.query({userId:customer.user.id}).$promise
+      .then(function(response) {
+        return response;
+      });
+  }
+
+  function getCharts($stateParams, ClinicCustomerChart) {
+    return ClinicCustomerChart.query({clinicId:$stateParams.clinicId, customerId:$stateParams.customerId}).$promise
+      .then(function(response) {
+        return response;
+      });
   }
 
   angular.module('petzApp')
-    .config(routesConfig);
+    .config(RouteConfig);
 
 })();

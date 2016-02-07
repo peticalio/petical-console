@@ -1,3 +1,6 @@
+<md-button ui-sref-active-eq="active" ui-sref="app.dashboard({clinicId:1})">
+  <md-icon class="material-icons" aria-label="Dashboard">dashboard</md-icon>ダッシュボード
+</md-button>
   dashboard
   <p>
   The left sidenav will 'lock open' on a medium (>=960px wide) device.
@@ -7,14 +10,13 @@
   </p>
   <div>
     <md-button ng-click="toggleLeft()"
-      class="md-primary" hide-gt-md>
+       hide-gt-md>
       Toggle left
     </md-button>
   </div>
   <div>
     <md-button ng-click="toggleRight()"
-      ng-hide="isOpenRight()"
-      class="md-primary">
+      ng-hide="isOpenRight()">
       Toggle right
     </md-button>
   </div>
