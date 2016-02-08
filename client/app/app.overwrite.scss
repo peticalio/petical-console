@@ -1,5 +1,13 @@
 // overwrite angular material styles
 
+// toolbar
+md-toolbar {
+  min-height: 58px;
+}
+.md-toolbar-tools {
+  height: 58px;
+}
+
 // form
 form {
   width: 100%;

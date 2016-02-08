@@ -3,7 +3,7 @@
 
   angular
     .module('petz.vendor', [
-      'petz.constants',
+      'petz.env',
       'ngMaterial'
     ]);
 })();

@@ -6,7 +6,7 @@ angular
     'petz.core',
     'petz.api',
     'petz.vendor',
-    'petz.constants',
+    'petz.env',
     'ngMaterial',
     'md.data.table',
     'ngCookies',
@@ -32,8 +32,8 @@ angular
     $mdThemingProvider
       .theme('console')
       .primaryPalette('cyan')
-      .accentPalette('pink')
-      .warnPalette('red')
+      .accentPalette('yellow')
+      .warnPalette('pink')
       .backgroundPalette('grey');
     $mdThemingProvider.setDefaultTheme('console');
   }])

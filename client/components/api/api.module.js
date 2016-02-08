@@ -3,7 +3,7 @@
 
   angular
     .module('petz.api', [
-      'petz.constants',
+      'petz.env',
       'petz.vendor'
     ]);
 })();

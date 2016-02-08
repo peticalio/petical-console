@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('petz.vendor')
-  .factory('resource', ['$resource', '$cacheFactory', 'Server', function ($resource, $cacheFactory, Server) {
+  .factory('resource', ['$resource', '$cacheFactory', 'api', function ($resource, $cacheFactory, api) {
     var interceptor = {
       response: function (response) {
         $cacheFactory.get('$http').remove(response.config.url);
@@ -28,10 +28,10 @@ angular.module('petz.vendor')
         'patch':   { method: 'PATCH', interceptor: interceptor },
       });
 
-      var resource = $resource(Server.baseUrl + url, paramDefaults, actions, options);
+      var resource = $resource(api.domain + url, paramDefaults, actions, options);
 
       resource.prototype.clear = function(url) {
-        $cacheFactory.get('$http').remove(Server.baseUrl + url);
+        $cacheFactory.get('$http').remove(api.domain + url);
       };
 
       return resource;

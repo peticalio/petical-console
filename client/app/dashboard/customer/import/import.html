@@ -1,4 +1,4 @@
-<md-card class="p0" ng-if="!ctrl.customer.user">
+<!-- <md-card class="p0" ng-if="!ctrl.customer.user"> -->
   <md-toolbar class="md-table-toolbar md-default">
     <div class="md-toolbar-tools">
       <h2 class="md-title">飼い主さまのインポート</h2>
@@ -15,6 +15,12 @@
   </md-toolbar>
   <md-card-content layout="row" class="p3 pt0">
     <form name="form" novalidate>
+      <div layout-gt-xs="row">
+        <div class="note" flex>
+          Petz.io アカウント <strong>{{ctrl.customer.user.login}}</strong> を <strong>{{ctrl.customer.clinic.name}}</strong> の顧客として新規登録します。<br/>
+          問題がなければ、インポートボタンをクリックしてください。
+        </div>
+      </div>
       <div layout-gt-xs="row">
         <md-input-container class="md-block" flex>
           <label>petz.io ログイン ID</label>
@@ -61,10 +67,10 @@
     </form>
   </md-card-content>
   <md-card-actions layout="row" layout-align="end center">
-    <md-button class="md-primary" ng-disabled="form.$invalid" ng-click="ctrl.authenticate(ctrl.token)">認証する</md-button>
+    <md-button class="md-raised md-primary" ng-disabled="form.$invalid" ng-click="ctrl.authenticate(ctrl.token)">認証する</md-button>
     <md-button ui-sref="app.dashboard.customer">キャンセル</md-button>
   </md-card-actions>
-</md-card>
+<!-- </md-card> -->
 
 <md-card class="p0" ng-if="ctrl.customer.user">
   <md-toolbar class="md-table-toolbar md-default">

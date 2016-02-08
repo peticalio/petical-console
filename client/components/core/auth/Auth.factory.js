@@ -5,8 +5,8 @@
     .module('petz.core')
     .service('Auth', AuthService);
 
-  AuthService.$inject = ['$location', '$rootScope', '$http', 'MyAccount', '$cookieStore', '$q', 'Base64', 'localStorageService', 'Server'];
-  function AuthService($location, $rootScope, $http, MyAccount, $cookieStore, $q, Base64, localStorageService, Server) {
+  AuthService.$inject = ['$location', '$rootScope', '$http', 'MyAccount', '$cookieStore', '$q', 'Base64', 'localStorageService', 'api'];
+  function AuthService($location, $rootScope, $http, MyAccount, $cookieStore, $q, Base64, localStorageService, api) {
     // ----- variables
     var _this = this;
 
@@ -40,7 +40,7 @@
 
       var data = 'username=' + encodeURIComponent(user.email) + '&password=' + encodeURIComponent(user.password) + '&grant_type=password&scope=read%20write&' + 'client_secret=mySecretOAuthSecret&client_id=majimenatestapp';
       return $http.post(
-        Server.baseUrl + '/oauth/token',
+        api.domain + '/oauth/token',
         data,
         {
           headers: {
@@ -69,7 +69,7 @@
     function refresh() {
       var token = $cookieStore.get('token');
       var data = 'refresh_token=' + token.refresh_token + '&grant_type=refresh_token&client_id=majimenatestapp&client_secret=mySecretOAuthSecret';
-      return $http.post(Server.baseUrl + '/oauth/token', data, {
+      return $http.post(api.domain + '/oauth/token', data, {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
           'Accept': 'application/json',
