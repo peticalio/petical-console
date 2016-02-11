@@ -22,6 +22,7 @@ angular
 
     $httpProvider.interceptors.push('AuthInterceptor');
   })
+
   .config(['$mdIconProvider', '$mdThemingProvider', function($mdIconProvider, $mdThemingProvider) {
     $mdIconProvider
       .fontSet('fa', 'fontawesome')
@@ -35,6 +36,19 @@ angular
       .accentPalette('yellow')
       .warnPalette('pink')
       .backgroundPalette('grey');
+
+    $mdThemingProvider
+      .theme('content')
+      .primaryPalette('grey',{
+        'default': '100',
+        'hue-1': '700',
+        'hue-2': '300',
+        'hue-3': '800'
+      })
+      .accentPalette('pink')
+      .warnPalette('red')
+      .backgroundPalette('grey');
+
     $mdThemingProvider.setDefaultTheme('console');
   }])
 ;

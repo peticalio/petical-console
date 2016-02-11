@@ -7,6 +7,7 @@
       this.toast = $mdToast;
     }
 
+    // インフォメッセージを出力する
     info(message) {
       this.toast.show(
         this.toast.simple()
@@ -14,6 +15,39 @@
           .position('bottom right')
           .hideDelay(5000)
       );
+    }
+
+    // インフォメッセージを出力する
+    error(message) {
+      this.toast.show(
+        this.toast.simple()
+          .textContent(message)
+          .position('bottom right')
+          .hideDelay(5000)
+      );
+    }
+
+    // 例外をハンドリングする
+    handle(cause) {
+      switch (cause.status) {
+        case 400:
+          if (cause.data && cause.data.errors) {
+            var message = null;
+            for (var i = 0; i < cause.data.errors.length; i++) {
+              if (message) {
+                message = message + '<br/>' + cause.data.errors[i].message;
+              } else {
+                message = cause.data.errors[i].message;
+              }
+            }
+            this.error(message);
+          } else if (cause.data) {
+            this.error(cause.data.detail);
+          }
+          break;
+        default:
+          this.error(cause.data.detail);
+      }
     }
   }
 

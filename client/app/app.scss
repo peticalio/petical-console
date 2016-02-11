@@ -29,7 +29,7 @@ body {
 
 // background
 .bg-color {
-  background-color: #f5f5f5 !important;
+  background-color: #F5F5F5 !important;
 }
 
 // note
@@ -39,9 +39,15 @@ body {
   display: block;
   font-size: 14px;
   font-weight: 500;
-  margin: 16px 0;
+  margin: 16px;
   padding: 24px 24px 24px 24px;
   text-align: center;
+}
+
+// card
+.flat-card {
+  background: #FFFFFF;
+  border-radius: 2px;
 }
 
 // sidenav menu
@@ -77,4 +83,10 @@ md-sidenav md-content ul li md-icon {
 }
 .side-menu menu-link a.active, .side-menu menu-link a.active md-icon {
   color: #00BCD4;
+}
+
+// copyright
+.copyright {
+  font-size: 12px;
+  margin: 16px 0;
 }

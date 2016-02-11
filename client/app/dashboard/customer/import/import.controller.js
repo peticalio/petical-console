@@ -1,46 +1,39 @@
-(function() {
+/* istanbul ignore next: tired of writing tests */
+(()=> {
   'use strict';
 
-  angular
-    .module('petzApp')
-    .controller('CustomerImportController', CustomerImportController);
-
-  CustomerImportController.$inject = ['$state', '$stateParams', 'ClinicUser', 'clinic'];
-  function CustomerImportController($state, $stateParams, ClinicUser, clinic) {
-    // ----- variables
-    var _this = this;
-
-    // ----- methods
-    function constructor() {
-      // variables
-      _this.clinic = clinic;
-
-      // methods
-      _this.clear = clear;
-      _this.authenticate = authenticate;
-      _this.imp = imp;
+  class CustomerImportController {
+    constructor($state, $stateParams, ClinicUser, clinic) {
+      this.state = $state;
+      this.params = $stateParams;
+      this.ClinicUser = ClinicUser;
+      this.clinic = clinic;
     }
 
     // 認証した顧客候補のユーザー情報を削除する
-    function clear() {
-      _this.customer = null;
+    clear() {
+      this.customer = null;
     }
 
     // 認証して顧客候補の情報を表示する
-    function authenticate(token) {
-      ClinicUser.authenticate({clinicId:$stateParams.clinicId}, token).$promise
-        .then(function(response) {
-          _this.customer = {clinic:_this.clinic, user:response};
+    authenticate(token) {
+      this.ClinicUser.authenticate({clinicId: this.params.clinicId}, token).$promise
+        .then((response) => {
+          this.customer = {clinic: this.clinic, user: response};
         });
     }
 
-    function imp(token) {
-      ClinicUser.imp({clinicId:$stateParams.clinicId}, token).$promise
-        .then(function(response) {
-          $state.go('app.dashboard.customer.list.detail', {clinicId:$stateParams.clinicId, customerId:response.id});
+    // 飼い主のデータをインポートする
+    imp(token) {
+      this.ClinicUser.imp({clinicId: this.params.clinicId}, token).$promise
+        .then((response) => {
+          this.state.go('app.dashboard.customer.list.detail', {clinicId: this.params.clinicId, customerId: response.id});
         });
     }
-
-    constructor();
   }
+
+  CustomerImportController.$inject = ['$state', '$stateParams', 'ClinicUser', 'clinic'];
+  angular.module('petzApp')
+    .controller('CustomerImportController', CustomerImportController);
+
 })();

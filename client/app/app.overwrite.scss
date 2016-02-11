@@ -1,12 +1,26 @@
 // overwrite angular material styles
 
+$base-height: 56px;
+$base-size:   8px;
+
 // toolbar
 md-toolbar {
-  min-height: 58px;
+  min-height: $base-height;
 }
 .md-toolbar-tools {
-  height: 58px;
+  height: $base-height;
 }
+.md-toolbar-tools .md-button {
+  margin: 0;
+}
+// toolbar custom extension
+.md-toolbar-tools.toolbar-nav {
+}
+.md-toolbar-tools.toolbar-nav .md-title {
+  font-weight: 500;
+  margin-left: $base-size;
+}
+
 
 // form
 form {
@@ -44,4 +58,7 @@ md-checkbox .description {
 // button
 a.md-button:hover {
   color: inherit;
+}
+.md-button.md-console-theme.md-primary.md-raised {
+  color: white;
 }

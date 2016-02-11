@@ -81,6 +81,7 @@
   }
 
   function getCustomers($stateParams, ClinicCustomer) {
+    console.log('call getCustomers()');
     return ClinicCustomer.query({clinicId: $stateParams.clinicId}).$promise
       .then(function(response) {
         return response;
@@ -88,6 +89,7 @@
   }
 
   function getCustomer($stateParams, ClinicCustomer) {
+    console.log('call getCustomer()');
     return ClinicCustomer.load({clinicId: $stateParams.clinicId, customerId: $stateParams.customerId}).$promise
       .then(function(response) {
         return response;

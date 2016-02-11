@@ -75,6 +75,23 @@ $base-size: 8px;
   margin: 0;
 }
 
+.m {
+  margin: $base-size;
+}
+.mt {
+  margin-top: $base-size;
+}
+.ml {
+  margin-left: $base-size;
+}
+.mr {
+  margin-right: $base-size;
+}
+.mb {
+  margin-bottom: $base-size;
+}
+
+
 // border
 .bb {
   border-bottom: 1px solid #ddd;

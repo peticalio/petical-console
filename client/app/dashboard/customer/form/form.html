@@ -1,7 +1,7 @@
-<md-card class="p0">
-  <md-toolbar class="md-table-toolbar md-default">
+<section>
+  <md-toolbar md-theme="content" class="p">
     <div class="md-toolbar-tools">
-      <h2 class="md-title">飼い主さま登録フォーム</h2>
+      <h1 class="md-title">飼い主さま登録フォーム</h1>
       <span flex></span>
       <md-button class="md-icon-button" ui-sref="app.dashboard.customer.import">
         <md-tooltip>インポート</md-tooltip>
@@ -13,159 +13,161 @@
       </md-button>
     </div>
   </md-toolbar>
-  <md-card-content layout="row" class="p3 pt0">
-    <form name="form" novalidate>
-      <div layout-gt-xs="row">
-        <md-input-container class="md-block" flex>
-          <label>お名前（姓）</label>
-          <input name="lastName" ng-model="ctrl.customer.user.lastName" maxlength="50" ng-required="true" ng-maxlength="50"/>
-          <div ng-if="form.lastName.$invalid" ng-messages="form.lastName.$error">
-            <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-              <span>50 文字以内で入力してください。</span>
+  <div class="p pt0">
+    <div class="flat-card p">
+      <form name="form" novalidate>
+        <div layout-gt-xs="row">
+          <md-input-container class="md-block" flex>
+            <label>お名前（姓）</label>
+            <input name="lastName" ng-model="ctrl.customer.user.lastName" maxlength="50" ng-required="true" ng-maxlength="50"/>
+            <div ng-if="form.lastName.$invalid" ng-messages="form.lastName.$error">
+              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                <span>50 文字以内で入力してください。</span>
+              </div>
             </div>
-          </div>
-        </md-input-container>
-        <md-input-container class="md-block" flex>
-          <label>お名前（名）</label>
-          <input name="firstName" ng-model="ctrl.customer.user.firstName" maxlength="50" ng-required="true" ng-maxlength="50"/>
-          <div ng-if="form.firstName.$invalid" ng-messages="form.firstName.$error">
-            <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-              <span>50 文字以内で入力してください。</span>
+          </md-input-container>
+          <md-input-container class="md-block" flex>
+            <label>お名前（名）</label>
+            <input name="firstName" ng-model="ctrl.customer.user.firstName" maxlength="50" ng-required="true" ng-maxlength="50"/>
+            <div ng-if="form.firstName.$invalid" ng-messages="form.firstName.$error">
+              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                <span>50 文字以内で入力してください。</span>
+              </div>
             </div>
-          </div>
-        </md-input-container>
-      </div>
-      <div layout-gt-xs="row">
-        <md-input-container class="md-block" flex>
-          <label>お名前（セイ）</label>
-          <input name="lastNameKana" ng-model="ctrl.customer.user.lastNameKana" maxlength="50" ng-maxlength="50"/>
-          <div ng-if="form.lastNameKana.$invalid" ng-messages="form.lastNameKana.$error">
-            <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-              <span>50 文字以内のカタカナで入力してください。</span>
-            </div>
-          </div>
-        </md-input-container>
-        <md-input-container class="md-block" flex>
-          <label>お名前（メイ）</label>
-          <input name="firstNameKana" ng-model="ctrl.customer.user.firstNameKana" maxlength="50" ng-maxlength="50"/>
-          <div ng-if="form.firstNameKana.$invalid" ng-messages="form.firstNameKana.$error">
-            <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-              <span>50 文字以内のカタカナで入力してください。</span>
-            </div>
-          </div>
-        </md-input-container>
-      </div>
-      <div layout-gt-xs="row">
-        <md-input-container class="md-block" flex>
-          <label>郵便番号</label>
-          <input name="zipCode" ng-model="ctrl.customer.user.zipCode" maxlength="7" ng-required="true" ng-minlength="7" ng-maxlength="7" ng-pattern="/^\d+$/"/>
-          <div ng-show="form.zipCode.$invalid" ng-messages="form.zipCode.$error">
-            <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-              <span>7 文字の半角数字で入力してください。</span>
-            </div>
-          </div>
-        </md-input-container>
-        <div flex hide-xs></div>
-        <div flex hide-xs hide-ms></div>
-        <div flex hide-xs hide-ms></div>
-      </div>
-      <div layout-gt-xs="row">
-        <md-input-container class="md-block" flex>
-          <label>都道府県</label>
-          <input name="state" ng-model="ctrl.customer.user.state" maxlength="10" ng-required="true" ng-maxlength="10"/>
-          <div ng-show="form.state.$invalid" ng-messages="form.state.$error">
-            <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-              <span>10 文字以内で入力してください。</span>
-            </div>
-          </div>
-        </md-input-container>
-        <div flex hide-xs></div>
-        <div flex hide-xs hide-ms></div>
-        <div flex hide-xs hide-ms></div>
-      </div>
-      <div layout-gt-xs="row">
-        <md-input-container class="md-block" flex>
-          <label>市区町村</label>
-          <input name="city" ng-model="ctrl.customer.user.city" maxlength="50" ng-required="true" ng-maxlength="50"/>
-          <div ng-show="form.city.$invalid" ng-messages="form.city.$error">
-            <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-              <span>50 文字で入力してください。</span>
-            </div>
-          </div>
-        </md-input-container>
-      </div>
-      <div layout-gt-xs="row">
-        <md-input-container class="md-block" flex>
-          <label>番地・その他</label>
-          <input name="street" ng-model="ctrl.customer.user.street" maxlength="50" ng-required="true" ng-maxlength="50"/>
-          <div ng-show="form.street.$invalid" ng-messages="form.street.$error">
-            <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-              <span>50 文字以内で入力してください。</span>
-            </div>
-          </div>
-        </md-input-container>
-      </div>
-      <div layout-gt-xs="row">
-        <md-input-container class="md-block" flex>
-          <label>電話番号（自宅）</label>
-          <input name="phoneNo" ng-model="ctrl.customer.user.phoneNo" maxlength="15" ng-required="true" ng-maxlength="15" ng-pattern="/^\d+$/"/>
-          <div ng-show="form.phoneNo.$invalid" ng-messages="form.phoneNo.$error">
-            <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-              <span>15 文字以内の半角数字で入力してください。</span>
-            </div>
-          </div>
-        </md-input-container>
-        <md-input-container class="md-block" flex>
-          <label>電話番号（携帯）</label>
-          <input name="mobilePhoneNo" ng-model="ctrl.customer.user.mobilePhoneNo" maxlength="15" ng-maxlength="15" ng-pattern="/^\d+$/"/>
-          <div ng-show="form.mobilePhoneNo.$invalid" ng-messages="form.mobilePhoneNo.$error">
-            <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-              <span>15 文字以内の半角数字で入力してください。</span>
-            </div>
-          </div>
-        </md-input-container>
-      </div>
-      <div layout-gt-xs="row">
-        <md-input-container class="md-block" flex>
-          <label>メールアドレス</label>
-          <input name="email" type="email" ng-model="ctrl.customer.user.email" maxlength="100" ng-required="true" ng-maxlength="100" ng-blur="ctrl.copyEmailToLogin()"/>
-          <div ng-show="form.email.$invalid" ng-messages="form.email.$error">
-            <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-              <span>100 文字以内で有効なメールアドレスを入力してください。</span>
-            </div>
-          </div>
-        </md-input-container>
-      </div>
-      <div layout-gt-xs="row" ng-show="!ctrl.useEmailForLoginId || ctrl.customer.id">
-        <md-input-container class="md-block" flex>
-          <label>petz.io ログイン ID</label>
-          <input name="login" type="email" ng-model="ctrl.customer.user.login" maxlength="100" ng-required="true" ng-maxlength="100" ng-disabled="ctrl.customer.id"/>
-          <div ng-show="form.login.$invalid" ng-messages="form.login.$error">
-            <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-              <span>100 文字以内で有効なメールアドレスを入力してください。</span>
-            </div>
-          </div>
-        </md-input-container>
-      </div>
-      <div layout-gt-xs="row" ng-show="!ctrl.customer.id">
-        <div layout-xs="column" flex-xs="100">
-          <md-checkbox ng-model="ctrl.useEmailForLoginId" class="md-accent md-align-top-left" flex>
-            メールアドレスを petz.io のログイン ID として利用する<br/>
-            <span class="description">
-              飼い主様が petz.io にログインすることで、飼い主様自身が自宅からカルテを参照したり、ペットに関する情報をメンテナンスできるようになります。<br/>
-              別のメールアドレスをログイン ID にする場合は、チェックを外してください。
-            </span>
-          </md-checkbox>
+          </md-input-container>
         </div>
+        <div layout-gt-xs="row">
+          <md-input-container class="md-block" flex>
+            <label>お名前（セイ）</label>
+            <input name="lastNameKana" ng-model="ctrl.customer.user.lastNameKana" maxlength="50" ng-maxlength="50"/>
+            <div ng-if="form.lastNameKana.$invalid" ng-messages="form.lastNameKana.$error">
+              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                <span>50 文字以内のカタカナで入力してください。</span>
+              </div>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-block" flex>
+            <label>お名前（メイ）</label>
+            <input name="firstNameKana" ng-model="ctrl.customer.user.firstNameKana" maxlength="50" ng-maxlength="50"/>
+            <div ng-if="form.firstNameKana.$invalid" ng-messages="form.firstNameKana.$error">
+              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                <span>50 文字以内のカタカナで入力してください。</span>
+              </div>
+            </div>
+          </md-input-container>
+        </div>
+        <div layout-gt-xs="row">
+          <md-input-container class="md-block" flex>
+            <label>郵便番号</label>
+            <input name="zipCode" ng-model="ctrl.customer.user.zipCode" maxlength="7" ng-required="true" ng-minlength="7" ng-maxlength="7" ng-pattern="/^\d+$/"/>
+            <div ng-show="form.zipCode.$invalid" ng-messages="form.zipCode.$error">
+              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                <span>7 文字の半角数字で入力してください。</span>
+              </div>
+            </div>
+          </md-input-container>
+          <div flex hide-xs></div>
+          <div flex hide-xs hide-ms></div>
+          <div flex hide-xs hide-ms></div>
+        </div>
+        <div layout-gt-xs="row">
+          <md-input-container class="md-block" flex>
+            <label>都道府県</label>
+            <input name="state" ng-model="ctrl.customer.user.state" maxlength="10" ng-required="true" ng-maxlength="10"/>
+            <div ng-show="form.state.$invalid" ng-messages="form.state.$error">
+              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                <span>10 文字以内で入力してください。</span>
+              </div>
+            </div>
+          </md-input-container>
+          <div flex hide-xs></div>
+          <div flex hide-xs hide-ms></div>
+          <div flex hide-xs hide-ms></div>
+        </div>
+        <div layout-gt-xs="row">
+          <md-input-container class="md-block" flex>
+            <label>市区町村</label>
+            <input name="city" ng-model="ctrl.customer.user.city" maxlength="50" ng-required="true" ng-maxlength="50"/>
+            <div ng-show="form.city.$invalid" ng-messages="form.city.$error">
+              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                <span>50 文字で入力してください。</span>
+              </div>
+            </div>
+          </md-input-container>
+        </div>
+        <div layout-gt-xs="row">
+          <md-input-container class="md-block" flex>
+            <label>番地・その他</label>
+            <input name="street" ng-model="ctrl.customer.user.street" maxlength="50" ng-required="true" ng-maxlength="50"/>
+            <div ng-show="form.street.$invalid" ng-messages="form.street.$error">
+              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                <span>50 文字以内で入力してください。</span>
+              </div>
+            </div>
+          </md-input-container>
+        </div>
+        <div layout-gt-xs="row">
+          <md-input-container class="md-block" flex>
+            <label>電話番号（自宅）</label>
+            <input name="phoneNo" ng-model="ctrl.customer.user.phoneNo" maxlength="15" ng-required="true" ng-maxlength="15" ng-pattern="/^\d+$/"/>
+            <div ng-show="form.phoneNo.$invalid" ng-messages="form.phoneNo.$error">
+              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                <span>15 文字以内の半角数字で入力してください。</span>
+              </div>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-block" flex>
+            <label>電話番号（携帯）</label>
+            <input name="mobilePhoneNo" ng-model="ctrl.customer.user.mobilePhoneNo" maxlength="15" ng-maxlength="15" ng-pattern="/^\d+$/"/>
+            <div ng-show="form.mobilePhoneNo.$invalid" ng-messages="form.mobilePhoneNo.$error">
+              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                <span>15 文字以内の半角数字で入力してください。</span>
+              </div>
+            </div>
+          </md-input-container>
+        </div>
+        <div layout-gt-xs="row">
+          <md-input-container class="md-block" flex>
+            <label>メールアドレス</label>
+            <input name="email" type="email" ng-model="ctrl.customer.user.email" maxlength="100" ng-required="true" ng-maxlength="100" ng-blur="ctrl.copyEmailToLogin()"/>
+            <div ng-show="form.email.$invalid" ng-messages="form.email.$error">
+              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                <span>100 文字以内で有効なメールアドレスを入力してください。</span>
+              </div>
+            </div>
+          </md-input-container>
+        </div>
+        <div layout-gt-xs="row" ng-show="!ctrl.useEmailForLoginId || ctrl.customer.id">
+          <md-input-container class="md-block" flex>
+            <label>petz.io ログイン ID</label>
+            <input name="login" type="email" ng-model="ctrl.customer.user.login" maxlength="100" ng-required="true" ng-maxlength="100" ng-disabled="ctrl.customer.id"/>
+            <div ng-show="form.login.$invalid" ng-messages="form.login.$error">
+              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                <span>100 文字以内で有効なメールアドレスを入力してください。</span>
+              </div>
+            </div>
+          </md-input-container>
+        </div>
+        <div layout-gt-xs="row" ng-show="!ctrl.customer.id" md-theme="content">
+          <div layout-xs="column" flex-xs="100">
+            <md-checkbox ng-model="ctrl.useEmailForLoginId" class="md-accent md-align-top-left" flex>
+              メールアドレスを petz.io のログイン ID として利用する<br/>
+              <span class="description">
+                飼い主様が petz.io にログインすることで、飼い主様自身が自宅からカルテを参照したり、ペットに関する情報をメンテナンスできるようになります。<br/>
+                別のメールアドレスをログイン ID にする場合は、チェックを外してください。
+              </span>
+            </md-checkbox>
+          </div>
+        </div>
+      </form>
+      <div layout-gt-xs="row" layout-align="end center" ng-if="!ctrl.customer.id">
+        <md-button class="md-primary md-raised" ng-disabled="form.$invalid" ng-click="ctrl.save(ctrl.customer)">登録する</md-button>
+        <md-button ui-sref="app.dashboard.customer">キャンセル</md-button>
       </div>
-    </form>
-  </md-card-content>
-  <md-card-actions layout="row" layout-align="end center" ng-if="!ctrl.customer.id">
-    <md-button class="md-primary" ng-disabled="form.$invalid" ng-click="ctrl.save(ctrl.customer)">保存する</md-button>
-    <md-button ui-sref="app.dashboard.customer">キャンセル</md-button>
-  </md-card-actions>
-  <md-card-actions layout="row" layout-align="end center" ng-if="ctrl.customer.id">
-    <md-button class="md-primary" ng-disabled="form.$invalid" ng-click="ctrl.update(ctrl.customer)">保存する</md-button>
-    <md-button ui-sref="app.dashboard.customer.detail">キャンセル</md-button>
-  </md-card-actions>
-</md-card>
+      <div layout-gt-xs="row" layout-align="end center" ng-if="ctrl.customer.id">
+        <md-button class="md-primary md-raised" ng-disabled="form.$invalid" ng-click="ctrl.update(ctrl.customer)">保存する</md-button>
+        <md-button ui-sref="app.dashboard.customer.detail">キャンセル</md-button>
+      </div>
+    </div>
+  </div>
+</section>

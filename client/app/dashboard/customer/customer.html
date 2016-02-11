@@ -1,5 +1,5 @@
-<md-card class="pl0 pr0 pt0">
-  <md-toolbar class="md-table-toolbar md-default">
+<section>
+  <md-toolbar md-theme="content" class="p">
     <div class="md-toolbar-tools">
       <h2 class="md-title">飼い主さま</h2>
       <span flex></span>
@@ -17,29 +17,31 @@
       </md-button>
     </div>
   </md-toolbar>
-  <md-table-container>
-    <table md-table class="table-hover table-clickable">
-      <thead md-head>
-        <tr md-row>
-          <th md-column md-order-by="customer.lastName"><span>飼い主のお名前</span></th>
-          <th md-column><span>住所・連絡先</span></th>
-          <th md-column>ログインID</th>
-        </tr>
-      </thead>
-      <tbody md-body>
-        <tr md-row ng-repeat="customer in ctrl.customers" ui-sref="app.dashboard.customer.detail({customerId: customer.id})">
-          <td md-cell>
-            {{customer.user.lastName}} {{customer.user.firstName}} 様
-          </td>
-          <td md-cell>
-            {{customer.user.zipCode}}<br/>
-            {{customer.user.state}}{{customer.user.city}}{{customer.user.street}}
-          </td>
-          <td md-cell>
-            {{customer.user.login}}
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </md-table-container>
-</md-card>
+  <div class="p pt0">
+    <md-table-container class="flat-card p">
+      <table md-table class="table-hover table-clickable">
+        <thead md-head>
+          <tr md-row>
+            <th md-column md-order-by="customer.lastName"><span>飼い主のお名前</span></th>
+            <th md-column><span>住所・連絡先</span></th>
+            <th md-column>ログインID</th>
+          </tr>
+        </thead>
+        <tbody md-body>
+          <tr md-row ng-repeat="customer in ctrl.customers" ui-sref="app.dashboard.customer.detail({customerId: customer.id})">
+            <td md-cell>
+              {{customer.user.lastName}} {{customer.user.firstName}} 様
+            </td>
+            <td md-cell>
+              {{customer.user.zipCode}}<br/>
+              {{customer.user.state}}{{customer.user.city}}{{customer.user.street}}
+            </td>
+            <td md-cell>
+              {{customer.user.login}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </md-table-container>
+  </div>
+</section>

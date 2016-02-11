@@ -1,4 +1,3 @@
-/* istanbul ignore next: tired of writing tests */
 (()=> {
   'use strict';
 
@@ -23,6 +22,9 @@
     save(customer) {
       this.ClinicCustomer.save({clinicId: this.params.clinicId}, customer).$promise
         .then(() => {
+          return this.ClinicCustomer.fetch({clinicId: this.params.clinicId}).$promise;
+        })
+        .then(() => {
           this.toaster.info('新しい飼い主さまを登録しました。');
           this.state.go('app.dashboard.customer', {clinicId: this.params.clinicId});
         });
@@ -31,6 +33,9 @@
     // 飼い主を変更する
     update(customer) {
       this.ClinicCustomer.update({clinicId: this.params.clinicId, customerId: customer.id}, customer).$promise
+        .then(() => {
+          return this.ClinicCustomer.get({clinicId: this.params.clinicId, customerId: customer.id}).$promise;
+        })
         .then(() => {
           this.toaster.info('飼い主さまの情報を変更しました。');
           this.state.go('app.dashboard.customer.detail', {clinicId: this.params.clinicId, customerId: customer.id});

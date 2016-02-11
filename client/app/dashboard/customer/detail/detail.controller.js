@@ -1,4 +1,3 @@
-/* istanbul ignore next: tired of writing tests */
 (()=> {
   'use strict';
 
