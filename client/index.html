@@ -26,15 +26,13 @@
     <link rel='stylesheet' href='//fonts.googleapis.com/css?family=Roboto:600,500,400'/>
     <link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/notosansjapanese.css"/>
   </head>
-  <body class="layout" layout="row" ng-app="petzApp">
+  <body ng-app="petzApp">
     <!--[if lt IE 7]>
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div style="display:flex; position:static;" ng-include="'app/dashboard/sidenav.html'"></div>
-    <div ui-view="" layout="column" flex></div>
-    <!-- <footer></footer> -->
+    <div ui-view layout="row" flex></div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
     <script>
