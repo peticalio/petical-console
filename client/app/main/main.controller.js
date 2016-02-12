@@ -1,13 +1,23 @@
-/* istanbul ignore next: tired of writing tests */
 (()=> {
   'use strict';
 
   class MainController {
-    constructor() {
+    constructor($state) {
+      this.state = $state;
+    }
+
+    // サイドバーをメインメニューにするか？
+    showMainMenu() {
+      return this.state.includes('app.home');
+    }
+
+    // サイドバーをダッシュボードメニューにするか？
+    showDashboardMenu() {
+      return this.state.includes('app.dashboard');
     }
   }
 
-  MainController.$inject = [];
+  MainController.$inject = ['$state'];
   angular.module('petzApp')
     .controller('MainController', MainController);
 

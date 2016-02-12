@@ -1,3 +1,105 @@
+<h5><i class="fa fa-paw fa-lg m"></i>わたしのペット</h5>
+<div class="row">
+  <div class="col-lg-4 col-sm-6" ng-repeat="pet in ctrl.pets">
+    <div class="panel widget bg-primary" ng-class="pet.sex === 'MALE' ? 'bg-info':'bg-pink'">
+      <a ui-sref="main.pet.detail({petId:pet.id})">
+        <div class="row row-table dash-card p">
+          <div class="col-xs-3 p0">
+            <img src="assets/images/dummy.png" alt="" class="media-box-object img-responsive img-rounded thumb64" />
+          </div>
+          <div class="col-xs-9 p0">
+            <h5 class="mt0 overflow">{{pet.name}}</h5>
+            <div class="small overflow">
+              {{pet.type}}<br/>
+              <i class="fa fa-mars mr" ng-show="pet.sex === 'MALE'"></i>
+              <i class="fa fa-venus mr" ng-show="pet.sex === 'FEMALE'"></i>
+              <span ng-show="pet.sex === 'MALE'">オス</span>
+              <span ng-show="pet.sex === 'FEMALE'">メス</span>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="col-lg-4 col-sm-6">
+    <div class="panel widget bg-default">
+      <a ui-sref="main.pet.form" class="muted">
+        <div class="row row-table dash-card">
+          <div class="col-xs-12">
+            <h5 class="text-center">
+              <i class="fa fa-plus fa-lg m"></i>
+              わたしのペットを追加する
+            </h5>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<h5><i class="fa fa-hospital-o fa-lg m"></i>動物病院（勤務先）</h5>
+<div class="row">
+  <div class="col-lg-4 col-sm-6" ng-repeat="clinic in ctrl.clinics">
+    <div class="panel widget bg-primary">
+      <a ui-sref="app.dashboard({clinicId:clinic.id})">
+        <div class="row row-table dash-card p">
+          <div class="col-xs-3 p0">
+            <img src="assets/images/dummy.png" alt="" class="media-box-object img-responsive img-rounded thumb64" />
+          </div>
+          <div class="col-xs-9 p0">
+            <h5 class="mt0 overflow">{{clinic.name}}</h5>
+            <div class="small overflow">
+              {{clinic.state}}{{clinic.city}}{{clinic.street}}<br/>
+              <i class="fa fa-user-md mr"></i>
+              {{clinic.lastName}} {{clinic.firstName}}
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="col-lg-4 col-sm-6">
+    <div class="panel widget bg-default">
+      <a ui-sref="main.clinic.form" class="muted">
+        <div class="row row-table dash-card">
+          <div class="col-xs-12">
+            <h5 class="text-center">
+              <i class="fa fa-plus fa-lg m"></i>
+              動物病院を追加する
+            </h5>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div ng-if="ctrl.invitations && ctrl.invitations.length !== 0">
+  <h5><i class="fa fa-envelope fa-lg m"></i>招待状が届いています</h5>
+  <div class="row">
+    <div class="col-lg-4 col-sm-6" ng-repeat="invitation in ctrl.invitations">
+      <div class="panel widget bg-warning">
+        <a ui-sref="main.clinic.invitation({invitationId:invitation.id})">
+          <div class="row row-table dash-card p">
+            <div class="col-xs-3 p0">
+              <img src="assets/images/dummy.png" alt="" class="media-box-object img-responsive img-rounded thumb64" />
+            </div>
+            <div class="col-xs-9 p0">
+              <h5 class="mt0 overflow">{{invitation.clinic.name}}</h5>
+              <div class="small overflow">
+                {{invitation.clinic.state}}{{invitation.clinic.city}}{{invitation.clinic.street}}<br/>
+                <i class="fa fa-user-md mr"></i>
+                {{invitation.user.lastName}} {{invitation.user.firstName}} 様より
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
   <div layout="column" layout-fill layout-align="top center">
     <p>
     The left sidenav will 'lock open' on a medium (>=960px wide) device.
@@ -19,7 +121,7 @@
       </md-button>
     </div>
     <div>
-      <md-button ui-sref="app.dashboard({clinicId:1})" class="md-primary">
+      <md-button ui-sref="app.dashboard({clinicId: 'c7df49da-875f-4208-b425-90e53fef54e0'})" class="md-primary">
         go to dashboard
       </md-button>
     </div>

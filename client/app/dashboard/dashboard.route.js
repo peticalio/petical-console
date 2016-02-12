@@ -10,6 +10,9 @@
     $stateProvider
       .state('app.dashboard', {
         url: '^/clinics/:clinicId/dashboard',
+        data: {
+          showDashboardMenu: true
+        },
         views: {
           '@app': {
             templateUrl:  'app/dashboard/dashboard.html',

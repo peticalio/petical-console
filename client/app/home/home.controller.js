@@ -1,9 +1,30 @@
+(()=> {
+  'use strict';
 
-angular
-  .module('petzApp')
-  .controller('HomeController', function ($scope, $timeout) {})
+  class HomeController {
+    constructor($state, MyClinic, MyPet, MyInvitation) {
+      this.state = $state;
+      this.clinics = MyClinic.query().$promise.then((response) => {
+        return response;
+      });
+      this.pets = MyPet.query().$promise.then((response) => {
+        return response;
+      })
+      this.invitations = MyInvitation.query().$promise.then((response) => {
+        return response;
+      })
+    }
+  }
 
+  HomeController.$inject = ['$state', 'MyClinic', 'MyPet', 'MyInvitation'];
+  angular.module('petzApp')
+    .controller('HomeController', HomeController);
+
+})();
+
+angular.module('petzApp')
   .controller('AppCtrl', function ($scope, $timeout, $mdSidenav, $log) {
+
       $scope.toggleLeft = buildDelayedToggler('left');
       $scope.toggleRight = buildToggler('right');
       $scope.isOpenRight = function(){

@@ -1,4 +1,7 @@
-<md-sidenav class="md-sidenav-left md-whiteframe-z1" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+<md-sidenav class="md-sidenav-left md-whiteframe-z1" md-component-id="mainmenu" md-is-locked-open="$mdMedia('gt-lg')" ng-show="ctrl.showMainMenu()">
+</md-sidenav>
+
+<md-sidenav class="md-sidenav-left md-whiteframe-z1" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" ng-show="ctrl.showDashboardMenu()">
   <md-toolbar class="md-tall">
     <h1 class="md-toolbar-tools"></h1>
   </md-toolbar>
