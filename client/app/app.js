@@ -13,6 +13,7 @@ angular
     'ngResource',
     'ngSanitize',
     'ui.router',
+    'ui.validate',
     'ui.bootstrap'
   ])
 

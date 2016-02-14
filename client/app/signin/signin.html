@@ -1,0 +1,36 @@
+<div class="container-small flat-card p2" style="margin: 24px auto;">
+  <h3>petz.io にサインイン</h3>
+  <div class="block-center">
+    <p class="text-right">
+      <a ui-sref="app.signup">無料の会員登録はこちら！登録は３０秒！</a>
+    </p>
+    <form name="form" novalidate="">
+      <md-input-container class="md-icon-float md-block">
+        <label>ログイン ID</label>
+        <md-icon class="material-icons" aria-label="Login">person</md-icon>
+        <input name="login" type="email" ng-model="ctrl.login.email" ng-required="true" ng-maxlength="100">
+        <div ng-show="form.login.$invalid" ng-messages="form.login.$error">
+          <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+            <span>100 文字以内で有効なメールアドレスを入力してください。</span>
+          </div>
+        </div>
+      </md-input-container>
+      <md-input-container class="md-icon-float md-block">
+        <label>パスワード</label>
+        <md-icon class="material-icons" aria-label="Password">lock</md-icon>
+        <input name="password" type="password" ng-model="ctrl.login.password" ng-required="true" ng-maxlength="100">
+        <div ng-show="form.password.$invalid" ng-messages="form.password.$error">
+          <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+            <span>100 文字以内でパスワードを入力してください。</span>
+          </div>
+        </div>
+      </md-input-container>
+      <p class="text-right">
+        <a ui-sref="app.reset" class="text-muted">もしかしてパスワードをお忘れですか？</a>
+      </p>
+      <p class="m0" layout-gt-xs="row" layout-align="end center">
+        <md-button class="md-primary md-raised" ng-disabled="form.$invalid" ng-click="ctrl.login(ctrl.login)">サインイン</md-button>
+      </p>
+    </form>
+  </div>
+</div>

@@ -9,14 +9,14 @@
     <ul class="side-menu">
       <li>
         <menu-link section="section">
-          <md-button class="md-default" ui-sref-active-eq="active" ui-sref="app.dashboard({clinicId: 'c7df49da-875f-4208-b425-90e53fef54e0'})">
+          <md-button class="md-default" ui-sref-active-eq="active" ui-sref="app.dashboard({clinicId: 'd7ba0801-fab7-4de6-8c3a-ec60d67e61ab'})">
             <md-icon class="material-icons" aria-label="Dashboard">dashboard</md-icon>ダッシュボード
           </md-button>
         </menu-link>
       </il>
       <li>
         <menu-link section="section">
-          <md-button ui-sref-active="active" ui-sref="app.dashboard.customer({clinicId: 'c7df49da-875f-4208-b425-90e53fef54e0'})">
+          <md-button ui-sref-active="active" ui-sref="app.dashboard.customer({clinicId: 'd7ba0801-fab7-4de6-8c3a-ec60d67e61ab'})">
             <md-icon class="material-icons" aria-label="Customers">face</md-icon>飼い主さま
           </md-button>
         </menu-link>
@@ -90,53 +90,58 @@
 <div layout="column" role="main" flex>
   <md-toolbar class="md-primary white" ng-controller="AppCtrl">
     <div class="md-toolbar-tools">
+      <!-- toggle -->
       <md-button class="md-icon-button" aria-label="Menu" ng-click="toggleLeft()" hide-gt-md>
         <md-icon class="material-icons white" aria-label="Menu">menu</md-icon>
       </md-button>
-      <md-button class="md-icon-button" hide-sm>
+      <md-button class="md-icon-button" hide-sm ng-show="ctrl.showDashboardMenu()">
         <md-icon class="material-icons white" aria-label="Menu">keyboard_backspace</md-icon>
       </md-button>
-      <h3>ダッシュボード</h3>
+
+      <!-- logo -->
       <span flex></span>
-      <md-button class="md-icon-button" aria-label="Home" ui-sref="app.home">
+      <div class="navbar-header">
+        <a class="navbar-brand ml" href="/"></a>
+      </div>
+      <span flex></span>
+
+      <!-- account menu -->
+      <md-button class="md-icon-button" aria-label="Home" ui-sref="app.home" ng-show="ctrl.showDashboardMenu()">
         <md-icon class="material-icons white" aria-label="Home">home</md-icon>
       </md-button>
-      <md-button class="md-icon-button" aria-label="More">
-        <md-icon class="material-icons white">more_vert</md-icon>
-      </md-button>
+      <md-menu md-position-mode="target-right target">
+        <md-button class="md-icon-button" aria-label="More" ng-click="ctrl.openMenu($mdOpenMenu, $event)">
+          <md-icon class="material-icons white">more_vert</md-icon>
+        </md-button>
+        <md-menu-content width="4">
+          <md-menu-item>
+            <md-button ng-click="ctrl.redial($event)">
+              <md-icon class="material-icons" aria-label="Home">dialpad</md-icon>
+              Redial
+            </md-button>
+          </md-menu-item>
+          <md-menu-item>
+            <md-button disabled="disabled" ng-click="ctrl.checkVoicemail()">
+              <md-icon class="material-icons" aria-label="Home">voicemail</md-icon>
+              Check voicemail
+            </md-button>
+          </md-menu-item>
+          <md-menu-divider></md-menu-divider>
+          <md-menu-item>
+            <md-button ng-click="ctrl.toggleNotifications()">
+              <md-icon class="material-icons" aria-label="Home">notifications</md-icon>
+              {{ctrl.notificationsEnabled ? 'Disable' : 'Enable' }} notifications
+            </md-button>
+          </md-menu-item>
+        </md-menu-content>
+      </md-menu>
     </div>
   </md-toolbar>
   <md-content layout="column" flex="" class="bg-color" ui-view="">
+    <div layout-padding="" class="pt0 bg-color">
+      <div class="copyright">
+        © 2016 <a href="https://petz.io">petz.io</a> - Produced by <a href="https://majimena.co.jp" target="_blank">majimena Inc,.</a>
+      </div>
+    </div>
   </md-content>
-<!--
-  <div layout="column" ui-view="">
-    <md-toolbar class="md-primary white" ng-controller="AppCtrl">
-      <div class="md-toolbar-tools">
-        <md-button class="md-icon-button" aria-label="Menu" ng-click="toggleLeft()" hide-gt-md>
-          <md-icon class="material-icons white" aria-label="Menu">menu</md-icon>
-        </md-button>
-        <md-button class="md-icon-button" hide-sm>
-          <md-icon class="material-icons white" aria-label="Menu">keyboard_backspace</md-icon>
-        </md-button>
-        <h3>ダッシュボード</h3>
-        <span flex></span>
-        <md-button class="md-icon-button" aria-label="Home" ui-sref="app.home">
-          <md-icon class="material-icons white" aria-label="Home">home</md-icon>
-        </md-button>
-        <md-button class="md-icon-button" aria-label="More">
-          <md-icon class="material-icons white">more_vert</md-icon>
-        </md-button>
-      </div>
-    </md-toolbar>
-    <md-content layout="column" flex="" class="bg-color">
-      <div flex="noshrink">
-      </div>
-      <div flex="" layout-padding="" layout-align="center" class="pt0">
-        <div class="copyright">
-          © 2016 <a href="https://petz.io">petz.io</a> - Produced by <a href="https://majimena.co.jp" target="_blank">majimena Inc,.</a>
-        </div>
-      </div>
-    </md-content>
-  </div>
- -->
 </div>

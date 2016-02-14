@@ -26,18 +26,26 @@ body {
   font-family: 'Roboto', 'Noto Sans Japanese', sans-serif;
   font-weight: 400;
 }
-body, body > div {
+body, body > div.main {
   max-width: 100%;
   max-height: 100%;
   overflow: hidden;
 }
-body > div {
+body > div.main {
   height: 100%;
 }
 
 // background
 .bg-color {
   background-color: #F5F5F5 !important;
+}
+
+// navbar
+.navbar-brand {
+  background: url('/assets/images/logo_236x75_1.png') no-repeat left center;
+  background-size: contain;
+  height: 30px;
+  width: 150px;
 }
 
 // note
@@ -91,6 +99,32 @@ md-sidenav md-content ul li md-icon {
 }
 .side-menu menu-link a.active, .side-menu menu-link a.active md-icon {
   color: #00BCD4;
+}
+
+// custom container
+@media (min-width: 768px) {
+  .container-small {
+    width: 300px;
+  }
+  .container-large {
+    width: 970px;
+  }
+}
+@media (min-width: 992px) {
+  .container-small {
+    width: 500px;
+  }
+  .container-large {
+    width: 1170px;
+  }
+}
+@media (min-width: 1200px) {
+  .container-small {
+    width: 700px;
+  }
+  .container-large {
+    width: 1500px;
+  }
 }
 
 // copyright

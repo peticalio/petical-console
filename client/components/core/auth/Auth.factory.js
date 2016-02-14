@@ -5,8 +5,8 @@
     .module('petz.core')
     .service('Auth', AuthService);
 
-  AuthService.$inject = ['$location', '$rootScope', '$http', 'MyAccount', '$cookieStore', '$q', 'Base64', 'localStorageService', 'api'];
-  function AuthService($location, $rootScope, $http, MyAccount, $cookieStore, $q, Base64, localStorageService, api) {
+  AuthService.$inject = ['$location', '$rootScope', '$http', 'MyAccount', '$cookieStore', '$q', 'Base64', 'api'];
+  function AuthService($location, $rootScope, $http, MyAccount, $cookieStore, $q, Base64, api) {
     // ----- variables
     var _this = this;
 
@@ -93,7 +93,6 @@
 
     function logout() {
       $cookieStore.remove('token');
-      localStorageService.clearAll();
       _this.currentUser = null;
     }
 

@@ -4,15 +4,15 @@
   class HomeController {
     constructor($state, MyClinic, MyPet, MyInvitation) {
       this.state = $state;
-      this.clinics = MyClinic.query().$promise.then((response) => {
-        return response;
+      MyClinic.query().$promise.then((response) => {
+        this.clinics = response;
       });
-      this.pets = MyPet.query().$promise.then((response) => {
-        return response;
-      })
-      this.invitations = MyInvitation.query().$promise.then((response) => {
-        return response;
-      })
+      MyPet.query().$promise.then((response) => {
+        this.pets = response;
+      });
+      MyInvitation.query().$promise.then((response) => {
+        this.invitations = response;
+      });
     }
   }
 

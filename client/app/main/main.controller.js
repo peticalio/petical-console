@@ -15,6 +15,10 @@
     showDashboardMenu() {
       return this.state.includes('app.dashboard');
     }
+
+    openMenu($mdOpenMenu, ev) {
+      $mdOpenMenu(ev);
+    }
   }
 
   MainController.$inject = ['$state'];

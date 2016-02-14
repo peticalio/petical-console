@@ -1,78 +1,76 @@
-<h5><i class="fa fa-paw fa-lg m"></i>わたしのペット</h5>
-<div class="row">
-  <div class="col-lg-4 col-sm-6" ng-repeat="pet in ctrl.pets">
-    <div class="panel widget bg-primary" ng-class="pet.sex === 'MALE' ? 'bg-info':'bg-pink'">
-      <a ui-sref="main.pet.detail({petId:pet.id})">
-        <div class="row row-table dash-card p">
-          <div class="col-xs-3 p0">
-            <img src="assets/images/dummy.png" alt="" class="media-box-object img-responsive img-rounded thumb64" />
-          </div>
-          <div class="col-xs-9 p0">
-            <h5 class="mt0 overflow">{{pet.name}}</h5>
-            <div class="small overflow">
-              {{pet.type}}<br/>
-              <i class="fa fa-mars mr" ng-show="pet.sex === 'MALE'"></i>
-              <i class="fa fa-venus mr" ng-show="pet.sex === 'FEMALE'"></i>
-              <span ng-show="pet.sex === 'MALE'">オス</span>
-              <span ng-show="pet.sex === 'FEMALE'">メス</span>
-            </div>
-          </div>
-        </div>
-      </a>
+<section>
+  <md-toolbar md-theme="content">
+    <div class="md-toolbar-tools">
+      <h1 class="md-title">わたしのペット</h1>
+      <span flex></span>
+      <md-button class="md-icon-button" ui-sref="app.dashboard.customer.form">
+        <md-tooltip>新規追加</md-tooltip>
+        <md-icon class="material-icons">add</md-icon>
+      </md-button>
     </div>
-  </div>
-  <div class="col-lg-4 col-sm-6">
-    <div class="panel widget bg-default">
-      <a ui-sref="main.pet.form" class="muted">
-        <div class="row row-table dash-card">
-          <div class="col-xs-12">
-            <h5 class="text-center">
-              <i class="fa fa-plus fa-lg m"></i>
-              わたしのペットを追加する
-            </h5>
+  </md-toolbar>
+  <div layout="row">
+    <md-card flex-xs flex-gt-sm="33" flex-gt-lg="25" ng-repeat="pet in ctrl.pets">
+      <md-card-title class="pb0">
+        <md-card-title-text>
+          <h4 class="m0">{{pet.name}}</h4>
+          <div class="small overflow">
+            {{pet.type}}<br/>
+            <i class="fa fa-mars mr" ng-show="pet.sex === 'MALE'"></i>
+            <i class="fa fa-venus mr" ng-show="pet.sex === 'FEMALE'"></i>
+            <span ng-show="pet.sex === 'MALE'">オス</span>
+            <span ng-show="pet.sex === 'FEMALE'">メス</span>
           </div>
-        </div>
-      </a>
-    </div>
-  </div>
-</div>
 
-<h5><i class="fa fa-hospital-o fa-lg m"></i>動物病院（勤務先）</h5>
-<div class="row">
-  <div class="col-lg-4 col-sm-6" ng-repeat="clinic in ctrl.clinics">
-    <div class="panel widget bg-primary">
-      <a ui-sref="app.dashboard({clinicId:clinic.id})">
-        <div class="row row-table dash-card p">
-          <div class="col-xs-3 p0">
-            <img src="assets/images/dummy.png" alt="" class="media-box-object img-responsive img-rounded thumb64" />
-          </div>
-          <div class="col-xs-9 p0">
-            <h5 class="mt0 overflow">{{clinic.name}}</h5>
-            <div class="small overflow">
-              {{clinic.state}}{{clinic.city}}{{clinic.street}}<br/>
-              <i class="fa fa-user-md mr"></i>
-              {{clinic.lastName}} {{clinic.firstName}}
-            </div>
-          </div>
-        </div>
-      </a>
-    </div>
+          <p class="md-subhead">{{clinic.state}}{{clinic.city}}{{clinic.street}}</p>
+          <p class="m0">
+            <i class="fa fa-user-md mr"></i>
+            {{clinic.lastName}} {{clinic.firstName}}
+          </p>
+        </md-card-title-text>
+        <md-card-title-media>
+          <div class="md-media-sm card-media"></div>
+        </md-card-title-media>
+      </md-card-title>
+      <md-card-actions layout="row" layout-align="end center">
+        <md-button ui-sref="app.dashboard({clinicId: clinic.id})">ダッシュボード</md-button>
+      </md-card-actions>
+    </md-card>
   </div>
-  <div class="col-lg-4 col-sm-6">
-    <div class="panel widget bg-default">
-      <a ui-sref="main.clinic.form" class="muted">
-        <div class="row row-table dash-card">
-          <div class="col-xs-12">
-            <h5 class="text-center">
-              <i class="fa fa-plus fa-lg m"></i>
-              動物病院を追加する
-            </h5>
-          </div>
-        </div>
-      </a>
+</section>
+
+<section>
+  <md-toolbar md-theme="content">
+    <div class="md-toolbar-tools">
+      <h1 class="md-title">勤務先動物病院</h1>
+      <span flex></span>
+      <md-button class="md-icon-button" ui-sref="app.dashboard.customer.form">
+        <md-tooltip>新規追加</md-tooltip>
+        <md-icon class="material-icons">add</md-icon>
+      </md-button>
     </div>
+  </md-toolbar>
+  <div layout="row">
+    <md-card flex-xs flex-gt-sm="33" flex-gt-lg="25" ng-repeat="clinic in ctrl.clinics">
+      <md-card-title class="pb0">
+        <md-card-title-text>
+          <h4 class="m0">{{clinic.name}}</h4>
+          <p class="md-subhead">{{clinic.state}}{{clinic.city}}{{clinic.street}}</p>
+          <p class="m0">
+            <i class="fa fa-user-md mr"></i>
+            {{clinic.lastName}} {{clinic.firstName}}
+          </p>
+        </md-card-title-text>
+        <md-card-title-media>
+          <div class="md-media-sm card-media"></div>
+        </md-card-title-media>
+      </md-card-title>
+      <md-card-actions layout="row" layout-align="end center">
+        <md-button ui-sref="app.dashboard({clinicId: clinic.id})">ダッシュボード</md-button>
+      </md-card-actions>
+    </md-card>
   </div>
-</div>
+</section>
 
 <div ng-if="ctrl.invitations && ctrl.invitations.length !== 0">
   <h5><i class="fa fa-envelope fa-lg m"></i>招待状が届いています</h5>
@@ -82,7 +80,7 @@
         <a ui-sref="main.clinic.invitation({invitationId:invitation.id})">
           <div class="row row-table dash-card p">
             <div class="col-xs-3 p0">
-              <img src="assets/images/dummy.png" alt="" class="media-box-object img-responsive img-rounded thumb64" />
+              <!-- <img src="assets/images/dummy.png" alt="" class="media-box-object img-responsive img-rounded thumb64" /> -->
             </div>
             <div class="col-xs-9 p0">
               <h5 class="mt0 overflow">{{invitation.clinic.name}}</h5>
@@ -98,106 +96,3 @@
     </div>
   </div>
 </div>
-
-
-  <div layout="column" layout-fill layout-align="top center">
-    <p>
-    The left sidenav will 'lock open' on a medium (>=960px wide) device.
-    </p>
-    <p>
-    The right sidenav will focus on a specific child element.
-    </p>
-    <div>
-      <md-button ng-click="toggleLeft()"
-        class="md-primary" hide-gt-md>
-        Toggle left
-      </md-button>
-    </div>
-    <div>
-      <md-button ng-click="toggleRight()"
-        ng-hide="isOpenRight()"
-        class="md-primary">
-        Toggle right
-      </md-button>
-    </div>
-    <div>
-      <md-button ui-sref="app.dashboard({clinicId: 'c7df49da-875f-4208-b425-90e53fef54e0'})" class="md-primary">
-        go to dashboard
-      </md-button>
-    </div>
-    <p>
-    The left sidenav will 'lock open' on a medium (>=960px wide) device.
-    </p>
-    <p>
-    The right sidenav will focus on a specific child element.
-    </p>
-    <div>
-      <md-button ng-click="toggleLeft()"
-        class="md-primary" hide-gt-md>
-        Toggle left
-      </md-button>
-    </div>
-    <div>
-      <md-button ng-click="toggleRight()"
-        ng-hide="isOpenRight()"
-        class="md-primary">
-        Toggle right
-      </md-button>
-    </div>
-    <p>
-    The left sidenav will 'lock open' on a medium (>=960px wide) device.
-    </p>
-    <p>
-    The right sidenav will focus on a specific child element.
-    </p>
-    <div>
-      <md-button ng-click="toggleLeft()"
-        class="md-primary" hide-gt-md>
-        Toggle left
-      </md-button>
-    </div>
-    <div>
-      <md-button ng-click="toggleRight()"
-        ng-hide="isOpenRight()"
-        class="md-primary">
-        Toggle right
-      </md-button>
-    </div>
-    <p>
-    The left sidenav will 'lock open' on a medium (>=960px wide) device.
-    </p>
-    <p>
-    The right sidenav will focus on a specific child element.
-    </p>
-    <div>
-      <md-button ng-click="toggleLeft()"
-        class="md-primary" hide-gt-md>
-        Toggle left
-      </md-button>
-    </div>
-    <div>
-      <md-button ng-click="toggleRight()"
-        ng-hide="isOpenRight()"
-        class="md-primary">
-        Toggle right
-      </md-button>
-    </div>
-  </div>
-  <div flex></div>
-<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
-  <md-toolbar>
-    <h1 class="md-toolbar-tools">Sidenav Right</h1>
-  </md-toolbar>
-  <md-content ng-controller="RightCtrl" layout-padding>
-    <form>
-      <md-input-container>
-        <label for="testInput">Test input</label>
-        <input type="text" id="testInput"
-               ng-model="data" md-autofocus>
-      </md-input-container>
-    </form>
-    <md-button ng-click="close()" class="md-primary">
-      Close Sidenav Right
-    </md-button>
-  </md-content>
-</md-sidenav>
