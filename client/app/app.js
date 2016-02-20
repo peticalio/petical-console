@@ -14,16 +14,20 @@ angular
     'ngSanitize',
     'ui.router',
     'ui.validate',
-    'ui.bootstrap'
+    'ui.gravatar',
+    'ui.bootstrap',
+    'googlechart'
   ])
 
-  .config(function($urlRouterProvider, $locationProvider, $httpProvider) {
+  // base config
+  .config(['$urlRouterProvider', '$locationProvider', '$httpProvider', function($urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider.otherwise('/');
     $locationProvider.html5Mode(true);
 
     $httpProvider.interceptors.push('AuthInterceptor');
-  })
+  }])
 
+  // angular material theme config
   .config(['$mdIconProvider', '$mdThemingProvider', function($mdIconProvider, $mdThemingProvider) {
     $mdIconProvider
       .fontSet('fa', 'fontawesome')
@@ -51,5 +55,15 @@ angular
       .backgroundPalette('grey');
 
     $mdThemingProvider.setDefaultTheme('console');
+  }])
+
+  // gravator config
+  .config(['gravatarServiceProvider', function(gravatarServiceProvider) {
+    gravatarServiceProvider.defaults = {
+      size     : 30,
+      'default': 'retro'
+    };
+    gravatarServiceProvider.secure = true;
+//    gravatarServiceProvider.protocol = 'https';
   }])
 ;

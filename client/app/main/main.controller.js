@@ -2,8 +2,10 @@
   'use strict';
 
   class MainController {
-    constructor($state) {
+    constructor($state, Auth) {
       this.state = $state;
+      this.Auth = Auth;
+      this.account = Auth.getCurrentUser();
     }
 
     // サイドバーをメインメニューにするか？
@@ -16,12 +18,19 @@
       return this.state.includes('app.dashboard');
     }
 
+    // アカウントメニューを表示する
     openMenu($mdOpenMenu, ev) {
       $mdOpenMenu(ev);
     }
+
+    // サインアウトする
+    signout() {
+      this.Auth.logout();
+      this.state.go('app.signin', {}, {reload: true});
+    }
   }
 
-  MainController.$inject = ['$state'];
+  MainController.$inject = ['$state', 'Auth'];
   angular.module('petzApp')
     .controller('MainController', MainController);
 

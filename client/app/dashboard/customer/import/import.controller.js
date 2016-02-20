@@ -27,7 +27,7 @@
     imp(token) {
       this.ClinicUser.imp({clinicId: this.params.clinicId}, token).$promise
         .then((response) => {
-          this.state.go('app.dashboard.customer.list.detail', {clinicId: this.params.clinicId, customerId: response.id});
+          this.state.go('app.dashboard.customer', {clinicId: this.params.clinicId, customerId: response.id});
         });
     }
   }
