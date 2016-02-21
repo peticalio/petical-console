@@ -7,7 +7,7 @@
         <md-tooltip>インポート</md-tooltip>
         <md-icon class="material-icons">file_upload</md-icon>
       </md-button>
-      <md-button class="md-icon-button" ui-sref="app.dashboard.customer">
+      <md-button class="md-icon-button" ui-sref="app.dashboard.customer.list">
         <md-tooltip>一覧</md-tooltip>
         <md-icon class="material-icons">list</md-icon>
       </md-button>
@@ -162,11 +162,11 @@
       </form>
       <div layout-gt-xs="row" layout-align="end center" ng-if="!ctrl.customer.id">
         <md-button class="md-primary md-raised" ng-disabled="form.$invalid" ng-click="ctrl.save(ctrl.customer)">登録する</md-button>
-        <md-button ui-sref="app.dashboard.customer">キャンセル</md-button>
+        <md-button ui-sref="app.dashboard.customer.list">キャンセル</md-button>
       </div>
       <div layout-gt-xs="row" layout-align="end center" ng-if="ctrl.customer.id">
         <md-button class="md-primary md-raised" ng-disabled="form.$invalid" ng-click="ctrl.update(ctrl.customer)">保存する</md-button>
-        <md-button ui-sref="app.dashboard.customer.detail">キャンセル</md-button>
+        <md-button ui-sref="app.dashboard.customer.detail({customerId: ctrl.customer.id})">キャンセル</md-button>
       </div>
     </div>
   </div>

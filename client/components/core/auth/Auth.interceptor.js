@@ -18,16 +18,18 @@ angular.module('petz.core')
       // Intercept 401s and redirect you to login
       responseError: function(response) {
         var toaster = $injector.get('toaster');
-        if (response.status === 401) {
-          toaster.info('タイムアウトしました。もう一度ログインしてください。');
-          $location.path('/signin');
-          $cookieStore.remove('token');
-        } else if (response.status === 400) {
+        if (response.status === 400) {
           toaster.handle(response);
+          $log.info(response);
+        } else if (response.status === 404) {
           $log.info(response);
         } else if (response.status === 500) {
           toaster.handle(response);
           $log.error(response);
+        } else {
+          toaster.info('タイムアウトしました。もう一度ログインしてください。');
+          $location.path('/signin');
+          $cookieStore.remove('token');
         }
         return $q.reject(response);
       }

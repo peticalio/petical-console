@@ -1,7 +1,7 @@
 (()=> {
   'use strict';
 
-  class CustomerController {
+  class CustomerListController {
     constructor($state, $stateParams, toaster, ClinicCustomer, customers) {
       this.state = $state;
       this.params = $stateParams;
@@ -20,8 +20,8 @@
     }
   }
 
-  CustomerController.$inject = ['$state', '$stateParams', 'toaster', 'ClinicCustomer', 'customers'];
+  CustomerListController.$inject = ['$state', '$stateParams', 'toaster', 'ClinicCustomer', 'customers'];
   angular.module('petzApp')
-    .controller('CustomerController', CustomerController);
+    .controller('CustomerListController', CustomerListController);
 
 })();

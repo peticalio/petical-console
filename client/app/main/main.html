@@ -9,14 +9,14 @@
     <ul class="side-menu">
       <li>
         <menu-link section="section">
-          <md-button class="md-default" ui-sref-active-eq="active" ui-sref="app.dashboard({clinicId: 'd7ba0801-fab7-4de6-8c3a-ec60d67e61ab'})">
+          <md-button class="md-default" ui-sref-active-eq="active" ui-sref="app.dashboard">
             <md-icon class="material-icons" aria-label="Dashboard">dashboard</md-icon>ダッシュボード
           </md-button>
         </menu-link>
       </il>
       <li>
-        <menu-link section="section">
-          <md-button ui-sref-active="active" ui-sref="app.dashboard.customer({clinicId: 'd7ba0801-fab7-4de6-8c3a-ec60d67e61ab'})">
+        <menu-link section="section" ui-sref-active="active" ui-sref="app.dashboard.customer">
+          <md-button ui-sref="app.dashboard.customer.list" ui-sref-ignore>
             <md-icon class="material-icons" aria-label="Customers">face</md-icon>飼い主さま
           </md-button>
         </menu-link>

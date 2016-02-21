@@ -4,13 +4,17 @@
   RouteConfig.$inject = ['$stateProvider'];
   function RouteConfig($stateProvider){
     $stateProvider
-      // 飼い主一覧
       .state('app.dashboard.customer', {
+        abstract: true,
         url: '^/clinics/:clinicId/customers',
+      })
+      // 飼い主一覧
+      .state('app.dashboard.customer.list', {
+        url: '/list',
         views: {
           '@app': {
-            templateUrl:  'app/dashboard/customer/customer.html',
-            controller:   'CustomerController',
+            templateUrl:  'app/dashboard/customer/list/list.html',
+            controller:   'CustomerListController',
             controllerAs: 'ctrl'
           }
         },
@@ -43,6 +47,20 @@
           }
         }
       })
+      // 飼い主変更
+      .state('app.dashboard.customer.form.update', {
+        url: '/:customerId/form',
+        views: {
+          '@app': {
+            templateUrl:  'app/dashboard/customer/form/form.html',
+            controller:   'CustomerFormController',
+            controllerAs: 'ctrl'
+          }
+        },
+        resolve: {
+          customer:       getCustomer
+        }
+      })
       // 飼い主詳細
       .state('app.dashboard.customer.detail', {
         url: '/:customerId',
@@ -59,20 +77,6 @@
           charts:         getCharts
         }
       })
-      // 飼い主変更
-      .state('app.dashboard.customer.detail.form', {
-        url: '/form',
-        views: {
-          '@app': {
-            templateUrl:  'app/dashboard/customer/form/form.html',
-            controller:   'CustomerFormController',
-            controllerAs: 'ctrl'
-          }
-        },
-        resolve: {
-          customer:       getCustomer
-        }
-      })
     ;
   }
 
@@ -81,7 +85,6 @@
   }
 
   function getCustomers($stateParams, ClinicCustomer) {
-    console.log('call getCustomers()');
     return ClinicCustomer.query({clinicId: $stateParams.clinicId}).$promise
       .then(function(response) {
         return response;
@@ -89,7 +92,6 @@
   }
 
   function getCustomer($stateParams, ClinicCustomer) {
-    console.log('call getCustomer()');
     return ClinicCustomer.load({clinicId: $stateParams.clinicId, customerId: $stateParams.customerId}).$promise
       .then(function(response) {
         return response;

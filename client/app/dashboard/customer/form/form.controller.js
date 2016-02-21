@@ -22,11 +22,8 @@
     save(customer) {
       this.ClinicCustomer.save({clinicId: this.params.clinicId}, customer).$promise
         .then(() => {
-          return this.ClinicCustomer.fetch({clinicId: this.params.clinicId}).$promise;
-        })
-        .then(() => {
           this.toaster.info('新しい飼い主さまを登録しました。');
-          this.state.go('app.dashboard.customer', {clinicId: this.params.clinicId});
+          this.state.go('app.dashboard.customer.list', {clinicId: this.params.clinicId});
         });
     }
 
@@ -34,7 +31,7 @@
     update(customer) {
       this.ClinicCustomer.update({clinicId: this.params.clinicId, customerId: customer.id}, customer).$promise
         .then(() => {
-          return this.ClinicCustomer.get({clinicId: this.params.clinicId, customerId: customer.id}).$promise;
+          return this.ClinicCustomer.clear({clinicId: this.params.clinicId}).$promise;
         })
         .then(() => {
           this.toaster.info('飼い主さまの情報を変更しました。');

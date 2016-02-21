@@ -3,7 +3,7 @@
     <div class="md-toolbar-tools">
       <h1 class="md-title">{{ctrl.customer.user.lastName}} {{ctrl.customer.user.firstName}} 様</h1>
       <span flex></span>
-      <md-button class="md-icon-button" ui-sref="app.dashboard.customer.detail.form">
+      <md-button class="md-icon-button" ui-sref="app.dashboard.customer.form.update({customerId:ctrl.customer.id})">
         <md-tooltip>編集する</md-tooltip>
         <md-icon class="material-icons">create</md-icon>
       </md-button>

@@ -98,6 +98,9 @@ md-sidenav md-content ul li md-icon {
   width: 100%;
   text-align: left;
 }
+.side-menu menu-link.active a, .side-menu menu-link.active a md-icon {
+  color: #00BCD4;
+}
 .side-menu menu-link a.active, .side-menu menu-link a.active md-icon {
   color: #00BCD4;
 }
