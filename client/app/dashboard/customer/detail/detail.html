@@ -1,8 +1,12 @@
 <section>
-  <md-toolbar md-theme="content" class="p">
+  <md-toolbar md-theme="content" class="pt">
     <div class="md-toolbar-tools">
       <h1 class="md-title">{{ctrl.customer.user.lastName}} {{ctrl.customer.user.firstName}} 様</h1>
       <span flex></span>
+      <md-button class="md-icon-button" ui-sref="app.dashboard.customer.list">
+        <md-tooltip>一覧</md-tooltip>
+        <md-icon class="material-icons">list</md-icon>
+      </md-button>
       <md-button class="md-icon-button" ui-sref="app.dashboard.customer.form.update({customerId:ctrl.customer.id})">
         <md-tooltip>編集する</md-tooltip>
         <md-icon class="material-icons">create</md-icon>
@@ -13,13 +17,12 @@
       </md-button>
     </div>
   </md-toolbar>
-  <div layout="column" class="p pt0">
-    <ng-include src="'app/dashboard/customer/detail/detail.inc.html'"/>
+  <div layout-padding ng-include="'app/dashboard/customer/detail/detail.inc.html'">
   </div>
 </section>
 
 <section>
-  <md-toolbar md-theme="content" class="p">
+  <md-toolbar md-theme="content">
     <div class="md-toolbar-tools">
       <h1 class="md-title">飼育ペット</h1>
       <span flex></span>
@@ -33,8 +36,8 @@
       </md-button>
     </div>
   </md-toolbar>
-  <div class="p pt0">
-    <md-table-container class="flat-card p">
+  <div layout-padding>
+    <md-table-container class="flat-card">
       <table md-table class="table-hover table-clickable">
         <thead md-head>
           <tr md-row>

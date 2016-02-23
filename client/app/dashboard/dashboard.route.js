@@ -1,11 +1,6 @@
 (function() {
   'use strict';
 
-  angular
-    .module('petzApp')
-    .config(routesConfig);
-
-  routesConfig.$inject = ['$stateProvider', '$locationProvider', '$urlRouterProvider'];
   function routesConfig($stateProvider, $locationProvider, $urlRouterProvider){
     $stateProvider
       .state('app.dashboard', {
@@ -41,5 +36,10 @@
         return response;
       });
   }
+
+  routesConfig.$inject = ['$stateProvider', '$locationProvider', '$urlRouterProvider'];
+  angular
+    .module('petzApp')
+    .config(routesConfig);
 
 })();

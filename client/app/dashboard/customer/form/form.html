@@ -1,5 +1,5 @@
 <section>
-  <md-toolbar md-theme="content" class="p">
+  <md-toolbar md-theme="content" class="pt">
     <div class="md-toolbar-tools">
       <h1 class="md-title">飼い主さま登録フォーム</h1>
       <span flex></span>
@@ -13,8 +13,8 @@
       </md-button>
     </div>
   </md-toolbar>
-  <div class="p pt0">
-    <div class="flat-card p">
+  <div layout-padding>
+    <div class="flat-card">
       <form name="form" novalidate>
         <div layout-gt-xs="row">
           <md-input-container class="md-block" flex>
@@ -159,15 +159,15 @@
             </md-checkbox>
           </div>
         </div>
+        <div layout-gt-xs="row" layout-align="end center" ng-if="!ctrl.customer.id">
+          <md-button class="md-primary md-raised" ng-disabled="form.$invalid" ng-click="ctrl.save(ctrl.customer)">登録する</md-button>
+          <md-button ui-sref="app.dashboard.customer.list">キャンセル</md-button>
+        </div>
+        <div layout-gt-xs="row" layout-align="end center" ng-if="ctrl.customer.id">
+          <md-button class="md-primary md-raised" ng-disabled="form.$invalid" ng-click="ctrl.update(ctrl.customer)">保存する</md-button>
+          <md-button ui-sref="app.dashboard.customer.detail({customerId: ctrl.customer.id})">キャンセル</md-button>
+        </div>
       </form>
-      <div layout-gt-xs="row" layout-align="end center" ng-if="!ctrl.customer.id">
-        <md-button class="md-primary md-raised" ng-disabled="form.$invalid" ng-click="ctrl.save(ctrl.customer)">登録する</md-button>
-        <md-button ui-sref="app.dashboard.customer.list">キャンセル</md-button>
-      </div>
-      <div layout-gt-xs="row" layout-align="end center" ng-if="ctrl.customer.id">
-        <md-button class="md-primary md-raised" ng-disabled="form.$invalid" ng-click="ctrl.update(ctrl.customer)">保存する</md-button>
-        <md-button ui-sref="app.dashboard.customer.detail({customerId: ctrl.customer.id})">キャンセル</md-button>
-      </div>
     </div>
   </div>
 </section>
