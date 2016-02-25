@@ -12,10 +12,12 @@ angular
     'ngCookies',
     'ngResource',
     'ngSanitize',
+    'ngAnimate',
     'ui.router',
     'ui.validate',
     'ui.gravatar',
     'ui.bootstrap',
+    'angular-loading-bar',
     'googlechart'
   ])
 
@@ -55,6 +57,12 @@ angular
       .backgroundPalette('grey');
 
     $mdThemingProvider.setDefaultTheme('console');
+  }])
+
+  // angular loading bar config
+  .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+    cfpLoadingBarProvider.includeSpinner = false;
+    cfpLoadingBarProvider.latencyThreshold = 0;
   }])
 
   // gravator config

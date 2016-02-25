@@ -8,6 +8,7 @@
       this.toaster = toaster;
       this.ClinicCustomer = ClinicCustomer;
       this.customers = customers;
+      this.isOpen = false;
     }
 
     // 一覧を更新する
@@ -15,7 +16,7 @@
       this.ClinicCustomer.fetch({clinicId: this.params.clinicId}).$promise
         .then((response) => {
           this.toaster.info('飼い主さまの一覧を更新しました。');
-          this.customers = response.data;
+          this.customers = response;
         });
     }
   }

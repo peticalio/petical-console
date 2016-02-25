@@ -3,14 +3,6 @@
     <div class="md-toolbar-tools">
       <h2 class="md-title">飼い主さま</h2>
       <span flex></span>
-      <md-button class="md-icon-button" ui-sref="app.dashboard.customer.form">
-        <md-tooltip>新規追加</md-tooltip>
-        <md-icon class="material-icons">add</md-icon>
-      </md-button>
-      <md-button class="md-icon-button" ui-sref="app.dashboard.customer.import">
-        <md-tooltip>インポート</md-tooltip>
-        <md-icon class="material-icons">file_upload</md-icon>
-      </md-button>
       <md-button class="md-icon-button" ng-click="ctrl.refresh()">
         <md-tooltip>更新</md-tooltip>
         <md-icon class="material-icons">refresh</md-icon>
@@ -43,5 +35,21 @@
         </tbody>
       </table>
     </md-table-container>
+  </div>
+  <div style="position:fixed; top:auto; right:20px; bottom:20px; left:auto;">
+    <md-fab-speed-dial md-direction="up" md-open="ctrl.isOpen" class="md-scale" ng-mouseenter="ctrl.isOpen=true" ng-mouseleave="ctrl.isOpen=false" ng-cloak>
+      <md-fab-trigger>
+        <md-button aria-label="add" class="md-fab md-warn" ui-sref="app.dashboard.customer.form">
+          <md-tooltip>新規追加</md-tooltip>
+          <md-icon class="material-icons">add</md-icon>
+        </md-button>
+      </md-fab-trigger>
+      <md-fab-actions>
+        <md-button aria-label="Facebook" class="md-fab md-raised md-mini" ui-sref="app.dashboard.customer.import">
+          <md-tooltip>インポート</md-tooltip>
+          <md-icon class="material-icons">file_upload</md-icon>
+        </md-button>
+      </md-fab-actions>
+    </md-fab-speed-dial>
   </div>
 </section>
