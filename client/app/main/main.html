@@ -22,22 +22,22 @@
         </menu-link>
       </il>
       <li>
-        <menu-link section="section">
-          <md-button ui-sref-active="active" ui-sref="app.dashboard.chart({clinicId:1})">
+        <menu-link section="section" ui-sref-active="active" ui-sref="app.dashboard.chart">
+          <md-button ui-sref="app.dashboard.chart.list" ui-sref-ignore>
             <md-icon class="material-icons" aria-label="Charts">pets</md-icon>カルテ
           </md-button>
         </menu-link>
       </il>
       <li>
-        <menu-link section="section">
-          <md-button ui-sref-active="active" ui-sref="app.dashboard.ticket({clinicId:1})">
+        <menu-link section="section" ui-sref-active="active" ui-sref="app.dashboard.ticket">
+          <md-button ui-sref="app.dashboard.ticket.list" ui-sref-ignore>
             <md-icon class="material-icons" aria-label="Tickets">receipt</md-icon>チケット
           </md-button>
         </menu-link>
       </il>
       <li>
-        <menu-link section="section">
-          <md-button ui-sref-active="active" ui-sref="app.dashboard.mail({clinicId:1})">
+        <menu-link section="section" ui-sref-active="active" ui-sref="app.dashboard.mail">
+          <md-button ui-sref="app.dashboard.mail.list" ui-sref-ignore>
             <md-icon class="material-icons" aria-label="Mails">mail</md-icon>メール
           </md-button>
         </menu-link>
@@ -88,7 +88,7 @@
 </md-sidenav>
 
 <div layout="column" role="main" flex>
-  <md-toolbar class="md-primary white" ng-controller="AppCtrl">
+  <md-toolbar class="md-primary white md-whiteframe-z1" ng-controller="AppCtrl">
     <div class="md-toolbar-tools">
       <!-- toggle -->
       <md-button class="md-icon-button" aria-label="Menu" ng-click="toggleLeft()" hide-gt-md>

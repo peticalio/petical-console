@@ -102,6 +102,36 @@ $base-size: 8px;
 .mb {
   margin-bottom: $base-size;
 }
+.m2 {
+  margin: $base-size * 2;
+}
+.mt2 {
+  margin-top: $base-size * 2;
+}
+.ml2 {
+  margin-left: $base-size * 2;
+}
+.mr2 {
+  margin-right: $base-size * 2;
+}
+.mb2 {
+  margin-bottom: $base-size * 2;
+}
+.m3 {
+  margin: $base-size * 3;
+}
+.mt3 {
+  margin-top: $base-size * 3;
+}
+.ml3 {
+  margin-left: $base-size * 3;
+}
+.mr3 {
+  margin-right: $base-size * 3;
+}
+.mb3 {
+  margin-bottom: $base-size * 3;
+}
 
 
 // border

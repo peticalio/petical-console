@@ -7,6 +7,9 @@ $base-size:   8px;
 md-toolbar {
   min-height: $base-height;
 }
+md-toolbar.md-content-theme:not(.md-menu-toolbar) {
+  background-color: transparent;
+}
 .md-toolbar-tools {
   height: $base-height;
 }
@@ -20,7 +23,13 @@ md-toolbar {
   font-weight: 500;
   margin-left: $base-size;
 }
-
+md-datepicker {
+  margin-top: 15px;
+  margin-bottom: 16px;
+}
+md-select-value {
+  font-size: 16px;
+}
 
 // form
 form {
@@ -45,6 +54,9 @@ label {
 input, textarea {
   font-size: 16px;
 }
+md-autocomplete md-autocomplete-wrap md-input-container {
+  padding-bottom: 2px !important;
+}
 
 // checkbox
 md-checkbox {
@@ -54,6 +66,9 @@ md-checkbox .description {
   font-size: 12px;
   line-height: 14px;
   color: grey;
+}
+md-select {
+  padding-bottom: 24px;
 }
 
 // button
@@ -68,6 +83,14 @@ a {
 }
 .link {
   cursor: pointer;
+}
+.fab {
+  position: fixed;
+  top: auto;
+  right: 20px;
+  bottom: 20px;
+  left: auto;
+  z-index: 2;
 }
 
 // loading bar

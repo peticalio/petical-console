@@ -1,75 +1,82 @@
-<div class="container-small flat-card p2" style="margin: 24px auto;">
-  <h3>petz.io にサインアップ</h3>
-  <div class="block-center">
-    <p class="text-right">
-      <a ui-sref="app.signin">既にアカウントをお持ちの方はこちら！</a>
-    </p>
-    <form name="form" novalidate="">
-      <div layout-gt-xs="row">
-        <md-input-container class="md-block" flex>
-          <label>お名前（姓）</label>
-          <md-icon class="material-icons">person</md-icon>
-          <input name="lastName" ng-model="ctrl.user.lastName" maxlength="50" ng-required="true" ng-maxlength="50"/>
-          <div ng-if="form.lastName.$invalid" ng-messages="form.lastName.$error">
-            <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-              <span>50 文字以内で入力してください。</span>
+<div layout="row" layout-align="center start">
+  <div layout-padding class="container-small flat-card mt3 mb3">
+    <h3>petz.io にサインアップ</h3>
+    <div>
+      <p class="text-right">
+        <a ui-sref="app.signin">既にアカウントをお持ちの方はこちら！</a>
+      </p>
+      <form name="form" novalidate="">
+        <div layout-gt-xs="row">
+          <md-input-container class="md-block" flex>
+            <label>お名前（姓）</label>
+            <md-icon class="material-icons">person</md-icon>
+            <input name="lastName" ng-model="ctrl.user.lastName" maxlength="50" ng-required="true" ng-maxlength="50"/>
+            <div ng-if="form.lastName.$invalid" ng-messages="form.lastName.$error">
+              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                <span>50 文字以内で入力してください。</span>
+              </div>
             </div>
-          </div>
-        </md-input-container>
-        <md-input-container class="md-block" flex>
-          <label>お名前（名）</label>
-          <md-icon class="material-icons">person</md-icon>
-          <input name="firstName" ng-model="ctrl.user.firstName" maxlength="50" ng-required="true" ng-maxlength="50"/>
-          <div ng-if="form.firstName.$invalid" ng-messages="form.firstName.$error">
-            <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-              <span>50 文字以内で入力してください。</span>
+          </md-input-container>
+          <md-input-container class="md-block" flex>
+            <label>お名前（名）</label>
+            <md-icon class="material-icons">person</md-icon>
+            <input name="firstName" ng-model="ctrl.user.firstName" maxlength="50" ng-required="true" ng-maxlength="50"/>
+            <div ng-if="form.firstName.$invalid" ng-messages="form.firstName.$error">
+              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                <span>50 文字以内で入力してください。</span>
+              </div>
             </div>
-          </div>
-        </md-input-container>
-      </div>
-      <md-input-container class="md-icon-float md-block">
-        <label>ログイン ID（メールアドレス）</label>
-        <md-icon class="material-icons">email</md-icon>
-        <input name="email" type="email" ng-model="ctrl.user.email" ng-required="true" ng-maxlength="100">
-        <div ng-show="form.email.$invalid" ng-messages="form.email.$error">
-          <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-            <span>100 文字以内で有効なメールアドレスを入力してください。</span>
+          </md-input-container>
+        </div>
+        <div layout-gt-xs="row">
+          <md-input-container class="md-icon-float md-block" flex>
+            <label>ログイン ID（メールアドレス）</label>
+            <md-icon class="material-icons">email</md-icon>
+            <input name="email" type="email" ng-model="ctrl.user.email" ng-required="true" ng-maxlength="100">
+            <div ng-show="form.email.$invalid" ng-messages="form.email.$error">
+              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                <span>100 文字以内で有効なメールアドレスを入力してください。</span>
+              </div>
+            </div>
+          </md-input-container>
+        </div>
+        <div layout-gt-xs="row">
+          <md-input-container class="md-icon-float md-block" flex>
+            <label>パスワード</label>
+            <md-icon class="material-icons">lock</md-icon>
+            <input name="password" type="password" ng-model="ctrl.user.password" ng-required="true" ng-minlength="5" ng-maxlength="100">
+            <div ng-show="form.password.$invalid" ng-messages="form.password.$error">
+              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                <span>5 文字以上 100 文字以内の半角英数字記号でパスワードを入力してください。</span>
+              </div>
+            </div>
+            <password-strength-bar password-to-check="ctrl.user.password"></password-strength-bar>
+          </md-input-container>
+        </div>
+        <div layout-gt-xs="row">
+          <md-input-container class="md-icon-float md-block" flex>
+            <label>パスワード（確認のためもう一度入力してください）</label>
+            <md-icon class="material-icons">lock_outline</md-icon>
+            <input id="confirm" name="confirm" type="password" ng-model="ctrl.user.confirm" ng-required="true" ui-validate="{same : '$value === ctrl.user.password'}">
+            <div ng-show="form.confirm.$invalid" ng-messages="form.confirm.$error">
+              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern', 'same']">
+                <span>パスワードに入力した値と異なっています。</span>
+              </div>
+            </div>
+            <password-strength-bar password-to-check="ctrl.user.password"></password-strength-bar>
+          </md-input-container>
+        </div>
+        <div layout-gt-xs="row" md-theme="content">
+          <div layout-xs="column" flex-xs="100">
+            <md-checkbox ng-model="ctrl.accept" class="md-accent md-align-top-left" flex ui-validate="{same: '$value === true'}">
+              私は<a href="https://petz.io/terms">利用規約</a>及び<a href="https://petz.io/privacy">プライバシーポリシー</a>に同意してアカウントを作成します。<br/>
+            </md-checkbox>
           </div>
         </div>
-      </md-input-container>
-      <md-input-container class="md-icon-float md-block">
-        <label>パスワード</label>
-        <md-icon class="material-icons">lock</md-icon>
-        <input name="password" type="password" ng-model="ctrl.user.password" ng-required="true" ng-minlength="5" ng-maxlength="100">
-        <div ng-show="form.password.$invalid" ng-messages="form.password.$error">
-          <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-            <span>5 文字以上 100 文字以内の半角英数字記号でパスワードを入力してください。</span>
-          </div>
+        <div layout-gt-xs="row" layout-align="end center">
+          <md-button class="md-primary md-raised" ng-disabled="form.$invalid" ng-click="ctrl.signup(ctrl.user)">サインアップ</md-button>
         </div>
-        <password-strength-bar password-to-check="ctrl.user.password"></password-strength-bar>
-      </md-input-container>
-      <md-input-container class="md-icon-float md-block">
-        <label>パスワード（確認のためもう一度入力してください）</label>
-        <md-icon class="material-icons">lock_outline</md-icon>
-        <input id="confirm" name="confirm" type="password" ng-model="ctrl.user.confirm" ng-required="true" ui-validate="{same : '$value === ctrl.user.password'}">
-        <div ng-show="form.confirm.$invalid" ng-messages="form.confirm.$error">
-          <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern', 'same']">
-            <span>パスワードに入力した値と異なっています。</span>
-          </div>
-        </div>
-        <password-strength-bar password-to-check="ctrl.user.password"></password-strength-bar>
-      </md-input-container>
-      <div layout-gt-xs="row" md-theme="content">
-        <div layout-xs="column" flex-xs="100">
-          <md-checkbox ng-model="ctrl.accept" class="md-accent md-align-top-left" flex ui-validate="{same: '$value === true'}">
-            私は<a href="https://petz.io/terms">利用規約</a>及び<a href="https://petz.io/privacy">プライバシーポリシー</a>に同意してアカウントを作成します。<br/>
-          </md-checkbox>
-        </div>
-      </div>
-      <div layout-gt-xs="row" layout-align="end center">
-        <md-button class="md-primary md-raised" ng-disabled="form.$invalid" ng-click="ctrl.signup(ctrl.user)">サインアップ</md-button>
-      </div>
-      <br/>
-    </form>
+      </form>
+    </div>
   </div>
 </div>

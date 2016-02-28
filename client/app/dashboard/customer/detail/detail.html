@@ -7,14 +7,6 @@
         <md-tooltip>一覧</md-tooltip>
         <md-icon class="material-icons">list</md-icon>
       </md-button>
-      <md-button class="md-icon-button" ui-sref="app.dashboard.customer.form.update({customerId:ctrl.customer.id})">
-        <md-tooltip>編集する</md-tooltip>
-        <md-icon class="material-icons">create</md-icon>
-      </md-button>
-      <md-button class="md-icon-button" ng-click="ctrl.delete($event, ctrl.customer)">
-        <md-tooltip>削除する</md-tooltip>
-        <md-icon class="material-icons">delete</md-icon>
-      </md-button>
     </div>
   </md-toolbar>
   <div layout-padding ng-include="'app/dashboard/customer/detail/detail.inc.html'">
@@ -26,10 +18,6 @@
     <div class="md-toolbar-tools">
       <h1 class="md-title">飼育ペット</h1>
       <span flex></span>
-      <md-button class="md-icon-button" ui-sref="app.dashboard.customer.form">
-        <md-tooltip>追加する</md-tooltip>
-        <md-icon class="material-icons">add</md-icon>
-      </md-button>
       <md-button class="md-icon-button">
         <md-tooltip>更新する</md-tooltip>
         <md-icon class="material-icons">refresh</md-icon>
@@ -41,31 +29,27 @@
       <table md-table class="table-hover table-clickable">
         <thead md-head>
           <tr md-row>
-            <th md-column></th>
             <th md-column>カルテ番号</th>
             <th md-column>ペットのお名前</th>
+            <th md-column>種類</th>
             <th md-column>色</th>
             <th md-column>性別</th>
-            <th md-column>生年月日</th>
-            <th md-column></th>
           </tr>
         </thead>
         <tbody md-body>
-          <tr md-row ng-repeat="pet in ctrl.pets">
+          <tr md-row ng-repeat="pet in ctrl.pets" ui-sref="app.dashboard.chart.detail({chartId: pet.chart.id})">
             <td md-cell>
-              <span class="label label-info" ng-show="pet.chart">カルテ作成済</span>
-              <span class="label label-default" ng-show="!pet.chart">カルテ未作成</span>
+              <span class="label label-default" ng-if="!pet.chart">カルテ作成済</span>
+              <span ng-if="pet.chart">{{pet.chart.chartNo}}</span>
             </td>
             <td md-cell>
-              <strong>{{pet.chart.chartNo}}</strong>
+              {{pet.name}} ちゃん
             </td>
             <td md-cell>
-              <strong>{{pet.name}}</strong>
-              ちゃん<br/>
-              <small>{{pet.type}}</small>
+              {{pet.type}}
             </td>
             <td md-cell>
-              <span class="label label-default-outline">{{pet.color}}</span>
+              <span class="label label-info">{{pet.color}}</span>
             </td>
             <td md-cell>
               <i class="fa fa-mars mr" ng-show="pet.sex === 'MALE'"></i>
@@ -73,16 +57,32 @@
               <span ng-show="pet.sex === 'MALE'">オス</span>
               <span ng-show="pet.sex === 'FEMALE'">メス</span>
             </td>
-            <td md-cell>
-              {{pet.birthDate | date:'yyyy/MM/dd'}}
-            </td>
-            <td md-cell>
-              <a ui-sref-ignore ui-sref="app.dashboard.chart.list.detail({chartId:pet.chart.id})" uib-tooltip="カルテを見る" ng-show="pet.chart"><i class="fa fa-eye fa-fw"></i></a>
-              <a ui-sref-ignore ui-sref="app.dashboard.chart.form.pet({customerId:ctrl.customer.id, petId:pet.id})" uib-tooltip="カルテを作成" ng-show="!pet.chart"><i class="fa fa-plus fa-fw"></i></a>
-            </td>
           </tr>
         </tbody>
       </table>
     </md-table-container>
+  </div>
+  <div class="fab">
+    <md-fab-speed-dial md-direction="up" md-open="ctrl.isOpen" class="md-scale" ng-mouseenter="ctrl.isOpen=true" ng-mouseleave="ctrl.isOpen=false" ng-cloak>
+      <md-fab-trigger>
+        <md-button aria-label="menu" class="md-fab md-warn">
+          <md-icon class="material-icons">menu</md-icon>
+        </md-button>
+      </md-fab-trigger>
+      <md-fab-actions>
+        <md-button class="md-fab md-raised md-mini" ui-sref="app.dashboard.chart.form({customerId:ctrl.customer.id})">
+          <md-tooltip>カルテを追加</md-tooltip>
+          <md-icon class="material-icons">add</md-icon>
+        </md-button>
+        <md-button class="md-fab md-raised md-mini" ui-sref="app.dashboard.customer.form.update({customerId:ctrl.customer.id})">
+          <md-tooltip>編集する</md-tooltip>
+          <md-icon class="material-icons">create</md-icon>
+        </md-button>
+        <md-button class="md-fab md-raised md-mini" ng-click="ctrl.delete($event, ctrl.customer)">
+          <md-tooltip>削除する</md-tooltip>
+          <md-icon class="material-icons">delete</md-icon>
+        </md-button>
+      </md-fab-actions>
+    </md-fab-speed-dial>
   </div>
 </section>

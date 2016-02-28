@@ -1,7 +1,38 @@
-(function() {
+(() => {
   'use strict';
 
-  RouteConfig.$inject = ['$stateProvider'];
+  function getEmpty(clinic) {
+    return {clinic: clinic};
+  }
+
+  function getCustomers($stateParams, ClinicCustomer) {
+    return ClinicCustomer.query({clinicId: $stateParams.clinicId}).$promise
+      .then(function(response) {
+        return response;
+      });
+  }
+
+  function getCustomer($stateParams, ClinicCustomer) {
+    return ClinicCustomer.load({clinicId: $stateParams.clinicId, customerId: $stateParams.customerId}).$promise
+      .then(function(response) {
+        return response;
+      });
+  }
+
+  function getPets(customer, UserPet) {
+    return UserPet.query({userId:customer.user.id}).$promise
+      .then(function(response) {
+        return response;
+      });
+  }
+
+  function getCharts($stateParams, ClinicCustomerChart) {
+    return ClinicCustomerChart.query({clinicId:$stateParams.clinicId, customerId:$stateParams.customerId}).$promise
+      .then(function(response) {
+        return response;
+      });
+  }
+
   function RouteConfig($stateProvider){
     $stateProvider
       .state('app.dashboard.customer', {
@@ -80,38 +111,7 @@
     ;
   }
 
-  function getEmpty(clinic) {
-    return {clinic: clinic};
-  }
-
-  function getCustomers($stateParams, ClinicCustomer) {
-    return ClinicCustomer.query({clinicId: $stateParams.clinicId}).$promise
-      .then(function(response) {
-        return response;
-      });
-  }
-
-  function getCustomer($stateParams, ClinicCustomer) {
-    return ClinicCustomer.load({clinicId: $stateParams.clinicId, customerId: $stateParams.customerId}).$promise
-      .then(function(response) {
-        return response;
-      });
-  }
-
-  function getPets(customer, UserPet) {
-    return UserPet.query({userId:customer.user.id}).$promise
-      .then(function(response) {
-        return response;
-      });
-  }
-
-  function getCharts($stateParams, ClinicCustomerChart) {
-    return ClinicCustomerChart.query({clinicId:$stateParams.clinicId, customerId:$stateParams.customerId}).$promise
-      .then(function(response) {
-        return response;
-      });
-  }
-
+  RouteConfig.$inject = ['$stateProvider'];
   angular.module('petzApp')
     .config(RouteConfig);
 
