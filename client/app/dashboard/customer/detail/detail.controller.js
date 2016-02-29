@@ -2,12 +2,15 @@
   'use strict';
 
   class CustomerDetailController {
-    constructor($state, $stateParams, dialog, toaster, ClinicCustomer, UserPet, ClinicCustomerChart, clinic, customer, pets, charts) {
+    constructor($q, $state, $stateParams, dialog, toaster, ClinicCustomer, UserPet, ClinicCustomerChart, clinic, customer, pets, charts) {
+      this.$q = $q;
       this.$state = $state;
       this.$stateParams = $stateParams;
       this.dialog = dialog;
       this.toaster = toaster;
       this.ClinicCustomer = ClinicCustomer;
+      this.UserPet = UserPet;
+      this.ClinicCustomerChart = ClinicCustomerChart;
       this.clinic = clinic;
       this.customer = customer;
       this.pets = pets;
@@ -31,15 +34,15 @@
     }
 
     refresh() {
-      this.UserPet.query({userId: this.customer.user.id}).$promise
-        .then((response) => {
-          this.pets = response;
+      let pets = this.UserPet.fetch({userId: this.customer.user.id}).$promise
+        .then((response) => response);
+      let charts = this.ClinicCustomerChart.fetch({clinicId: this.$stateParams.clinicId, customerId: this.$stateParams.customerId}).$promise
+        .then((response) => response);
+      this.$q.all([pets, charts])
+        .then(() => {
+          this.relate();
+          this.toaster.info('ペットの一覧を更新しました。');
         });
-      this.ClinicCustomerChart.query({clinicId: this.$stateParams.clinicId, customerId: this.$stateParams.customerId}).$promise
-        .then((response) => {
-          this.charts = response;
-        });
-      this.relate();
     }
 
     relate() {
@@ -53,7 +56,7 @@
     }
   }
 
-  CustomerDetailController.$inject = ['$state', '$stateParams', 'dialog', 'toaster', 'ClinicCustomer', 'UserPet', 'ClinicCustomerChart', 'clinic', 'customer', 'pets', 'charts'];
+  CustomerDetailController.$inject = ['$q', '$state', '$stateParams', 'dialog', 'toaster', 'ClinicCustomer', 'UserPet', 'ClinicCustomerChart', 'clinic', 'customer', 'pets', 'charts'];
   angular.module('petzApp')
     .controller('CustomerDetailController', CustomerDetailController);
 

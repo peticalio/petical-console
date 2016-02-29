@@ -55,6 +55,11 @@
       });
   }
 
+  function getClinicChart($stateParams, ClinicChart) {
+    return ClinicChart.get({clinicId: $stateParams.clinicId, chartId: $stateParams.chartId}).$promise
+      .then((response) => response);
+  }
+
   // configure state provider
 
   function ClinicChartRouter($stateProvider) {
@@ -125,10 +130,7 @@
           }
         },
         resolve: {
-          chart: ['$stateParams', 'Chart', function($stateParams, Chart) {
-            return Chart.get({clinicId:$stateParams.clinicId, chartId:$stateParams.chartId}).$promise
-              .then(function(response) {return response;});
-          }]
+          chart:          getClinicChart
         }
       })
     ;

@@ -32,8 +32,12 @@
       this.$state.go('app.signin', {}, {reload: true});
     }
 
+    // サイドメニューを開く
     toggleLeft() {
-      this.buildDelayedToggler('left');
+      var func = function() {
+        this.$mdSidenav('left').toggle();
+      };
+      return this.debounce(func, 200);
     }
 
     closeLeft() {
@@ -41,26 +45,13 @@
         .then(() => console.log('close LEFT is done'));
     }
 
-    buildDelayedToggler(navID) {
-      return this.debounce(() => {
-        this.$mdSidenav(navID).toggle()
-          .then(() => {
-            console.log('toggle ' + navID + ' is done');
-          });
-      }, 200);
-    }
-
     debounce(func, wait) {
       var timer;
-      return function debounced() {
-        var context = this.$scope;
-        var args = Array.prototype.slice.call(arguments);
-        this.$timeout.cancel(timer);
-        timer = this.$timeout(() => {
-          timer = undefined;
-          func.apply(context, args);
-        }, wait || 10);
-      };
+      this.$timeout.cancel(timer);
+      timer = this.$timeout(() => {
+        timer = undefined;
+        this.$mdSidenav('left').toggle();
+      }, wait || 10);
     }
   }
 

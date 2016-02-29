@@ -1,7 +1,122 @@
+<section>
+  <md-toolbar md-theme="content" class="pt">
+    <div class="md-toolbar-tools">
+      <h1 class="md-title">{{ctrl.chart.pet.name}} ちゃんのカルテ</h1>
+      <span flex></span>
+      <md-button class="md-icon-button" ui-sref="app.dashboard.customer.list">
+        <md-tooltip md-direction="left">一覧</md-tooltip>
+        <md-icon class="material-icons">list</md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <div layout-padding>
+    <div layout-gt-xs="row" class="flat-card">
+      <md-list flex>
+        <md-subheader class="md-no-sticky">ペット基本情報</md-subheader>
+        <md-list-item>
+          <md-icon class="material-icons">
+            local_hospital
+            <md-tooltip>所属動物病院</md-tooltip>
+          </md-icon>
+          <p>{{ctrl.clinic.name}}</p>
+        </md-list-item>
+        <md-list-item>
+          <md-icon class="material-icons">
+            person
+            <md-tooltip>氏名</md-tooltip>
+          </md-icon>
+          <p>{{ctrl.customer.user.lastName}} {{ctrl.customer.user.firstName}} 様</p>
+        </md-list-item>
+        <md-list-item>
+          <md-icon class="material-icons">
+            person_outline
+            <md-tooltip>氏名（フリガナ）</md-tooltip>
+          </md-icon>
+          <p ng-show="ctrl.customer.user.lastNameKana">{{ctrl.customer.user.lastNameKana}} {{ctrl.customer.user.firstNameKana}}</p>
+          <p ng-show="!ctrl.customer.user.lastNameKana">未登録</p>
+        </md-list-item>
+        <md-list-item>
+          <md-icon class="material-icons">
+            account_box
+            <md-tooltip>ログインID</md-tooltip>
+          </md-icon>
+          <p>{{ctrl.customer.user.login}}</p>
+        </md-list-item>
+      </md-list>
+      <md-list flex>
+        <md-subheader class="md-no-sticky">飼い主さま基本情報</md-subheader>
+        <md-list-item>
+          <md-icon class="material-icons">
+            location_on
+            <md-tooltip>郵便番号</md-tooltip>
+          </md-icon>
+          <p ng-show="ctrl.customer.user.zipCode">〒 {{ctrl.customer.user.zipCode}}</p>
+          <p ng-show="!ctrl.customer.user.zipCode">未登録</p>
+        </md-list-item>
+        <md-list-item>
+          <md-icon class="material-icons">
+            import_contacts
+            <md-tooltip>住所</md-tooltip>
+          </md-icon>
+          <p ng-show="ctrl.customer.user.state">{{ctrl.customer.user.state}}{{ctrl.customer.user.city}}{{ctrl.customer.user.street}}</p>
+          <p ng-show="!ctrl.customer.user.state">未登録</p>
+        </md-list-item>
+        <md-list-item>
+          <md-icon class="material-icons">
+            phone
+            <md-tooltip>電話番号（自宅）</md-tooltip>
+          </md-icon>
+          <p ng-show="ctrl.customer.user.phoneNo">{{ctrl.customer.user.phoneNo}}</p>
+          <p ng-show="!ctrl.customer.user.phoneNo">未登録</p>
+        </md-list-item>
+        <md-list-item>
+          <md-icon class="material-icons">
+            phone_android
+            <md-tooltip>電話番号（携帯）</md-tooltip>
+          </md-icon>
+          <p ng-show="ctrl.customer.user.mobilePhoneNo">{{ctrl.customer.user.mobilePhoneNo}}</p>
+          <p ng-show="!ctrl.customer.user.mobilePhoneNo">未登録</p>
+        </md-list-item>
+        <md-list-item>
+          <md-icon class="material-icons">
+            mail_outline
+            <md-tooltip>メールアドレス</md-tooltip>
+          </md-icon>
+          <p>{{ctrl.customer.user.email}}</p>
+        </md-list-item>
+      </md-list>
+    </div>
+  </div>
+  <div class="fab" ng-show="ctrl.chart.id">
+    <md-fab-speed-dial md-direction="up" md-open="ctrl.isOpen" class="md-scale" ng-mouseenter="ctrl.isOpen=true" ng-mouseleave="ctrl.isOpen=false" ng-cloak>
+      <md-fab-trigger>
+        <md-button aria-label="menu" class="md-fab md-warn">
+          <md-icon class="material-icons">menu</md-icon>
+        </md-button>
+      </md-fab-trigger>
+      <md-fab-actions>
+        <md-button class="md-fab md-raised md-mini" ng-click="ctrl.reserve(ctrl.chart)">
+          <md-tooltip>予約する</md-tooltip>
+          <md-icon class="material-icons">today</md-icon>
+        </md-button>
+        <md-button class="md-fab md-raised md-mini" ui-sref="app.dashboard.chart.form.pet({clinicId: ctrl.chart.customer.clinic.id, customerId: ctrl.chart.customer.id, petId: ctrl.chart.pet.id})">
+          <md-tooltip>編集する</md-tooltip>
+          <md-icon class="material-icons">create</md-icon>
+        </md-button>
+        <md-button class="md-fab md-raised md-mini" ng-click="ctrl.removeChart(ctrl.chart)">
+          <md-tooltip>削除する</md-tooltip>
+          <md-icon class="material-icons">delete</md-icon>
+        </md-button>
+      </md-fab-actions>
+    </md-fab-speed-dial>
+  </div>
+</section>
+
+
 <h3>
   <div style="float:right;">
     <button type="button" class="btn btn-default btn-sm" ng-click="ctrl.reserve(ctrl.chart)" ng-show="ctrl.chart.id">予約する</button>
-    <button type="button" class="btn btn-default btn-sm" ui-sref="app.dashboard.chart.form.pet({clinicId:ctrl.chart.customer.clinic.id, customerId:ctrl.chart.customer.id, petId:ctrl.chart.pet.id})" ng-show="ctrl.chart.id">編集する</button>
+    <button type="button" class="btn btn-default btn-sm"  ng-show="ctrl.chart.id">編集する</button>
     <button type="button" class="btn btn-danger-outline btn-sm" ng-click="ctrl.removeChart(ctrl.chart)" ng-show="ctrl.chart.id">削除する</button>
   </div>
   {{ctrl.chart.pet.name}} ちゃんのカルテ

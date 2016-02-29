@@ -4,7 +4,7 @@
       <h1 class="md-title">{{ctrl.customer.user.lastName}} {{ctrl.customer.user.firstName}} 様</h1>
       <span flex></span>
       <md-button class="md-icon-button" ui-sref="app.dashboard.customer.list">
-        <md-tooltip>一覧</md-tooltip>
+        <md-tooltip md-direction="left">一覧</md-tooltip>
         <md-icon class="material-icons">list</md-icon>
       </md-button>
     </div>
@@ -19,8 +19,8 @@
       <h1 class="md-title">飼育ペット</h1>
       <span flex></span>
       <md-button class="md-icon-button">
-        <md-tooltip>更新する</md-tooltip>
-        <md-icon class="material-icons">refresh</md-icon>
+        <md-tooltip md-direction="left">更新する</md-tooltip>
+        <md-icon class="material-icons" ng-click="ctrl.refresh()">refresh</md-icon>
       </md-button>
     </div>
   </md-toolbar>
