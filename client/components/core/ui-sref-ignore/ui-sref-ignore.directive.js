@@ -4,8 +4,8 @@ angular.module('petz.core')
   .directive('uiSrefIgnore', function() {
     return {
       restrict: 'A',
-      link: function(scope, elem, attrs) {
-        elem.on('click', function(e) {
+      link: function(scope, elem) {
+        elem.on('click', function() {
           // Find the ui sref parent
           var uiSref = elem.parents('[ui-sref]').first();
           // Set the target attribute so that the click event is ignored

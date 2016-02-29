@@ -1,12 +1,12 @@
-(()=> {
+(() => {
   'use strict';
 
   class SignupController {
     constructor($rootScope, $state, $location, $cacheFactory, Auth, Signup) {
-      this.root = $rootScope;
-      this.state = $state;
-      this.location = $location;
-      this.cache = $cacheFactory;
+      this.$rootScope = $rootScope;
+      this.$state = $state;
+      this.$location = $location;
+      this.$cacheFactory = $cacheFactory;
       this.Auth = Auth;
       this.Signup = Signup;
     }
@@ -18,15 +18,15 @@
           return this.Auth.login(user);
         })
         .then(() => {
-          if (this.root.returnToState) {
-            var path = this.root.returnToState + this.root.returnToStateParams;
-            this.location.path(path);
+          if (this.$rootScope.returnToState) {
+            var path = this.$rootScope.returnToState + this.$rootScope.returnToStateParams;
+            this.$location.path(path);
           } else {
-            this.cache.get('$http').removeAll();
-            this.state.go('app.home', {}, {reload: true});
+            this.$cacheFactory.get('$http').removeAll();
+            this.$state.go('app.home', {}, {reload: true});
           }
         });
-    };
+    }
   }
 
   SignupController.$inject = ['$rootScope', '$state', '$location', '$cacheFactory', 'Auth', 'Signup'];

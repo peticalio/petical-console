@@ -1,19 +1,14 @@
-(function() {
+(() => {
   'use strict';
 
-  angular
-    .module('petzApp')
-    .controller('ChartUploadController', ChartUploadController);
+  class ChartUploadController {
+    construct($state, $stateParams) {
+      this.$state = $state;
+      this.$stateParams = $stateParams;
+    }
+  }
 
   ChartUploadController.$inject = ['$state', '$stateParams'];
-  function ChartUploadController($state, $stateParams) {
-    // ----- variables
-    var _this = this;
-
-    // ----- methods
-    function construct() {
-    }
-
-    construct();
-  }
+  angular.module('petzApp')
+    .controller('ChartUploadController', ChartUploadController);
 })();

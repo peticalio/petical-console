@@ -3,8 +3,8 @@
 
   class CustomerDetailController {
     constructor($state, $stateParams, dialog, toaster, ClinicCustomer, UserPet, ClinicCustomerChart, clinic, customer, pets, charts) {
-      this.state = $state;
-      this.params = $stateParams;
+      this.$state = $state;
+      this.$stateParams = $stateParams;
       this.dialog = dialog;
       this.toaster = toaster;
       this.ClinicCustomer = ClinicCustomer;
@@ -19,14 +19,14 @@
     delete(event, customer) {
       this.dialog.delete(event, customer)
         .then(() => {
-          return this.ClinicCustomer.delete({clinicId: this.params.clinicId, customerId: this.params.customerId});
+          return this.ClinicCustomer.delete({clinicId: this.$stateParams.clinicId, customerId: this.$stateParams.customerId});
         })
         .then(() => {
           this.toaster.info('飼い主さまを削除しました。');
-          return this.ClinicCustomer.fetch({clinicId: this.params.clinicId}).$promise;
+          return this.ClinicCustomer.fetch({clinicId: this.$stateParams.clinicId}).$promise;
         })
         .then(() => {
-          this.state.go('app.dashboard.customer.list');
+          this.$state.go('app.dashboard.customer.list');
         });
     }
 
@@ -35,7 +35,7 @@
         .then((response) => {
           this.pets = response;
         });
-      this.ClinicCustomerChart.query({clinicId:$stateParams.clinicId, customerId:$stateParams.customerId}).$promise
+      this.ClinicCustomerChart.query({clinicId: this.$stateParams.clinicId, customerId: this.$stateParams.customerId}).$promise
         .then((response) => {
           this.charts = response;
         });

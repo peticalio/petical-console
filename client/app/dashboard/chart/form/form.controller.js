@@ -18,25 +18,6 @@
       this.chart = {customer:customer, pet:{}};
     }
 
-    // // angular-ui用処理
-    // transformTag(newTag) {
-    //   return {name: newTag};
-    // }
-    //
-    // // 生年月日選択ダイアログの表示制御
-    // this.openedBirthDate = false;
-    // openBirthDateDialog($event) {
-    //   $event.stopPropagation();
-    //   this.openedBirthDate = !this.openedBirthDate;
-    // }
-    //
-    // // マイクロチップ埋め込み日選択ダイアログの表示制御
-    // this.openedMicrochipDate = false;
-    // openMicrochipDateDialog($event) {
-    //   $event.stopPropagation();
-    //   this.openedMicrochipDate = !this.openedMicrochipDate;
-    // }
-
     // 種類を取得する（オートコンプリート用）
     getTypes(text) {
       return this.types.filter((item) => {
@@ -60,26 +41,37 @@
 
     // カルテを登録する
     save(chart) {
-      // FIXME md-autocompleteにバグがあるため
-      if (chart.pet.type == null) chart.pet.type = this.typeText;
-      if (chart.pet.color == null) chart.pet.color = this.colorText;
-      if (chart.pet.blood == null) chart.pet.blood = this.bloodText;
-      console.log(chart);
-      this.ClinicChart.save({clinicId: this.$stateParams.clinicId}, chart).$promise
+      this.supportAutocomplete(chart);
+      return this.ClinicChart.save({clinicId: this.$stateParams.clinicId}, chart).$promise
         .then((response) => {
           this.toaster.info('新しくカルテを作成しました。');
           this.$state.go('app.dashboard.chart.detail', {clinicId: this.$stateParams.clinicId, customerId: this.$stateParams.customerId, chartId: response.data.id});
+          return response.$promise;
         });
     }
 
     // カルテを保存する
     update(chart) {
-      return Chart.update({clinicId:$stateParams.clinicId, chartId:chart.id}, chart).$promise
-        .then(function(response) {
-          Notify.success('カルテを保存しました。');
-          $state.go('app.dashboard.chart.detail', {clinicId:$stateParams.clinicId, customerId:$stateParams.customerId, chartId:chart.id});
+      this.supportAutocomplete(chart);
+      return this.ClinicChart.update({clinicId: this.$stateParams.clinicId, chartId: chart.id}, chart).$promise
+        .then((response) => {
+          this.toaster.info('カルテを保存しました。');
+          this.$state.go('app.dashboard.chart.detail', {clinicId: this.$stateParams.clinicId, customerId: this.$stateParams.customerId, chartId: response.data.id});
           return response.$promise;
         });
+    }
+
+    // FIXME md-autocompleteにバグがあるため
+    supportAutocomplete(chart) {
+      if (angular.isDefined(this.typeText)) {
+        chart.pet.type = this.typeText;
+      }
+      if (angular.isDefined(this.colorText)) {
+        chart.pet.color = this.colorText;
+      }
+      if (angular.isDefined(this.bloodText)) {
+        chart.pet.blood = this.bloodText;
+      }
     }
   }
 

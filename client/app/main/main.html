@@ -5,7 +5,7 @@
   <md-toolbar class="md-tall">
     <h1 class="md-toolbar-tools"></h1>
   </md-toolbar>
-  <md-content flex ng-controller="LeftCtrl">
+  <md-content flex>
     <ul class="side-menu">
       <li>
         <menu-link section="section">
@@ -88,10 +88,10 @@
 </md-sidenav>
 
 <div layout="column" role="main" flex>
-  <md-toolbar class="md-primary white md-whiteframe-z1" ng-controller="AppCtrl">
+  <md-toolbar class="md-primary white md-whiteframe-z1">
     <div class="md-toolbar-tools">
       <!-- toggle -->
-      <md-button class="md-icon-button" aria-label="Menu" ng-click="toggleLeft()" hide-gt-md>
+      <md-button class="md-icon-button" aria-label="Menu" ng-click="ctrl.toggleLeft()" hide-gt-md>
         <md-icon class="material-icons white" aria-label="Menu">menu</md-icon>
       </md-button>
       <md-button class="md-icon-button" hide-sm ng-show="ctrl.showDashboardMenu()">
@@ -111,12 +111,12 @@
         <md-menu-content width="4">
           <md-subheader><h4 class="mt0">{{ctrl.account.username}}</h4>{{ctrl.account.login}}</md-subheader>
           <md-menu-item>
-            <md-button ng-click="ctrl.redial($event)">
+            <md-button>
               <md-icon class="material-icons" aria-label="Home">person_outline</md-icon>アカウント
             </md-button>
           </md-menu-item>
           <md-menu-item>
-            <md-button ng-click="ctrl.redial($event)">
+            <md-button>
               <md-icon class="material-icons" aria-label="Home">security</md-icon>パスワード変更
             </md-button>
           </md-menu-item>

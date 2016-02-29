@@ -1,7 +1,18 @@
-(function() {
+(() => {
   'use strict';
 
-  function routesConfig($stateProvider){
+  function empty() {
+    return {country:'JP'};
+  }
+
+  function getInvitation($stateParams, MyInvitation) {
+    return MyInvitation.load({invitationId:$stateParams.invitationId}).$promise
+      .then(function(response) {
+        return response;
+      });
+  }
+
+  function ClinicRouter($stateProvider){
     $stateProvider
       // register new clinic
       .state('app.clinic', {
@@ -38,18 +49,7 @@
     ;
   }
 
-  function empty() {
-    return {country:'JP'};
-  }
-
-  function getInvitation($stateParams, MyInvitation) {
-    return MyInvitation.load({invitationId:$stateParams.invitationId}).$promise
-      .then(function(response) {
-        return response;
-      });
-  }
-
-  routesConfig.$inject = ['$stateProvider'];
-  angular.module('petzApp').config(routesConfig);
+  ClinicRouter.$inject = ['$stateProvider'];
+  angular.module('petzApp').config(ClinicRouter);
 
 })();

@@ -1,7 +1,17 @@
-(function() {
+(() => {
   'use strict';
 
-  function routesConfig($stateProvider, $locationProvider, $urlRouterProvider){
+  function getClinics(Clinic) {
+    return Clinic.query().$promise
+      .then((response) => response);
+  }
+
+  function getClinic($stateParams, Clinic) {
+    return Clinic.load({clinicId: $stateParams.clinicId}).$promise
+      .then((response) => response);
+  }
+
+  function DashboardRouter($stateProvider){
     $stateProvider
       .state('app.dashboard', {
         url: '^/clinics/:clinicId/dashboard',
@@ -23,23 +33,8 @@
     ;
   }
 
-  function getClinics(Clinic) {
-    return Clinic.query().$promise
-      .then(function(response) {
-        return response;
-      });
-  }
-
-  function getClinic($stateParams, Clinic) {
-    return Clinic.load({clinicId: $stateParams.clinicId}).$promise
-      .then(function(response) {
-        return response;
-      });
-  }
-
-  routesConfig.$inject = ['$stateProvider', '$locationProvider', '$urlRouterProvider'];
-  angular
-    .module('petzApp')
-    .config(routesConfig);
+  DashboardRouter.$inject = ['$stateProvider'];
+  angular.module('petzApp')
+    .config(DashboardRouter);
 
 })();

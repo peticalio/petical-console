@@ -34,4 +34,5 @@ angular.module('petz.core')
         return $q.reject(response);
       }
     };
-  }])
+  }]
+);
