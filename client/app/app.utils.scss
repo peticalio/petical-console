@@ -135,8 +135,17 @@ $base-size: 8px;
 
 
 // border
+.bt {
+  border-top: 1px solid #ddd;
+}
 .bb {
   border-bottom: 1px solid #ddd;
+}
+.br {
+  border-right: 1px solid #ddd;
+}
+.bl {
+  border-left: 1px solid #ddd;
 }
 
 // table (extend bootstrap table)

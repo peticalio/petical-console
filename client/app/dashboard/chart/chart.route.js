@@ -56,7 +56,7 @@
   }
 
   function getClinicChart($stateParams, ClinicChart) {
-    return ClinicChart.get({clinicId: $stateParams.clinicId, chartId: $stateParams.chartId}).$promise
+    return ClinicChart.load({clinicId: $stateParams.clinicId, chartId: $stateParams.chartId}).$promise
       .then((response) => response);
   }
 

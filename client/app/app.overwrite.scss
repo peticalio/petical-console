@@ -31,6 +31,11 @@ md-select-value {
   font-size: 16px;
 }
 
+// tabs
+md-tabs.md-console-theme.md-primary > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item:not([disabled]).md-active {
+  color: #fff;
+}
+
 // form
 form {
   width: 100%;

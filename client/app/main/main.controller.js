@@ -2,10 +2,11 @@
   'use strict';
 
   class MainController {
-    constructor($scope, $state, $timeout, $mdSidenav, Auth) {
+    constructor($scope, $state, $timeout, $mdMedia, $mdSidenav, Auth) {
       this.$scope = $scope;
       this.$state = $state;
       this.$timeout = $timeout;
+      this.$mdMedia = $mdMedia;
       this.$mdSidenav = $mdSidenav;
       this.Auth = Auth;
       this.account = Auth.getCurrentUser();
@@ -19,6 +20,11 @@
     // サイドバーをダッシュボードメニューにするか？
     showDashboardMenu() {
       return this.$state.includes('app.dashboard');
+    }
+
+    // サイドバーのトグルアイコンを表示するか？
+    showDashbordMenuIcon() {
+      return this.$mdMedia('xs');
     }
 
     // アカウントメニューを表示する
@@ -55,7 +61,7 @@
     }
   }
 
-  MainController.$inject = ['$scope', '$state', '$timeout', '$mdSidenav', 'Auth'];
+  MainController.$inject = ['$scope', '$state', '$timeout', '$mdMedia', '$mdSidenav', 'Auth'];
   angular.module('petzApp')
     .controller('MainController', MainController);
 

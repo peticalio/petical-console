@@ -1,9 +1,11 @@
 <md-sidenav class="md-sidenav-left md-whiteframe-z1" md-component-id="mainmenu" md-is-locked-open="$mdMedia('gt-lg')" ng-show="ctrl.showMainMenu()">
 </md-sidenav>
 
-<md-sidenav class="md-sidenav-left md-whiteframe-z1" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" ng-show="ctrl.showDashboardMenu()">
-  <md-toolbar class="md-tall">
-    <h1 class="md-toolbar-tools"></h1>
+<md-sidenav class="md-sidenav-left br" md-theme="sidemenu" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" ng-show="ctrl.showDashboardMenu()">
+  <md-toolbar class="bb">
+    <div class="md-toolbar-tools">
+      <h2>Petz.io</h2>
+    </div>
   </md-toolbar>
   <md-content flex>
     <ul class="side-menu">
@@ -88,26 +90,32 @@
 </md-sidenav>
 
 <div layout="column" role="main" flex>
-  <md-toolbar class="md-primary white md-whiteframe-z1">
+  <md-toolbar class="md-primary white">
     <div class="md-toolbar-tools">
       <!-- toggle -->
-      <md-button class="md-icon-button" aria-label="Menu" ng-click="ctrl.toggleLeft()" hide-gt-md>
+      <md-button class="md-icon-button" ng-if="ctrl.showDashbordMenuIcon()" ng-click="ctrl.toggleLeft()">
         <md-icon class="material-icons white" aria-label="Menu">menu</md-icon>
       </md-button>
-      <md-button class="md-icon-button" hide-sm ng-show="ctrl.showDashboardMenu()">
+      <md-button class="md-icon-button" ng-if="ctrl.showDashboardMenu()" hide-sm>
         <md-icon class="material-icons white" aria-label="Menu">keyboard_backspace</md-icon>
       </md-button>
 
       <!-- logo -->
       <span flex></span>
-      <div class="navbar-header">
+      <!-- <div class="navbar-header">
         <a class="navbar-brand ml" href="/"></a>
       </div>
-      <span flex></span>
+      <span flex></span> -->
 
       <!-- account menu -->
+      <md-button class="md-icon-button" ui-sref="app.home">
+        <md-icon class="material-icons white">apps</md-icon>
+      </md-button>
+      <md-button class="md-icon-button">
+        <md-icon class="material-icons white">notifications</md-icon>
+      </md-button>
       <md-menu md-position-mode="target-right target" style="margin-right:0;" class="link">
-        <img gravatar-src-once="ctrl.account.login" class="img-circle" style="width:32px;" ng-click="ctrl.openMenu($mdOpenMenu, $event)"/>
+        <img gravatar-src-once="ctrl.account.login" class="img-circle ml" style="width:32px;" ng-click="ctrl.openMenu($mdOpenMenu, $event)"/>
         <md-menu-content width="4">
           <md-subheader><h4 class="mt0">{{ctrl.account.username}}</h4>{{ctrl.account.login}}</md-subheader>
           <md-menu-item>
@@ -132,8 +140,9 @@
   </md-toolbar>
 
   <div class="full-page-overlay" ptz-show-state-change>
-    <i class="icon-loader spin">Loading…</i>
+    <i class="icon-loader spin"></i>
   </div>
+
   <md-content layout="column" flex="" class="bg-color fadein" ui-view="">
     <div layout-padding="" class="pt0 bg-color">
       <div class="copyright">

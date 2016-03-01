@@ -52,9 +52,18 @@ angular
         'hue-2': '300',
         'hue-3': '800'
       })
-      .accentPalette('pink')
+      .accentPalette('orange')
       .warnPalette('red')
       .backgroundPalette('grey');
+
+    $mdThemingProvider
+      .theme('sidemenu')
+      .primaryPalette('grey',{
+        'default': '50',
+        'hue-1': '700',
+        'hue-2': '300',
+        'hue-3': '800'
+      });
 
     $mdThemingProvider.setDefaultTheme('console');
   }])

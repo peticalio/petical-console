@@ -71,15 +71,15 @@
       </md-fab-trigger>
       <md-fab-actions>
         <md-button class="md-fab md-raised md-mini" ui-sref="app.dashboard.chart.form({customerId:ctrl.customer.id})">
-          <md-tooltip>カルテを追加</md-tooltip>
+          <md-tooltip md-direction="left">カルテを追加</md-tooltip>
           <md-icon class="material-icons">add</md-icon>
         </md-button>
         <md-button class="md-fab md-raised md-mini" ui-sref="app.dashboard.customer.form.update({customerId:ctrl.customer.id})">
-          <md-tooltip>編集する</md-tooltip>
+          <md-tooltip md-direction="left">編集する</md-tooltip>
           <md-icon class="material-icons">create</md-icon>
         </md-button>
         <md-button class="md-fab md-raised md-mini" ng-click="ctrl.delete($event, ctrl.customer)">
-          <md-tooltip>削除する</md-tooltip>
+          <md-tooltip md-direction="left">削除する</md-tooltip>
           <md-icon class="material-icons">delete</md-icon>
         </md-button>
       </md-fab-actions>
