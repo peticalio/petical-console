@@ -130,11 +130,16 @@
       </md-menu>
     </div>
   </md-toolbar>
-  <md-content layout="column" flex="" class="bg-color" ui-view="">
+
+  <div class="full-page-overlay" ptz-show-state-change>
+    <i class="icon-loader spin">Loading…</i>
+  </div>
+  <md-content layout="column" flex="" class="bg-color fadein" ui-view="">
     <div layout-padding="" class="pt0 bg-color">
       <div class="copyright">
         © 2016 <a href="https://petz.io">petz.io</a> - Produced by <a href="https://majimena.co.jp" target="_blank">majimena Inc,.</a>
       </div>
     </div>
   </md-content>
+
 </div>
