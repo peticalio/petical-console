@@ -3,9 +3,21 @@
 $base-height: 56px;
 $base-size:   8px;
 
+// fade in and out
+.fadein.ng-enter {
+  transition:0.5s linear all;
+  opacity:0;
+}
+.fadein.ng-enter.ng-enter-active {
+  opacity:1;
+}
+
 // toolbar
 md-toolbar {
   min-height: $base-height;
+}
+md-toolbar.navigation {
+  z-index: 10;
 }
 md-toolbar.md-content-theme:not(.md-menu-toolbar) {
   background-color: transparent;

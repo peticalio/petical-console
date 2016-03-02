@@ -50,11 +50,6 @@
           }
         },
         resolve: {
-          delay: function($q, $timeout) {
-            var delay = $q.defer();
-            $timeout(delay.resolve, 3000);
-            return delay.promise;
-          },
           customers:      getCustomers
         }
       })

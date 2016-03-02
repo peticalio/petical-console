@@ -17,7 +17,6 @@ angular
     'ui.validate',
     'ui.gravatar',
     'ui.bootstrap',
-    'angular-loading-bar',
     'googlechart'
   ])
 
@@ -65,13 +64,13 @@ angular
         'hue-3': '800'
       });
 
-    $mdThemingProvider.setDefaultTheme('console');
-  }])
+    $mdThemingProvider
+      .theme('progress')
+      .primaryPalette('grey',{
+        'default': '800'
+      });
 
-  // angular loading bar config
-  .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
-    cfpLoadingBarProvider.includeSpinner = false;
-    cfpLoadingBarProvider.latencyThreshold = 0;
+    $mdThemingProvider.setDefaultTheme('console');
   }])
 
   // gravator config
