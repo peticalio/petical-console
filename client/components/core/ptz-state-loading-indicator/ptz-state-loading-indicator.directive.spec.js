@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Directive: ptzShowStateChange', function () {
+describe('Directive: ptzStateLoadingIndicator', function () {
 
   // load the directive's module
   beforeEach(module('petz.core'));
@@ -13,7 +13,7 @@ describe('Directive: ptzShowStateChange', function () {
   }));
 
   it('should make hidden element visible', inject(function ($compile) {
-    element = angular.element('<ptz-show-state-change></ptz-show-state-change>');
+    element = angular.element('<ptz-state-loading-indicator></ptz-state-loading-indicator>');
     element = $compile(element)(scope);
   }));
 });
