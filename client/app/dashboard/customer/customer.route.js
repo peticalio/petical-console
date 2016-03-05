@@ -79,7 +79,7 @@
         }
       })
       // 飼い主変更
-      .state('app.dashboard.customer.form.update', {
+      .state('app.dashboard.customer.update', {
         url: '/:customerId/form',
         views: {
           '@app': {

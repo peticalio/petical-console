@@ -1,70 +1,44 @@
-<h3>
-  カルテをさがす
-  <small>管理しているカルテを検索します。</small>
-</h3>
-
-<form name="form" role="form" class="form-inline mb" ng-submit="ctrl.search(ctrl.criteria)" novalidate>
-  <section class="form-group mr" ng-class="{'has-error': form.customer.$invalid}">
-    <label class="control-label small">飼い主:</label>
-    <input id="customer" name="customer" type="text" class="form-control input-sm" maxlength="50" placeholder="例）山田" ng-model="ctrl.criteria.customerName" ng-maxlength="50" uib-typeahead="customer.lastName + ' ' + customer.firstName for customer in ctrl.getCustomer($viewValue)" uib-typeahead-on-select="ctrl.onSelectCustomer($item, $model, $label)">
+<div class="layout-max-width">
+  <section>
+    <md-toolbar md-theme="content" class="pt">
+      <div class="md-toolbar-tools">
+        <h2 class="md-title">カルテ</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="ctrl.refresh()">
+          <md-tooltip md-direction="left">更新</md-tooltip>
+          <md-icon class="material-icons">refresh</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <div layout-padding>
+      <md-table-container class="flat-card">
+        <table md-table class="table-hover table-clickable">
+          <thead md-head>
+            <tr md-row>
+              <th md-column><span>カルテ番号</span></th>
+              <th md-column><span>ペットのお名前</span></th>
+              <th md-column><span>飼い主さま</span></th>
+              <th md-column><span>作成日時</span></th>
+            </tr>
+          </thead>
+          <tbody md-body>
+            <tr md-row ng-repeat="chart in ctrl.charts" ui-sref="app.dashboard.chart.detail({chartId:chart.id})">
+              <td md-cell>
+                {{chart.chartNo}}
+              </td>
+              <td md-cell>
+                {{chart.pet.name}}
+              </td>
+              <td md-cell>
+                {{chart.customer.user.lastName}} {{chart.customer.user.firstName}} 様
+              </td>
+              <td md-cell>
+                {{chart.createdDate | date:'yyyy/MM/dd HH:mm'}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </md-table-container>
+    </div>
   </section>
-  <section class="form-group">
-    <button type="submit" class="btn btn-default btn-sm">フィルタ</button>
-  </section>
-</form>
-
-<div class="alert alert-default text-center" ng-show="!ctrl.charts || ctrl.charts.length === 0">
-  <p class="large-icon"><i class="fa fa-frown-o"></i></p>
-  <h4>結果が見つかりませんでした</h4>
-  <p>別の検索条件で検索するか、新しくカルテを作成してください。</p>
-</div>
-<div class="table-responsive" ng-show="ctrl.charts && ctrl.charts.length !== 0">
-  <table class="table table-striped table-hover table-clickable middle">
-    <thead class="small">
-      <tr>
-        <th class="col-sm-2">カルテ番号</th>
-        <th class="col-sm-3">ペットのお名前</th>
-        <th class="col-sm-4">飼い主</th>
-        <th class="col-sm-1">作成日</th>
-        <th class="col-sm-2"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="chart in ctrl.charts" ui-sref="app.dashboard.chart.list.detail({chartId:chart.id})">
-        <td class="small">
-          {{chart.chartNo}}
-        </td>
-        <td>
-          <strong>{{chart.pet.name}}</strong> ちゃん<br/>
-          <small>{{chart.pet.type}}</small>
-        </td>
-        <td>
-          <strong>{{chart.customer.user.lastName}} {{chart.customer.user.firstName}}</strong> 様<br/>
-          <small>{{chart.customer.user.state}}{{chart.customer.user.city}}{{chart.customer.user.street}}</small>
-        </td>
-        <td class="small">
-          {{chart.createdDate | date:'yyyy/MM/dd'}}
-        </td>
-        <td class="text-right">
-          <a ui-sref-ignore ui-sref="app.dashboard.chart.list.detail({chartId:chart.id})" uib-tooltip="カルテを見る"><i class="fa fa-eye fa-fw"></i></a>
-          <a ui-sref-ignore ng-click="ctrl.editChart(chart)" uib-tooltip="カルテを修正"><i class="fa fa-pencil fa-fw"></i></a>
-          <a ui-sref-ignore ng-click="ctrl.reserve(chart)" uib-tooltip="診察を予約"><i class="fa fa-clock-o fa-fw"></i></a>
-          <a ui-sref-ignore href="#" uib-tooltip="削除"><i class="fa fa-trash fa-fw"></i></a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <nav class="text-right">
-    <ul class="pagination pagination-sm">
-      <li ng-show="ctrl.links['first']" ng-click="ctrl.loadPage(ctrl.links['first'])"><a>&lt;&lt;</a></li>
-      <li ng-show="ctrl.links['prev']" ng-click="ctrl.loadPage(ctrl.links['prev'])"><a>&lt;</a></li>
-      <li ng-if="ctrl.page > 2" ng-click="ctrl.loadPage(ctrl.page - 2)"><a>{{ctrl.page - 2}}</a></li>
-      <li ng-if="ctrl.page > 1" ng-click="ctrl.loadPage(ctrl.page - 1)"><a>{{ctrl.page - 1}}</a></li>
-      <li class="active"><a>{{ctrl.page}}</a></li>
-      <li ng-if="ctrl.page < ctrl.links['last']" ng-click="ctrl.loadPage(page + 1)"><a>{{ctrl.page + 1}}</a></li>
-      <li ng-if="ctrl.page < ctrl.links['last'] - 1" ng-click="ctrl.loadPage(page + 2)"><a>{{ctrl.page + 2}}</a></li>
-      <li ng-show="ctrl.links['next']" ng-click="ctrl.loadPage(ctrl.links['next'])"><a>&gt;</a></li>
-      <li ng-show="ctrl.links['last']" ng-click="ctrl.loadPage(ctrl.links['last'])"><a>&gt;&gt;</a></li>
-    </ul>
-  </nav>
 </div>

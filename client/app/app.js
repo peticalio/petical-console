@@ -40,7 +40,7 @@ angular
       .theme('console')
       .primaryPalette('cyan')
       .accentPalette('yellow')
-      .warnPalette('pink')
+      .warnPalette('red')
       .backgroundPalette('grey');
 
     $mdThemingProvider
@@ -51,7 +51,14 @@ angular
         'hue-2': '300',
         'hue-3': '800'
       })
-      .accentPalette('orange')
+      .accentPalette('amber')
+      .warnPalette('red')
+      .backgroundPalette('grey');
+
+    $mdThemingProvider
+      .theme('fab')
+      .primaryPalette('pink')
+      .accentPalette('indigo')
       .warnPalette('red')
       .backgroundPalette('grey');
 

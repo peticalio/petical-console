@@ -1,97 +1,68 @@
-<section>
-  <md-toolbar md-theme="content">
-    <div class="md-toolbar-tools">
-      <h1 class="md-title">わたしのペット</h1>
-      <span flex></span>
-      <md-button class="md-icon-button" ui-sref="app.dashboard.customer.form">
-        <md-tooltip>新規追加</md-tooltip>
-        <md-icon class="material-icons">add</md-icon>
-      </md-button>
+<div class="layout-max-width" md-theme="content">
+  <section>
+    <md-toolbar class="pt">
+      <div class="md-toolbar-tools">
+        <h1 class="md-title">わたしのペット</h1>
+        <span flex></span>
+        <!-- <md-button class="md-icon-button" ui-sref="app.dashboard.customer.form">
+          <md-tooltip>新規追加</md-tooltip>
+          <md-icon class="material-icons">add</md-icon>
+        </md-button> -->
+      </div>
+    </md-toolbar>
+    <div layout-padding>
+      <md-grid-list md-cols="4" md-cols-xs="1" md-cols-sm="3" md-gutter="1em" md-row-height="4:3" class="pt0">
+        <md-grid-tile ng-repeat="pet in ctrl.pets" class="flat-card clickable">
+          <md-grid-tile-footer>
+            <h3>{{pet.name}}</h3>
+          </md-grid-tile-footer>
+        </md-grid-tile>
+      </md-grid-list>
     </div>
-  </md-toolbar>
-  <div layout="row">
-    <md-card flex-xs flex-gt-sm="33" flex-gt-lg="25" ng-repeat="pet in ctrl.pets">
-      <md-card-title class="pb0">
-        <md-card-title-text>
-          <h4 class="m0">{{pet.name}}</h4>
-          <div class="small overflow">
-            {{pet.type}}<br/>
-            <i class="fa fa-mars mr" ng-show="pet.sex === 'MALE'"></i>
-            <i class="fa fa-venus mr" ng-show="pet.sex === 'FEMALE'"></i>
-            <span ng-show="pet.sex === 'MALE'">オス</span>
-            <span ng-show="pet.sex === 'FEMALE'">メス</span>
-          </div>
+  </section>
 
-          <p class="md-subhead">{{clinic.state}}{{clinic.city}}{{clinic.street}}</p>
-          <p class="m0">
-            <i class="fa fa-user-md mr"></i>
-            {{clinic.lastName}} {{clinic.firstName}}
-          </p>
-        </md-card-title-text>
-        <md-card-title-media>
-          <div class="md-media-sm card-media"></div>
-        </md-card-title-media>
-      </md-card-title>
-      <md-card-actions layout="row" layout-align="end center">
-        <md-button ui-sref="app.dashboard({clinicId: clinic.id})">ダッシュボード</md-button>
-      </md-card-actions>
-    </md-card>
+  <section>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h1 class="md-title">勤務先動物病院</h1>
+        <span flex></span>
+        <md-button class="md-primary" ui-sref="app.clinic.form">
+          追加する
+        </md-button>
+      </div>
+    </md-toolbar>
+    <div layout-padding>
+      <md-grid-list md-cols="4" md-cols-xs="1" md-cols-sm="3" md-gutter="1em" md-row-height="4:3" class="pt0">
+        <md-grid-tile ng-repeat="clinic in ctrl.clinics" class="flat-card clickable" ui-sref="app.dashboard({clinicId: clinic.id})">
+          <md-grid-tile-footer>
+            <h3>{{clinic.name}}</h3>
+          </md-grid-tile-footer>
+        </md-grid-tile>
+      </md-grid-list>
+    </md-content>
   </div>
-</section>
 
-<section>
-  <md-toolbar md-theme="content">
-    <div class="md-toolbar-tools">
-      <h1 class="md-title">勤務先動物病院</h1>
-      <span flex></span>
-      <md-button class="md-icon-button" ui-sref="app.clinic.form">
-        <md-tooltip>新規追加</md-tooltip>
-        <md-icon class="material-icons">add</md-icon>
-      </md-button>
-    </div>
-  </md-toolbar>
-  <div layout="row">
-    <md-card flex-xs flex-gt-sm="33" flex-gt-lg="25" ng-repeat="clinic in ctrl.clinics">
-      <md-card-title class="pb0">
-        <md-card-title-text>
-          <h4 class="m0">{{clinic.name}}</h4>
-          <p class="md-subhead">{{clinic.state}}{{clinic.city}}{{clinic.street}}</p>
-          <p class="m0">
-            <i class="fa fa-user-md mr"></i>
-            {{clinic.lastName}} {{clinic.firstName}}
-          </p>
-        </md-card-title-text>
-        <md-card-title-media>
-          <div class="md-media-sm card-media"></div>
-        </md-card-title-media>
-      </md-card-title>
-      <md-card-actions layout="row" layout-align="end center">
-        <md-button ui-sref="app.dashboard({clinicId: clinic.id})">ダッシュボード</md-button>
-      </md-card-actions>
-    </md-card>
-  </div>
-</section>
-
-<div ng-if="ctrl.invitations && ctrl.invitations.length !== 0">
-  <h5><i class="fa fa-envelope fa-lg m"></i>招待状が届いています</h5>
-  <div class="row">
-    <div class="col-lg-4 col-sm-6" ng-repeat="invitation in ctrl.invitations">
-      <div class="panel widget bg-warning">
-        <a ui-sref="main.clinic.invitation({invitationId:invitation.id})">
-          <div class="row row-table dash-card p">
-            <div class="col-xs-3 p0">
-              <!-- <img src="assets/images/dummy.png" alt="" class="media-box-object img-responsive img-rounded thumb64" /> -->
-            </div>
-            <div class="col-xs-9 p0">
-              <h5 class="mt0 overflow">{{invitation.clinic.name}}</h5>
-              <div class="small overflow">
-                {{invitation.clinic.state}}{{invitation.clinic.city}}{{invitation.clinic.street}}<br/>
-                <i class="fa fa-user-md mr"></i>
-                {{invitation.user.lastName}} {{invitation.user.firstName}} 様より
+  <div ng-if="ctrl.invitations && ctrl.invitations.length !== 0">
+    <h5><i class="fa fa-envelope fa-lg m"></i>招待状が届いています</h5>
+    <div class="row">
+      <div class="col-lg-4 col-sm-6" ng-repeat="invitation in ctrl.invitations">
+        <div class="panel widget bg-warning">
+          <a ui-sref="main.clinic.invitation({invitationId:invitation.id})">
+            <div class="row row-table dash-card p">
+              <div class="col-xs-3 p0">
+                <!-- <img src="assets/images/dummy.png" alt="" class="media-box-object img-responsive img-rounded thumb64" /> -->
+              </div>
+              <div class="col-xs-9 p0">
+                <h5 class="mt0 overflow">{{invitation.clinic.name}}</h5>
+                <div class="small overflow">
+                  {{invitation.clinic.state}}{{invitation.clinic.city}}{{invitation.clinic.street}}<br/>
+                  <i class="fa fa-user-md mr"></i>
+                  {{invitation.user.lastName}} {{invitation.user.firstName}} 様より
+                </div>
               </div>
             </div>
-          </div>
-        </a>
+          </a>
+        </div>
       </div>
     </div>
   </div>

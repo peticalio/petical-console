@@ -1,88 +1,91 @@
-<section>
-  <md-toolbar md-theme="content" class="pt">
-    <div class="md-toolbar-tools">
-      <h1 class="md-title">{{ctrl.customer.user.lastName}} {{ctrl.customer.user.firstName}} 様</h1>
-      <span flex></span>
-      <md-button class="md-icon-button" ui-sref="app.dashboard.customer.list">
-        <md-tooltip md-direction="left">一覧</md-tooltip>
-        <md-icon class="material-icons">list</md-icon>
-      </md-button>
+<div class="layout-max-width">
+  <section>
+    <md-toolbar md-theme="content" class="pt">
+      <div class="md-toolbar-tools">
+        <h1 class="md-title">{{ctrl.customer.user.lastName}} {{ctrl.customer.user.firstName}} 様</h1>
+        <span flex></span>
+        <md-button class="md-icon-button" ui-sref="app.dashboard.customer.list">
+          <md-tooltip md-direction="left">一覧</md-tooltip>
+          <md-icon class="material-icons">list</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <div layout-padding ng-include="'app/dashboard/customer/detail/detail.inc.html'">
     </div>
-  </md-toolbar>
-  <div layout-padding ng-include="'app/dashboard/customer/detail/detail.inc.html'">
-  </div>
-</section>
+  </section>
 
-<section>
-  <md-toolbar md-theme="content">
-    <div class="md-toolbar-tools">
-      <h1 class="md-title">飼育ペット</h1>
-      <span flex></span>
-      <md-button class="md-icon-button">
-        <md-tooltip md-direction="left">更新する</md-tooltip>
-        <md-icon class="material-icons" ng-click="ctrl.refresh()">refresh</md-icon>
-      </md-button>
+  <section>
+    <md-toolbar md-theme="content">
+      <div class="md-toolbar-tools">
+        <h1 class="md-title">飼育ペット</h1>
+        <span flex></span>
+        <md-button class="md-icon-button">
+          <md-tooltip md-direction="left">更新する</md-tooltip>
+          <md-icon class="material-icons" ng-click="ctrl.refresh()">refresh</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <div layout-padding>
+      <md-table-container class="flat-card">
+        <table md-table class="table-hover table-clickable">
+          <thead md-head>
+            <tr md-row>
+              <th md-column>カルテ番号</th>
+              <th md-column>ペットのお名前</th>
+              <th md-column>種類</th>
+              <th md-column>色</th>
+              <th md-column>性別</th>
+            </tr>
+          </thead>
+          <tbody md-body>
+            <tr md-row ng-repeat="pet in ctrl.pets" ui-sref="app.dashboard.chart.detail({chartId: pet.chart.id})">
+              <td md-cell>
+                <span class="label label-default" ng-if="!pet.chart">カルテ作成済</span>
+                <span ng-if="pet.chart">{{pet.chart.chartNo}}</span>
+              </td>
+              <td md-cell>
+                {{pet.name}} ちゃん
+              </td>
+              <td md-cell>
+                {{pet.type}}
+              </td>
+              <td md-cell>
+                <span class="label label-info">{{pet.color}}</span>
+              </td>
+              <td md-cell>
+                <i class="fa fa-mars mr" ng-show="pet.sex === 'MALE'"></i>
+                <i class="fa fa-venus mr" ng-show="pet.sex === 'FEMALE'"></i>
+                <span ng-show="pet.sex === 'MALE'">オス</span>
+                <span ng-show="pet.sex === 'FEMALE'">メス</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </md-table-container>
     </div>
-  </md-toolbar>
-  <div layout-padding>
-    <md-table-container class="flat-card">
-      <table md-table class="table-hover table-clickable">
-        <thead md-head>
-          <tr md-row>
-            <th md-column>カルテ番号</th>
-            <th md-column>ペットのお名前</th>
-            <th md-column>種類</th>
-            <th md-column>色</th>
-            <th md-column>性別</th>
-          </tr>
-        </thead>
-        <tbody md-body>
-          <tr md-row ng-repeat="pet in ctrl.pets" ui-sref="app.dashboard.chart.detail({chartId: pet.chart.id})">
-            <td md-cell>
-              <span class="label label-default" ng-if="!pet.chart">カルテ作成済</span>
-              <span ng-if="pet.chart">{{pet.chart.chartNo}}</span>
-            </td>
-            <td md-cell>
-              {{pet.name}} ちゃん
-            </td>
-            <td md-cell>
-              {{pet.type}}
-            </td>
-            <td md-cell>
-              <span class="label label-info">{{pet.color}}</span>
-            </td>
-            <td md-cell>
-              <i class="fa fa-mars mr" ng-show="pet.sex === 'MALE'"></i>
-              <i class="fa fa-venus mr" ng-show="pet.sex === 'FEMALE'"></i>
-              <span ng-show="pet.sex === 'MALE'">オス</span>
-              <span ng-show="pet.sex === 'FEMALE'">メス</span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </md-table-container>
-  </div>
-  <div class="fab">
-    <md-fab-speed-dial md-direction="up" md-open="ctrl.isOpen" class="md-scale" ng-mouseenter="ctrl.isOpen=true" ng-mouseleave="ctrl.isOpen=false" ng-cloak>
-      <md-fab-trigger>
-        <md-button aria-label="menu" class="md-fab md-warn">
-          <md-icon class="material-icons">menu</md-icon>
-        </md-button>
-      </md-fab-trigger>
-      <md-fab-actions>
-        <md-button class="md-fab md-raised md-mini" ui-sref="app.dashboard.chart.form({customerId:ctrl.customer.id})">
-          <md-tooltip md-direction="left">カルテを追加</md-tooltip>
-          <md-icon class="material-icons">add</md-icon>
-        </md-button>
-        <md-button class="md-fab md-raised md-mini" ui-sref="app.dashboard.customer.form.update({customerId:ctrl.customer.id})">
-          <md-tooltip md-direction="left">編集する</md-tooltip>
-          <md-icon class="material-icons">create</md-icon>
-        </md-button>
-        <md-button class="md-fab md-raised md-mini" ng-click="ctrl.delete($event, ctrl.customer)">
-          <md-tooltip md-direction="left">削除する</md-tooltip>
-          <md-icon class="material-icons">delete</md-icon>
-        </md-button>
-      </md-fab-actions>
-    </md-fab-speed-dial>
-  </div>
-</section>
+  </section>
+</div>
+
+<div class="fab" md-theme="fab">
+  <md-fab-speed-dial md-direction="up" md-open="ctrl.isOpen" class="md-scale" ng-mouseenter="ctrl.isOpen=true" ng-mouseleave="ctrl.isOpen=false" ng-cloak>
+    <md-fab-trigger>
+      <md-button aria-label="menu" class="md-fab md-primary">
+        <md-icon class="material-icons">menu</md-icon>
+      </md-button>
+    </md-fab-trigger>
+    <md-fab-actions>
+      <md-button class="md-fab md-raised md-mini" ui-sref="app.dashboard.chart.form({customerId:ctrl.customer.id})">
+        <md-tooltip md-direction="left">カルテを追加</md-tooltip>
+        <md-icon class="material-icons">add</md-icon>
+      </md-button>
+      <md-button class="md-fab md-raised md-mini" ui-sref="app.dashboard.customer.update({customerId:ctrl.customer.id})">
+        <md-tooltip md-direction="left">編集する</md-tooltip>
+        <md-icon class="material-icons">create</md-icon>
+      </md-button>
+      <md-button class="md-fab md-raised md-mini" ng-click="ctrl.delete($event, ctrl.customer)">
+        <md-tooltip md-direction="left">削除する</md-tooltip>
+        <md-icon class="material-icons">delete</md-icon>
+      </md-button>
+    </md-fab-actions>
+  </md-fab-speed-dial>
+</div>

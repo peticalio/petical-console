@@ -33,30 +33,24 @@
       });
   }
 
-  // ペットの飼い主を取得する
-  function getCustomer($stateParams, ClinicCustomer) {
+  // ペットの飼い主を取得する（TODO このままで良いか微妙なところ）
+  function getChartByCustomer($stateParams, ClinicCustomer) {
     if (!$stateParams.customerId) {
       return {};
     }
     return ClinicCustomer.load({clinicId:$stateParams.clinicId, customerId:$stateParams.customerId}).$promise
-      .then(function(response) {
-        return response;
-      });
-  }
-
-  // ペットを取得する
-  function getPet($stateParams, Pet) {
-    if (!$stateParams.petId) {
-      return {};
-    }
-    return Pet.load({petId:$stateParams.petId}).$promise
-      .then(function(response) {
-        return response;
+      .then((response) => {
+        return {customer: response, pet: {}};
       });
   }
 
   function getClinicChart($stateParams, ClinicChart) {
     return ClinicChart.load({clinicId: $stateParams.clinicId, chartId: $stateParams.chartId}).$promise
+      .then((response) => response);
+  }
+
+  function getCharts($stateParams, ClinicChart) {
+    return ClinicChart.query({clinicId: $stateParams.clinicId}).$promise
       .then((response) => response);
   }
 
@@ -68,6 +62,7 @@
         abstract: true,
         url:      '^/clinics/:clinicId/charts'
       })
+      // カルテ新規作成（顧客特定済みの場合）
       .state('app.dashboard.chart.form', {
         url: '^/clinics/:clinicId/customers/:customerId/charts/form',
         views: {
@@ -82,11 +77,12 @@
           colors:         getColors,
           bloods:         getBloods,
           tags:           getTags,
-          customer:       getCustomer
+          chart:          getChartByCustomer
         }
       })
-      .state('app.dashboard.chart.form.pet', {
-        url: '^/clinics/:clinicId/customers/:customerId/pets/:petId/charts/form',
+      // カルテ編集フォーム
+      .state('app.dashboard.chart.update', {
+        url: '/:chartId/form',
         views: {
           '@app': {
             templateUrl:  'app/dashboard/chart/form/form.html',
@@ -95,11 +91,16 @@
           }
         },
         resolve: {
-          pet:            getPet
+          types:          getTypes,
+          colors:         getColors,
+          bloods:         getBloods,
+          tags:           getTags,
+          chart:          getClinicChart
         }
       })
+      // カルテアップロードフォーム
       .state('app.dashboard.chart.upload', {
-        url: '^/clinics/:clinicId/charts/upload/form',
+        url: '/upload',
         views: {
           '@app': {
             templateUrl:  'app/dashboard/chart/upload/upload.html',
@@ -108,7 +109,7 @@
           }
         }
       })
-
+      // カルテ一覧
       .state('app.dashboard.chart.list', {
         url: '/list',
         views: {
@@ -117,9 +118,12 @@
             controller:   'ChartListController',
             controllerAs: 'ctrl'
           }
+        },
+        resolve: {
+          charts:         getCharts
         }
       })
-
+      // カルテ詳細
       .state('app.dashboard.chart.detail', {
         url: '/:chartId',
         views: {

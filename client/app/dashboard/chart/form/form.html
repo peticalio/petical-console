@@ -1,157 +1,147 @@
-<section>
-  <md-toolbar md-theme="content" class="pt">
-    <div class="md-toolbar-tools">
-      <h1 class="md-title">カルテ登録フォーム</h1>
-      <span flex></span>
-      <md-button class="md-icon-button" ui-sref="app.dashboard.chart.list">
-        <md-tooltip>一覧</md-tooltip>
-        <md-icon class="material-icons">list</md-icon>
-      </md-button>
-    </div>
-  </md-toolbar>
-  <div layout-padding>
-    <div class="flat-card">
-      <div layout-gt-xs="row" ng-if="!ctrl.chart.customer.id">
-        <div class="note ml mr" flex>
-          初めて来院されたお客様の場合は、先に<a ui-sref="app.dashboard.customer.form">飼い主を登録</a>してください。<br/>
-          既に飼い主が登録されている場合は、<a ui-sref="app.dashboard.customer.list">飼い主をさがす</a>から飼い主を特定してください。
-        </div>
+<div class="layout-max-width">
+  <section>
+    <md-toolbar md-theme="content" class="pt">
+      <div class="md-toolbar-tools">
+        <h1 class="md-title">カルテ登録フォーム</h1>
+        <span flex></span>
+        <md-button class="md-icon-button" ui-sref="app.dashboard.chart.list">
+          <md-tooltip>一覧</md-tooltip>
+          <md-icon class="material-icons">list</md-icon>
+        </md-button>
       </div>
-      <form name="form" novalidate ng-if="ctrl.chart.customer.id">
-        <div layout-gt-xs="row">
-          <md-input-container class="md-block" flex>
-            <label>カルテ番号</label>
-            <input name="chartNo" ng-model="ctrl.chart.chartNo" ng-disabled="true"/>
-          </md-input-container>
+    </md-toolbar>
+    <div layout-padding>
+      <div class="flat-card">
+        <div layout-gt-xs="row" ng-if="!ctrl.chart.customer.id">
+          <div class="note ml mr" flex>
+            初めて来院されたお客様の場合は、先に<a ui-sref="app.dashboard.customer.form">飼い主を登録</a>してください。<br/>
+            既に飼い主が登録されている場合は、<a ui-sref="app.dashboard.customer.list">飼い主をさがす</a>から飼い主を特定してください。
+          </div>
         </div>
-        <div layout-gt-xs="row">
-          <md-input-container class="md-block" flex>
-            <label>飼い主（姓）</label>
-            <input name="lastName" ng-model="ctrl.chart.customer.user.lastName" ng-disabled="true"/>
-          </md-input-container>
-          <md-input-container class="md-block" flex>
-            <label>飼い主（名）</label>
-            <input name="firstName" ng-model="ctrl.chart.customer.user.firstName" ng-disabled="true"/>
-          </md-input-container>
-        </div>
-        <div layout-gt-xs="row">
-          <md-input-container class="md-block" flex>
-            <label>ペットのお名前</label>
-            <input name="name" ng-model="ctrl.chart.pet.name" maxlength="50" ng-required="true" ng-maxlength="50"/>
-            <div ng-show="form.name.$invalid" ng-messages="form.name.$error">
-              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-                <span>50 文字以内で入力してください。</span>
+        <form name="form" novalidate ng-if="ctrl.chart.customer.id">
+          <div layout="row" layout-wrap>
+            <md-input-container class="md-block" flex="100">
+              <label>カルテ番号</label>
+              <input name="chartNo" ng-model="ctrl.chart.chartNo" ng-disabled="true"/>
+            </md-input-container>
+            <md-input-container class="md-block" flex="50" flex-xs="100">
+              <label>飼い主（姓）</label>
+              <input name="lastName" ng-model="ctrl.chart.customer.user.lastName" ng-disabled="true"/>
+            </md-input-container>
+            <md-input-container class="md-block" flex="50" flex-xs="100">
+              <label>飼い主（名）</label>
+              <input name="firstName" ng-model="ctrl.chart.customer.user.firstName" ng-disabled="true"/>
+            </md-input-container>
+            <md-input-container class="md-block" flex="50" flex-xs="100">
+              <label>ペットのお名前</label>
+              <input name="name" ng-model="ctrl.chart.pet.name" maxlength="50" ng-required="true" ng-maxlength="50"/>
+              <div ng-show="form.name.$invalid" ng-messages="form.name.$error">
+                <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                  <span>50 文字以内で入力してください。</span>
+                </div>
+              </div>
+            </md-input-container>
+            <div hide-xs flex="50"></div>
+            <md-autocomplete md-input-name="type" md-floating-label="種類" md-selected-item="ctrl.chart.pet.type" md-search-text="ctrl.typeText" md-items="item in ctrl.getTypes(ctrl.typeText)" md-item-text="item" ng-required="true" md-min-length="0" md-input-maxlength="50" flex="50" flex-xs="100">
+              <md-item-template>
+                <span md-highlight-text="ctrl.typeText">{{item}}</span>
+              </md-item-template>
+              <div ng-show="form.type.$invalid" ng-messages="form.type.$error">
+                <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                  <span>一覧から選択するか 50 文字以内で入力してください。</span>
+                </div>
+              </div>
+            </md-autocomplete>
+            <md-autocomplete md-input-name="color" md-floating-label="毛色" md-selected-item="ctrl.chart.pet.color" md-search-text="ctrl.colorText" md-items="item in ctrl.getColors(ctrl.colorText)" md-item-text="item" ng-required="true" md-min-length="0" md-input-maxlength="50" flex="50" flex-xs="100">
+              <md-item-template>
+                <span md-highlight-text="ctrl.colorText">{{item}}</span>
+              </md-item-template>
+              <div ng-show="form.color.$invalid" ng-messages="form.color.$error">
+                <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                  <span>一覧から選択するか 50 文字以内で入力してください。</span>
+                </div>
+              </div>
+            </md-autocomplete>
+            <md-input-container class="md-block" flex="50" flex-xs="100">
+              <label>性別</label>
+              <md-select ng-model="ctrl.chart.pet.sex">
+                <md-option ng-repeat="sex in ctrl.sexes" value="{{sex.value}}">
+                  {{sex.name}}
+                </md-option>
+              </md-select>
+            </md-input-container>
+            <md-autocomplete md-input-name="blood" md-floating-label="血液型" md-selected-item="ctrl.chart.pet.blood" md-search-text="ctrl.bloodText" md-items="item in ctrl.getBloods(ctrl.bloodText)" md-item-text="item" md-min-length="0" md-input-maxlength="50" flex="50" flex-xs="100">
+              <md-item-template>
+                <span md-highlight-text="ctrl.bloodText">{{item}}</span>
+              </md-item-template>
+              <div ng-show="form.blood.$invalid" ng-messages="form.blood.$error">
+                <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                  <span>一覧から選択するか 50 文字以内で入力してください。</span>
+                </div>
+              </div>
+            </md-autocomplete>
+            <div class="md-datepicker-wrap" flex="50" flex-xs="100">
+              <md-datepicker name="birthDate" ng-model="ctrl.chart.pet.birthDate" md-placeholder="生年月日" md-max-date="ctrl.today">
+              </md-datepicker>
+              <div ng-show="form.birthDate.$invalid" ng-messages="form.birthDate.$error">
+                <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                  <span>日付は yyyy/MM/dd の形式で入力してください。</span>
+                </div>
               </div>
             </div>
-          </md-input-container>
-        </div>
-        <div layout-gt-xs="row">
-          <md-autocomplete md-input-name="type" md-floating-label="種類" md-selected-item="ctrl.chart.pet.type" md-search-text="ctrl.typeText" md-items="item in ctrl.getTypes(ctrl.typeText)" md-item-text="item" ng-required="true" md-min-length="0" md-input-maxlength="50" flex>
-            <md-item-template>
-              <span md-highlight-text="ctrl.typeText">{{item}}</span>
-            </md-item-template>
-            <div ng-show="form.type.$invalid" ng-messages="form.type.$error">
-              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-                <span>一覧から選択するか 50 文字以内で入力してください。</span>
+            <md-input-container class="md-block" flex="50" flex-xs="100">
+              <label>マイクロチップ番号</label>
+              <input name="microchipNo" ng-model="ctrl.chart.pet.microchipNo" maxlength="50" ng-maxlength="50"/>
+              <div ng-show="form.microchipNo.$invalid" ng-messages="form.microchipNo.$error">
+                <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                  <span>50 文字以内で入力してください。</span>
+                </div>
               </div>
-            </div>
-          </md-autocomplete>
-          <md-autocomplete md-input-name="color" md-floating-label="毛色" md-selected-item="ctrl.chart.pet.color" md-search-text="ctrl.colorText" md-items="item in ctrl.getColors(ctrl.colorText)" md-item-text="item" ng-required="true" md-min-length="0" md-input-maxlength="50" flex>
-            <md-item-template>
-              <span md-highlight-text="ctrl.colorText">{{item}}</span>
-            </md-item-template>
-            <div ng-show="form.color.$invalid" ng-messages="form.color.$error">
-              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-                <span>一覧から選択するか 50 文字以内で入力してください。</span>
+            </md-input-container>
+            <md-input-container class="md-block" flex="50" flex-xs="100">
+              <label>去勢・避妊</label>
+              <md-select ng-model="ctrl.chart.pet.neutral">
+                <md-option ng-repeat="neutral in ctrl.neutrals" value="{{neutral.value}}">
+                  {{neutral.name}}
+                </md-option>
+              </md-select>
+            </md-input-container>
+            <div hide-xs flex="50"></div>
+            <md-input-container class="md-block" flex="100">
+              <label>アレルギーの有無や注意事項</label>
+              <textarea name="allergia" ng-model="ctrl.chart.pet.allergia" maxlength="2000" md-maxlength="2000" rows="5" md-select-on-focus></textarea>
+              <div ng-show="form.allergia.$invalid" ng-messages="form.allergia.$error">
+                <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                  <span>2000 文字以内で入力してください。</span>
+                </div>
               </div>
-            </div>
-          </md-autocomplete>
-        </div>
-        <div layout-gt-xs="row">
-          <md-datepicker class="md-block" ng-model="ctrl.chart.pet.birthDate" md-placeholder="生年月日">
-          </md-datepicker>
-        </div>
-        <div layout-gt-xs="row">
-          <md-input-container class="md-block" flex>
-            <label>性別</label>
-            <md-select ng-model="ctrl.chart.pet.sex">
-              <md-option ng-repeat="sex in ctrl.sexes" value="{{sex.value}}">
-                {{sex.name}}
-              </md-option>
-            </md-select>
-          </md-input-container>
-          <md-autocomplete md-input-name="blood" md-floating-label="血液型" md-selected-item="ctrl.chart.pet.blood" md-search-text="ctrl.bloodText" md-items="item in ctrl.getBloods(ctrl.bloodText)" md-item-text="item" md-min-length="0" md-input-maxlength="50" flex>
-            <md-item-template>
-              <span md-highlight-text="ctrl.bloodText">{{item}}</span>
-            </md-item-template>
-            <div ng-show="form.blood.$invalid" ng-messages="form.blood.$error">
-              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-                <span>一覧から選択するか 50 文字以内で入力してください。</span>
+            </md-input-container>
+            <md-input-container class="md-block" flex="100">
+              <label>薬剤に関する注意事項</label>
+              <textarea name="drug" ng-model="ctrl.chart.pet.drug" maxlength="2000" md-maxlength="2000" rows="5" md-select-on-focus></textarea>
+              <div ng-show="form.drug.$invalid" ng-messages="form.drug.$error">
+                <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                  <span>2000 文字以内で入力してください。</span>
+                </div>
               </div>
-            </div>
-          </md-autocomplete>
-        </div>
-        <div layout-gt-xs="row">
-          <md-input-container class="md-block" flex>
-            <label>マイクロチップ番号</label>
-            <input name="microchipNo" ng-model="ctrl.chart.pet.microchipNo" maxlength="50" ng-maxlength="50"/>
-            <div ng-show="form.microchipNo.$invalid" ng-messages="form.microchipNo.$error">
-              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-                <span>50 文字以内で入力してください。</span>
+            </md-input-container>
+            <md-input-container class="md-block" flex="100">
+              <label>その他、備考・注意事項</label>
+              <textarea name="other" ng-model="ctrl.chart.pet.other" maxlength="2000" md-maxlength="2000" rows="5" md-select-on-focus></textarea>
+              <div ng-show="form.other.$invalid" ng-messages="form.other.$error">
+                <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                  <span>2000 文字以内で入力してください。</span>
+                </div>
               </div>
-            </div>
-          </md-input-container>
-          <div flex></div>
-        </div>
-        <div layout-gt-xs="row">
-          <md-input-container class="md-block" flex>
-            <label>去勢・避妊</label>
-            <md-select ng-model="ctrl.chart.pet.neutral">
-              <md-option ng-repeat="neutral in ctrl.neutrals" value="{{neutral.value}}">
-                {{neutral.name}}
-              </md-option>
-            </md-select>
-          </md-input-container>
-          <div flex></div>
-        </div>
-        <div layout-gt-xs="row">
-          <md-input-container class="md-block" flex>
-            <label>アレルギーの有無や注意事項</label>
-            <textarea name="allergia" ng-model="ctrl.chart.pet.allergia" maxlength="2000" md-maxlength="2000" rows="5" md-select-on-focus></textarea>
-            <div ng-show="form.allergia.$invalid" ng-messages="form.allergia.$error">
-              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-                <span>2000 文字以内で入力してください。</span>
-              </div>
-            </div>
-          </md-input-container>
-        </div>
-        <div layout-gt-xs="row">
-          <md-input-container class="md-block" flex>
-            <label>薬剤に関する注意事項</label>
-            <textarea name="drug" ng-model="ctrl.chart.pet.drug" maxlength="2000" md-maxlength="2000" rows="5" md-select-on-focus></textarea>
-            <div ng-show="form.drug.$invalid" ng-messages="form.drug.$error">
-              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-                <span>2000 文字以内で入力してください。</span>
-              </div>
-            </div>
-          </md-input-container>
-        </div>
-        <div layout-gt-xs="row">
-          <md-input-container class="md-block" flex>
-            <label>その他、備考・注意事項</label>
-            <textarea name="other" ng-model="ctrl.chart.pet.other" maxlength="2000" md-maxlength="2000" rows="5" md-select-on-focus></textarea>
-            <div ng-show="form.other.$invalid" ng-messages="form.other.$error">
-              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-                <span>2000 文字以内で入力してください。</span>
-              </div>
-            </div>
-          </md-input-container>
-        </div>
-        <div layout-gt-xs="row" layout-align="end center">
-          <md-button class="md-raised md-primary" ng-disabled="form.$invalid" ng-click="ctrl.save(ctrl.chart)">登録する</md-button>
-          <md-button ui-sref="app.dashboard.customer.detail({customerId: ctrl.chart.customer.id})">キャンセル</md-button>
-        </div>
-      </form>
+            </md-input-container>
+          </div>
+          <div layout="row" layout-align="end center">
+            <md-button class="md-raised md-primary" ng-disabled="form.$invalid" ng-click="ctrl.save(ctrl.chart)" ng-show="!ctrl.chart.id">登録する</md-button>
+            <md-button class="md-raised md-primary" ng-disabled="form.$invalid" ng-click="ctrl.update(ctrl.chart)" ng-show="ctrl.chart.id">保存する</md-button>
+            <md-button ui-sref="app.dashboard.customer.detail({customerId: ctrl.chart.customer.id})">キャンセル</md-button>
+          </div>
+        </form>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+</div>

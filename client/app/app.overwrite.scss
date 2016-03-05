@@ -23,6 +23,7 @@ md-toolbar.md-content-theme:not(.md-menu-toolbar) {
   background-color: transparent;
 }
 .md-toolbar-tools {
+  font-weight: 200;
   height: $base-height;
 }
 .md-toolbar-tools .md-button {
@@ -32,12 +33,15 @@ md-toolbar.md-content-theme:not(.md-menu-toolbar) {
 .md-toolbar-tools.toolbar-nav {
 }
 .md-toolbar-tools.toolbar-nav .md-title {
-  font-weight: 500;
   margin-left: $base-size;
 }
-md-datepicker {
+.md-datepicker-wrap {
   margin-top: 15px;
   margin-bottom: 16px;
+  padding-bottom: 16px;
+}
+.md-datepicker-input {
+  font-size: 16px;
 }
 md-select-value {
   font-size: 16px;

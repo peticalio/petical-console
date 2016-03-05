@@ -152,3 +152,12 @@ $base-size: 8px;
 table.table-clickable > tbody > tr {
   cursor: pointer;
 }
+.clickable {
+  cursor: pointer;
+}
+
+// layout
+.layout-max-width {
+  width: 100%;
+  max-width: 1200px;
+}

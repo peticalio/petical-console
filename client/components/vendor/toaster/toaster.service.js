@@ -12,8 +12,9 @@
       this.toast.show(
         this.toast.simple()
           .textContent(message)
+          .action('X')
           .position('bottom right')
-          .hideDelay(5000)
+          .hideDelay(4000)
       );
     }
 
@@ -22,8 +23,9 @@
       this.toast.show(
         this.toast.simple()
           .textContent(message)
+          .action('X')
           .position('bottom right')
-          .hideDelay(5000)
+          .hideDelay(4000)
       );
     }
 

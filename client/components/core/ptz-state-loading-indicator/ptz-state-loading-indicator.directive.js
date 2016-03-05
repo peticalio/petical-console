@@ -9,13 +9,17 @@ angular.module('petz.core')
       template: template,
       replace: true,
       link: function(scope) {
-        scope.isStateLoading = false;
-        $rootScope.$on('$stateChangeStart', function() {
+        var view = function() {
           scope.isStateLoading = true;
-        });
-        $rootScope.$on('$stateChangeSuccess', function() {
+        };
+        var hide = function() {
           scope.isStateLoading = false;
-        });
+        };
+
+        scope.isStateLoading = false;
+        $rootScope.$on('$stateChangeStart', view);
+        $rootScope.$on('$stateChangeSuccess', hide);
+        $rootScope.$on('$stateChangeError', hide);
       }
     };
   }]);

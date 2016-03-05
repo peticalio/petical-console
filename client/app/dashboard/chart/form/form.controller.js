@@ -2,7 +2,7 @@
   'use strict';
 
   class ChartFormController {
-    constructor($state, $stateParams, toaster, ClinicChart, types, colors, bloods, tags, customer) {
+    constructor($state, $stateParams, toaster, ClinicChart, types, colors, bloods, tags, chart) {
       this.$state = $state;
       this.$stateParams = $stateParams;
       this.toaster = toaster;
@@ -11,11 +11,10 @@
       this.colors = colors;
       this.bloods = bloods;
       this.tags = tags;
+      this.chart = chart;
       this.sexes = [{name:'不明', value:''}, {name:'オス', value:'MALE'}, {name:'メス', value:'FEMALE'}];
       this.neutrals = [{name:'していない', value:false}, {name:'済み', value:true}];
-      this.customer = customer;
-
-      this.chart = {customer:customer, pet:{}};
+      this.today = new Date();
     }
 
     // 種類を取得する（オートコンプリート用）
@@ -75,7 +74,7 @@
     }
   }
 
-  ChartFormController.$inject = ['$state', '$stateParams', 'toaster', 'ClinicChart', 'types', 'colors', 'bloods', 'tags', 'customer'];
+  ChartFormController.$inject = ['$state', '$stateParams', 'toaster', 'ClinicChart', 'types', 'colors', 'bloods', 'tags', 'chart'];
   angular
     .module('petzApp')
     .controller('ChartFormController', ChartFormController);

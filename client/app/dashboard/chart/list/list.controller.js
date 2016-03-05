@@ -2,20 +2,21 @@
   'use strict';
 
   class ChartListController {
-    constructor($state, $stateParams, toaster, ClinicChart) {
+    constructor($state, $stateParams, toaster, ClinicChart, charts) {
       this.$state = $state;
       this.$stateParams = $stateParams;
       this.toaster = toaster;
       this.ClinicChart = ClinicChart;
-      this.criteria = {};
-      this.refresh(this.criteria);
+      this.charts = charts;
     }
 
     // カルテを検索する
-    refresh(criteria) {
-      return this.ClinicChart.query(criteria).$promise
+    refresh() {
+      return this.ClinicChart.fetch({clinicId: this.$stateParams.clinicId}).$promise
         .then((response) => {
-          return response;
+          this.charts = response;
+          this.toaster.info('カルテの一覧を更新しました。');
+          return response.$promise;
         });
     }
 
@@ -31,7 +32,7 @@
     }
   }
 
-  ChartListController.$inject = ['$state', '$stateParams', 'toaster', 'ClinicChart'];
+  ChartListController.$inject = ['$state', '$stateParams', 'toaster', 'ClinicChart', 'charts'];
   angular.module('petzApp')
     .controller('ChartListController', ChartListController);
 

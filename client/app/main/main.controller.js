@@ -12,19 +12,19 @@
       this.account = Auth.getCurrentUser();
     }
 
-    // サイドバーをメインメニューにするか？
-    showMainMenu() {
-      return this.$state.includes('app.home');
+    // サイドバーをダッシュボードメニューにするか？
+    showMainMenuIcon() {
+      return this.showMainMenu() && !this.$mdMedia('gt-sm');
+    }
+    showDashboardMenuIcon() {
+      return this.showDashboardMenu() && !this.$mdMedia('gt-sm');
     }
 
-    // サイドバーをダッシュボードメニューにするか？
+    showMainMenu() {
+      return this.$state.includes('app.home') || this.$state.includes('app.clinic');
+    }
     showDashboardMenu() {
       return this.$state.includes('app.dashboard');
-    }
-
-    // サイドバーのトグルアイコンを表示するか？
-    showDashbordMenuIcon() {
-      return this.$mdMedia('xs');
     }
 
     // アカウントメニューを表示する
@@ -39,11 +39,11 @@
     }
 
     // サイドメニューを開く
+    toggleMainMenu() {
+      return this.debounce('mainmenu', 200);
+    }
     toggleLeft() {
-      var func = function() {
-        this.$mdSidenav('left').toggle();
-      };
-      return this.debounce(func, 200);
+      return this.debounce('left', 200);
     }
 
     closeLeft() {
@@ -51,12 +51,12 @@
         .then(() => console.log('close LEFT is done'));
     }
 
-    debounce(func, wait) {
+    debounce(name, wait) {
       var timer;
       this.$timeout.cancel(timer);
       timer = this.$timeout(() => {
         timer = undefined;
-        this.$mdSidenav('left').toggle();
+        this.$mdSidenav(name).toggle();
       }, wait || 10);
     }
   }

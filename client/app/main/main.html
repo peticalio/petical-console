@@ -1,10 +1,41 @@
-<md-sidenav class="md-sidenav-left md-whiteframe-z1" md-component-id="mainmenu" md-is-locked-open="$mdMedia('gt-lg')" ng-show="ctrl.showMainMenu()">
+<md-sidenav class="md-sidenav-left" md-component-id="mainmenu" md-is-locked-open="$mdMedia('gt-md')" ng-show="ctrl.showMainMenu()">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <div class="navbar-header">
+        <a class="navbar-brand ml" href="/"></a>
+      </div>
+    </div>
+  </md-toolbar>
+  <md-content class="bg-color" flex>
+    <ul class="side-menu">
+      <li>
+        <menu-link section="section">
+          <md-button class="md-default" ui-sref-active-eq="active" ui-sref="app.home">
+            <md-icon class="material-icons" aria-label="Apps">apps</md-icon>マイメニュー
+          </md-button>
+        </menu-link>
+      </il>
+    </ul>
+  </md-content>
 </md-sidenav>
 
 <md-sidenav class="md-sidenav-left br" md-theme="sidemenu" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" ng-show="ctrl.showDashboardMenu()">
   <md-toolbar class="bb">
     <div class="md-toolbar-tools">
-      <h2>Petz.io</h2>
+      <h2><span class="clinic-label">{{clinic.name}}</span></h2>
+      <span flex></span>
+      <md-menu>
+        <md-button class="md-icon-button" ng-click="ctrl.openMenu($mdOpenMenu, $event)">
+          <md-icon class="material-icons">arrow_drop_down</md-icon>
+        </md-button>
+        <md-menu-content width="4">
+          <md-menu-item ng-repeat="c in clinics">
+            <md-button ui-sref="app.dashboard({clinicId: c.id})">
+              {{c.name}}
+            </md-button>
+          </md-menu-item>
+        </md-menu-content>
+      </md-menu>
     </div>
   </md-toolbar>
   <md-content flex>
@@ -86,6 +117,10 @@
         </menu-link>
       </il>
     </ul>
+    <div class="copyright">
+      © 2016 <a href="https://petz.io">petz.io</a>
+      Produced by <a href="https://majimena.co.jp" target="_blank">majimena Inc,.</a>
+    </div>
   </md-content>
 </md-sidenav>
 
@@ -93,9 +128,13 @@
   <md-toolbar class="navigation md-primary white">
     <div class="md-toolbar-tools">
       <!-- toggle -->
-      <md-button class="md-icon-button" ng-if="ctrl.showDashbordMenuIcon()" ng-click="ctrl.toggleLeft()">
+      <md-button class="md-icon-button" ng-if="ctrl.showMainMenuIcon()" ng-click="ctrl.toggleMainMenu()">
         <md-icon class="material-icons white" aria-label="Menu">menu</md-icon>
       </md-button>
+      <md-button class="md-icon-button" ng-if="ctrl.showDashboardMenuIcon()" ng-click="ctrl.toggleLeft()">
+        <md-icon class="material-icons white" aria-label="Menu">menu</md-icon>
+      </md-button>
+
       <md-button class="md-icon-button" ng-if="ctrl.showDashboardMenu()" hide-sm>
         <md-icon class="material-icons white" aria-label="Menu">keyboard_backspace</md-icon>
       </md-button>
@@ -140,12 +179,7 @@
   </md-toolbar>
 
   <ptz-state-loading-indicator></ptz-state-loading-indicator>
-  <md-content layout="column" flex="" class="bg-color fadein" ui-view="">
-    <div layout-padding="" class="pt0 bg-color">
-      <div class="copyright">
-        © 2016 <a href="https://petz.io">petz.io</a> - Produced by <a href="https://majimena.co.jp" target="_blank">majimena Inc,.</a>
-      </div>
-    </div>
+  <md-content layout="row" flex="" class="bg-color fadein" layout-align="center start" ui-view="">
   </md-content>
 
 </div>

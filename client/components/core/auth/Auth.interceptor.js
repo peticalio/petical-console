@@ -28,8 +28,9 @@ angular.module('petz.core')
           $log.error(response);
         } else {
           toaster.info('タイムアウトしました。もう一度ログインしてください。');
-          $location.path('/signin');
+          // $location.path('/signin').replace();
           $cookieStore.remove('token');
+          $injector.get('$state').go('app.signin');
         }
         return $q.reject(response);
       }
