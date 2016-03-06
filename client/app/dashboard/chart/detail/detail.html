@@ -275,7 +275,7 @@
       </md-button>
     </md-fab-trigger>
     <md-fab-actions>
-      <md-button class="md-fab md-raised md-mini" ng-click="ctrl.reserve(ctrl.chart)">
+      <md-button class="md-fab md-raised md-mini" ui-sref="app.dashboard.ticket.form({chartId: ctrl.chart.id})">
         <md-tooltip md-direction="left">予約する</md-tooltip>
         <md-icon class="material-icons">today</md-icon>
       </md-button>
@@ -283,7 +283,7 @@
         <md-tooltip md-direction="left">編集する</md-tooltip>
         <md-icon class="material-icons">create</md-icon>
       </md-button>
-      <md-button class="md-fab md-raised md-mini" ng-click="ctrl.removeChart(ctrl.chart)">
+      <md-button class="md-fab md-raised md-mini" ng-click="ctrl.delete($event, ctrl.chart)">
         <md-tooltip md-direction="left">削除する</md-tooltip>
         <md-icon class="material-icons">delete</md-icon>
       </md-button>

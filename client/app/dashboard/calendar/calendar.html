@@ -1,0 +1,30 @@
+<h3>
+  <div class="pull-right">
+    <button type="button" class="btn btn-default btn-sm" ui-sref="app.dashboard.ticket.form">診察を予約する</button>
+  </div>
+  予約状況を見る
+  <small>今月の予約状況を確認します。</small>
+</h3>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-xs-6 col-md-6 text-left">
+        <div class="btn-group">
+          <button class="btn btn-sm btn-default" mwl-date-modifier date="ctrl.calendarDay" decrement="ctrl.viewCalendar" ng-click="ctrl.getTodaysSchedules(ctrl.calendarDay)">&lt;&nbsp;前月</button>
+        </div>
+      </div>
+      <div class="col-xs-6 col-md-6 text-right">
+        <div class="btn-group">
+          <button class="btn btn-sm btn-default" mwl-date-modifier date="ctrl.calendarDay" increment="ctrl.viewCalendar" ng-click="ctrl.getTodaysSchedules(ctrl.calendarDay)">翌月&nbsp;&gt;</button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <h4 class="text-center"><strong>{{ctrl.calendarDay | date: 'yyyy-MM'}}</strong> のスケジュール</h4>
+        <mwl-calendar view="'month'" current-day="ctrl.calendarDay" events="ctrl.events" on-event-click="ctrl.showEventDetail(calendarEvent)"></mwl-calendar>
+      </div>
+    </div>
+  </div>
+</div>

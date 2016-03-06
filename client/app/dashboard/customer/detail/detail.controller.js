@@ -33,6 +33,7 @@
         });
     }
 
+    // カルテをリフレッシュする
     refresh() {
       let pets = this.UserPet.fetch({userId: this.customer.user.id}).$promise
         .then((response) => response);
@@ -45,6 +46,7 @@
         });
     }
 
+    // 所有ペットとカルテを関連付ける（privateな処理）
     relate() {
       this.pets.some((pet) => {
         this.charts.some((chart) => {
@@ -53,6 +55,15 @@
           }
         });
       });
+    }
+
+    // カルテを表示する（カルテがない場合は作成ページを表示する）
+    goChart(customer, pet) {
+      if (pet.chart) {
+        this.$state.go('app.dashboard.chart.detail', {clinicId: this.$stateParams.clinicId, chartId: pet.chart.id});
+      } else {
+        this.$state.go('app.dashboard.chart.import', {clinicId: this.$stateParams.clinicId, customerId: customer.id, petId: pet.id});
+      }
     }
   }
 

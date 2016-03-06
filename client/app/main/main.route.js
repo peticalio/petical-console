@@ -7,7 +7,11 @@
         abstract:         true,
         templateUrl:      'app/main/main.html',
         controller:       'MainController',
-        controllerAs:     'ctrl'
+        controllerAs:     'ctrl',
+        title: 'Petz.io',
+        data: {
+          title: 'Petz.io'
+        }
       })
     ;
   }

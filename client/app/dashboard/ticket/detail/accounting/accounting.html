@@ -1,0 +1,129 @@
+<div class="layout-max-width">
+  <md-toolbar md-theme="content" class="pt">
+    <div class="md-toolbar-tools">
+      <h1 class="md-title">{{ctrl.ticket.chart.pet.name}} ちゃんの請求書</h1>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="ctrl.refresh()">
+        <md-tooltip md-direction="left">更新する</md-tooltip>
+        <md-icon class="material-icons">refresh</md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <div layout-padding>
+    <md-table-container class="flat-card">
+      <table md-table class="table-hover table-clickable">
+        <thead md-head>
+          <tr md-row>
+            <th md-column>ステータス</th>
+            <th md-column>請求額</th>
+            <th md-column>消費税</th>
+            <th md-column>受領金額</th>
+            <th md-column>作成日時</th>
+          </tr>
+        </thead>
+        <tbody md-body>
+          <tr md-row ng-repeat="invoice in ctrl.invoices">
+            <td md-cell>
+              {{invoice.paid}}
+            </td>
+            <td md-cell>
+              {{invoice.total}}
+            </td>
+            <td md-cell>
+              {{invoice.tax}}
+            </td>
+            <td md-cell>
+              {{invoice.receiptAmount}}
+            </td>
+            <td md-cell>
+              {{invoice.createdDate | date:'yyyy/MM/dd HH:mm'}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </md-table-container>
+  </div>
+  <md-toolbar md-theme="content">
+    <div class="md-toolbar-tools">
+      <h1 class="md-title">代金のお支払い</h1>
+    </div>
+  </md-toolbar>
+  <div layout-padding>
+  </div>
+</div>
+
+
+<!-- <div class="modal-body">
+  <form name="form" role="form" novalidate>
+    <div class="row">
+      <div class="col-md-12">
+        <section class="form-group">
+          <label class="control-label">お名前</label>
+          <p class="control-label-static">{{ctrl.invoice.ticket.pet.name}} ちゃん（{{ctrl.invoice.ticket.customer.lastName}}{{ctrl.invoice.ticket.customer.firstName}} 様）</p>
+        </section>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <section class="form-group">
+          <label class="control-label">請求額</label>
+          <p class="control-label-static">{{ctrl.invoice.total | currency:'¥ ':0}}</p>
+        </section>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <section class="form-group" ng-class="{'has-error': form.type.$dirty && form.type.$invalid}">
+          <label class="control-label">お支払い方法</label>
+          <select id="type" name="type" class="form-control" ng-model="ctrl.payment.type" ng-required="true">
+            <option value="CASH">現金</option>
+            <option value="CREDIT_CARD">クレジットカード</option>
+            <option value="OTHER">その他</option>
+          </select>
+          <div ng-show="form.type.$invalid && form.type.$dirty">
+            <p class="help-block" ng-show="form.type.$error">
+              <span>お支払い方法を選択してください。</span>
+            </p>
+          </div>
+        </section>
+      </div>
+      <div class="col-md-6">
+        <section class="form-group" ng-class="{'has-error': form.amount.$dirty && form.amount.$invalid}">
+          <label class="control-label">お支払い金額</label>
+          <input type="number" id="amount" name="amount" class="form-control" maxlength="9" ng-model="ctrl.payment.amount" ng-required="true" ng-min="0" ng-max="999999999" ng-change="ctrl.calculateChange()"/>
+          <div ng-show="form.amount.$invalid && form.amount.$dirty">
+            <p class="help-block" ng-show="form.amount.$error">
+              <span>0 - 999999999 の間の数字を入力してください。</span>
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <section class="form-group" ng-class="{'has-error': form.amount.$dirty && form.amount.$invalid}">
+          <label class="control-label">おつり（もしくは不足額）</label>
+          <p class="control-label-static">{{ctrl.payment.changed | currency:'¥ ':0}}</p>
+        </section>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <section class="form-group" ng-class="{'has-error': form.memo.$invalid}">
+          <label for="memo" class="control-label">その他・備考</label>
+          <textarea id="memo" name="memo" type="text" class="form-control" maxlength="2000" rows="7" placeholder="例）お金を持ち合わせていないとのことで未納あり。" ng-model="ctrl.payment.memo" ng-maxlength="2000"></textarea>
+          <div ng-show="form.memo.$invalid && form.memo.$dirty">
+            <p class="help-block" ng-show="form.memo.$error">
+              <span>2000 文字以内で入力してください。</span>
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary" ng-click="ctrl.save(ctrl.payment)" ng-disabled="form.$invalid">保存する</button>
+  <button type="button" class="btn btn-link" ng-click="ctrl.closeDialog()">閉じる</button>
+</div> -->

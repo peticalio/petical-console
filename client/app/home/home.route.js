@@ -54,6 +54,7 @@
   }
 
   HomeRouter.$inject = ['$stateProvider'];
-  angular.module('petzApp').config(HomeRouter);
+  angular.module('petzApp')
+    .config(HomeRouter);
 
 })();

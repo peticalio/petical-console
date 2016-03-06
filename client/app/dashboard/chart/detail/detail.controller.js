@@ -2,10 +2,12 @@
   'use strict';
 
   class ChartDetailController {
-    constructor($state, $stateParams, toaster, ClinicTicket, chart) {
+    constructor($state, $stateParams, dialog, toaster, ClinicChart, ClinicTicket, chart) {
       this.$state = $state;
       this.$stateParams = $stateParams;
+      this.dialog = dialog;
       this.toaster = toaster;
+      this.ClinicChart = ClinicChart;
       this.ClinicTicket = ClinicTicket;
       this.chart = chart;
 
@@ -29,9 +31,24 @@
           return response.$promise;
         });
     }
+
+    // 飼い主を削除する
+    delete(event, chart) {
+      this.dialog.delete(event, chart)
+        .then(() => {
+          return this.ClinicChart.delete({clinicId: this.$stateParams.clinicId, chartId: this.$stateParams.chartId});
+        })
+        .then(() => {
+          this.toaster.info(chart.pet.name + ' ちゃんのカルテを削除しました。');
+          return this.ClinicChart.fetch({clinicId: this.$stateParams.clinicId}).$promise;
+        })
+        .then(() => {
+          this.$state.go('app.dashboard.chart.list');
+        });
+    }
   }
 
-  ChartDetailController.$inject = ['$state', '$stateParams', 'toaster', 'ClinicTicket', 'chart'];
+  ChartDetailController.$inject = ['$state', '$stateParams', 'dialog', 'toaster', 'ClinicChart', 'ClinicTicket', 'chart'];
   angular.module('petzApp')
     .controller('ChartDetailController', ChartDetailController);
 

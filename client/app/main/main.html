@@ -69,6 +69,13 @@
         </menu-link>
       </il>
       <li>
+        <menu-link section="section" ui-sref-active="active" ui-sref="app.dashboard.calendar">
+          <md-button ui-sref="app.dashboard.calendar" ui-sref-ignore>
+            <md-icon class="material-icons" aria-label="Calendar">event</md-icon>カレンダー
+          </md-button>
+        </menu-link>
+      </il>
+      <li>
         <menu-link section="section" ui-sref-active="active" ui-sref="app.dashboard.mail">
           <md-button ui-sref="app.dashboard.mail.list" ui-sref-ignore>
             <md-icon class="material-icons" aria-label="Mails">mail</md-icon>メール
@@ -135,11 +142,12 @@
         <md-icon class="material-icons white" aria-label="Menu">menu</md-icon>
       </md-button>
 
-      <md-button class="md-icon-button" ng-if="ctrl.showDashboardMenu()" hide-sm>
+      <md-button class="md-icon-button" ng-if="ctrl.showDashboardMenu()" ng-click="ctrl.goBack()" hide-xs hide-sm>
         <md-icon class="material-icons white" aria-label="Menu">keyboard_backspace</md-icon>
       </md-button>
 
       <!-- logo -->
+      <span class="navigation-title">{{ctrl.getTitle()}}</span>
       <span flex></span>
       <!-- <div class="navbar-header">
         <a class="navbar-brand ml" href="/"></a>

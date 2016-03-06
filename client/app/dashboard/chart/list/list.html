@@ -22,7 +22,7 @@
             </tr>
           </thead>
           <tbody md-body>
-            <tr md-row ng-repeat="chart in ctrl.charts" ui-sref="app.dashboard.chart.detail({chartId:chart.id})">
+            <tr md-row ng-repeat="chart in ctrl.charts" ui-sref="app.dashboard.chart.detail({chartId: chart.id})">
               <td md-cell>
                 {{chart.chartNo}}
               </td>
@@ -30,7 +30,7 @@
                 {{chart.pet.name}}
               </td>
               <td md-cell>
-                {{chart.customer.user.lastName}} {{chart.customer.user.firstName}} 様
+                <a ui-sref="app.dashboard.customer.detail({customerId: chart.customer.id})" ui-sref-ignore>{{chart.customer.user.lastName}} {{chart.customer.user.firstName}}</a> 様
               </td>
               <td md-cell>
                 {{chart.createdDate | date:'yyyy/MM/dd HH:mm'}}

@@ -38,9 +38,9 @@
             </tr>
           </thead>
           <tbody md-body>
-            <tr md-row ng-repeat="pet in ctrl.pets" ui-sref="app.dashboard.chart.detail({chartId: pet.chart.id})">
+            <tr md-row ng-repeat="pet in ctrl.pets" ng-click="ctrl.goChart(ctrl.customer, pet)">
               <td md-cell>
-                <span class="label label-default" ng-if="!pet.chart">カルテ作成済</span>
+                <span class="label label-default" ng-if="!pet.chart">カルテ未作成</span>
                 <span ng-if="pet.chart">{{pet.chart.chartNo}}</span>
               </td>
               <td md-cell>

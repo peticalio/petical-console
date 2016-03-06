@@ -12,7 +12,7 @@
       this.toast.show(
         this.toast.simple()
           .textContent(message)
-          .action('X')
+          .action('OK')
           .position('bottom right')
           .hideDelay(4000)
       );
@@ -23,7 +23,7 @@
       this.toast.show(
         this.toast.simple()
           .textContent(message)
-          .action('X')
+          .action('OK')
           .position('bottom right')
           .hideDelay(4000)
       );

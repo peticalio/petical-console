@@ -1,0 +1,94 @@
+<div class="text-right mb">
+  <button class="btn btn-danger-outline" ng-click="ctrl.cancel()" ng-show="!ctrl.invoice.paid && !ctrl.invoice.removed">キャンセル</button>
+</div>
+
+<div class="paper">
+  <h1 class="mb-lg text-center text-danger" ng-show="ctrl.invoice.removed">この診療明細書は取り消されているため無効です</h1>
+  <h3 class="mt0">診療明細書　兼　領収書</h3>
+  <small>
+    <span class="mr">領収書番号：{{ctrl.invoice.id}}</span>
+  </small>
+  <hr/>
+  <div class="row mb">
+    <div class="col-xs-7">
+      <p><small>カルテ番号：{{ctrl.invoice.ticket.chart.id}}</small></p>
+      <p>
+        〒 {{ctrl.invoice.ticket.chart.customer.user.zipCode}}<br/>
+        {{ctrl.invoice.ticket.chart.customer.user.state}}{{ctrl.invoice.ticket.chart.customer.user.city}}{{ctrl.invoice.ticket.chart.customer.user.street}}
+      </p>
+      <h4 class="b0">{{ctrl.invoice.ticket.chart.customer.lastName}} {{ctrl.invoice.ticket.chart.customer.firstName}} 様</h4>
+      <h4 class="b0">{{ctrl.invoice.ticket.chart.pet.name}} ちゃん</h4>
+    </div>
+    <div class="col-xs-5">
+      <p class="text-right">診察日：{{ctrl.invoice.ticket.startDateTime | date:'yyyy/MM/dd'}}</p>
+      <p class="text-right">発行日：{{ctrl.invoice.createdDate | date:'yyyy/MM/dd'}}</p>
+      <div class="clearfix" style="border-bottom:1px solid #ccc;">
+        <p class="pull-left h4">ご請求金額</p>
+        <p class="pull-right h4 mr">{{ctrl.invoice.total | currency:'¥ ':0}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead class="small">
+            <tr>
+              <th class="col-sm-1">#</th>
+              <th class="col-sm-5">診療項目</th>
+              <th class="col-sm-2">単価</th>
+              <th class="col-sm-1">数量</th>
+              <th class="col-sm-1">消費税</th>
+              <th class="col-sm-2">金額</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="examination in ctrl.examinations">
+              <td class="text-right">{{$index + 1}}</td>
+              <td>{{examination.name}}</td>
+              <td class="text-right">{{examination.price | currency:'¥ ':0}}</td>
+              <td class="text-right">{{examination.quantity}}</td>
+              <td class="text-right">{{examination.tax | currency:'¥ ':0}}</td>
+              <td class="text-right">{{examination.total | currency:'¥ ':0}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-7">
+      <p>
+        〒 {{ctrl.clinic.zipCode}}<br/>
+        {{ctrl.clinic.state}}{{ctrl.clinic.city}}{{ctrl.clinic.street}}
+      </p>
+      <h4 class="b0">{{ctrl.clinic.name}}</h4>
+      <p>
+        <span class="mr">TEL: {{ctrl.clinic.phoneNo}}</span>
+        <span class="mr">FAX: {{ctrl.clinic.faxNo}}</span>
+        <br/>
+        <span class="mr">{{ctrl.clinic.url}}</span>
+      </p>
+    </div>
+    <div class="col-xs-5">
+      <div class="clearfix mb-lg" style="border-bottom:1px solid #ccc;">
+        <p class="pull-left h4">合計</p>
+        <p class="pull-right mr h4 text-right">
+          {{ctrl.invoice.total | currency:'¥ ':0}}<br/>
+          <small>（内、消費税）{{ctrl.invoice.tax | currency:'¥ ':0}}</small>
+        </p>
+      </div>
+      <div class="clearfix" style="border-bottom:1px solid #ccc;">
+        <p class="pull-left h4">領収金額</p>
+        <p class="pull-right mr h4 text-right">
+          {{ctrl.invoice.receiptAmount | currency:'¥ ':0}}<br/>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="text-right mt">
+  <button class="btn btn-primary" ng-click="ctrl.showAccountingModal(ctrl.invoice)" ng-show="!ctrl.invoice.paid && !ctrl.invoice.removed">入金する</button>
+  <button class="btn btn-default" onclick="window.print()" ng-show="!ctrl.invoice.removed">印刷する</button>
+</div>

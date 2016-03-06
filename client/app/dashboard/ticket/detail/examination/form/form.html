@@ -1,0 +1,94 @@
+<div class="layout-max-width">
+  <md-toolbar md-theme="content" class="pt">
+    <div class="md-toolbar-tools">
+      <h1 class="md-title">{{ctrl.ticket.chart.pet.name}} ちゃんの診察内容</h1>
+      <span flex></span>
+      <md-button class="md-icon-button" ui-sref="app.dashboard.chart.list">
+        <md-tooltip md-direction="left">一覧</md-tooltip>
+        <md-icon class="material-icons">list</md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <div layout-padding>
+    <div class="modal-header">
+      <button type="button" class="close" aria-label="Close" ng-click="ctrl.closeDialog()">&times;</button>
+      <h4 class="modal-title" id="myModalLabel">{{ctrl.examination.ticket.chart.pet.name}} ちゃんの診察内容</h4>
+    </div>
+    <div class="modal-body">
+      <form name="form" role="form" novalidate>
+        <div class="row">
+          <div class="col-md-6">
+            <section class="form-group">
+              <label for="clinicId" class="control-label">ペットのお名前</label>
+              <p class="control-label-static">{{ctrl.examination.ticket.chart.pet.name}} ちゃん</p>
+            </section>
+          </div>
+          <div class="col-md-6">
+            <section class="form-group">
+              <label for="clinicId" class="control-label">飼い主</label>
+              <p class="control-label-static">{{ctrl.examination.ticket.chart.customer.user.lastName}} {{ctrl.examination.ticket.chart.customer.user.firstName}} 様</p>
+            </section>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <section class="form-group" ng-class="{'has-error': form.name.$invalid}">
+              <label for="name" class="control-label">診察内容</label><span class="label label-required">必須</span>
+              <ui-select name="name" ng-model="ctrl.examination.product" ng-required="true" on-select="ctrl.selectProduct($item)">
+                <ui-select-match placeholder="診察内容を検索または選択">{{$select.selected.name}}</ui-select-match>
+                <ui-select-choices repeat="product as product in ctrl.products">
+                  {{product.name}}
+                </ui-select-choices>
+              </ui-select>
+              <div ng-show="form.name.$invalid && form.name.$dirty">
+                <p class="help-block" ng-show="form.name.$error">
+                  <span>診察内容を選択してください。</span>
+                </p>
+              </div>
+            </section>
+          </div>
+          <div class="col-md-3">
+            <section class="form-group" ng-class="{'has-error': form.price.$invalid}">
+              <label for="price" class="control-label">診察料金</label><span class="label label-required">必須</span>
+              <input type="number" id="price" name="price" class="form-control" maxlength="9" ng-model="ctrl.examination.price" ng-required="true"/>
+              <div ng-show="form.price.$invalid && form.price.$dirty">
+                <p class="help-block" ng-show="form.price.$error">
+                  <span>診察料金を入力してください。</span>
+                </p>
+              </div>
+            </section>
+          </div>
+          <div class="col-md-3">
+            <section class="form-group" ng-class="{'has-error': form.quantity.$invalid}">
+              <label for="quantity" class="control-label">数量</label><span class="label label-required">必須</span>
+              <input type="number" id="quantity" name="quantity" class="form-control" maxlength="3" ng-model="ctrl.examination.quantity" ng-required="true"/>
+              <div ng-show="form.quantity.$invalid && form.quantity.$dirty">
+                <p class="help-block" ng-show="form.quantity.$error">
+                  <span>数量を入力してください。</span>
+                </p>
+              </div>
+            </section>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <section class="form-group" ng-class="{'has-error': form.memo.$invalid}">
+              <label for="memo" class="control-label">メモ</label>
+              <textarea id="memo" name="memo" type="text" class="form-control" maxlength="2000" rows="7" placeholder="例）診察内容を自由入力。" ng-model="ctrl.examination.memo" ng-maxlength="2000"></textarea>
+              <div ng-show="form.memo.$invalid && form.memo.$dirty">
+                <p class="help-block" ng-show="form.memo.$error">
+                  <span>2000 文字以内で入力してください。</span>
+                </p>
+              </div>
+            </section>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" ng-click="ctrl.save(ctrl.examination)" ng-disabled="form.$invalid">保存する</button>
+      <button type="button" class="btn btn-danger-reverse" ng-click="ctrl.remove(ctrl.examination)" ng-show="ctrl.examination.id">削除する</button>
+      <button type="button" class="btn btn-link" ng-click="ctrl.closeDialog()">閉じる</button>
+    </div>
+  </div>
+</div>

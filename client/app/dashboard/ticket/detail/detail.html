@@ -1,0 +1,137 @@
+<div layout="column" flex>
+  <md-tabs md-dynamic-height md-selected="ctrl.selected" class="md-primary" flex="100">
+    <md-tab label="基本情報" ui-sref="app.dashboard.ticket.detail">
+    </md-tab>
+    <md-tab label="診察内容" ui-sref="app.dashboard.ticket.detail.examination">
+    </md-tab>
+    <md-tab label="証明書" ui-sref="app.dashboard.ticket.detail.certificate">
+    </md-tab>
+    <md-tab label="添付" ui-sref="app.dashboard.ticket.detail.attachment">
+    </md-tab>
+    <md-tab label="会計" ui-sref="app.dashboard.ticket.detail.accounting">
+    </md-tab>
+  </md-tabs>
+
+  <div layout="row" layout-align="center start" flex="100" ui-view="" class="fadein">
+    <div class="layout-max-width">
+      <md-toolbar md-theme="content" class="pt">
+        <div class="md-toolbar-tools">
+          <h1 class="md-title">{{ctrl.ticket.chart.pet.name}} ちゃんのチケット</h1>
+          <span flex></span>
+          <md-button class="md-icon-button" ui-sref="app.dashboard.ticket.list">
+            <md-tooltip md-direction="left">一覧</md-tooltip>
+            <md-icon class="material-icons">list</md-icon>
+          </md-button>
+        </div>
+      </md-toolbar>
+      <div layout-padding>
+        <div layout="row" layout-wrap class="flat-card">
+          <md-list flex="50" flex-xs="100">
+            <md-subheader class="md-no-sticky">チケット詳細</md-subheader>
+            <md-list-item>
+              <md-icon class="material-icons">
+                local_hospital
+                <md-tooltip>所属動物病院</md-tooltip>
+              </md-icon>
+              <p>{{ctrl.clinic.name}}</p>
+            </md-list-item>
+            <md-list-item>
+              <md-icon class="material-icons">
+                receipt
+                <md-tooltip>チケット番号</md-tooltip>
+              </md-icon>
+              <p>{{ctrl.ticket.id}}</p>
+            </md-list-item>
+            <md-list-item>
+              <md-icon class="material-icons">
+                access_time
+                <md-tooltip>予定日時</md-tooltip>
+              </md-icon>
+              <p>{{ctrl.ticket.startDateTime | date:'yyyy/MM/dd HH:mm'}} - {{ctrl.ticket.endDateTime | date:'HH:mm'}}</p>
+            </md-list-item>
+            <md-list-item>
+              <md-icon class="material-icons">
+                hourglass_empty
+                <md-tooltip>ステータス</md-tooltip>
+              </md-icon>
+              <p><ptz-ticket-status status="ctrl.ticket.state"></ptz-ticket-status></p>
+            </md-list-item>
+            <md-list-item>
+              <md-icon class="material-icons">
+                create
+                <md-tooltip>作成日時</md-tooltip>
+              </md-icon>
+              <p>{{ctrl.ticket.createdDate | date:'yyyy/MM/dd HH:mm'}}</p>
+            </md-list-item>
+          </md-list>
+          <md-list flex="50" flex-xs="100">
+            <md-subheader class="md-no-sticky">ペット・飼い主さま</md-subheader>
+            <md-list-item>
+              <md-icon class="material-icons">
+                folder
+                <md-tooltip>カルテ番号</md-tooltip>
+              </md-icon>
+              <p><a ui-sref="app.dashboard.chart.detail({chartId: ctrl.ticket.chart.id})">{{ctrl.ticket.chart.chartNo}}</a></p>
+            </md-list-item>
+            <md-list-item>
+              <md-icon class="material-icons">
+                pets
+                <md-tooltip>ペット</md-tooltip>
+              </md-icon>
+              <p>{{ctrl.ticket.chart.pet.name}} ちゃん</p>
+            </md-list-item>
+            <md-list-item>
+              <md-icon class="material-icons">
+                person
+                <md-tooltip>飼い主さま</md-tooltip>
+              </md-icon>
+              <p><a ui-sref="app.dashboard.customer.detail({customerId: ctrl.ticket.chart.customer.id})">{{ctrl.ticket.chart.customer.user.lastName}} {{ctrl.ticket.chart.customer.user.firstName}}</a> 様</p>
+            </md-list-item>
+            <md-list-item>
+              <md-icon class="material-icons">
+                phone
+                <md-tooltip>電話番号（自宅）</md-tooltip>
+              </md-icon>
+              <p ng-show="ctrl.ticket.chart.customer.user.phoneNo">{{ctrl.ticket.chart.customer.user.phoneNo}}</p>
+              <p ng-show="!ctrl.ticket.chart.customer.user.phoneNo">未登録</p>
+            </md-list-item>
+            <md-list-item>
+              <md-icon class="material-icons">
+                phone_android
+                <md-tooltip>電話番号（携帯）</md-tooltip>
+              </md-icon>
+              <p ng-show="ctrl.ticket.chart.customer.user.mobilePhoneNo">{{ctrl.ticket.chart.customer.user.mobilePhoneNo}}</p>
+              <p ng-show="!ctrl.ticket.chart.customer.user.mobilePhoneNo">未登録</p>
+            </md-list-item>
+            <md-list-item>
+              <md-icon class="material-icons">
+                mail_outline
+                <md-tooltip>メールアドレス</md-tooltip>
+              </md-icon>
+              <p>{{ctrl.ticket.chart.customer.user.email}}</p>
+            </md-list-item>
+          </md-list>
+        </div>
+      </div>
+      <div class="fab" md-theme="fab">
+        <md-fab-speed-dial md-direction="up" md-open="ctrl.isOpen" class="md-scale" ng-mouseenter="ctrl.isOpen=true" ng-mouseleave="ctrl.isOpen=false" ng-cloak>
+          <md-fab-trigger>
+            <md-button aria-label="menu" class="md-fab md-primary">
+              <md-icon class="material-icons">menu</md-icon>
+            </md-button>
+          </md-fab-trigger>
+          <md-fab-actions>
+            <md-button class="md-fab md-raised md-mini" ui-sref="app.dashboard.ticket.update({ticketId: ctrl.ticket.id})">
+              <md-tooltip md-direction="left">編集する</md-tooltip>
+              <md-icon class="material-icons">create</md-icon>
+            </md-button>
+            <md-button class="md-fab md-raised md-mini" ng-click="ctrl.delete($event, ctrl.ticket)">
+              <md-tooltip md-direction="left">削除する</md-tooltip>
+              <md-icon class="material-icons">delete</md-icon>
+            </md-button>
+          </md-fab-actions>
+        </md-fab-speed-dial>
+      </div>
+    </div>
+  </div>
+</div>

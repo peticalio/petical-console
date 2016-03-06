@@ -1,0 +1,192 @@
+<div class="paper" ng-if="ctrl.certificate.type === 'RABID'">
+  <small>
+    <span class="mr">第　　　　　号</span>
+  </small>
+  <h3 class="text-center mt0">狂犬病予防注射済証</h3>
+  <div class="row">
+    <div class="col-xs-2">
+      <p class="text-center">所有者<br/>（管理者）</p>
+    </div>
+    <div class="col-xs-10">
+      <div class="row">
+        <div class="col-xs-2">
+          <p class="text-center">住所</p>
+        </div>
+        <div class="col-xs-10">
+          <p>
+            〒 {{ctrl.certificate.ticket.chart.customer.user.zipCode}}<br/>
+            {{ctrl.certificate.ticket.chart.customer.user.state}}{{ctrl.certificate.ticket.chart.customer.user.city}}{{ctrl.certificate.ticket.chart.customer.user.street}}
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <p class="text-center">氏名</p>
+        </div>
+        <div class="col-xs-10">
+          <p>{{ctrl.certificate.ticket.chart.customer.lastName}} {{ctrl.certificate.ticket.chart.customer.firstName}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-2">
+      <p class="text-center">鑑札</p>
+    </div>
+    <div class="col-xs-4">
+      <p>第　{{ctrl.certificate.licenseNo}}　号</p>
+    </div>
+    <div class="col-xs-2">
+      <p class="text-center">注射済票</p>
+    </div>
+    <div class="col-xs-4">
+      <p>第　{{ctrl.certificate.reportNo}}　号</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td class="col-xs-2">種類</td>
+              <td class="col-xs-4">{{ctrl.certificate.ticket.chart.pet.type}}</td>
+              <td class="col-xs-2">生年月日</td>
+              <td class="col-xs-4">{{ctrl.certificate.ticket.chart.pet.birthDate | date:'yyyy/MM/dd'}}</td>
+            </tr>
+            <tr>
+              <td class="col-xs-2">毛色</td>
+              <td class="col-xs-4">{{ctrl.certificate.ticket.chart.pet.color}}</td>
+              <td class="col-xs-2">性別</td>
+              <td class="col-xs-4">{{ctrl.certificate.ticket.chart.pet.sex}}</td>
+            </tr>
+            <tr>
+              <td class="col-xs-2">名称</td>
+              <td class="col-xs-4">{{ctrl.certificate.ticket.chart.pet.name}}</td>
+              <td class="col-xs-2">体格</td>
+              <td class="col-xs-4"></td>
+            </tr>
+            <tr>
+              <td class="col-xs-2">その他特徴</td>
+              <td colspan="3">{{ctrl.certificate.memo}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <h4 class="mt0" style="font-weight:normal;">
+    上記の犬に対して、狂犬病予防注射を {{ctrl.certificate.vaccinatedDate | date:'yyyy/MM/dd'}} に行ったことを証明します。
+  </h4>
+  <div class="row">
+    <div class="col-xs-2">
+      <p class="text-center">実施者</p>
+    </div>
+    <div class="col-xs-10">
+      <div class="row">
+        <div class="col-xs-2">
+          <p class="text-center">住所</p>
+        </div>
+        <div class="col-xs-10">
+          <p>
+            〒 {{ctrl.clinic.zipCode}}<br/>
+            {{ctrl.clinic.state}}{{ctrl.clinic.city}}{{ctrl.clinic.street}}
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <p class="text-center">氏名</p>
+        </div>
+        <div class="col-xs-10">
+          <p>
+            {{ctrl.clinic.name}}<br/>
+            獣医師　{{ctrl.clinic.lastName}} {{ctrl.clinic.firstName}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p>本証を居住地の市町村役場に提出して、注射済証の交付を受けてください。</p>
+</div>
+
+<div class="paper" ng-if="ctrl.certificate.type === 'PREVENTION'">
+  <h3 class="text-center mt0">予防接種証明書</h3>
+  <p class="text-center"><small>VACCINATION CERTIFICATE</small></p>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td class="col-xs-2">所有者氏名</td>
+              <td colspan="3">{{ctrl.certificate.ticket.chart.customer.user.lastName}} {{ctrl.certificate.ticket.chart.customer.user.firstName}}　様</td>
+            </tr>
+            <tr>
+              <td class="col-xs-2">住所</td>
+              <td colspan="3">{{ctrl.certificate.ticket.chart.customer.user.state}}{{ctrl.certificate.ticket.chart.customer.user.city}}{{ctrl.certificate.ticket.chart.customer.user.street}}</td>
+            </tr>
+            <tr>
+              <td class="col-xs-2">種類</td>
+              <td class="col-xs-4">{{ctrl.certificate.ticket.chart.pet.type}}</td>
+              <td class="col-xs-2">名前</td>
+              <td class="col-xs-4">{{ctrl.certificate.ticket.chart.pet.name}}</td>
+            </tr>
+            <tr>
+              <td class="col-xs-2">性別</td>
+              <td class="col-xs-4">{{ctrl.certificate.ticket.chart.pet.sex}}</td>
+              <td class="col-xs-2">生年月日</td>
+              <td class="col-xs-4">{{ctrl.certificate.ticket.chart.pet.birthDate | date:'yyyy/MM/dd'}}</td>
+            </tr>
+            <tr>
+              <td class="col-xs-2">ワクチン</td>
+              <td class="col-xs-4">{{ctrl.certificate.vaccine.name}}</td>
+              <td class="col-xs-2">接種日</td>
+              <td class="col-xs-4">{{ctrl.certificate.vaccinatedDate | date:'yyyy/MM/dd'}}</td>
+            </tr>
+            <tr>
+              <td class="col-xs-2">その他・備考</td>
+              <td colspan="3">{{ctrl.certificate.vaccine.memo}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-8">
+      <h4 class="mt0" style="font-weight:normal;">上記の通り接種したことを証明します。</h4>
+      <div class="row">
+        <div class="col-xs-2">
+          <p class="text-center">住所</p>
+        </div>
+        <div class="col-xs-10">
+          <p>
+            〒 {{ctrl.clinic.zipCode}}<br/>
+            {{ctrl.clinic.state}}{{ctrl.clinic.city}}{{ctrl.clinic.street}}
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <p class="text-center">氏名</p>
+        </div>
+        <div class="col-xs-10">
+          <p>
+            {{ctrl.clinic.name}}<br/>
+            獣医師　{{ctrl.clinic.lastName}} {{ctrl.clinic.firstName}}
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="b text-center p-lg mb">シール添付欄</div>
+      <div class="b text-center p-lg">シール添付欄</div>
+    </div>
+  </div>
+  <p>次回は、{{ctrl.nextVaccinatedDate | date:'yyyy/MM/dd'}} 頃接種してください。</p>
+</div>
+
+<div class="text-right mt">
+  <button class="btn btn-default" onclick="window.print()">印刷する</button>
+</div>

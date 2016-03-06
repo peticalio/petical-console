@@ -2,14 +2,30 @@
   'use strict';
 
   class MainController {
-    constructor($scope, $state, $timeout, $mdMedia, $mdSidenav, Auth) {
+    constructor($scope, $state, $timeout, $window, $mdMedia, $mdSidenav, Auth) {
       this.$scope = $scope;
       this.$state = $state;
       this.$timeout = $timeout;
+      this.$window = $window;
       this.$mdMedia = $mdMedia;
       this.$mdSidenav = $mdSidenav;
       this.Auth = Auth;
       this.account = Auth.getCurrentUser();
+    }
+
+    // history backを使って前の画面に戻る
+    goBack() {
+      this.$window.history.back();
+    }
+
+    getTitle() {
+      var title = '';
+      title = (this.$state.includes('app.dashboard')) ? 'ダッシュボード' : title;
+      title = (this.$state.includes('app.dashboard.customer')) ? '飼い主さま' : title;
+      title = (this.$state.includes('app.dashboard.chart')) ? 'カルテ' : title;
+      title = (this.$state.includes('app.dashboard.ticket')) ? 'チケット' : title;
+      title = (this.$state.includes('app.dashboard.mail')) ? 'メール' : title;
+      return title;
     }
 
     // サイドバーをダッシュボードメニューにするか？
@@ -61,7 +77,7 @@
     }
   }
 
-  MainController.$inject = ['$scope', '$state', '$timeout', '$mdMedia', '$mdSidenav', 'Auth'];
+  MainController.$inject = ['$scope', '$state', '$timeout', '$window', '$mdMedia', '$mdSidenav', 'Auth'];
   angular.module('petzApp')
     .controller('MainController', MainController);
 

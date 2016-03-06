@@ -1,0 +1,82 @@
+<div class="modal-header">
+  <button type="button" class="close" aria-label="close" ng-click="ctrl.closeDialog()">&times;</button>
+  <h4 class="modal-title">予防接種証明書を発行する</h4>
+</div>
+
+<div class="modal-body">
+  <form name="form" role="form" novalidate>
+    <div class="row">
+      <div class="col-md-12">
+        <section class="form-group">
+          <label class="control-label">お名前</label>
+          <p class="control-label-static">{{ctrl.ticket.chart.pet.name}} ちゃん（{{ctrl.ticket.chart.customer.user.lastName}} {{ctrl.ticket.chart.customer.user.firstName}} 様）</p>
+        </section>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <section class="form-group">
+          <label class="control-label">種別</label>
+          <p class="control-label-static">{{ctrl.ticket.chart.pet.type}}</p>
+        </section>
+      </div>
+      <div class="col-md-6">
+        <section class="form-group">
+          <label class="control-label">毛色</label>
+          <p class="control-label-static">{{ctrl.ticket.chart.pet.color}}</p>
+        </section>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <section class="form-group" ng-class="{'has-error': form.vaccinatedDate.$dirty && form.vaccinatedDate.$invalid}">
+          <label class="control-label">予防接種日</label><span class="label label-required">必須</span>
+          <div class="dropdown">
+            <div class="input-group">
+              <input id="vaccinatedDate" name="vaccinatedDate" type="date" class="form-control" placeholder="例）2016-04-30" ng-model="ctrl.certificate.vaccinatedDate" ng-required="true" is-open="ctrl.openedVaccinatedDate" uib-datepicker-popup />
+              <span class="input-group-addon">
+                <a ng-click="ctrl.openVaccinatedDateDialog($event)"><span class="fa fa-calendar"></span></a>
+              </span>
+            </div>
+          </div>
+          <div ng-show="form.vaccinatedDate.$invalid && form.vaccinatedDate.$dirty">
+            <p class="help-block" ng-show="form.vaccinatedDate.$error">
+              <span>yyyy-MM-dd 形式の日付を入力してください。</span>
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <section class="form-group" ng-class="{'has-error': form.vaccine.$dirty && form.vaccine.$invalid}">
+          <label class="control-label">ワクチン</label><span class="label label-required">必須</span>
+          <select id="vaccine" name="vaccine" class="form-control" ng-model="ctrl.certificate.vaccine" ng-required="true" ng-options="vaccine.name for vaccine in ctrl.vaccines track by vaccine.id"></select>
+          <div ng-show="form.vaccine.$invalid && form.vaccine.$dirty">
+            <p class="help-block" ng-show="form.vaccine.$error">
+              <span>一覧から選択してください。</span>
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <section class="form-group" ng-class="{'has-error': form.memo.$dirty && form.memo.$invalid}">
+          <label class="control-label">ワクチンの説明</label>
+          <textarea id="memo" name="memo" class="form-control" rows="5" placeholder="例）噛み癖があるため、扱いに注意してください。" ng-model="ctrl.certificate.memo" ng-maxlength="2000"/>
+          <div ng-show="form.memo.$invalid && form.memo.$dirty">
+            <p class="help-block" ng-show="form.memo.$error">
+              <span>2000 文字以内で入力してください。</span>
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary" ng-click="ctrl.save(ctrl.certificate)" ng-disabled="form.$invalid">保存する</button>
+  <button type="button" class="btn btn-link" ng-click="ctrl.closeDialog()">閉じる</button>
+</div>

@@ -22,6 +22,7 @@
       .state('app.dashboard', {
         url: '^/clinics/:clinicId/dashboard',
         data: {
+          title: 'ダッシュボード',
           showDashboardMenu: true
         },
         views: {

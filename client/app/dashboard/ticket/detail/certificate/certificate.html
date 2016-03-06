@@ -1,0 +1,59 @@
+<div class="layout-max-width">
+  <md-toolbar md-theme="content" class="pt">
+    <div class="md-toolbar-tools">
+      <h1 class="md-title">発行済み証明書</h1>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="ctrl.refresh()">
+        <md-tooltip md-direction="left">更新する</md-tooltip>
+        <md-icon class="material-icons">refresh</md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <div layout-padding>
+    <md-table-container class="flat-card">
+      <table md-table class="table-hover table-clickable">
+        <thead md-head>
+          <tr md-row>
+            <th md-column>種別</th>
+            <th md-column>証明書・ワクチン内容</th>
+            <th md-column>発行日</th>
+          </tr>
+        </thead>
+        <tbody md-body>
+          <tr md-row ng-repeat="certificate in ctrl.certificates" ui-sref="app.dashboard.ticket.detail.certificate.detail({ticketId: ctrl.ticket.id, certificateId: certificate.id})">
+            <td md-cell>
+              <span ng-if="certificate.type === 'RABID'">狂犬病予防注射済証</span>
+              <span ng-if="certificate.type === 'PREVENTION'">予防接種証明書</span>
+            </td>
+            <td md-cell>
+              {{certificate.vaccine.name}}
+            </td>
+            <td md-cell>
+              {{certificate.vaccinatedDate | date:'yyyy/MM/dd HH:mm'}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </md-table-container>
+  </div>
+</div>
+
+<div class="fab" md-theme="fab">
+  <md-fab-speed-dial md-direction="up" md-open="ctrl.isOpen" class="md-scale" ng-mouseenter="ctrl.isOpen=true" ng-mouseleave="ctrl.isOpen=false" ng-cloak>
+    <md-fab-trigger>
+      <md-button aria-label="menu" class="md-fab md-primary">
+        <md-icon class="material-icons">menu</md-icon>
+      </md-button>
+    </md-fab-trigger>
+    <md-fab-actions>
+      <md-button class="md-fab md-raised md-mini" ui-sref="app.dashboard.ticket.form({chartId: ctrl.chart.id})">
+        <md-tooltip md-direction="left">予防接種</md-tooltip>
+        <md-icon class="material-icons">local_pharmacy</md-icon>
+      </md-button>
+      <md-button class="md-fab md-raised md-mini" ui-sref="app.dashboard.chart.update({chartId: ctrl.chart.id})">
+        <md-tooltip md-direction="left">狂犬病予防</md-tooltip>
+        <md-icon class="material-icons">colorize</md-icon>
+      </md-button>
+    </md-fab-actions>
+  </md-fab-speed-dial>
+</div>

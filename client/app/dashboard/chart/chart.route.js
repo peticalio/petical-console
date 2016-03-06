@@ -4,33 +4,25 @@
   // ペットの種別を取得する
   function getTypes(Type) {
     return Type.query().$promise
-      .then(function(response) {
-        return response;
-      });
+      .then((response) => response);
   }
 
   // ペットの毛色を取得する
   function getColors(Color) {
     return Color.query().$promise
-      .then(function(response) {
-        return response;
-      });
+      .then((response) => response);
   }
 
   // ペットの血液型を取得する
   function getBloods(Blood) {
     return Blood.query().$promise
-      .then(function(response) {
-        return response;
-      });
+      .then((response) => response);
   }
 
   // ペットのタグを取得する
   function getTags(Tag) {
     return Tag.query().$promise
-      .then(function(response) {
-        return response;
-      });
+      .then((response) => response);
   }
 
   // ペットの飼い主を取得する（TODO このままで良いか微妙なところ）
@@ -44,6 +36,23 @@
       });
   }
 
+  // ペットの飼い主を取得する
+  function getChartByPet($stateParams, ClinicCustomer, Pet) {
+    if (!$stateParams.customerId || !$stateParams.petId) {
+      return {};
+    }
+    var pet = null;
+    return Pet.load({petId: $stateParams.petId}).$promise
+      .then((response) => {
+        pet = response;
+        return ClinicCustomer.load({clinicId:$stateParams.clinicId, customerId:$stateParams.customerId}).$promise;
+      })
+      .then((response) => {
+        var chart = {customer: response, pet: pet};
+        return chart;
+      });
+  }
+
   function getClinicChart($stateParams, ClinicChart) {
     return ClinicChart.load({clinicId: $stateParams.clinicId, chartId: $stateParams.chartId}).$promise
       .then((response) => response);
@@ -53,8 +62,6 @@
     return ClinicChart.query({clinicId: $stateParams.clinicId}).$promise
       .then((response) => response);
   }
-
-  // configure state provider
 
   function ClinicChartRouter($stateProvider) {
     $stateProvider
@@ -96,6 +103,24 @@
           bloods:         getBloods,
           tags:           getTags,
           chart:          getClinicChart
+        }
+      })
+      // カルテインポートフォーム
+      .state('app.dashboard.chart.import', {
+        url: '^/clinics/:clinicId/customers/:customerId/pets/:petId/form',
+        views: {
+          '@app': {
+            templateUrl:  'app/dashboard/chart/form/form.html',
+            controller:   'ChartFormController',
+            controllerAs: 'ctrl'
+          }
+        },
+        resolve: {
+          types:          getTypes,
+          colors:         getColors,
+          bloods:         getBloods,
+          tags:           getTags,
+          chart:          getChartByPet
         }
       })
       // カルテアップロードフォーム
