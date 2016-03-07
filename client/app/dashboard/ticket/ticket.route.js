@@ -17,8 +17,15 @@
   }
 
   // チケットに関する診察内容を取得する
-  function getExaminations(clinic, ticket, ClinicTicketExamination) {
+  function getClinicTicketExaminations(clinic, ticket, ClinicTicketExamination) {
     return ClinicTicketExamination.query({clinicId: clinic.id, ticketId: ticket.id}).$promise
+      .then((response) => response);
+  }
+  function getClinicTicketExamination(ticket) {
+    return {ticket: ticket};
+  }
+  function getClinicProducts(clinic, ClinicProduct) {
+    return ClinicProduct.query({clinicId: clinic.id}).$promise
       .then((response) => response);
   }
 
@@ -110,9 +117,15 @@
           ticket:         getTicket
         }
       })
+
       // チケット詳細（診察内容）
       .state('app.dashboard.ticket.detail.examination', {
-        url: '/examinations',
+        abstract: true,
+        url: '/examinations'
+      })
+      // チケット詳細（診察内容一覧）
+      .state('app.dashboard.ticket.detail.examination.list', {
+        url: '/list',
         views: {
           '@app.dashboard.ticket.detail': {
             templateUrl:  'app/dashboard/ticket/detail/examination/examination.html',
@@ -121,9 +134,25 @@
           }
         },
         resolve: {
-          examinations:   getExaminations
+          examinations:   getClinicTicketExaminations
         }
       })
+      // チケット詳細（診察内容登録フォーム）
+      .state('app.dashboard.ticket.detail.examination.form', {
+        url: '/form',
+        views: {
+          '@app.dashboard.ticket.detail': {
+            templateUrl:  'app/dashboard/ticket/detail/examination/form/form.html',
+            controller:   'TicketDetailExaminationFormController',
+            controllerAs: 'ctrl'
+          }
+        },
+        resolve: {
+          examination:    getClinicTicketExamination,
+          products:       getClinicProducts
+        }
+      })
+
       // チケット詳細（証明書）
       .state('app.dashboard.ticket.detail.certificate', {
         url: '/certificates',
@@ -178,7 +207,7 @@
         },
         resolve: {
           invoice:        getInvoices,
-          examinations:   getExaminations
+          examinations:   getClinicTicketExaminations
         }
       })
     ;

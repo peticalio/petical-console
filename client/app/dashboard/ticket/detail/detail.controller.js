@@ -22,10 +22,10 @@
     // ステートから選択されているタブ番号を取得する
     getSelectedTabNo() {
       var no = 0;
-      no = this.$state.is('app.dashboard.ticket.detail.examination') ? 1 : no;
-      no = this.$state.is('app.dashboard.ticket.detail.certificate') ? 2 : no;
-      no = this.$state.is('app.dashboard.ticket.detail.attachment') ? 3 : no;
-      no = this.$state.is('app.dashboard.ticket.detail.accounting') ? 4 : no;
+      no = this.$state.includes('app.dashboard.ticket.detail.examination') ? 1 : no;
+      no = this.$state.includes('app.dashboard.ticket.detail.certificate') ? 2 : no;
+      no = this.$state.includes('app.dashboard.ticket.detail.attachment') ? 3 : no;
+      no = this.$state.includes('app.dashboard.ticket.detail.accounting') ? 4 : no;
       return no;
     }
 
