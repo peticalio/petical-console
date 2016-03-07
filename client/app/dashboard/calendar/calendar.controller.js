@@ -1,28 +1,19 @@
-(function() {
+(() => {
   'use strict';
 
-  angular
-    .module('petzApp')
-    .controller('TicketCalendarController', TicketCalendarController);
+  class CalendarController {
+    constructor($state, $stateParams, ClinicTicket, clinic) {
+      this.$state = $state;
+      this.$stateParams = $stateParams;
+      this.ClinicTicket = ClinicTicket;
+      this.clinic = clinic;
 
-  TicketCalendarController.$inject = ['$state', '$stateParams', 'Modal', 'ClinicTicket'];
-  function TicketCalendarController($state, $stateParams, Modal, ClinicTicket) {
-    // ----- variables
-    var _this = this;
-
-    // ----- methods
-    function constructor() {
-      _this.viewCalendar = 'month';
-      _this.calendarDay = new Date();
-      _this.calendarTitle = 'hoge';
-
-      getTodaysSchedules(_this.calendarDay);
-
-      _this.getTodaysSchedules = getTodaysSchedules;
-      _this.showEventDetail = showEventDetail;
+      this.viewCalendar = 'month';
+      this.today = new Date();
+      this.getTodaysSchedules(this.today);
     }
 
-    function convertScheduleToEvent(element) {
+    convertScheduleToEvent(element) {
       var type = '';
       switch (element.state) {
         case 'RESERVED':
@@ -53,39 +44,42 @@
       };
     }
 
-    function convertSchedulesToEvents(response) {
+    convertSchedulesToEvents(response) {
       if (!response.data || response.data.length === 0) {
-        _this.events = [];
+        this.events = [];
       } else {
-        _this.events = response.data.map(function(element) {
-          return convertScheduleToEvent(element);
+        this.events = response.data.map(function(element) {
+          return this.convertScheduleToEvent(element);
         });
       }
     }
 
     // 指定した月のスケジュールをロードする
-    function getTodaysSchedules(today) {
-      ClinicTicket.fetch({clinicId:$stateParams.clinicId, year:today.getFullYear(), month:today.getMonth() + 1}).$promise
-        .then(convertSchedulesToEvents);
+    getTodaysSchedules(today) {
+      this.ClinicTicket.fetch({clinicId: this.clinic.id, year: today.getFullYear(), month: today.getMonth() + 1}).$promise
+        .then((response) => this.convertSchedulesToEvents(response));
     }
 
     // 指定したイベントの詳細をモーダルに表示する
-    function showEventDetail(event) {
-      Modal.open('app/dashboard/common/event/event-modal.html', 'EventModalController', 'ctrl', {ticket: function() {return event.schedule;}}).result
-        .then(function(data) {
-          if (data) {
-            _this.events.some(function(v, i) {
-              if (v.schedule.id === event.schedule.id) {
-                _this.events.splice(i, 1);
-              }
-            });
-            if (!data.removed) {
-              _this.events.push(convertScheduleToEvent(data));
-            }
-          }
-        });
-    }
-
-    constructor();
+    // showEventDetail(event) {
+    //   Modal.open('app/dashboard/common/event/event-modal.html', 'EventModalController', 'ctrl', {ticket: function() {return event.schedule;}}).result
+    //     .then(function(data) {
+    //       if (data) {
+    //         _this.events.some(function(v, i) {
+    //           if (v.schedule.id === event.schedule.id) {
+    //             _this.events.splice(i, 1);
+    //           }
+    //         });
+    //         if (!data.removed) {
+    //           _this.events.push(convertScheduleToEvent(data));
+    //         }
+    //       }
+    //     });
+    // }
   }
+
+  CalendarController.$inject = ['$state', '$stateParams', 'ClinicTicket', 'clinic'];
+  angular.module('petzApp')
+    .controller('CalendarController', CalendarController);
+
 })();

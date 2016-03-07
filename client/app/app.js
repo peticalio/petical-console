@@ -10,6 +10,7 @@ angular
     'ngMaterial',
     'angularMoment',
     'md.data.table',
+    'mwl.calendar',
     'ngCookies',
     'ngResource',
     'ngSanitize',

@@ -7,8 +7,15 @@
       this.toaster = toaster;
       this.ClinicTicketExamination = ClinicTicketExamination;
       this.clinic = clinic;
+      this.ticket = ticket;
       this.examination = examination;
       this.products = products;
+    }
+
+    getProducts(text) {
+      return this.products.filter((item) => {
+        return (item.name.indexOf(text) >= 0) ? true : false;
+      });
     }
 
     // 登録する商品を決定する
@@ -26,7 +33,7 @@
         .then(() => this.ClinicTicketExamination.fetch({clinicId: this.clinic.id, ticketId: this.ticket.id}).$promise)
         .then(() => {
           this.toaster.info('新しく診察内容を追加しました。');
-          this.$state.go('app.dashboard.ticket.examination.list');
+          this.$state.go('app.dashboard.ticket.detail.examination.list');
         });
     }
 
@@ -35,7 +42,7 @@
         .then(() => this.ClinicTicketExamination.fetch({clinicId: this.clinic.id, ticketId: this.ticket.id}).$promise)
         .then(() => {
           this.toaster.info('診察内容を更新しました。');
-          this.$state.go('app.dashboard.ticket.examination.list');
+          this.$state.go('app.dashboard.ticket.detail.examination.list');
         });
     }
 
@@ -44,7 +51,7 @@
         .then(() => this.ClinicTicketExamination.fetch({clinicId: this.clinic.id, ticketId: this.ticket.id}).$promise)
         .then(() => {
           this.toaster.info('診察内容を削除しました。');
-          this.$state.go('app.dashboard.ticket.examination.list');
+          this.$state.go('app.dashboard.ticket.detail.examination.list');
         });
     }
   }

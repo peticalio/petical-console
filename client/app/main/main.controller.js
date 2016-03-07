@@ -24,6 +24,7 @@
       title = (this.$state.includes('app.dashboard.customer')) ? '飼い主さま' : title;
       title = (this.$state.includes('app.dashboard.chart')) ? 'カルテ' : title;
       title = (this.$state.includes('app.dashboard.ticket')) ? 'チケット' : title;
+      title = (this.$state.includes('app.dashboard.calendar')) ? 'カレンダー' : title;
       title = (this.$state.includes('app.dashboard.mail')) ? 'メール' : title;
       return title;
     }

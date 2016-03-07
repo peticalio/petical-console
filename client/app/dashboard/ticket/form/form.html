@@ -85,6 +85,10 @@
             <md-button class="md-primary md-raised" ng-disabled="form.$invalid" ng-click="ctrl.save(ctrl.ticket)">登録する</md-button>
             <md-button ui-sref="app.dashboard.chart.detail">キャンセル</md-button>
           </div>
+          <div layout="row" layout-align="end center" ng-if="ctrl.ticket.id">
+            <md-button class="md-primary md-raised" ng-disabled="form.$invalid" ng-click="ctrl.update(ctrl.ticket)">更新する</md-button>
+            <md-button ui-sref="app.dashboard.ticket.detail({ticketId: ctrl.ticket.id})">キャンセル</md-button>
+          </div>
         </form>
       </div>
     </div>

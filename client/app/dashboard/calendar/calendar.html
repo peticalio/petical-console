@@ -1,12 +1,23 @@
-<h3>
-  <div class="pull-right">
-    <button type="button" class="btn btn-default btn-sm" ui-sref="app.dashboard.ticket.form">診察を予約する</button>
-  </div>
-  予約状況を見る
-  <small>今月の予約状況を確認します。</small>
-</h3>
+<div class="layout-max-width">
+  <section>
+    <md-toolbar md-theme="content" class="pt">
+      <div class="md-toolbar-tools">
+        <h1 class="md-title">今週の予約状況</h1>
+        <span flex></span>
+        <md-button class="md-icon-button" ui-sref="app.dashboard.customer.list">
+          <md-tooltip md-direction="left">一覧</md-tooltip>
+          <md-icon class="material-icons">list</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <div layout-padding>
+      <mwl-calendar view="'month'" view-date="ctrl.today" events="ctrl.events">
+      </mwl-calendar>
+    </div>
+  </section>
+</div>
 
-<div class="row">
+<!-- <div class="row">
   <div class="col-md-12">
     <div class="row">
       <div class="col-xs-6 col-md-6 text-left">
@@ -27,4 +38,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->

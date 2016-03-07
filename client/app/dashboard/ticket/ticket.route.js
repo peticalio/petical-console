@@ -21,9 +21,15 @@
     return ClinicTicketExamination.query({clinicId: clinic.id, ticketId: ticket.id}).$promise
       .then((response) => response);
   }
-  function getClinicTicketExamination(ticket) {
+  // 診察内容を取得する（指定がない場合はオブジェクトを返す）
+  function getClinicTicketExamination($stateParams, clinic, ticket, ClinicTicketExamination) {
+    if ($stateParams.examinationId) {
+      return ClinicTicketExamination.load({clinicId: clinic.id, ticketId: ticket.id, examinationId: $stateParams.examinationId}).$promise
+        .then((response) => response);
+    }
     return {ticket: ticket};
   }
+  // 商品を取得する
   function getClinicProducts(clinic, ClinicProduct) {
     return ClinicProduct.query({clinicId: clinic.id}).$promise
       .then((response) => response);
@@ -155,7 +161,12 @@
 
       // チケット詳細（証明書）
       .state('app.dashboard.ticket.detail.certificate', {
-        url: '/certificates',
+        abstract: true,
+        url: '/certificates'
+      })
+      // チケット詳細（証明書の一覧）
+      .state('app.dashboard.ticket.detail.certificate.list', {
+        url: '/list',
         views: {
           '@app.dashboard.ticket.detail': {
             templateUrl:  'app/dashboard/ticket/detail/certificate/certificate.html',
@@ -167,8 +178,14 @@
           certificates:   getCertificates
         }
       })
+
       // チケット詳細（添付）
       .state('app.dashboard.ticket.detail.attachment', {
+        abstract: true,
+        url: '/attachments'
+      })
+      // チケット詳細（添付の一覧）
+      .state('app.dashboard.ticket.detail.attachment.list', {
         url: '/attachments',
         views: {
           '@app.dashboard.ticket.detail': {
@@ -181,8 +198,14 @@
           attachments:    getAttachments
         }
       })
-      // チケット詳細（お支払い）
+
+      // チケット詳細（会計）
       .state('app.dashboard.ticket.detail.accounting', {
+        abstract: true,
+        url: '/accountings'
+      })
+      // チケット詳細（会計一覧）
+      .state('app.dashboard.ticket.detail.accounting.list', {
         url: '/accountings',
         views: {
           '@app.dashboard.ticket.detail': {
@@ -195,6 +218,7 @@
           invoices:        getInvoices
         }
       })
+
       // チケット詳細（請求書） @Deprecated
       .state('app.dashboard.ticket.detail.invoice', {
         url: '/invoices/:invoiceId',

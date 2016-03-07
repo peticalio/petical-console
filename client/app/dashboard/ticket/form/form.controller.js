@@ -10,7 +10,16 @@
       this.ClinicTicketStatus = ClinicTicketStatus;
       this.timetable = timetable;
       this.ticket = ticket;
+      this.startTime = this.copyTime(ticket.startDateTime);
+      this.endTime = this.copyTime(ticket.endDateTime);
       this.today = new Date();
+    }
+
+    copyTime(time) {
+      if (time) {
+        return this.$filter('date')(time, 'HH:mm');
+      }
+      return null;
     }
 
     // 開始日付が変更された時に終了日付も変更する
@@ -24,7 +33,7 @@
       var et = new Date(date.getTime());
       et.setMinutes(et.getMinutes() + 60);
       this.ticket.endDateTime = et;
-      this.endTime = this.$filter('date')(et, 'HH:mm');
+      this.endTime = this.copyTime(et);
     }
 
     // 時刻が変えられた時に指定されたDateオブジェクトの時分を変える
