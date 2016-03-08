@@ -1,14 +1,20 @@
 (() => {
   'use strict';
 
-  function getClinics(Clinic) {
+  function getClinics($rootScope, Clinic) {
     return Clinic.query().$promise
-      .then((response) => response);
+      .then((response) => {
+        $rootScope.clinics = response;
+        return response;
+      });
   }
 
-  function getClinic($stateParams, Clinic) {
+  function getClinic($rootScope, $stateParams, Clinic) {
     return Clinic.load({clinicId: $stateParams.clinicId}).$promise
-      .then((response) => response);
+      .then((response) => {
+        $rootScope.clinic = response;
+        return response;
+      });
   }
 
   function DashboardRouter($stateProvider) {

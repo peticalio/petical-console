@@ -158,6 +158,35 @@
           products:       getClinicProducts
         }
       })
+      // チケット詳細（診察内容登録フォーム）
+      .state('app.dashboard.ticket.detail.examination.update', {
+        url: '/:examinationId/form',
+        views: {
+          '@app.dashboard.ticket.detail': {
+            templateUrl:  'app/dashboard/ticket/detail/examination/form/form.html',
+            controller:   'TicketDetailExaminationFormController',
+            controllerAs: 'ctrl'
+          }
+        },
+        resolve: {
+          examination:    getClinicTicketExamination,
+          products:       getClinicProducts
+        }
+      })
+      // チケット詳細（診察内容登録フォーム）
+      .state('app.dashboard.ticket.detail.examination.detail', {
+        url: '/:examinationId',
+        views: {
+          '@app.dashboard.ticket.detail': {
+            templateUrl:  'app/dashboard/ticket/detail/examination/detail/detail.html',
+            controller:   'TicketDetailExaminationDetailController',
+            controllerAs: 'ctrl'
+          }
+        },
+        resolve: {
+          examination:    getClinicTicketExamination
+        }
+      })
 
       // チケット詳細（証明書）
       .state('app.dashboard.ticket.detail.certificate', {

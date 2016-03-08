@@ -22,7 +22,7 @@
           </tr>
         </thead>
         <tbody md-body>
-          <tr md-row ng-repeat="examination in ctrl.examinations">
+          <tr md-row ng-repeat="examination in ctrl.examinations" ui-sref="app.dashboard.ticket.detail.examination.detail({examinationId: examination.id})">
             <td md-cell>
               {{examination.examinationDateTime | date:'yyyy/MM/dd HH:mm'}}
             </td>
