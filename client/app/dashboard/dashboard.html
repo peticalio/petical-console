@@ -6,6 +6,14 @@
       </div>
     </md-toolbar>
     <div layout-padding>
+      <div class="flat-card">
+        <h5><i class="fa fa-clock-o fa-lg mr"></i>本日の時間別予約数</h5>
+        <div google-chart chart="ctrl.ticketChart" style="height:300px;"></div>
+        <h5><i class="fa fa-usd fa-lg mr"></i>売上高推移（日次）</h5>
+        <div google-chart chart="ctrl.dailySalesChart" style="height:300px;"></div>
+        <h5><i class="fa fa-usd fa-lg mr"></i>売上高推移（月次）</h5>
+        <div google-chart chart="ctrl.monthlySalesChart" style="height:300px;"></div>
+      </div>
     </div>
   </section>
 </div>

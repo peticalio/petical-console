@@ -2,23 +2,30 @@
   'use strict';
 
   class DashboardController {
-    construct($stateParams, ClinicOutline, ClinicTicketSummary, ClinicSales, clinics, clinic) {
+    constructor($stateParams, ClinicOutline, ClinicTicketSummary, ClinicSales, clinics, clinic) {
       this.$stateParams = $stateParams;
+      this.ClinicOutline = ClinicOutline;
+      this.ClinicTicketSummary = ClinicTicketSummary;
+      this.ClinicSales = ClinicSales;
       this.clinic = clinic;
       this.clinics = clinics;
       this.today = new Date();
+      this.loadTicketSummary();
+      this.loadDailySales();
+      this.loadMonthlySales();
     }
 
     getClinicOutline() {
       return this.ClinicOutline.get({clinicId: this.$stateParams.clinicId, year: this.today.getFullYear(), month: this.today.getMonth() + 1, day: this.today.getDate()}).$promise
-        .then((response) => response.$promise);
-        // .then((response) => {
-        //   this.outline = response;
-        //   return response.$promise;
-        // });
+        // .then((response) => response.$promise);
+        .then((response) => {
+          this.outline = response;
+          return response.$promise;
+        });
     }
 
     loadTicketSummary() {
+      console.log('call');
       this.ClinicTicketSummary.get({clinicId: this.$stateParams.clinicId, type: 'daily'}).$promise
         .then((response) => {
           response.data.unshift(response.labels);

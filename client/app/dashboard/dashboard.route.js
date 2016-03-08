@@ -1,30 +1,20 @@
 (() => {
   'use strict';
 
-  function getClinics($rootScope, Clinic) {
+  function getClinics(Clinic) {
     return Clinic.query().$promise
-      .then((response) => {
-        $rootScope.clinics = response;
-        return response;
-      });
+      .then((response) => response);
   }
 
-  function getClinic($rootScope, $stateParams, Clinic) {
+  function getClinic($stateParams, Clinic) {
     return Clinic.load({clinicId: $stateParams.clinicId}).$promise
-      .then((response) => {
-        $rootScope.clinic = response;
-        return response;
-      });
+      .then((response) => response);
   }
 
-  function DashboardRouter($stateProvider){
+  function DashboardRouter($stateProvider) {
     $stateProvider
       .state('app.dashboard', {
         url: '^/clinics/:clinicId/dashboard',
-        data: {
-          title: 'ダッシュボード',
-          showDashboardMenu: true
-        },
         views: {
           '@app': {
             templateUrl:  'app/dashboard/dashboard.html',
