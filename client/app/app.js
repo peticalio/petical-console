@@ -19,6 +19,7 @@ angular
     'ui.validate',
     'ui.gravatar',
     'ui.bootstrap',
+    'nvd3',
     'googlechart'
   ])
 

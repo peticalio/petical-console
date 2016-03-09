@@ -5,12 +5,17 @@
         <h2>ダッシュボード</h2>
       </div>
     </md-toolbar>
-    <div layout-padding>
-      <div class="flat-card">
+    <div layout="row" layout-padding layout-wrap>
+      <div class="flat-card mb" flex="100">
         <h5><i class="fa fa-clock-o fa-lg mr"></i>本日の時間別予約数</h5>
-        <div google-chart chart="ctrl.ticketChart" style="height:300px;"></div>
+        <nvd3 options="ctrl.ticketChartOptions" data="ctrl.ticketChartData"></nvd3>
+        <!-- <div google-chart chart="ctrl.ticketChart" style="height:300px;"></div> -->
+      </div>
+      <div class="flat-card mb" flex="50">
         <h5><i class="fa fa-usd fa-lg mr"></i>売上高推移（日次）</h5>
         <div google-chart chart="ctrl.dailySalesChart" style="height:300px;"></div>
+      </div>
+      <div class="flat-card mb" flex="50">
         <h5><i class="fa fa-usd fa-lg mr"></i>売上高推移（月次）</h5>
         <div google-chart chart="ctrl.monthlySalesChart" style="height:300px;"></div>
       </div>

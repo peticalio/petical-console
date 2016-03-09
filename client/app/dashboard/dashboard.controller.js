@@ -2,8 +2,9 @@
   'use strict';
 
   class DashboardController {
-    constructor($stateParams, ClinicOutline, ClinicTicketSummary, ClinicSales, clinics, clinic) {
+    constructor($stateParams, $filter, ClinicOutline, ClinicTicketSummary, ClinicSales, clinics, clinic) {
       this.$stateParams = $stateParams;
+      this.$filter = $filter;
       this.ClinicOutline = ClinicOutline;
       this.ClinicTicketSummary = ClinicTicketSummary;
       this.ClinicSales = ClinicSales;
@@ -25,17 +26,44 @@
     }
 
     loadTicketSummary() {
-      console.log('call');
+      var formateDate = function(d) {
+        var date = new Date(d);
+        return date.getHours() + ':' + date.getMinutes();
+      };
+
       this.ClinicTicketSummary.get({clinicId: this.$stateParams.clinicId, type: 'daily'}).$promise
         .then((response) => {
-          response.data.unshift(response.labels);
-          this.ticketChart = {
-            options: {
-              colors: ['#2196F3']
-            },
-            type: 'ColumnChart',
-            data: response.data
+          // response.data.unshift(response.labels);
+          this.ticketChartOptions = {
+            chart: {
+              type: 'historicalBarChart',
+              height: 300,
+              margin : {top: 16, right: 0, bottom: 40, left: 40},
+              x: function(d) {return d[0] * 1000;},
+              y: function(d) {return d[1];},
+              showControls: true,
+              showValues: true,
+              xAxis: {
+                axisLabel: 'Time',
+                tickFormat: formateDate
+              },
+              tooltip: {
+                keyFormatter: formateDate
+              }
+            }
           };
+          this.ticketChartData = [{
+            key: 'Quantity',
+            values: response.data
+          }];
+
+          // this.ticketChart = {
+          //   options: {
+          //     colors: ['#2196F3']
+          //   },
+          //   type: 'ColumnChart',
+          //   data: response.data
+          // };
         });
     }
 
@@ -68,7 +96,7 @@
     }
   }
 
-  DashboardController.$inject = ['$stateParams', 'ClinicOutline', 'ClinicTicketSummary', 'ClinicSales', 'clinics', 'clinic'];
+  DashboardController.$inject = ['$stateParams', '$filter', 'ClinicOutline', 'ClinicTicketSummary', 'ClinicSales', 'clinics', 'clinic'];
   angular.module('petzApp')
     .controller('DashboardController', DashboardController);
 
