@@ -1,0 +1,57 @@
+<h3>
+  <div class="pull-right">
+    <button type="button" class="btn btn-sm btn-default" ui-sref="app.dashboard.product.detail.form({clinicId:ctrl.product.clinic.id, productId:ctrl.product.id})">変更する</button>
+    <button type="button" class="btn btn-sm btn-danger-outline" ng-click="ctrl.remove(ctrl.product)">削除する</button>
+  </div>
+  {{ctrl.product.name}}
+  <small>
+    <span class="mr">作成日：{{ctrl.product.createdDate | date:'yyyy/MM/dd HH:mm'}}</span>
+    <span class="mr">最終更新日：{{ctrl.product.lastModifiedDate | date:'yyyy/MM/dd HH:mm'}}</span>
+  </small>
+</h3>
+
+<div class="row">
+  <div class="col-md-12">
+    <form name="form" role="form" class="form-horizontal" ng-submit="ctrl.save(ctrl.chart)" novalidate>
+      <fieldset>
+        <div class="row">
+          <div class="col-md-6">
+            <section class="form-group">
+              <div class="col-sm-4">ID:</div>
+              <div class="col-sm-8"><strong>{{ctrl.product.id}}</strong></div>
+            </section>
+            <section class="form-group">
+              <div class="col-sm-4">診察・商品名:</div>
+              <div class="col-sm-8"><strong>{{ctrl.product.name}}</strong></div>
+            </section>
+            <section class="form-group">
+              <div class="col-sm-4">価格（単価）:</div>
+              <div class="col-sm-8"><strong>{{ctrl.product.price | currency:'¥ ':0}}</strong></div>
+            </section>
+          </div>
+          <div class="col-md-6">
+            <section class="form-group">
+              <div class="col-sm-4">税区分:</div>
+              <div class="col-sm-8"><span class="label label-info-outline" ng-if="product.taxType === 'EXCLUSIVE'">外税</span><span class="label label-warning" ng-if="product.taxType !== 'EXCLUSIVE'">内税</span></div>
+            </section>
+            <section class="form-group">
+              <div class="col-sm-4">消費税率:</div>
+              <div class="col-sm-8"><strong>{{ctrl.product.taxRate * 100}} %</strong></div>
+            </section>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <section class="form-group">
+              <div class="col-sm-2">説明:</div>
+              <div class="col-sm-10"><span class="pre"><strong>{{ctrl.product.description}}</strong></span></div>
+            </section>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+    <section class="form-group">
+      <button type="button" class="btn btn-link" ui-sref="app.dashboard.product">戻る</button>
+    </section>
+  </div>
+</div>

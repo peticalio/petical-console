@@ -1,0 +1,35 @@
+<h3>
+  <div class="pull-right">
+    <button type="button" class="btn btn-sm btn-default" ui-sref="app.dashboard.vaccine.detail.form({clinicId:ctrl.vaccine.clinic.id, vaccineId:ctrl.vaccine.id})">変更する</button>
+    <button type="button" class="btn btn-sm btn-danger-outline" ng-click="ctrl.remove(ctrl.vaccine)">削除する</button>
+  </div>
+  {{ctrl.vaccine.name}}
+  <small>
+    <span class="mr">作成日：{{ctrl.vaccine.createdDate | date:'yyyy/MM/dd HH:mm'}}</span>
+    <span class="mr">最終更新日：{{ctrl.vaccine.lastModifiedDate | date:'yyyy/MM/dd HH:mm'}}</span>
+  </small>
+</h3>
+
+<div class="row">
+  <div class="col-md-12">
+    <form name="form" role="form" class="form-horizontal" ng-submit="ctrl.save(ctrl.vaccine)" novalidate>
+      <fieldset>
+        <section class="form-group">
+          <div class="col-sm-2">ID:</div>
+          <div class="col-sm-10"><strong>{{ctrl.vaccine.id}}</strong></div>
+        </section>
+        <section class="form-group">
+          <div class="col-sm-2">ワクチン名:</div>
+          <div class="col-sm-10"><strong>{{ctrl.vaccine.name}}</strong></div>
+        </section>
+        <section class="form-group">
+          <div class="col-sm-2">説明:</div>
+          <div class="col-sm-10"><span class="pre"><strong>{{ctrl.vaccine.memo}}</strong></span></div>
+        </section>
+      </fieldset>
+    </form>
+    <section class="form-group">
+      <button type="button" class="btn btn-link" ui-sref="app.dashboard.vaccine">戻る</button>
+    </section>
+  </div>
+</div>

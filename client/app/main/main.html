@@ -86,22 +86,22 @@
     <md-divider></md-divider>
     <ul class="side-menu">
       <li>
-        <menu-link section="section">
-          <md-button ui-sref-active="active" ui-sref="app.dashboard.staff({clinicId:1})">
+        <menu-link section="section" ui-sref-active="active" ui-sref="app.dashboard.staff">
+          <md-button ui-sref="app.dashboard.staff.list" ui-sref-ignore>
             <md-icon class="material-icons" aria-label="Clinic Staffs">person</md-icon>クリニックスタッフ
           </md-button>
         </menu-link>
       </il>
       <li>
-        <menu-link section="section">
-          <md-button ui-sref-active="active" ui-sref="app.dashboard.product({clinicId:1})">
+        <menu-link section="section" ui-sref-active="active" ui-sref="app.dashboard.product">
+          <md-button ui-sref="app.dashboard.product.list" ui-sref-ignore>
             <md-icon class="material-icons" aria-label="Products">loyalty</md-icon>商品・料金マスタ
           </md-button>
         </menu-link>
       </il>
       <li>
-        <menu-link section="section">
-          <md-button ui-sref-active="active" ui-sref="app.dashboard.vaccine({clinicId:1})">
+        <menu-link section="section" ui-sref-active="active" ui-sref="app.dashboard.vaccine">
+          <md-button ui-sref="app.dashboard.vaccine.list" ui-sref-ignore>
             <md-icon class="material-icons" aria-label="Vaccine">colorize</md-icon>予防接種ワクチン
           </md-button>
         </menu-link>
