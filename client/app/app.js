@@ -110,7 +110,7 @@ angular
           if (input.hasOwnProperty(key)) {
             var value = input[key];
             // Check for string properties which look like dates.
-            if (typeof value === 'string' && value.match(ISO8601_REGEXP)) {
+            if (typeof value === 'string' && value.length >= 10 && value.match(ISO8601_REGEXP)) {
               var date = moment(value);
               input[key] = new Date(date.unix() * 1000);
             } else if (typeof value === 'object') {

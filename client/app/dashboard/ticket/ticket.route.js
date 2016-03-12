@@ -35,9 +35,22 @@
       .then((response) => response);
   }
 
-  // チケットに関する証明書を取得する
+  // チケットに関する証明書の一覧を取得する
   function getCertificates(clinic, ticket, ClinicTicketCertificate) {
     return ClinicTicketCertificate.query({clinicId: clinic.id, ticketId: ticket.id}).$promise
+      .then((response) => response);
+  }
+  // ワクチンを取得する
+  function getClinicVaccines(clinic, ClinicVaccine) {
+    return ClinicVaccine.query({clinicId: clinic.id}).$promise
+      .then((response) => response);
+  }
+  // チケットに関する証明書の詳細を取得する
+  function getClinicTicketCertificate($stateParams, clinic, ticket, ClinicTicketCertificate) {
+    if (!$stateParams.certificateId) {
+      return {};
+    }
+    return ClinicTicketCertificate.load({clinicId: clinic.id, ticketId: ticket.id, certificateId: $stateParams.certificateId}).$promise
       .then((response) => response);
   }
 
@@ -193,7 +206,7 @@
         abstract: true,
         url: '/certificates'
       })
-      // チケット詳細（証明書の一覧）
+      // チケット詳細（証明書一覧）
       .state('app.dashboard.ticket.detail.certificate.list', {
         url: '/list',
         views: {
@@ -205,6 +218,49 @@
         },
         resolve: {
           certificates:   getCertificates
+        }
+      })
+      // チケット詳細（証明書発行フォーム）
+      .state('app.dashboard.ticket.detail.certificate.form', {
+        url: '/form',
+        views: {
+          '@app.dashboard.ticket.detail': {
+            templateUrl:  'app/dashboard/ticket/detail/certificate/certificate-form/certificate-form.html',
+            controller:   'TicketDetailCertificateFormController',
+            controllerAs: 'ctrl'
+          }
+        },
+        resolve: {
+          vaccines:   getClinicVaccines,
+          certificate: getClinicTicketCertificate
+        }
+      })
+      // チケット詳細（狂犬病予防接種証明書発行フォーム）
+      .state('app.dashboard.ticket.detail.certificate.rabidform', {
+        url: '/rabidform',
+        views: {
+          '@app.dashboard.ticket.detail': {
+            templateUrl:  'app/dashboard/ticket/detail/certificate/rabid-form/rabid-form.html',
+            controller:   'TicketDetailCertificateRabidFormController',
+            controllerAs: 'ctrl'
+          }
+        },
+        resolve: {
+          certificate: getClinicTicketCertificate
+        }
+      })
+      // チケット詳細（証明書印刷プレビュー）
+      .state('app.dashboard.ticket.detail.certificate.detail', {
+        url: '/:certificateId',
+        views: {
+          '@app.dashboard.ticket.detail': {
+            templateUrl:  'app/dashboard/ticket/detail/certificate/detail/detail.html',
+            controller:   'TicketDetailCertificateDetailController',
+            controllerAs: 'ctrl'
+          }
+        },
+        resolve: {
+          certificate:   getClinicTicketCertificate
         }
       })
 

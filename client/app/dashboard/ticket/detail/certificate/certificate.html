@@ -14,19 +14,20 @@
       <table md-table class="table-hover table-clickable">
         <thead md-head>
           <tr md-row>
-            <th md-column>種別</th>
             <th md-column>証明書・ワクチン内容</th>
+            <th md-column>種別</th>
             <th md-column>発行日</th>
           </tr>
         </thead>
         <tbody md-body>
           <tr md-row ng-repeat="certificate in ctrl.certificates" ui-sref="app.dashboard.ticket.detail.certificate.detail({ticketId: ctrl.ticket.id, certificateId: certificate.id})">
             <td md-cell>
-              <span ng-if="certificate.type === 'RABID'">狂犬病予防注射済証</span>
-              <span ng-if="certificate.type === 'PREVENTION'">予防接種証明書</span>
+              <span ng-if="certificate.type === 'RABID'">狂犬病予防注射</span>
+              <span ng-if="certificate.type === 'PREVENTION'">{{certificate.vaccine.name}}</span>
             </td>
             <td md-cell>
-              {{certificate.vaccine.name}}
+              <span ng-if="certificate.type === 'RABID'">狂犬病予防注射済証</span>
+              <span ng-if="certificate.type === 'PREVENTION'">予防接種証明書</span>
             </td>
             <td md-cell>
               {{certificate.vaccinatedDate | date:'yyyy/MM/dd HH:mm'}}
@@ -46,11 +47,11 @@
       </md-button>
     </md-fab-trigger>
     <md-fab-actions>
-      <md-button class="md-fab md-raised md-mini" ui-sref="app.dashboard.ticket.form({chartId: ctrl.chart.id})">
+      <md-button class="md-fab md-raised md-mini" ui-sref="app.dashboard.ticket.detail.certificate.form({ticketId: ctrl.ticket.id})">
         <md-tooltip md-direction="left">予防接種</md-tooltip>
         <md-icon class="material-icons">local_pharmacy</md-icon>
       </md-button>
-      <md-button class="md-fab md-raised md-mini" ui-sref="app.dashboard.chart.update({chartId: ctrl.chart.id})">
+      <md-button class="md-fab md-raised md-mini" ui-sref="app.dashboard.ticket.detail.certificate.rabidform({ticketId: ctrl.ticket.id})">
         <md-tooltip md-direction="left">狂犬病予防</md-tooltip>
         <md-icon class="material-icons">colorize</md-icon>
       </md-button>

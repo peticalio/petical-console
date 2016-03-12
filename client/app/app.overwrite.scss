@@ -43,23 +43,6 @@ md-toolbar.md-content-theme:not(.md-menu-toolbar) {
   margin-left: $base-size;
 }
 
-// date picker
-.md-datepicker-wrap {
-  margin-top: 15px;
-  margin-bottom: 16px;
-  padding-bottom: 16px;
-}
-.md-datepicker-input {
-  font-size: 16px;
-}
-md-select-value {
-  font-size: 16px;
-}
-.md-error-message {
-  font-size: 12px;
-  color: rgb(213, 0, 0);
-}
-
 // tabs
 md-tabs.md-console-theme.md-primary > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item:not([disabled]).md-active {
   color: #fff;
@@ -94,6 +77,27 @@ md-autocomplete md-autocomplete-wrap md-input-container {
 .md-datepicker-input-container {
   padding-bottom: 2px !important;
 }
+// select
+.select-message-container {
+  min-height: 23px;
+}
+// date picker
+.md-datepicker-wrap {
+  margin-top: 15px;
+  margin-bottom: 16px;
+  padding-bottom: 17px;
+}
+.md-datepicker-input {
+  font-size: 16px;
+}
+md-select-value {
+  font-size: 16px;
+}
+.md-error-message {
+  font-size: 12px;
+  color: rgb(213, 0, 0);
+}
+
 
 // checkbox
 md-checkbox {

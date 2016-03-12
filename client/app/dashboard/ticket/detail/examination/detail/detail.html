@@ -27,21 +27,21 @@
         <md-subheader class="md-no-sticky">金額</md-subheader>
         <md-list-item>
           <md-icon class="material-icons">
-            local_hospital
+            attach_money
             <md-tooltip>単価 * 数量</md-tooltip>
           </md-icon>
           <p>{{ctrl.examination.price | currency:'¥ ':0}} * {{ctrl.examination.quantity}}</p>
         </md-list-item>
         <md-list-item>
           <md-icon class="material-icons">
-            local_hospital
-            <md-tooltip>単価 * 数量</md-tooltip>
+            store
+            <md-tooltip>課税タイプ</md-tooltip>
           </md-icon>
           <p><span class="label label-info">{{ctrl.examination.taxType}}</span></p>
         </md-list-item>
         <md-list-item>
           <md-icon class="material-icons">
-            local_hospital
+            attach_money
             <md-tooltip>合計</md-tooltip>
           </md-icon>
           <p>{{ctrl.examination.total | currency:'¥ ':0}} ({{ctrl.examination.tax | currency:'¥ ':0}})</p>

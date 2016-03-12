@@ -135,6 +135,9 @@ $base-size: 8px;
 
 
 // border
+.b {
+  border: 1px solid #ddd;
+}
 .bt {
   border-top: 1px solid #ddd;
 }
@@ -160,4 +163,7 @@ table.table-clickable > tbody > tr {
 .layout-max-width {
   width: 100%;
   max-width: 1200px;
+}
+.overflow {
+  overflow: auto;
 }

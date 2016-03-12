@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: RabidModalController', function () {
+describe('Controller: TicketDetailCertificateRabidFormController', function () {
 
   // load the controller's module
   beforeEach(module('petzApp'));
@@ -10,7 +10,7 @@ describe('Controller: RabidModalController', function () {
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    sut = $controller('RabidModalController', {
+    sut = $controller('TicketDetailCertificateRabidFormController', {
       $scope: scope
     });
   }));

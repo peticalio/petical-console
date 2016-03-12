@@ -1,7 +1,7 @@
 <div class="layout-max-width">
   <md-toolbar md-theme="content" class="pt">
     <div class="md-toolbar-tools">
-      <h1 class="md-title">{{ctrl.ticket.chart.pet.name}} ちゃんの証明書発行</h1>
+      <h1 class="md-title">{{ctrl.ticket.chart.pet.name}} ちゃんの狂犬病予防注射済証発行</h1>
     </div>
   </md-toolbar>
   <div layout-padding>
@@ -18,23 +18,25 @@
             </div>
           </div>
           <md-input-container class="md-block" flex="50" flex-xs="100">
-            <label>接種ワクチン</label>
-            <md-select name="vaccine" ng-model="ctrl.certificate.vaccine.id" ng-required="true">
-              <md-option ng-repeat="vaccine in ctrl.vaccines" value="{{vaccine.id}}">
-                {{vaccine.name}}
-              </md-option>
-            </md-select>
-            <div class="select-message-container">
-              <div ng-show="form.vaccine.$invalid" ng-messages="form.vaccine.$error">
-                <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-                  <span>2000 文字以内で入力してください。</span>
-                </div>
+            <label>鑑札番号</label>
+            <input name="licenseNo" ng-model="ctrl.certificate.licenseNo" maxlength="50" ng-maxlength="50"/>
+            <div ng-show="form.licenseNo.$invalid" ng-messages="form.licenseNo.$error">
+              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                <span>50 文字以内で入力してください。</span>
               </div>
             </div>
           </md-input-container>
-          <div flex="50" hide-xs></div>
+          <md-input-container class="md-block" flex="50" flex-xs="100">
+            <label>済票番号</label>
+            <input name="reportNo" ng-model="ctrl.certificate.reportNo" maxlength="50" ng-maxlength="50"/>
+            <div ng-show="form.reportNo.$invalid" ng-messages="form.reportNo.$error">
+              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                <span>50 文字以内で入力してください。</span>
+              </div>
+            </div>
+          </md-input-container>
           <md-input-container class="md-block" flex="100">
-            <label>メモ、要望事項</label>
+            <label>その他特徴</label>
             <textarea name="memo" ng-model="ctrl.certificate.memo" maxlength="2000" md-maxlength="2000" rows="5"></textarea>
             <div ng-show="form.memo.$invalid" ng-messages="form.memo.$error">
               <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">

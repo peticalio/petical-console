@@ -38,7 +38,7 @@
             </div>
             <md-input-container class="md-block" flex="20" flex-xs="100">
               <label>診察開始時刻</label>
-              <md-select ng-model="ctrl.startTime" ng-required="true" md-on-close="ctrl.copyStartDateTime(ctrl.startTime)">
+              <md-select name="startTime" ng-model="ctrl.startTime" ng-required="true" md-on-close="ctrl.copyStartDateTime(ctrl.startTime)">
                 <md-option ng-repeat="time in ctrl.timetable" value="{{time}}">
                   {{time}}
                 </md-option>
@@ -60,7 +60,7 @@
             </div>
             <md-input-container class="md-block" flex="20" flex-xs="100">
               <label>診察終了時刻</label>
-              <md-select ng-model="ctrl.endTime" ng-required="true" md-on-close="ctrl.changeTime(ctrl.ticket.endDateTime, ctrl.endTime)">
+              <md-select name="endTime" ng-model="ctrl.endTime" ng-required="true" md-on-close="ctrl.changeTime(ctrl.ticket.endDateTime, ctrl.endTime)">
                 <md-option ng-repeat="time in ctrl.timetable" value="{{time}}">
                   {{time}}
                 </md-option>
@@ -83,7 +83,7 @@
           </div>
           <div layout="row" layout-align="end center" ng-if="!ctrl.ticket.id">
             <md-button class="md-primary md-raised" ng-disabled="form.$invalid" ng-click="ctrl.save(ctrl.ticket)">登録する</md-button>
-            <md-button ui-sref="app.dashboard.chart.detail">キャンセル</md-button>
+            <md-button ui-sref="app.dashboard.chart.detail({chartId: ctrl.ticket.chart.id})">キャンセル</md-button>
           </div>
           <div layout="row" layout-align="end center" ng-if="ctrl.ticket.id">
             <md-button class="md-primary md-raised" ng-disabled="form.$invalid" ng-click="ctrl.update(ctrl.ticket)">更新する</md-button>

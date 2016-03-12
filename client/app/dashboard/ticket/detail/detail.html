@@ -1,5 +1,5 @@
 <div layout="column" flex>
-  <md-tabs md-dynamic-height md-selected="ctrl.selected" class="md-primary" flex="100">
+  <md-tabs md-dynamic-height md-selected="ctrl.selected" class="md-primary no-print" flex="100">
     <md-tab label="基本情報" ui-sref="app.dashboard.ticket.detail">
     </md-tab>
     <md-tab label="診察内容" ui-sref="app.dashboard.ticket.detail.examination.list">
@@ -12,7 +12,7 @@
     </md-tab>
   </md-tabs>
 
-  <div layout="row" layout-align="center start" flex="100" ui-view="" class="fadein">
+  <div layout="row" layout-align="center start" layout-align-xs="start start" flex="100" ui-view="" class="fadein overflow">
     <div class="layout-max-width">
       <md-toolbar md-theme="content" class="pt">
         <div class="md-toolbar-tools">

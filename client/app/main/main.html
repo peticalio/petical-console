@@ -1,4 +1,4 @@
-<md-sidenav class="md-sidenav-left" md-component-id="mainmenu" md-is-locked-open="$mdMedia('gt-md')" ng-show="ctrl.showMainMenu()">
+<md-sidenav class="md-sidenav-left no-print" md-component-id="mainmenu" md-is-locked-open="$mdMedia('gt-md')" ng-show="ctrl.showMainMenu()">
   <md-toolbar>
     <div class="md-toolbar-tools">
       <div class="navbar-header">
@@ -19,7 +19,7 @@
   </md-content>
 </md-sidenav>
 
-<md-sidenav class="md-sidenav-left br" md-theme="sidemenu" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" ng-show="ctrl.showDashboardMenu()">
+<md-sidenav class="md-sidenav-left br no-print" md-theme="sidemenu" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" ng-show="ctrl.showDashboardMenu()">
   <md-toolbar class="bb">
     <div class="md-toolbar-tools">
       <h2><span class="clinic-label">{{clinic.name}}</span></h2>
@@ -132,7 +132,7 @@
 </md-sidenav>
 
 <div layout="column" role="main" flex>
-  <md-toolbar class="navigation md-primary white">
+  <md-toolbar class="navigation md-primary white no-print">
     <div class="md-toolbar-tools">
       <!-- toggle -->
       <md-button class="md-icon-button" ng-if="ctrl.showMainMenuIcon()" ng-click="ctrl.toggleMainMenu()">
@@ -187,6 +187,7 @@
   </md-toolbar>
 
   <ptz-state-loading-indicator></ptz-state-loading-indicator>
+
   <md-content layout="row" flex="" class="bg-color fadein" layout-align="center start" ui-view="">
   </md-content>
 

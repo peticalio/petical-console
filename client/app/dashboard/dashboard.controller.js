@@ -26,72 +26,125 @@
     }
 
     loadTicketSummary() {
-      var formateDate = function(d) {
-        var date = new Date(d);
-        return date.getHours() + ':' + date.getMinutes();
+      var formatTime = function(d) {
+        return moment(d).format('HH:mm');
+      };
+      var transform = function(data, series) {
+        return data.map((d) => {
+          return {x: d[0], y: d[1], series: series};
+        });
       };
 
       this.ClinicTicketSummary.get({clinicId: this.$stateParams.clinicId, type: 'daily'}).$promise
         .then((response) => {
-          // response.data.unshift(response.labels);
           this.ticketChartOptions = {
             chart: {
-              type: 'historicalBarChart',
+              type: 'multiBarChart',
               height: 300,
-              margin : {top: 16, right: 0, bottom: 40, left: 40},
-              x: function(d) {return d[0] * 1000;},
-              y: function(d) {return d[1];},
-              showControls: true,
-              showValues: true,
+              margin : {top: 16, right: 40, bottom: 40, left: 64},
+              clipEdge: true,
+              stacked: true,
               xAxis: {
-                axisLabel: 'Time',
-                tickFormat: formateDate
+                axisLabel: 'Time (HH:mm)',
+                tickFormat: formatTime
               },
-              tooltip: {
-                keyFormatter: formateDate
+              yAxis: {
+                axisLabel: 'Count'
               }
             }
           };
           this.ticketChartData = [{
-            key: 'Quantity',
-            values: response.data
+            key: 'Reserved',
+            color: '#e91e63',
+            values: transform(response.data, 0)
+          }, {
+            key: 'Complete',
+            color: '#2196f3',
+            values: transform(response.data, 1)
           }];
-
-          // this.ticketChart = {
-          //   options: {
-          //     colors: ['#2196F3']
-          //   },
-          //   type: 'ColumnChart',
-          //   data: response.data
-          // };
         });
     }
 
     loadDailySales() {
+      var formatDate = function(d) {
+        var date = moment(d);
+        return date.format('MM/DD');
+      };
+      var formatFullDate = function(d) {
+        return moment(d).format('YYYY/MM/DD HH:mm');
+      };
+
       this.ClinicSales.get({clinicId: this.$stateParams.clinicId, type: 'daily'}).$promise
         .then((response) => {
-          response.data.unshift(response.labels);
-          this.dailySalesChart = {
-            options: {
-              colors: ['#8BC34A']
-            },
-            type: 'ColumnChart',
-            data: response.data
+          this.dailySalesChartOptions = {
+            chart: {
+              type: 'multiChart',
+              height: 300,
+              color: ['#1e88e5','#1e88e5'],
+              margin : {top: 16, right: 40, bottom: 24, left: 40},
+              x: function(d) {return d[0];},
+              y: function(d) {return d[1];},
+              xAxis: {
+                tickFormat: formatDate
+              },
+              bar1: {
+                tickFormat: function(d) {return d;},
+              },
+              line1: {
+                tickFormat: function(d) {return d;},
+              },
+              tooltip: {
+                keyFormatter: formatFullDate
+              }
+            }
           };
+          this.dailySalesChartData = [
+            {
+              key: 'Sales',
+              bar: true,
+              values: response.data
+            },
+            {
+              key: 'Tickets',
+              values: response.data
+            }
+          ];
         });
     }
 
     loadMonthlySales() {
+      var formatDate = function(d) {
+        var date = moment(d);
+        return date.format('MM/DD');
+      };
+      var formatFullDate = function(d) {
+        return moment(d).format('YYYY/MM/DD HH:mm');
+      };
+
       this.ClinicSales.get({clinicId: this.$stateParams.clinicId, type: 'daily'}).$promise
         .then((response) => {
-          response.data.unshift(response.labels);
-          this.monthlySalesChart = {
-            options: {
-              colors: ['#00BCD4']
-            },
-            type: 'ColumnChart',
-            data: response.data
+          this.monthlySalesChartOptions = {
+            chart: {
+              type: 'historicalBarChart',
+              height: 300,
+              color: ['#1e88e5'],
+              margin : {top: 16, right: 40, bottom: 24, left: 40},
+              x: function(d) {return d[0];},
+              y: function(d) {return d[1];},
+              showControls: true,
+              showValues: true,
+              xAxis: {
+                tickFormat: formatDate
+              },
+              tooltip: {
+                keyFormatter: formatFullDate
+              }
+            }
           };
+          this.monthlySalesChartData = [{
+            key: 'Sales',
+            values: response.data
+          }];
         });
     }
   }
