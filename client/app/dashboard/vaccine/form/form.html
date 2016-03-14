@@ -12,7 +12,7 @@
             <label>ワクチン名</label>
             <input name="name" ng-model="ctrl.vaccine.name" maxlength="50" ng-required="true" ng-maxlength="50"></input>
             <div ng-show="form.name.$invalid" ng-messages="form.name.$error">
-              <div ng-message-exp="['required', 'min', 'max', 'pattern']">
+              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
                 <span>50 文字以内で入力してください。</span>
               </div>
             </div>
@@ -39,55 +39,3 @@
     </div>
   </div>
 </div>
-<!--
-
-
-
-<h3>
-  予防接種ワクチンを登録する
-  <small>予防接種証明書の発行に使用するワクチンを登録します。</small>
-</h3>
-
-<div class="row">
-  <div class="col-md-9">
-    <form name="form" role="form" novalidate>
-      <fieldset>
-        <div class="row">
-          <div class="col-md-6">
-            <section class="form-group" ng-class="{'has-error': form.name.$invalid && form.name.$dirty}">
-              <label for="name" class="control-label">ワクチン名</label><span class="label label-required">必須</span>
-              <input id="name" name="name" type="text" class="form-control" maxlength="50" placeholder="例）犬６種混合ワクチン" ng-model="ctrl.vaccine.name" ng-required="true" ng-maxlength="50"/>
-              <div ng-show="form.name.$invalid && form.name.$dirty">
-                <p class="help-block" ng-show="form.name.$error">
-                  <span>50 文字以内で入力してください。</span>
-                </p>
-              </div>
-            </section>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <section class="form-group" ng-class="{'has-error': form.memo.$invalid && form.memo.$dirty}">
-              <label for="memo" class="control-label">説明</label>
-              <textarea id="memo" name="memo" class="form-control" maxlength="2000" rows="5" placeholder="例）犬ジステンバー、犬パラインフルエンザ等" ng-model="ctrl.vaccine.memo" ng-maxlength="2000"></textarea>
-              <div ng-show="form.memo.$invalid && form.memo.$dirty">
-                <p class="help-block" ng-show="form.memo.$error">
-                  <span>2000 文字以内で入力してください。</span>
-                </p>
-              </div>
-            </section>
-          </div>
-        </div>
-        <section class="form-group text-right">
-          <button type="button" class="btn btn-primary" ng-disabled="form.$invalid" ng-click="ctrl.update(ctrl.vaccine)" ng-show="ctrl.vaccine.id">変更する</button>
-          <button type="button" class="btn btn-primary" ng-disabled="form.$invalid" ng-click="ctrl.save(ctrl.vaccine)" ng-show="!ctrl.vaccine.id">登録する</button>
-          <button type="button" class="btn btn-link" ui-sref="app.dashboard.vaccine">キャンセル</button>
-        </section>
-      </fieldset>
-    </form>
-  </div>
-  <div class="col-md-3">
-    <h4 class="m0 pb-lg">ヒント</h4>
-    <p><small>クリニックで使用している予防接種ワクチンを事前に登録してください。<br/>予防接種証明書を発行する際に、どのワクチンを接種したのかを記載する欄がありますので、そこに表示されます。</small></p>
-  </div>
-</div> -->

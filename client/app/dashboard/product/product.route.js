@@ -6,12 +6,12 @@
       .then((response) => response);
   }
 
-  function empty() {
-    return {taxType:'EXCLUSIVE', taxRate:0.08};
-  }
-
-  function getProduct($stateParams, Product) {
-    return Product.get({clinicId: $stateParams.clinicId, productId: $stateParams.productId});
+  function getClinicProduct($stateParams, clinic, ClinicProduct) {
+    if (!$stateParams.productId) {
+      return {taxType: 'EXCLUSIVE', taxRate: 0.08};
+    }
+    return ClinicProduct.load({clinicId: clinic.id, productId: $stateParams.productId}).$promise
+      .then((response) => response);
   }
 
   function ClinicProductRouter($stateProvider) {
@@ -20,6 +20,7 @@
         abstract: true,
         url: '^/clinics/:clinicId/products'
       })
+      // 商品一覧
       .state('app.dashboard.product.list', {
         url: '/list',
         views: {
@@ -33,6 +34,7 @@
           products: getClinicProducts
         }
       })
+      // 商品登録フォーム
       .state('app.dashboard.product.form', {
         url: '/form',
         views: {
@@ -43,9 +45,24 @@
           }
         },
         resolve: {
-          product: empty
+          product: getClinicProduct
         }
       })
+      // 商品更新フォーム
+      .state('app.dashboard.product.update', {
+        url: '/:productId/form',
+        views: {
+          '@app': {
+            templateUrl:  'app/dashboard/product/form/form.html',
+            controller:   'ProductFormController',
+            controllerAs: 'ctrl'
+          }
+        },
+        resolve: {
+          product: getClinicProduct
+        }
+      })
+      // 商品詳細
       .state('app.dashboard.product.detail', {
         url: '/:productId',
         views: {
@@ -56,17 +73,7 @@
           }
         },
         resolve: {
-          product: getProduct
-        }
-      })
-      .state('app.dashboard.product.detail.form', {
-        url: '/form',
-        views: {
-          '@app': {
-            templateUrl:  'app/dashboard/product/form/form.html',
-            controller:   'ProductFormController',
-            controllerAs: 'ctrl'
-          }
+          product: getClinicProduct
         }
       })
     ;

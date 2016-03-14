@@ -1,32 +1,30 @@
-(function() {
+(() => {
   'use strict';
 
-  angular
-    .module('petzApp')
-    .controller('VaccineDetailController', VaccineDetailController);
-
-  VaccineDetailController.$inject = ['$state', '$stateParams', 'Notify', 'ClinicVaccine', 'vaccine'];
-  function VaccineDetailController($state, $stateParams, Notify, ClinicVaccine, vaccine) {
-    // ----- variables
-    var _this = this;
-
-    // ----- methods
-    function constructor() {
-      _this.vaccine = vaccine;
-      _this.remove = remove;
+  class VaccineDetailController {
+    constructor($state, dialog, toaster, ClinicVaccine, clinic, vaccine) {
+      this.$state = $state;
+      this.dialog = dialog;
+      this.toaster = toaster;
+      this.ClinicVaccine = ClinicVaccine;
+      this.clinic = clinic;
+      this.vaccine = vaccine;
     }
 
     // ワクチンを削除する
-    function remove(vaccine) {
-      Notify.del(function() {
-        ClinicVaccine.remove({clinicId: $stateParams.clinicId, vaccineId: vaccine.id}).$promise
-          .then(function() {
-            $state.go('app.dashboard.vaccine');
-            Notify.success('指定された予防接種ワクチンを削除しました。');
-          });
-      });
+    delete(event, vaccine) {
+      this.dialog.delete(event, vaccine)
+        .then(() => this.ClinicVaccine.delete({clinicId: this.clinic.id, vaccineId: vaccine.id}))
+        .then(() => this.ClinicVaccine.fetch({clinicId: this.clinic.id}))
+        .then(() => {
+          this.toaster.info('予防接種ワクチンを削除しました。');
+          this.$state.go('app.dashboard.vaccine.list');
+        });
     }
-
-    constructor();
   }
+
+  VaccineDetailController.$inject = ['$state', 'dialog', 'toaster', 'ClinicVaccine', 'clinic', 'vaccine'];
+  angular.module('petzApp')
+    .controller('VaccineDetailController', VaccineDetailController);
+
 })();

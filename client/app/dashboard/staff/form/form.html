@@ -1,67 +1,28 @@
-<h3>
-  スタッフを招待する
-  <small>動物病院のメニューを利用できるように、ユーザをスタッフとして招待します。</small>
-</h3>
-
-<div class="row">
-  <div class="col-md-9">
-    <form name="form" role="form" ng-submit="ctrl.invite(ctrl.invitation)" novalidate>
-      <fieldset>
-        <section class="form-group" ng-class="{'has-error': form.email.$dirty && form.email.$invalid}">
-          <label for="email" class="control-label">メールアドレス</label>
-          <div>
-            <textarea id="email" name="email" class="form-control" maxlength="1000" rows="5" placeholder="カンマ区切りか改行区切りで、複数のメールアドレスを指定できます。" ng-model="ctrl.invitation.email" ng-required="true" ng-minlength="1" ng-maxlength="1000"></textarea>
-            <small>Petz.ioにメンバー登録されていない場合は会員登録の案内も併せて送信されます。</small>
-            <div ng-show="form.email.$dirty && form.email.$invalid">
-              <p class="help-block" ng-show="form.email.$error.required">
-                <span>1つ以上のメールアドレスを入力してください</span>
-              </p>
-              <p class="help-block" ng-show="form.email.$error.maxlength">
-                <span>全てのメールアドレスを合わせて1000文字以内で入力してください</span>
-              </p>
+<div class="layout-max-width">
+  <md-toolbar md-theme="content" class="pt">
+    <div class="md-toolbar-tools">
+      <h1 class="md-title">スタッフ招待フォーム</h1>
+    </div>
+  </md-toolbar>
+  <div layout-padding>
+    <div class="flat-card">
+      <form name="form" role="form" novalidate>
+        <div layout="row" layout-wrap>
+          <md-input-container class="md-block" flex="100">
+            <label>招待するアカウントまたはメールアドレス（カンマ区切り、改行で複数入力可）</label>
+            <textarea name="email" ng-model="ctrl.invitation.email" maxlength="1000" rows="5" ng-required="true" ng-minlength="1" ng-maxlength="1000"></textarea>
+            <div ng-show="form.email.$invalid" ng-messages="form.email.$error">
+              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                <span>全てのメールアドレスを合わせて1000文字以内で入力してください。</span>
+              </div>
             </div>
-          </div>
-        </section>
-        <section class="form-group text-right">
-          <button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">招待する</button>
-          <button type="button" class="btn btn-link" ui-sref="app.dashboard.staff">キャンセル</button>
-        </section>
-      </fieldset>
-    </form>
-  </div>
-  <div class="col-md-3">
-    <h4 class="m0 pb-lg">ヒント</h4>
-    <p><small>スタッフへ招待メールが送信されます。メールに記載されているリンクよりアカウント登録を行ってください。</small></p>
-    <p><small>メールが届かない場合は、迷惑メールになっていないかご確認ください。</small></p>
+          </md-input-container>
+        </div>
+        <div layout="row" layout-align="end center">
+          <md-button class="md-primary md-raised" ng-disabled="form.$invalid" ng-click="ctrl.invite(ctrl.invitation)">招待する</md-button>
+          <md-button ui-sref="app.dashboard.staff.list">キャンセル</md-button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
-
-<!-- Modal -->
-<!-- <script type="text/ng-template" id="staff-invitation-modal.html">
-  <div class="modal-header">
-    <h4 class="modal-title" id="myModalLabel">メンバーを招待する</h4>
-  </div>
-  <div class="modal-body">
-    <form name="form" role="form" ng-submit="InvitationCtrl.invite()" novalidate>
-      <section class="form-group" ng-class="{'has-error': form.email.$dirty && form.email.$invalid}">
-        <label for="email" class="control-label">メールアドレス</label>
-        <div>
-          <textarea id="email" name="email" class="form-control" maxlength="1000" rows="5" placeholder="カンマ区切りか改行区切りで、複数のメールアドレスを指定できます。" ng-model="invitation.email" ng-required="true" ng-minlength="1" ng-maxlength="1000"></textarea>
-          <small>Petz.ioにメンバー登録されていない場合は会員登録の案内も併せて送信されます。</small>
-          <div ng-show="form.email.$dirty && form.email.$invalid">
-            <p class="help-block" ng-show="form.email.$error.required">
-              <span>1つ以上のメールアドレスを入力してください</span>
-            </p>
-            <p class="help-block" ng-show="form.email.$error.maxlength">
-              <span>全てのメールアドレスを合わせて1000文字以内で入力してください</span>
-            </p>
-          </div>
-        </div>
-      </section>
-      <section class="form-group text-right">
-        <button type="button" class="btn btn-default" ng-click="InvitationCtrl.closeInvitaionDialog()">閉じる</button>
-        <button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">招待する</button>
-      </section>
-    </form>
-  </div>
-</script> -->

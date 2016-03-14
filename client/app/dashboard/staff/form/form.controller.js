@@ -1,30 +1,26 @@
-(function() {
+(() => {
   'use strict';
 
-  angular
-    .module('petzApp')
+  class StaffFormController {
+    constructor($state, toaster, ClinicInvitation, clinic) {
+      this.$state = $state;
+      this.toaster = toaster;
+      this.ClinicInvitation = ClinicInvitation;
+      this.clinic = clinic;
+    }
+
+    invite(invitation) {
+      invitation.emails = invitation.email.split(',');
+      this.ClinicInvitation.save({clinicId: this.clinic.id}, invitation).$promise
+        .then(() => {
+          this.toaster.info('ご指定のメールアドレスに招待状を送信しました。');
+          this.$state.go('app.dashboard.staff.list', {clinicId: this.clinic.id});
+        });
+    }
+  }
+
+  StaffFormController.$inject = ['$state', 'toaster', 'ClinicInvitation', 'clinic'];
+  angular.module('petzApp')
     .controller('StaffFormController', StaffFormController);
 
-  StaffFormController.$inject = ['$state', '$stateParams', 'Notify', 'ClinicInvitation'];
-  function StaffFormController($state, $stateParams, Notify, ClinicInvitation) {
-    // ----- variables
-    var _this = this;
-
-    // ----- methods
-    function constructor() {
-      _this.invite = invite;
-    }
-
-    function invite(form) {
-      var email = form.email;
-      var invitation = new ClinicInvitation({clinicId: $stateParams.clinicId});
-      invitation.emails = email.split(',');
-      invitation.$save(function() {
-        Notify.success('ご指定のメールアドレスに招待状を送信しました。');
-        $state.go('app.dashboard.staff', {clinicId: $stateParams.clinicId});
-      });
-    }
-
-    constructor();
-  }
 })();

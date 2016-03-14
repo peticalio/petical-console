@@ -1,84 +1,69 @@
-<h3>
-  診察料金を登録する
-  <small>診察料金やその他薬剤等の販売商品を登録します。</small>
-</h3>
-
-<div class="row">
-  <div class="col-md-9">
-    <form name="form" role="form" novalidate>
-      <fieldset>
-        <div class="row">
-          <div class="col-md-6">
-            <section class="form-group" ng-class="{'has-error': form.name.$invalid && form.name.$dirty}">
-              <label for="name" class="control-label">診察・商品名</label><span class="label label-required">必須</span>
-              <input id="name" name="name" type="text" class="form-control" maxlength="50" placeholder="例）初診料" ng-model="ctrl.product.name" ng-required="true" ng-maxlength="50"/>
-              <div ng-show="form.name.$invalid && form.name.$dirty">
-                <p class="help-block" ng-show="form.name.$error">
-                  <span>50 文字以内で入力してください。</span>
-                </p>
+<div class="layout-max-width">
+  <md-toolbar md-theme="content" class="pt">
+    <div class="md-toolbar-tools">
+      <h1 class="md-title">商品・料金マスタ登録フォーム</h1>
+    </div>
+  </md-toolbar>
+  <div layout-padding>
+    <div class="flat-card">
+      <form name="form" role="form" novalidate>
+        <div layout="row" layout-wrap>
+          <md-input-container class="md-block" flex="50" flex-xs="100">
+            <label>商品名（診察名）</label>
+            <input name="name" ng-model="ctrl.product.name" maxlength="50" ng-required="true" ng-maxlength="50"></input>
+            <div ng-show="form.name.$invalid" ng-messages="form.name.$error">
+              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                <span>50 文字以内で入力してください。</span>
               </div>
-            </section>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <section class="form-group" ng-class="{'has-error': form.price.$invalid && form.price.$dirty}">
-              <label for="price" class="control-label">料金（単価）</label><span class="label label-required">必須</span>
-              <input id="price" name="price" type="number" class="form-control" min="1" max="999999999" placeholder="例）2000" ng-model="ctrl.product.price" ng-required="true"/>
-              <div ng-show="form.price.$invalid && form.price.$dirty">
-                <p class="help-block" ng-show="form.price.$error">
-                  <span>1 〜 999999999 までの数値で入力してください。</span>
-                </p>
+            </div>
+          </md-input-container>
+          <div flex="50" hide-xs></div>
+          <md-input-container class="md-block" flex="25" flex-xs="50">
+            <label>価格（単価）</label>
+            <input name="price" type="number" ng-model="ctrl.product.price" ng-required="true" min="0" max="9999999"></input>
+            <div ng-show="form.price.$invalid" ng-messages="form.price.$error">
+              <div ng-message-exp="['required', 'min', 'max', 'pattern']">
+                <span>0 - 9,999,999 の間で入力してください。</span>
               </div>
-            </section>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <section class="form-group" ng-class="{'has-error': form.taxType.$invalid && form.taxType.$dirty}">
-              <label for="taxType" class="control-label">消費税区分</label><span class="label label-required">必須</span>
-              <select id="taxType" name="taxType" class="form-control" ng-model="ctrl.product.taxType">
-                <option value="EXCLUSIVE">外税</option>
-                <option value="INCLUSIVE">内税</option>
-              </select>
-            </section>
-          </div>
-          <div class="col-md-6">
-            <section class="form-group" ng-class="{'has-error': form.taxRate.$invalid && form.taxRate.$dirty}">
-              <label for="taxRate" class="control-label">消費税率</label>
-              <input id="taxRate" name="taxRate" type="number" class="form-control" maxlength="4" placeholder="例）初診料" ng-model="ctrl.product.taxRate" ng-required="true" ng-maxlength="4" ng-disabled="true"/>
-              <div ng-show="form.taxRate.$invalid && form.taxRate.$dirty">
-                <p class="help-block" ng-show="form.taxRate.$error">
-                  <span>0.01 〜 1.00 までの数値で入力してください。</span>
-                </p>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-block" flex="25" flex-xs="50">
+            <label>消費税区分</label>
+            <md-select ng-model="ctrl.product.taxType">
+              <md-option ng-repeat="type in ctrl.taxTypes" value="{{type.value}}">
+                {{type.name}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+          <md-input-container class="md-block" flex="25" flex-xs="50">
+            <label>消費税率</label>
+            <input name="taxRate" ng-model="ctrl.product.taxRate" ng-required="true" ng-disabled="true"></input>
+            <div ng-show="form.taxRate.$invalid" ng-messages="form.memo.$error">
+              <p class="help-block" ng-show="form.taxRate.$error">
+                <span>0.01 〜 1.00 までの数値で入力してください。</span>
+              </p>
+            </div>
+          </md-input-container>
+          <div flex="25" hide-xs></div>
+          <md-input-container class="md-block" flex="100">
+            <label>説明</label>
+            <textarea name="description" ng-model="ctrl.product.description" maxlength="2000" md-maxlength="2000" rows="5"></textarea>
+            <div ng-show="form.description.$invalid" ng-messages="form.description.$error">
+              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                <span>2000 文字以内で入力してください。</span>
               </div>
-            </section>
-          </div>
+            </div>
+          </md-input-container>
         </div>
-        <div class="row">
-          <div class="col-md-12">
-            <section class="form-group" ng-class="{'has-error': form.description.$invalid && form.description.$dirty}">
-              <label for="description" class="control-label">説明</label>
-              <textarea id="description" name="description" class="form-control" maxlength="2000" rows="5" placeholder="例）初診の患者様に必須で設定する診察料金のプランです。" ng-model="ctrl.product.description" ng-maxlength="2000"></textarea>
-              <div ng-show="form.description.$invalid && form.description.$dirty">
-                <p class="help-block" ng-show="form.description.$error">
-                  <span>2000 文字以内で入力してください。</span>
-                </p>
-              </div>
-            </section>
-          </div>
+        <div layout="row" layout-align="end center" ng-if="!ctrl.product.id">
+          <md-button class="md-primary md-raised" ng-disabled="form.$invalid" ng-click="ctrl.save(ctrl.product)">登録する</md-button>
+          <md-button ui-sref="app.dashboard.product.list">キャンセル</md-button>
         </div>
-        <section class="form-group text-right">
-          <button type="button" class="btn btn-primary" ng-disabled="form.$invalid" ng-click="ctrl.update(ctrl.product)" ng-show="ctrl.product.id">変更する</button>
-          <button type="button" class="btn btn-primary" ng-disabled="form.$invalid" ng-click="ctrl.save(ctrl.product)" ng-show="!ctrl.product.id">登録する</button>
-          <button type="button" class="btn btn-link" ui-sref="app.dashboard.product">キャンセル</button>
-        </section>
-      </fieldset>
-    </form>
-  </div>
-  <div class="col-md-3">
-    <h4 class="m0 pb-lg">ヒント</h4>
-    <p><small>診察料金や商品については、一般的に使用されるデータが初期設定時に登録されています。</small></p>
-    <p><small>各クリニックで料金をカスタマイズする場合は、個別に設定を行ってください。</small></p>
+        <div layout="row" layout-align="end center" ng-if="ctrl.product.id">
+          <md-button class="md-primary md-raised" ng-disabled="form.$invalid" ng-click="ctrl.update(ctrl.product)">更新する</md-button>
+          <md-button ui-sref="app.dashboard.product.detail({productId: ctrl.product.id})">キャンセル</md-button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>

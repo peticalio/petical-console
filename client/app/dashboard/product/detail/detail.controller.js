@@ -1,32 +1,29 @@
-(function() {
+(() => {
   'use strict';
 
-  angular
-    .module('petzApp')
+  class ProductDetailController {
+    constructor($state, dialog, toaster, ClinicProduct, clinic, product) {
+      this.$state = $state;
+      this.dialog = dialog;
+      this.toaster = toaster;
+      this.ClinicProduct = ClinicProduct;
+      this.clinic = clinic;
+      this.product = product;
+    }
+
+    delete(event, product) {
+      this.dialog.delete(event, product)
+        .then(() => this.ClinicProduct.delete({clinicId: this.clinic.id, chartId: product.id}))
+        .then(() => this.ClinicProduct.fetch({clinicId: this.clinic.id}))
+        .then(() => {
+          this.toaster.info('商品・料金マスタを削除しました。');
+          this.$state.go('app.dashboard.product.list');
+        });
+    }
+  }
+
+  ProductDetailController.$inject = ['$state', 'dialog', 'toaster', 'ClinicProduct', 'clinic', 'product'];
+  angular.module('petzApp')
     .controller('ProductDetailController', ProductDetailController);
 
-  ProductDetailController.$inject = ['$state', '$stateParams', 'Notify', 'Product', 'product'];
-  function ProductDetailController($state, $stateParams, Notify, Product, product) {
-    // ----- variables
-    var _this = this;
-
-    // ----- methods
-    function constructor() {
-      _this.product = product;
-      _this.remove = remove;
-    }
-
-    // 診察料金を削除する
-    function remove(product) {
-      Notify.del(function() {
-        Product.remove({clinicId: $stateParams.clinicId, productId: product.id}).$promise
-          .then(function() {
-            $state.go('app.dashboard.product');
-            Notify.success('指定された診察料金を削除しました。');
-          });
-      });
-    }
-
-    constructor();
-  }
 })();
