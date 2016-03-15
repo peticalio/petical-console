@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  class ChartDetailReservationController {
+  class ChartDetailTicketController {
     constructor($state, toaster, ClinicChartTicket, clinic, chart, tickets) {
       this.$state = $state;
       this.toaster = toaster;
@@ -21,8 +21,8 @@
     }
   }
 
-  ChartDetailReservationController.$inject = ['$state', 'toaster', 'ClinicChartTicket', 'clinic', 'chart', 'tickets'];
+  ChartDetailTicketController.$inject = ['$state', 'toaster', 'ClinicChartTicket', 'clinic', 'chart', 'tickets'];
   angular.module('petzApp')
-    .controller('TicketDetailExaminationController', ChartDetailReservationController);
+    .controller('ChartDetailTicketController', ChartDetailTicketController);
 
 })();

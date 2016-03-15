@@ -2,7 +2,7 @@
   <md-tabs md-dynamic-height md-selected="ctrl.selected" class="md-primary no-print" flex="100">
     <md-tab label="基本情報" ui-sref="app.dashboard.chart.detail">
     </md-tab>
-    <md-tab label="診察履歴" ui-sref="app.dashboard.chart.detail.examination.list">
+    <md-tab label="診察履歴" ui-sref="app.dashboard.chart.detail.ticket.list">
     </md-tab>
     <md-tab label="予約状況" ui-sref="app.dashboard.chart.detail.reservation.list">
     </md-tab>
@@ -159,7 +159,7 @@
             <md-list-item>
               <md-icon class="material-icons">
                 location_on
-                <md-tooltip>チップ番号</md-tooltip>
+                <md-tooltip>マイクロチップ番号</md-tooltip>
               </md-icon>
               <p>{{ctrl.chart.pet.microchipNo}}</p>
             </md-list-item>
@@ -199,82 +199,6 @@
     </div>
   </div>
 </div>
-
-<md-tabs md-dynamic-height class="md-primary" flex>
-  <md-tab label="診察履歴">
-    <div layout="row" layout-align="center start">
-      <div class="layout-max-width">
-        <md-toolbar md-theme="content" class="pt">
-          <div class="md-toolbar-tools">
-            <h1 class="md-title">{{ctrl.chart.pet.name}} ちゃんのカルテ</h1>
-          </div>
-        </md-toolbar>
-        <div layout-padding>
-          <form name="form" role="form" class="form-horizontal">
-            <uib-tabset>
-              <uib-tab>
-                <uib-tab-heading>診察履歴</uib-tab-heading>
-                <div class="alert alert-default text-center" ng-show="!ctrl.tickets || ctrl.tickets.length === 0">
-                  <p class="large-icon"><i class="fa fa-frown-o"></i></p>
-                  <h4>まだ診察の履歴はありません</h4>
-                  <p>診察をする場合は、<a ui-sref="app.dashboard.ticket.form">こちらからチケットを作成</a>して診察内容を追記してください。</p>
-                </div>
-                <div class="table-responsive" ng-show="ctrl.tickets && ctrl.tickets.length !== 0">
-                  <table class="table table-striped table-hover table-clickable middle">
-                    <thead class="small">
-                      <tr>
-                        <th class="col-sm-3">#</th>
-                        <th class="col-sm-1">診療日</th>
-                        <th class="col-sm-1">診療時刻</th>
-                        <th class="col-sm-1">ステータス</th>
-                        <th class="col-sm-2">請求額</th>
-                        <th class="col-sm-2">受領額</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr ng-repeat="ticket in ctrl.tickets" ui-sref="app.dashboard.ticket.detail({ticketId:ticket.id})">
-                        <td class="small">
-                          {{ticket.id}}
-                        </td>
-                        <td class="small">
-                          {{ticket.startDateTime | date:'yyyy/MM/dd'}}
-                        </td>
-                        <td class="small">
-                          {{ticket.startDateTime | date:'HH:mm'}} - {{ticket.endDateTime | date:'HH:mm'}}
-                        </td>
-                        <td class="text-center">
-                          <ptz-schedule-status status="ticket.state"></ptz-schedule-status>
-                        </td>
-                        <td>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </uib-tab>
-            </uib-tabset>
-          </form>
-        </div>
-      </div>
-    </div>
-  </md-tab>
-
-  <md-tab label="予約状況">
-    <div layout="row" layout-align="center start">
-      <div class="layout-max-width">
-        <md-toolbar md-theme="content" class="pt">
-          <div class="md-toolbar-tools">
-            <h1 class="md-title">{{ctrl.chart.pet.name}} ちゃんのカルテ</h1>
-          </div>
-          <div layout-padding>
-          </div>
-        </md-toolbar>
-      </div>
-    </div>
-  </md-tab>
-</md-tabs>
 
 <div class="fab" md-theme="fab" ng-show="ctrl.chart.id">
   <md-fab-speed-dial md-direction="up" md-open="ctrl.isOpen" class="md-scale" ng-mouseenter="ctrl.isOpen=true" ng-mouseleave="ctrl.isOpen=false" ng-cloak>

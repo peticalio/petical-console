@@ -63,6 +63,16 @@
       .then((response) => response);
   }
 
+  function getClinicChartTickets(clinic, chart, ClinicChartTicket) {
+    return ClinicChartTicket.query({clinicId: clinic.id, chartId: chart.id}).$promise
+      .then((response) => response);
+  }
+
+  function getClinicChartReservations(clinic, chart, ClinicChartTicket) {
+    return ClinicChartTicket.query({clinicId: clinic.id, chartId: chart.id, state: 'RESERVED'}).$promise
+      .then((response) => response);
+  }
+
   function ClinicChartRouter($stateProvider) {
     $stateProvider
       .state('app.dashboard.chart', {
@@ -164,22 +174,22 @@
       })
 
       // カルテ詳細（診察履歴）
-      .state('app.dashboard.chart.detail.examination', {
+      .state('app.dashboard.chart.detail.ticket', {
         abstract: true,
-        url: '/examinations'
+        url: '/tickets'
       })
       // カルテ詳細（診察履歴一覧）
-      .state('app.dashboard.chart.detail.examination.list', {
+      .state('app.dashboard.chart.detail.ticket.list', {
         url: '/list',
         views: {
           '@app.dashboard.chart.detail': {
-            templateUrl:  'app/dashboard/chart/detail/examination/examination.html',
+            templateUrl:  'app/dashboard/chart/detail/ticket/ticket.html',
             controller:   'ChartDetailExaminationController',
             controllerAs: 'ctrl'
           }
         },
         resolve: {
-          examinations:   getClinicChartExaminations
+          tickets:   getClinicChartTickets
         }
       })
 
@@ -199,7 +209,7 @@
           }
         },
         resolve: {
-          reservations:   getClinicChartReservations
+          tickets:   getClinicChartReservations
         }
       })
     ;
