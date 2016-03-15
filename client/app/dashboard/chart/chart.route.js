@@ -162,6 +162,46 @@
           chart:          getClinicChart
         }
       })
+
+      // カルテ詳細（診察履歴）
+      .state('app.dashboard.chart.detail.examination', {
+        abstract: true,
+        url: '/examinations'
+      })
+      // カルテ詳細（診察履歴一覧）
+      .state('app.dashboard.chart.detail.examination.list', {
+        url: '/list',
+        views: {
+          '@app.dashboard.chart.detail': {
+            templateUrl:  'app/dashboard/chart/detail/examination/examination.html',
+            controller:   'ChartDetailExaminationController',
+            controllerAs: 'ctrl'
+          }
+        },
+        resolve: {
+          examinations:   getClinicChartExaminations
+        }
+      })
+
+      // カルテ詳細（診察予約）
+      .state('app.dashboard.chart.detail.reservation', {
+        abstract: true,
+        url: '/reservations'
+      })
+      // カルテ詳細（診察予約一覧）
+      .state('app.dashboard.chart.detail.reservation.list', {
+        url: '/list',
+        views: {
+          '@app.dashboard.chart.detail': {
+            templateUrl:  'app/dashboard/chart/detail/reservation/reservation.html',
+            controller:   'ChartDetailReservationController',
+            controllerAs: 'ctrl'
+          }
+        },
+        resolve: {
+          reservations:   getClinicChartReservations
+        }
+      })
     ;
   }
 

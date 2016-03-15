@@ -1,4 +1,4 @@
-<!-- <div layout="column" flex>
+<div layout="column" flex>
   <md-tabs md-dynamic-height md-selected="ctrl.selected" class="md-primary no-print" flex="100">
     <md-tab label="基本情報" ui-sref="app.dashboard.chart.detail">
     </md-tab>
@@ -9,203 +9,198 @@
   </md-tabs>
 
   <div layout="row" layout-align="center start" layout-align-xs="start start" flex="100" ui-view="" class="fadein overflow">
-  </div>
-</div> -->
-
-<md-tabs md-dynamic-height class="md-primary" flex>
-  <md-tab label="基本情報">
-    <div layout="row" layout-align="center start">
-      <div class="layout-max-width">
-        <md-toolbar md-theme="content" class="pt">
-          <div class="md-toolbar-tools">
-            <h1 class="md-title">{{ctrl.chart.pet.name}} ちゃんのカルテ</h1>
-            <span flex></span>
-            <md-button class="md-icon-button" ui-sref="app.dashboard.chart.list">
-              <md-tooltip md-direction="left">一覧</md-tooltip>
-              <md-icon class="material-icons">list</md-icon>
-            </md-button>
-          </div>
-        </md-toolbar>
-        <div layout-padding>
-          <div layout-gt-xs="row" class="flat-card">
-            <md-list flex>
-              <md-subheader class="md-no-sticky">ペット</md-subheader>
-              <md-list-item>
-                <md-icon class="material-icons">
-                  local_hospital
-                  <md-tooltip>所属動物病院</md-tooltip>
-                </md-icon>
-                <p>{{ctrl.chart.clinic.name}}</p>
-              </md-list-item>
-              <md-list-item>
-                <md-icon class="material-icons">
-                  folder
-                  <md-tooltip>カルテ番号</md-tooltip>
-                </md-icon>
-                <p>{{ctrl.chart.chartNo}}</p>
-              </md-list-item>
-              <md-list-item>
-                <md-icon class="material-icons">
-                  pets
-                  <md-tooltip>お名前</md-tooltip>
-                </md-icon>
-                <p>{{ctrl.chart.pet.name}} ちゃん</p>
-              </md-list-item>
-              <md-list-item>
-                <md-icon class="material-icons">
-                  format_list_bulleted
-                  <md-tooltip>品種</md-tooltip>
-                </md-icon>
-                <p>{{ctrl.chart.pet.type}}</p>
-              </md-list-item>
-              <md-list-item>
-                <md-icon class="material-icons">
-                  invert_colors
-                  <md-tooltip>毛色</md-tooltip>
-                </md-icon>
-                <p>{{ctrl.chart.pet.color}}</p>
-              </md-list-item>
-              <md-list-item>
-                <md-icon class="material-icons">
-                  today
-                  <md-tooltip>生年月日</md-tooltip>
-                </md-icon>
-                <p ng-show="ctrl.chart.pet.birthDate">{{ctrl.chart.pet.birthDate | date:'yyyy/MM/dd'}}</p>
-                <p ng-show="!ctrl.chart.pet.birthDate">未登録</p>
-              </md-list-item>
-              <md-list-item>
-                <md-icon class="material-icons">
-                  accessibility
-                  <md-tooltip>性別</md-tooltip>
-                </md-icon>
-                <p>
-                  <i class="fa fa-mars mr" ng-show="ctrl.chart.pet.sex === 'MALE'"></i>
-                  <i class="fa fa-venus mr" ng-show="ctrl.chart.pet.sex === 'FEMALE'"></i>
-                  <span ng-show="ctrl.chart.pet.sex === 'MALE'">オス</span>
-                  <span ng-show="ctrl.chart.pet.sex === 'FEMALE'">メス</span>
-                </p>
-              </md-list-item>
-              <md-list-item>
-                <md-icon class="material-icons">
-                  local_hospital
-                  <md-tooltip>血液型</md-tooltip>
-                </md-icon>
-                <p>{{ctrl.chart.pet.blood}}</p>
-              </md-list-item>
-              <md-list-item>
-                <md-icon class="material-icons">
-                  call_split
-                  <md-tooltip>去勢・避妊</md-tooltip>
-                </md-icon>
-                <p>
-                  <span ng-show="ctrl.chart.pet.neutral">済み</span>
-                  <span ng-show="!ctrl.chart.pet.neutral">していない</span>
-                </p>
-              </md-list-item>
-            </md-list>
-            <md-list flex>
-              <md-subheader class="md-no-sticky">飼い主さま</md-subheader>
-              <md-list-item>
-                <md-icon class="material-icons">
-                  person
-                  <md-tooltip>氏名</md-tooltip>
-                </md-icon>
-                <p>{{ctrl.chart.customer.user.lastName}} {{ctrl.chart.customer.user.firstName}} 様</p>
-              </md-list-item>
-              <md-list-item>
-                <md-icon class="material-icons">
-                  location_on
-                  <md-tooltip>郵便番号</md-tooltip>
-                </md-icon>
-                <p ng-show="ctrl.chart.customer.user.zipCode">〒 {{ctrl.chart.customer.user.zipCode}}</p>
-                <p ng-show="!ctrl.chart.customer.user.zipCode">未登録</p>
-              </md-list-item>
-              <md-list-item>
-                <md-icon class="material-icons">
-                  import_contacts
-                  <md-tooltip>住所</md-tooltip>
-                </md-icon>
-                <p ng-show="ctrl.chart.customer.user.state">{{ctrl.chart.customer.user.state}}{{ctrl.chart.customer.user.city}}{{ctrl.chart.customer.user.street}}</p>
-                <p ng-show="!ctrl.chart.customer.user.state">未登録</p>
-              </md-list-item>
-              <md-list-item>
-                <md-icon class="material-icons">
-                  phone
-                  <md-tooltip>電話番号（自宅）</md-tooltip>
-                </md-icon>
-                <p ng-show="ctrl.chart.customer.user.phoneNo">{{ctrl.chart.customer.user.phoneNo}}</p>
-                <p ng-show="!ctrl.chart.customer.user.phoneNo">未登録</p>
-              </md-list-item>
-              <md-list-item>
-                <md-icon class="material-icons">
-                  phone_android
-                  <md-tooltip>電話番号（携帯）</md-tooltip>
-                </md-icon>
-                <p ng-show="ctrl.chart.customer.user.mobilePhoneNo">{{ctrl.chart.customer.user.mobilePhoneNo}}</p>
-                <p ng-show="!ctrl.chart.customer.user.mobilePhoneNo">未登録</p>
-              </md-list-item>
-              <md-list-item>
-                <md-icon class="material-icons">
-                  mail_outline
-                  <md-tooltip>メールアドレス</md-tooltip>
-                </md-icon>
-                <p>{{ctrl.chart.customer.user.email}}</p>
-              </md-list-item>
-              <md-subheader class="md-no-sticky">マイクロチップ</md-subheader>
-              <md-list-item>
-                <md-icon class="material-icons">
-                  contacts
-                  <md-tooltip>埋込日</md-tooltip>
-                </md-icon>
-                <p>
-                  <span ng-show="ctrl.chart.pet.microchipDate">{{ctrl.chart.pet.microchipDate | date:'yyyy/MM/dd'}}</span>
-                  <span ng-show="!ctrl.chart.pet.microchipDate">していない</span>
-                </p>
-              </md-list-item>
-              <md-list-item>
-                <md-icon class="material-icons">
-                  location_on
-                  <md-tooltip>チップ番号</md-tooltip>
-                </md-icon>
-                <p>{{ctrl.chart.pet.microchipNo}}</p>
-              </md-list-item>
-            </md-list>
-          </div>
+    <div class="layout-max-width">
+      <md-toolbar md-theme="content" class="pt">
+        <div class="md-toolbar-tools">
+          <h1 class="md-title">{{ctrl.chart.pet.name}} ちゃんのカルテ</h1>
+          <span flex></span>
+          <md-button class="md-icon-button" ui-sref="app.dashboard.chart.list">
+            <md-tooltip md-direction="left">一覧</md-tooltip>
+            <md-icon class="material-icons">list</md-icon>
+          </md-button>
         </div>
-        <md-toolbar md-theme="content">
-          <div class="md-toolbar-tools">
-            <h1 class="md-title">アレルギー</h1>
-          </div>
-        </md-toolbar>
-        <div layout-padding>
-          <div layout-gt-xs="row" class="flat-card" layout-padding>
-            <p class="pre">{{ctrl.chart.pet.allergia}}</p>
-          </div>
+      </md-toolbar>
+      <div layout-padding>
+        <div layout-gt-xs="row" class="flat-card">
+          <md-list flex>
+            <md-subheader class="md-no-sticky">ペット</md-subheader>
+            <md-list-item>
+              <md-icon class="material-icons">
+                local_hospital
+                <md-tooltip>所属動物病院</md-tooltip>
+              </md-icon>
+              <p>{{ctrl.chart.clinic.name}}</p>
+            </md-list-item>
+            <md-list-item>
+              <md-icon class="material-icons">
+                folder
+                <md-tooltip>カルテ番号</md-tooltip>
+              </md-icon>
+              <p>{{ctrl.chart.chartNo}}</p>
+            </md-list-item>
+            <md-list-item>
+              <md-icon class="material-icons">
+                pets
+                <md-tooltip>お名前</md-tooltip>
+              </md-icon>
+              <p>{{ctrl.chart.pet.name}} ちゃん</p>
+            </md-list-item>
+            <md-list-item>
+              <md-icon class="material-icons">
+                format_list_bulleted
+                <md-tooltip>品種</md-tooltip>
+              </md-icon>
+              <p>{{ctrl.chart.pet.type}}</p>
+            </md-list-item>
+            <md-list-item>
+              <md-icon class="material-icons">
+                invert_colors
+                <md-tooltip>毛色</md-tooltip>
+              </md-icon>
+              <p>{{ctrl.chart.pet.color}}</p>
+            </md-list-item>
+            <md-list-item>
+              <md-icon class="material-icons">
+                today
+                <md-tooltip>生年月日</md-tooltip>
+              </md-icon>
+              <p ng-show="ctrl.chart.pet.birthDate">{{ctrl.chart.pet.birthDate | date:'yyyy/MM/dd'}}</p>
+              <p ng-show="!ctrl.chart.pet.birthDate">未登録</p>
+            </md-list-item>
+            <md-list-item>
+              <md-icon class="material-icons">
+                accessibility
+                <md-tooltip>性別</md-tooltip>
+              </md-icon>
+              <p>
+                <i class="fa fa-mars mr" ng-show="ctrl.chart.pet.sex === 'MALE'"></i>
+                <i class="fa fa-venus mr" ng-show="ctrl.chart.pet.sex === 'FEMALE'"></i>
+                <span ng-show="ctrl.chart.pet.sex === 'MALE'">オス</span>
+                <span ng-show="ctrl.chart.pet.sex === 'FEMALE'">メス</span>
+              </p>
+            </md-list-item>
+            <md-list-item>
+              <md-icon class="material-icons">
+                local_hospital
+                <md-tooltip>血液型</md-tooltip>
+              </md-icon>
+              <p>{{ctrl.chart.pet.blood}}</p>
+            </md-list-item>
+            <md-list-item>
+              <md-icon class="material-icons">
+                call_split
+                <md-tooltip>去勢・避妊</md-tooltip>
+              </md-icon>
+              <p>
+                <span ng-show="ctrl.chart.pet.neutral">済み</span>
+                <span ng-show="!ctrl.chart.pet.neutral">していない</span>
+              </p>
+            </md-list-item>
+          </md-list>
+          <md-list flex>
+            <md-subheader class="md-no-sticky">飼い主さま</md-subheader>
+            <md-list-item>
+              <md-icon class="material-icons">
+                person
+                <md-tooltip>氏名</md-tooltip>
+              </md-icon>
+              <p>{{ctrl.chart.customer.user.lastName}} {{ctrl.chart.customer.user.firstName}} 様</p>
+            </md-list-item>
+            <md-list-item>
+              <md-icon class="material-icons">
+                location_on
+                <md-tooltip>郵便番号</md-tooltip>
+              </md-icon>
+              <p ng-show="ctrl.chart.customer.user.zipCode">〒 {{ctrl.chart.customer.user.zipCode}}</p>
+              <p ng-show="!ctrl.chart.customer.user.zipCode">未登録</p>
+            </md-list-item>
+            <md-list-item>
+              <md-icon class="material-icons">
+                import_contacts
+                <md-tooltip>住所</md-tooltip>
+              </md-icon>
+              <p ng-show="ctrl.chart.customer.user.state">{{ctrl.chart.customer.user.state}}{{ctrl.chart.customer.user.city}}{{ctrl.chart.customer.user.street}}</p>
+              <p ng-show="!ctrl.chart.customer.user.state">未登録</p>
+            </md-list-item>
+            <md-list-item>
+              <md-icon class="material-icons">
+                phone
+                <md-tooltip>電話番号（自宅）</md-tooltip>
+              </md-icon>
+              <p ng-show="ctrl.chart.customer.user.phoneNo">{{ctrl.chart.customer.user.phoneNo}}</p>
+              <p ng-show="!ctrl.chart.customer.user.phoneNo">未登録</p>
+            </md-list-item>
+            <md-list-item>
+              <md-icon class="material-icons">
+                phone_android
+                <md-tooltip>電話番号（携帯）</md-tooltip>
+              </md-icon>
+              <p ng-show="ctrl.chart.customer.user.mobilePhoneNo">{{ctrl.chart.customer.user.mobilePhoneNo}}</p>
+              <p ng-show="!ctrl.chart.customer.user.mobilePhoneNo">未登録</p>
+            </md-list-item>
+            <md-list-item>
+              <md-icon class="material-icons">
+                mail_outline
+                <md-tooltip>メールアドレス</md-tooltip>
+              </md-icon>
+              <p>{{ctrl.chart.customer.user.email}}</p>
+            </md-list-item>
+            <md-subheader class="md-no-sticky">マイクロチップ</md-subheader>
+            <md-list-item>
+              <md-icon class="material-icons">
+                contacts
+                <md-tooltip>埋込日</md-tooltip>
+              </md-icon>
+              <p>
+                <span ng-show="ctrl.chart.pet.microchipDate">{{ctrl.chart.pet.microchipDate | date:'yyyy/MM/dd'}}</span>
+                <span ng-show="!ctrl.chart.pet.microchipDate">していない</span>
+              </p>
+            </md-list-item>
+            <md-list-item>
+              <md-icon class="material-icons">
+                location_on
+                <md-tooltip>チップ番号</md-tooltip>
+              </md-icon>
+              <p>{{ctrl.chart.pet.microchipNo}}</p>
+            </md-list-item>
+          </md-list>
         </div>
-        <md-toolbar md-theme="content">
-          <div class="md-toolbar-tools">
-            <h1 class="md-title">薬剤に関する注意事項</h1>
-          </div>
-        </md-toolbar>
-        <div layout-padding>
-          <div layout-gt-xs="row" class="flat-card" layout-padding>
-            <p class="pre">{{ctrl.chart.pet.drug}}</p>
-          </div>
+      </div>
+      <md-toolbar md-theme="content">
+        <div class="md-toolbar-tools">
+          <h1 class="md-title">アレルギー</h1>
         </div>
-        <md-toolbar md-theme="content">
-          <div class="md-toolbar-tools">
-            <h1 class="md-title">その他・備考</h1>
-          </div>
-        </md-toolbar>
-        <div layout-padding>
-          <div layout-gt-xs="row" class="flat-card" layout-padding>
-            <p class="pre">{{ctrl.chart.pet.other}}</p>
-          </div>
+      </md-toolbar>
+      <div layout-padding>
+        <div layout-gt-xs="row" class="flat-card" layout-padding>
+          <p class="pre">{{ctrl.chart.pet.allergia}}</p>
+        </div>
+      </div>
+      <md-toolbar md-theme="content">
+        <div class="md-toolbar-tools">
+          <h1 class="md-title">薬剤に関する注意事項</h1>
+        </div>
+      </md-toolbar>
+      <div layout-padding>
+        <div layout-gt-xs="row" class="flat-card" layout-padding>
+          <p class="pre">{{ctrl.chart.pet.drug}}</p>
+        </div>
+      </div>
+      <md-toolbar md-theme="content">
+        <div class="md-toolbar-tools">
+          <h1 class="md-title">その他・備考</h1>
+        </div>
+      </md-toolbar>
+      <div layout-padding>
+        <div layout-gt-xs="row" class="flat-card" layout-padding>
+          <p class="pre">{{ctrl.chart.pet.other}}</p>
         </div>
       </div>
     </div>
-  </md-tab>
+  </div>
+</div>
 
+<md-tabs md-dynamic-height class="md-primary" flex>
   <md-tab label="診察履歴">
     <div layout="row" layout-align="center start">
       <div class="layout-max-width">
