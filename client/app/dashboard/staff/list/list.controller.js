@@ -25,22 +25,3 @@
     .controller('StaffListController', StaffListController);
 
 })();
-
-// angular.module('petzApp')
-//   .controller('ClinicDetailStaffInvitationModalController', function ($scope, $stateParams, $modalInstance, Notify, ClinicInvitation) {
-//     var _this = this;
-//
-//     _this.closeInvitaionDialog = function() {
-//       $modalInstance.dismiss('cancel');
-//     };
-//
-//     _this.invite = function() {
-//       var email = $scope.invitation.email;
-//       var invitation = new ClinicInvitation({clinicId: $stateParams.clinicId});
-//       invitation.emails = email.split(',');
-//       invitation.$save(function() {
-//         $modalInstance.dismiss('cancel');
-//         Notify.success('ご指定のメールアドレスに招待状を送信しました。');
-//       });
-//     }
-//   });

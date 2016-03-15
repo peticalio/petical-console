@@ -154,3 +154,45 @@ a {
 .img-circle {
   width: 32px;
 }
+
+.label-default {
+  @extend .label-primary;
+  background-color: #999999;
+  border: 1px solid #999999;
+}
+.label-default-outline {
+  @extend .label-default;
+  background-color: #fff;
+  color: #999999;
+  border: 1px solid #999999;
+}
+.label-primary-outline {
+  @extend .label-primary;
+  background-color: #fff;
+  color: $brand-primary;
+  border: 1px solid $brand-primary;
+}
+.label-success-outline {
+  @extend .label-success;
+  background-color: #fff;
+  color: $brand-success;
+  border: 1px solid $brand-success;
+}
+.label-info-outline {
+  @extend .label-info;
+  background-color: #fff;
+  color: $brand-info;
+  border: 1px solid $brand-info;
+}
+.label-warning-outline {
+  @extend .label-warning;
+  background-color: #fff;
+  color: $brand-warning;
+  border: 1px solid $brand-warning;
+}
+.label-danger-outline {
+  @extend .label-danger;
+  background-color: #fff;
+  color: $brand-danger;
+  border: 1px solid $brand-danger;
+}

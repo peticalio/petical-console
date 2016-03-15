@@ -8,9 +8,6 @@ angular
     'petz.vendor',
     'petz.env',
     'ngMaterial',
-    'angularMoment',
-    'md.data.table',
-    'mwl.calendar',
     'ngCookies',
     'ngResource',
     'ngSanitize',
@@ -19,8 +16,10 @@ angular
     'ui.validate',
     'ui.gravatar',
     'ui.bootstrap',
-    'nvd3',
-    'googlechart'
+    'angularMoment',
+    'md.data.table',
+    'mwl.calendar',
+    'nvd3'
   ])
 
   // base config
