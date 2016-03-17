@@ -2,53 +2,38 @@
   'use strict';
 
   class ChartDetailController {
-    constructor($state, $stateParams, dialog, toaster, ClinicChart, ClinicTicket, chart) {
+    constructor($state, dialog, toaster, ClinicChart, ClinicTicket, clinic, chart) {
       this.$state = $state;
-      this.$stateParams = $stateParams;
       this.dialog = dialog;
       this.toaster = toaster;
       this.ClinicChart = ClinicChart;
       this.ClinicTicket = ClinicTicket;
+      this.clinic = clinic;
       this.chart = chart;
-
-      this.getTickets();
+      this.selected = this.getSelectedTabNo();
     }
 
-    // ペットの診察予約ページへ遷移する
-    reserve() {
-      // var ticket = {clinic:chart.clinic, chart:chart};
-      // Modal.open('app/dashboard/common/event/event-modal.html', 'EventModalController', 'ctrl', {ticket: function() {return ticket;}}).result
-      //   .then(function() {
-      //     Notify.success('診察の予約を登録しました。詳細は予約スケジュールをご確認ください。');
-      //   });
+    // ステートから選択されているタブ番号を取得する
+    getSelectedTabNo() {
+      var no = 0;
+      no = this.$state.includes('app.dashboard.chart.detail.ticket') ? 1 : no;
+      no = this.$state.includes('app.dashboard.chart.detail.reservation') ? 2 : no;
+      return no;
     }
 
-    // 診察履歴（チケット）を取得する
-    getTickets() {
-      return this.ClinicTicket.query({clinicId: this.$stateParams.clinicId, petId: this.chart.pet.id}).$promise
-        .then((response) => {
-          this.tickets = response;
-          return response.$promise;
-        });
-    }
-
-    // 飼い主を削除する
+    // カルテを削除する
     delete(event, chart) {
       this.dialog.delete(event, chart)
-        .then(() => {
-          return this.ClinicChart.delete({clinicId: this.$stateParams.clinicId, chartId: this.$stateParams.chartId});
-        })
+        .then(() => this.ClinicChart.delete({clinicId: this.clinic.id, chartId: chart.id}).$promise)
+        .then(() => this.ClinicChart.fetch({clinicId: this.clinic.id}).$promise)
         .then(() => {
           this.toaster.info(chart.pet.name + ' ちゃんのカルテを削除しました。');
-          return this.ClinicChart.fetch({clinicId: this.$stateParams.clinicId}).$promise;
-        })
-        .then(() => {
           this.$state.go('app.dashboard.chart.list');
         });
     }
   }
 
-  ChartDetailController.$inject = ['$state', '$stateParams', 'dialog', 'toaster', 'ClinicChart', 'ClinicTicket', 'chart'];
+  ChartDetailController.$inject = ['$state', 'dialog', 'toaster', 'ClinicChart', 'ClinicTicket', 'clinic', 'chart'];
   angular.module('petzApp')
     .controller('ChartDetailController', ChartDetailController);
 

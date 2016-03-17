@@ -23,6 +23,6 @@
 
   ChartDetailReservationController.$inject = ['$state', 'toaster', 'ClinicChartTicket', 'clinic', 'chart', 'tickets'];
   angular.module('petzApp')
-    .controller('TicketDetailExaminationController', ChartDetailReservationController);
+    .controller('ChartDetailReservationController', ChartDetailReservationController);
 
 })();

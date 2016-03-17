@@ -64,7 +64,7 @@
   }
 
   function getClinicChartTickets(clinic, chart, ClinicChartTicket) {
-    return ClinicChartTicket.query({clinicId: clinic.id, chartId: chart.id}).$promise
+    return ClinicChartTicket.query({clinicId: clinic.id, chartId: chart.id, state: 'COMPLETED'}).$promise
       .then((response) => response);
   }
 
@@ -184,7 +184,7 @@
         views: {
           '@app.dashboard.chart.detail': {
             templateUrl:  'app/dashboard/chart/detail/ticket/ticket.html',
-            controller:   'ChartDetailExaminationController',
+            controller:   'ChartDetailTicketController',
             controllerAs: 'ctrl'
           }
         },

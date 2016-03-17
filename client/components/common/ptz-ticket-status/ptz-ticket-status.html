@@ -1,3 +1,18 @@
-<span class="label" ng-class="{'label-info':status === 'RESERVED', 'label-warning':status === 'RECEIPTED', 'label-primary':status === 'DOING', 'label-danger':status === 'PAYMENT', 'label-default':status === 'CANCEL', 'label-default':status === 'COMPLETED'}">
-  {{status}}
+<span class="label label-info" ng-if="$ctrl.value === 'RESERVED'">
+  予約中
+</span>
+<span class="label label-warning" ng-if="$ctrl.value === 'RECEIPTED'">
+  受付済
+</span>
+<span class="label label-primary" ng-if="$ctrl.value === 'DOING'">
+  診察中
+</span>
+<span class="label label-danger" ng-if="$ctrl.value === 'PAYMENT'">
+  支払待
+</span>
+<span class="label label-default" ng-if="$ctrl.value === 'CANCEL'">
+  キャンセル
+</span>
+<span class="label label-default-outline" ng-if="$ctrl.value === 'COMPLETED'">
+  完了
 </span>
