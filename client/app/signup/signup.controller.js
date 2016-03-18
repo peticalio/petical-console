@@ -23,7 +23,7 @@
             this.$location.path(path);
           } else {
             this.$cacheFactory.get('$http').removeAll();
-            this.$state.go('app.home', {}, {reload: true});
+            this.$state.go('app.main', {}, {reload: true});
           }
         });
     }

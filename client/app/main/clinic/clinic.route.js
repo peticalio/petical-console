@@ -15,15 +15,15 @@
   function ClinicRouter($stateProvider){
     $stateProvider
       // register new clinic
-      .state('app.clinic', {
+      .state('app.main.clinic', {
         abstract:         true
       })
-      .state('app.clinic.form', {
+      .state('app.main.clinic.form', {
         authenticate:     true,
         url:              '^/clinics/form',
         views: {
           '@app': {
-            templateUrl:  'app/clinic/form/form.html',
+            templateUrl:  'app/main/clinic/form/form.html',
             controller:   'ClinicFormController',
             controllerAs: 'ctrl'
           }
@@ -32,7 +32,7 @@
           clinic:         empty
         }
       })
-      .state('app.clinic.invitation', {
+      .state('app.main.clinic.invitation', {
         authenticate:     true,
         url:              '^/invitations/:invitationId',
         views: {
@@ -50,6 +50,7 @@
   }
 
   ClinicRouter.$inject = ['$stateProvider'];
-  angular.module('petzApp').config(ClinicRouter);
+  angular.module('petzApp')
+    .config(ClinicRouter);
 
 })();

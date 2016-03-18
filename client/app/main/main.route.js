@@ -3,15 +3,15 @@
 
   function MainRouter($stateProvider){
     $stateProvider
-      .state('app', {
-        abstract:         true,
-        templateUrl:      'app/main/main.html',
-        controller:       'MainController',
-        controllerAs:     'ctrl',
-        title: 'Petz.io',
-        data: {
-          title: 'Petz.io'
-        }
+      .state('app.main', {
+        url:              '^/',
+        views: {
+          '@app': {
+            templateUrl:  'app/main/main.html',
+            controller:   'MainController',
+            controllerAs: 'ctrl'
+          }
+        },
       })
     ;
   }
