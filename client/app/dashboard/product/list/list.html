@@ -35,7 +35,7 @@
                 <span class="label label-warning" ng-if="product.taxType !== 'EXCLUSIVE'">内税</span>
               </td>
               <td md-cell>
-                {{product.taxRate}}
+                {{product.taxRate | percentage:1}}
               </td>
               <td md-cell>
                 {{product.createdDate | date:'yyyy/MM/dd HH:mm'}}

@@ -22,8 +22,8 @@
     }
   }
 
-  StaffDetailController.$inject = ['$state', 'dialog', 'toaster', 'ClinicStaff', 'clinic', 'product'];
+  StaffDetailController.$inject = ['$state', 'dialog', 'toaster', 'ClinicStaff', 'clinic', 'staff'];
   angular.module('petzApp')
-    .controller('ProductDetailController', StaffDetailController);
+    .controller('StaffDetailController', StaffDetailController);
 
 })();

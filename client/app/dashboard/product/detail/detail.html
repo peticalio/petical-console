@@ -34,7 +34,7 @@
               attach_money
               <md-tooltip>価格（単価）</md-tooltip>
             </md-icon>
-            <p>{{ctrl.product.price}}</p>
+            <p>{{ctrl.product.price | currency:'¥ ':0}}</p>
           </md-list-item>
           <md-list-item>
             <md-icon class="material-icons">
@@ -49,7 +49,7 @@
               monetization_on
               <md-tooltip>消費税率</md-tooltip>
             </md-icon>
-            <p>{{ctrl.product.taxRate}}</p>
+            <p>{{ctrl.product.taxRate | percentage:1}}</p>
           </md-list-item>
         </md-list>
         <md-list flex="100">

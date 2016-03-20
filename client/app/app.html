@@ -18,7 +18,11 @@
       <li>
         <menu-link section="section">
           <md-button class="md-default" ui-sref-active-eq="active" ui-sref="app.main.invitation.list">
-            <md-icon class="material-icons" aria-label="Invitations">apps</md-icon>招待状
+            <div layout="row" flex>
+              <md-icon class="material-icons" aria-label="Invitations">inbox</md-icon>招待状
+              <span flex></span>
+              <span class="img-circle">2</span>
+            </div>
           </md-button>
         </menu-link>
       </il>
@@ -162,7 +166,7 @@
       <span flex></span> -->
 
       <!-- account menu -->
-      <md-button class="md-icon-button" ui-sref="app.home">
+      <md-button class="md-icon-button" ui-sref="app.main">
         <md-icon class="material-icons white">apps</md-icon>
       </md-button>
       <md-button class="md-icon-button">
@@ -174,18 +178,18 @@
           <md-subheader><h4 class="mt0">{{ctrl.account.username}}</h4>{{ctrl.account.login}}</md-subheader>
           <md-menu-item>
             <md-button>
-              <md-icon class="material-icons" aria-label="Home">person_outline</md-icon>アカウント
+              <md-icon class="material-icons" aria-label="Account">person_outline</md-icon>アカウント
             </md-button>
           </md-menu-item>
           <md-menu-item>
             <md-button>
-              <md-icon class="material-icons" aria-label="Home">security</md-icon>パスワード変更
+              <md-icon class="material-icons" aria-label="Password">security</md-icon>パスワード変更
             </md-button>
           </md-menu-item>
           <md-menu-divider></md-menu-divider>
           <md-menu-item>
             <md-button ng-click="ctrl.signout()">
-              <md-icon class="material-icons" aria-label="Home">exit_to_app</md-icon>サインアウト
+              <md-icon class="material-icons" aria-label="Signout">exit_to_app</md-icon>サインアウト
             </md-button>
           </md-menu-item>
         </md-menu-content>

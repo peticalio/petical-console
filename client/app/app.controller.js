@@ -38,7 +38,7 @@
     }
 
     showMainMenu() {
-      return this.$state.includes('app.home') || this.$state.includes('app.clinic');
+      return this.$state.includes('app.main');
     }
     showDashboardMenu() {
       return this.$state.includes('app.dashboard');

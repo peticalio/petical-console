@@ -2,7 +2,7 @@
   <section>
     <md-toolbar md-theme="content" class="pt">
       <div class="md-toolbar-tools">
-        <h1 class="md-title">{{ctrl.staff.user.username}}の詳細</h1>
+        <h1 class="md-title">{{ctrl.staff.user.lastName}} {{ctrl.staff.user.firstName}}の詳細</h1>
         <span flex></span>
         <md-button class="md-icon-button" ui-sref="app.dashboard.staff.list">
           <md-tooltip md-direction="left">一覧</md-tooltip>
@@ -28,22 +28,36 @@
             <p ng-show="ctrl.staff.user.lastNameKana">{{ctrl.staff.user.lastNameKana}} {{ctrl.staff.user.firstNameKana}}</p>
             <p ng-show="!ctrl.staff.user.lastNameKana">未登録</p>
           </md-list-item>
+          <md-list-item>
+            <md-icon class="material-icons">
+              create
+              <md-tooltip>作成日時</md-tooltip>
+            </md-icon>
+            <p>{{ctrl.staff.createdDate | date:'yyyy/MM/dd HH:mm'}}</p>
+          </md-list-item>
         </md-list>
         <md-list flex="50" flex-xs="100">
           <md-list-item>
             <md-icon class="material-icons">
               mail_outline
-              <md-tooltip>メールアドレス</md-tooltip>
+              <md-tooltip>ログインID</md-tooltip>
             </md-icon>
-            <p>{{ctrl.staff.user.email}}</p>
+            <p>{{ctrl.staff.user.login}}</p>
           </md-list-item>
           <md-list-item>
             <md-icon class="material-icons">
-              mail_outline
+              hourglass_empty
               <md-tooltip>ステータス</md-tooltip>
             </md-icon>
             <p ng-if="ctrl.staff.activatedDate"><span class="label label-primary">アクティブ</span></p>
             <p ng-if="!ctrl.staff.activatedDate"><span class="label label-default">インアクティブ</span></p>
+          </md-list-item>
+          <md-list-item>
+            <md-icon class="material-icons">
+              check_circle
+              <md-tooltip>アクティベート日時</md-tooltip>
+            </md-icon>
+            <p ng-if="ctrl.staff.activatedDate">{{ctrl.staff.activatedDate | date:'yyyy/MM/dd HH:mm'}}</p>
           </md-list-item>
         </md-list>
       </div>
