@@ -4,6 +4,10 @@ section.print-page {
 }
 
 @media print {
+  .table-bordered tr td, .table-bordered tr th {
+    border-color: #000 !important;
+  }
+
   section.print-page {
     display: block;
     page-break-after: always;

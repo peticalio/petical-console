@@ -27,7 +27,7 @@
                 {{ticket.startDateTime | date:'yyyy/MM/dd HH:mm'}} - {{ticket.endDateTime | date:'HH:mm'}}
               </td>
               <td md-cell>
-                <ptz-ticket-status status="ticket.state"></ptz-ticket-status>
+                <ptz-ticket-status value="ticket.state"></ptz-ticket-status>
               </td>
               <td md-cell>
                 <a ui-sref-ignore ui-sref="app.dashboard.chart.detail({chartId: ticket.chart.id})">{{ticket.chart.pet.name}}</a> ちゃん<br/>

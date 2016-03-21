@@ -66,6 +66,12 @@
       .then((response) => response);
   }
 
+  // 請求書を取得する
+  function getClinicInvoice($stateParams, clinic, ClinicInvoice) {
+    return ClinicInvoice.load({clinicId: clinic.id, invoiceId: $stateParams.invoiceId}).$promise
+      .then((response) => response);
+  }
+
   // カルテをもとにチケットを取得する
   function getTicketByChart($stateParams, ClinicChart, clinic) {
     return ClinicChart.load({clinicId: $stateParams.clinicId, chartId: $stateParams.chartId}).$promise
@@ -271,7 +277,7 @@
       })
       // チケット詳細（添付の一覧）
       .state('app.dashboard.ticket.detail.attachment.list', {
-        url: '/attachments',
+        url: '/list',
         views: {
           '@app.dashboard.ticket.detail': {
             templateUrl:  'app/dashboard/ticket/detail/attachment/attachment.html',
@@ -285,17 +291,17 @@
       })
 
       // チケット詳細（会計）
-      .state('app.dashboard.ticket.detail.accounting', {
+      .state('app.dashboard.ticket.detail.invoice', {
         abstract: true,
-        url: '/accountings'
+        url: '/invoices'
       })
       // チケット詳細（会計一覧）
-      .state('app.dashboard.ticket.detail.accounting.list', {
-        url: '/accountings',
+      .state('app.dashboard.ticket.detail.invoice.list', {
+        url: '/list',
         views: {
           '@app.dashboard.ticket.detail': {
-            templateUrl:  'app/dashboard/ticket/detail/accounting/accounting.html',
-            controller:   'TicketDetailAccountingController',
+            templateUrl:  'app/dashboard/ticket/detail/invoice/invoice.html',
+            controller:   'TicketDetailInvoiceController',
             controllerAs: 'ctrl'
           }
         },
@@ -303,19 +309,18 @@
           invoices:        getInvoices
         }
       })
-
-      // チケット詳細（請求書） @Deprecated
-      .state('app.dashboard.ticket.detail.invoice', {
-        url: '/invoices/:invoiceId',
+      // チケット詳細（請求書詳細）
+      .state('app.dashboard.ticket.detail.invoice.detail', {
+        url: '/:invoiceId',
         views: {
           '@app.dashboard.ticket.detail': {
-            templateUrl:  'app/dashboard/ticket/invoice/invoice.html',
-            controller:   'InvoiceController',
+            templateUrl:  'app/dashboard/ticket/detail/invoice/detail/detail.html',
+            controller:   'TicketDetailInvoiceDetailController',
             controllerAs: 'ctrl'
           }
         },
         resolve: {
-          invoice:        getInvoices,
+          invoice:        getClinicInvoice,
           examinations:   getClinicTicketExaminations
         }
       })

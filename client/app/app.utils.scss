@@ -151,6 +151,24 @@ $base-size: 8px;
   border-left: 1px solid #ddd;
 }
 
+@media print {
+  .b {
+    border-color: #000;
+  }
+  .bt {
+    border-color: #000;
+  }
+  .bb {
+    border-color: #000;
+  }
+  .br {
+    border-color: #000;
+  }
+  .bl {
+    border-color: #000;
+  }
+}
+
 // table (extend bootstrap table)
 table.table-clickable > tbody > tr {
   cursor: pointer;

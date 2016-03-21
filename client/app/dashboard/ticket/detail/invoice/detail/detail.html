@@ -1,0 +1,109 @@
+<div class="flat-card m" layout-padding>
+  <section class="print-page">
+    <h3 class="text-center print-title mb3">診療明細書　兼　領収書</h3>
+    <div layout="row" layout-wrap>
+      <div flex="50">
+        <h4 class="pb bb">{{ctrl.invoice.ticket.chart.customer.user.lastName}} {{ctrl.invoice.ticket.chart.customer.user.firstName}} 様</h4>
+        <p class="pl2">
+          〒 {{ctrl.invoice.ticket.chart.customer.user.zipCode}}<br/>
+          {{ctrl.invoice.ticket.chart.customer.user.state}}{{ctrl.invoice.ticket.chart.customer.user.city}}{{ctrl.invoice.ticket.chart.customer.user.street}}
+        </p>
+        <p class="mt3">
+          {{ctrl.invoice.ticket.chart.pet.name}} ちゃんの治療費として、
+          下記の通りご請求申し上げます。
+        </p>
+        <div class="clearfix bb">
+          <p class="pull-left h4">ご請求金額</p>
+          <p class="pull-right h4 mr">{{ctrl.invoice.total | currency:'¥ ':0}}</p>
+        </div>
+      </div>
+      <div flex="50">
+        <p class="text-right"><small>領収書番号：{{ctrl.invoice.id}}<br />カルテ番号：{{ctrl.invoice.ticket.chart.id}}</small></p>
+        <p class="text-right">診察日：{{ctrl.invoice.ticket.startDateTime | date:'yyyy/MM/dd'}}</p>
+        <p class="text-right">発行日：{{ctrl.invoice.createdDate | date:'yyyy/MM/dd'}}</p>
+      </div>
+      <div flex="100">
+        <table class="table table-bordered mt3">
+          <thead class="small">
+            <tr>
+              <th class="col-sm-1">#</th>
+              <th class="col-sm-5">詳細</th>
+              <th class="col-sm-2">単価</th>
+              <th class="col-sm-1">数量</th>
+              <th class="col-sm-1">消費税</th>
+              <th class="col-sm-2">金額</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="examination in ctrl.examinations">
+              <td class="text-right">{{$index + 1}}</td>
+              <td>{{examination.name}}</td>
+              <td class="text-right">{{examination.price | currency:'¥ ':0}}</td>
+              <td class="text-right">{{examination.quantity}}</td>
+              <td class="text-right">{{examination.tax | currency:'¥ ':0}}</td>
+              <td class="text-right">{{examination.total | currency:'¥ ':0}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div flex="60">
+        <h4 class="b0">{{ctrl.clinic.name}}</h4>
+        <p>
+          〒 {{ctrl.clinic.zipCode}}<br/>
+          {{ctrl.clinic.state}}{{ctrl.clinic.city}}{{ctrl.clinic.street}}
+        </p>
+        <p>
+          <span class="mr" ng-show="ctrl.clinic.phoneNo">TEL: {{ctrl.clinic.phoneNo}}</span>
+          <span class="mr" ng-show="ctrl.clinic.faxNo">FAX: {{ctrl.clinic.faxNo}}</span>
+          <br/>
+          <span class="mr">{{ctrl.clinic.url}}</span>
+        </p>
+      </div>
+      <div flex="40">
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td>小計</td>
+              <td class="text-right">{{ctrl.invoice.subtotal | currency:'¥ ':0}}</td>
+            </tr>
+            <tr>
+              <td>消費税</td>
+              <td class="text-right">{{ctrl.invoice.tax | currency:'¥ ':0}}</td>
+            </tr>
+            <tr>
+              <th>合計金額</th>
+              <th class="text-right">{{ctrl.invoice.total | currency:'¥ ':0}}</th>
+            </tr>
+            <tr ng-if="ctrl.invoice.receiptAmount !== 0">
+              <th>受領金額</th>
+              <th class="text-right">{{ctrl.invoice.receiptAmount | currency:'¥ ':0}}</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <div layout="row" layout-align="end center" class="no-print">
+    <md-button class="md-primary md-raised" onclick="window.print()">印刷する</md-button>
+  </div>
+</div>
+
+<div class="fab no-print" md-theme="fab">
+  <md-fab-speed-dial md-direction="up" md-open="ctrl.isOpen" class="md-scale" ng-mouseenter="ctrl.isOpen=true" ng-mouseleave="ctrl.isOpen=false" ng-cloak>
+    <md-fab-trigger>
+      <md-button aria-label="menu" class="md-fab md-primary">
+        <md-icon class="material-icons">menu</md-icon>
+      </md-button>
+    </md-fab-trigger>
+    <md-fab-actions>
+      <md-button class="md-fab md-raised md-mini" ng-click="ctrl.pay(ctrl.invoice)">
+        <md-tooltip md-direction="left">支払する</md-tooltip>
+        <md-icon class="material-icons">payment</md-icon>
+      </md-button>
+      <md-button class="md-fab md-raised md-mini" ng-click="ctrl.cancel($event, ctrl.invoice)">
+        <md-tooltip md-direction="left">キャンセル</md-tooltip>
+        <md-icon class="material-icons">cancel</md-icon>
+      </md-button>
+    </md-fab-actions>
+  </md-fab-speed-dial>
+</div>

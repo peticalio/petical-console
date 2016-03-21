@@ -8,7 +8,7 @@
     </md-tab>
     <md-tab label="添付" ui-sref="app.dashboard.ticket.detail.attachment.list">
     </md-tab>
-    <md-tab label="会計" ui-sref="app.dashboard.ticket.detail.accounting.list">
+    <md-tab label="会計" ui-sref="app.dashboard.ticket.detail.invoice.list">
     </md-tab>
   </md-tabs>
 
@@ -54,7 +54,7 @@
                 hourglass_empty
                 <md-tooltip>ステータス</md-tooltip>
               </md-icon>
-              <p><ptz-ticket-status status="ctrl.ticket.state"></ptz-ticket-status></p>
+              <p><ptz-ticket-status value="ctrl.ticket.state"></ptz-ticket-status></p>
             </md-list-item>
             <md-list-item>
               <md-icon class="material-icons">

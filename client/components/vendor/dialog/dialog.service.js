@@ -2,8 +2,9 @@
   'use strict';
 
   class DialogService {
-    constructor($mdDialog) {
+    constructor($mdDialog, $mdMedia) {
       this.$mdDialog = $mdDialog;
+      this.$mdMedia = $mdMedia;
     }
 
     confirm(event, title, message) {
@@ -21,6 +22,10 @@
     }
 
     show(options) {
+      var useFullScreen = this.$mdMedia('sm') || this.$mdMedia('xs');
+      options.parent = angular.element(document.body);
+      options.fullscreen = useFullScreen;
+      options.clickOutsideToClose = true;
       return this.$mdDialog.show(options);
     }
 
@@ -33,7 +38,7 @@
     }
   }
 
-  DialogService.$inject = ['$mdDialog'];
+  DialogService.$inject = ['$mdDialog', '$mdMedia'];
   angular.module('petz.vendor')
     .service('dialog', DialogService);
 

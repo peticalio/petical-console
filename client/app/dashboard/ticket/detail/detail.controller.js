@@ -25,7 +25,7 @@
       no = this.$state.includes('app.dashboard.ticket.detail.examination') ? 1 : no;
       no = this.$state.includes('app.dashboard.ticket.detail.certificate') ? 2 : no;
       no = this.$state.includes('app.dashboard.ticket.detail.attachment') ? 3 : no;
-      no = this.$state.includes('app.dashboard.ticket.detail.accounting') ? 4 : no;
+      no = this.$state.includes('app.dashboard.ticket.detail.invoice') ? 4 : no;
       return no;
     }
 
