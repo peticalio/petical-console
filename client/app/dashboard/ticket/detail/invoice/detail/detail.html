@@ -4,7 +4,7 @@
     <div layout="row" layout-wrap>
       <div flex="50">
         <h4 class="pb bb">{{ctrl.invoice.ticket.chart.customer.user.lastName}} {{ctrl.invoice.ticket.chart.customer.user.firstName}} 様</h4>
-        <p class="pl2">
+        <p>
           〒 {{ctrl.invoice.ticket.chart.customer.user.zipCode}}<br/>
           {{ctrl.invoice.ticket.chart.customer.user.state}}{{ctrl.invoice.ticket.chart.customer.user.city}}{{ctrl.invoice.ticket.chart.customer.user.street}}
         </p>
@@ -46,7 +46,7 @@
           </tbody>
         </table>
       </div>
-      <div flex="60">
+      <div flex="50">
         <h4 class="b0">{{ctrl.clinic.name}}</h4>
         <p>
           〒 {{ctrl.clinic.zipCode}}<br/>
@@ -59,7 +59,7 @@
           <span class="mr">{{ctrl.clinic.url}}</span>
         </p>
       </div>
-      <div flex="40">
+      <div flex="50">
         <table class="table table-bordered">
           <tbody>
             <tr>
@@ -75,8 +75,8 @@
               <th class="text-right">{{ctrl.invoice.total | currency:'¥ ':0}}</th>
             </tr>
             <tr ng-if="ctrl.invoice.receiptAmount !== 0">
-              <th>受領金額</th>
-              <th class="text-right">{{ctrl.invoice.receiptAmount | currency:'¥ ':0}}</th>
+              <td>受領金額（おつり）</td>
+              <td class="text-right">{{ctrl.invoice.receiptAmount | currency:'¥ ':0}} ({{ctrl.invoice.receiptAmount - ctrl.invoice.total | currency:'¥ ':0}})</td>
             </tr>
           </tbody>
         </table>
@@ -96,8 +96,8 @@
       </md-button>
     </md-fab-trigger>
     <md-fab-actions>
-      <md-button class="md-fab md-raised md-mini" ng-click="ctrl.pay(ctrl.invoice)">
-        <md-tooltip md-direction="left">支払する</md-tooltip>
+      <md-button class="md-fab md-raised md-mini" ng-click="ctrl.showPaymentModal($event, ctrl.invoice)">
+        <md-tooltip md-direction="left">お金を受領</md-tooltip>
         <md-icon class="material-icons">payment</md-icon>
       </md-button>
       <md-button class="md-fab md-raised md-mini" ng-click="ctrl.cancel($event, ctrl.invoice)">

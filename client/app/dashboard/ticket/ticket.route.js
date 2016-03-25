@@ -3,8 +3,9 @@
 
   // 当日分のチケットを全て取得する
   function getTickets($stateParams, ClinicTicket) {
+    // ミッションクリティカルな機能なので、常にフェッチする
     var today = new Date();
-    return ClinicTicket.query({clinicId: $stateParams.clinicId, year: today.getFullYear(), month: today.getMonth() + 1, day: today.getDate()}).$promise
+    return ClinicTicket.fetch({clinicId: $stateParams.clinicId, year: today.getFullYear(), month: today.getMonth() + 1, day: today.getDate()}).$promise
       .then((response) => response);
   }
 

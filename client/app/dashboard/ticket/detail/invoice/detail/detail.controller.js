@@ -27,18 +27,20 @@
     }
 
     // 支払モーダルを表示する
-    pay(event, invoice) {
+    showPaymentModal(event, invoice) {
       var options = {
         controller: 'TicketDetailInvoiceDetailPaymentController',
         controllerAs: 'ctrl',
         templateUrl: 'app/dashboard/ticket/detail/invoice/detail/payment/payment.html',
         targetEvent: event,
-        locals: {clinic: this.clinic, ticket: this.ticket, invoice: this.invoice}
+        locals: {clinic: this.clinic, ticket: this.ticket, invoice: invoice}
       };
       this.dialog.show(options)
-        .then(() => this.ClinicInvoicePayment.save({clinicId: this.clinic.id, invoiceId: this.invoice.id}, invoice).$promise)
         .then(() => this.ClinicInvoice.get({clinicId: this.clinic.id, invoiceId: this.invoice.id}).$promise)
-        .then(() => this.toaster.info('支払情報を登録しました。'));
+        .then((response) => {
+          this.invoice = response;
+          this.toaster.info('お客様のお支払い情報を登録しました。');
+        });
     }
   }
 

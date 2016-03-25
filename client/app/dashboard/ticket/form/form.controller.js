@@ -53,9 +53,6 @@
     save(ticket) {
       this.ClinicTicket.save({clinicId: ticket.clinic.id}, ticket).$promise
         .then(() => {
-          return this.ClinicTicket.fetch({clinicId: ticket.clinic.id}).$promise;
-        })
-        .then(() => {
           this.toaster.info('新しいチケットを作成しました。');
           this.$state.go('app.dashboard.chart.detail', {clinicId: ticket.clinic.id, chartId: ticket.chart.id});
         });
