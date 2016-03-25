@@ -1,0 +1,41 @@
+<div class="layout-max-width">
+  <section>
+    <md-toolbar md-theme="content" class="pt">
+      <div class="md-toolbar-tools">
+        <h1 class="md-title">今週の予約状況</h1>
+        <span flex></span>
+        <md-button class="md-icon-button" ui-sref="app.dashboard.customer.list">
+          <md-tooltip md-direction="left">一覧</md-tooltip>
+          <md-icon class="material-icons">list</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <div layout-padding>
+      <mwl-calendar view="'month'" view-date="ctrl.today" events="ctrl.events">
+      </mwl-calendar>
+    </div>
+  </section>
+</div>
+
+<!-- <div class="row">
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-xs-6 col-md-6 text-left">
+        <div class="btn-group">
+          <button class="btn btn-sm btn-default" mwl-date-modifier date="ctrl.calendarDay" decrement="ctrl.viewCalendar" ng-click="ctrl.getTodaysSchedules(ctrl.calendarDay)">&lt;&nbsp;前月</button>
+        </div>
+      </div>
+      <div class="col-xs-6 col-md-6 text-right">
+        <div class="btn-group">
+          <button class="btn btn-sm btn-default" mwl-date-modifier date="ctrl.calendarDay" increment="ctrl.viewCalendar" ng-click="ctrl.getTodaysSchedules(ctrl.calendarDay)">翌月&nbsp;&gt;</button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <h4 class="text-center"><strong>{{ctrl.calendarDay | date: 'yyyy-MM'}}</strong> のスケジュール</h4>
+        <mwl-calendar view="'month'" current-day="ctrl.calendarDay" events="ctrl.events" on-event-click="ctrl.showEventDetail(calendarEvent)"></mwl-calendar>
+      </div>
+    </div>
+  </div>
+</div> -->

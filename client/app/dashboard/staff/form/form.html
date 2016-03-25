@@ -1,0 +1,28 @@
+<div class="layout-max-width">
+  <md-toolbar md-theme="content" class="pt">
+    <div class="md-toolbar-tools">
+      <h1 class="md-title">スタッフ招待フォーム</h1>
+    </div>
+  </md-toolbar>
+  <div layout-padding>
+    <div class="flat-card">
+      <form name="form" role="form" novalidate>
+        <div layout="row" layout-wrap>
+          <md-input-container class="md-block" flex="100">
+            <label>招待するアカウントまたはメールアドレス（カンマ区切り、改行で複数入力可）</label>
+            <textarea name="email" ng-model="ctrl.invitation.email" maxlength="1000" rows="5" ng-required="true" ng-minlength="1" ng-maxlength="1000"></textarea>
+            <div ng-show="form.email.$invalid" ng-messages="form.email.$error">
+              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                <span>全てのメールアドレスを合わせて1000文字以内で入力してください。</span>
+              </div>
+            </div>
+          </md-input-container>
+        </div>
+        <div layout="row" layout-align="end center">
+          <md-button class="md-primary md-raised" ng-disabled="form.$invalid" ng-click="ctrl.invite(ctrl.invitation)">招待する</md-button>
+          <md-button ui-sref="app.dashboard.staff.list">キャンセル</md-button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

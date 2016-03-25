@@ -1,0 +1,62 @@
+<md-dialog aria-label="Mango (Fruit)">
+  <form name="form" role="form" novalidate>
+    <md-toolbar class="white">
+      <div class="md-toolbar-tools">
+        <h2>請求額を受領する</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="ctrl.close()">
+          <md-icon class="material-icons white">close</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content class="p2">
+      <div class="container-small" layout="row" layout-wrap>
+        <div flex="50" flex-xs="100">
+          <label>ご請求金額</label>
+          <h3 class="mt pb2">{{ctrl.invoice.total | currency:'¥ ':0}}</h3>
+        </div>
+        <div flex="50" flex-xs="100">
+          <label>おつり</label>
+          <h3 class="mt pb2">{{ctrl.payment.changed | currency:'¥ ':0}}</h3>
+        </div>
+        <md-input-container class="md-block" flex="50" flex-xs="100">
+          <label>支払方法</label>
+          <md-select name="type" ng-model="ctrl.payment.type" ng-required="true">
+            <md-option ng-repeat="type in ctrl.paymentTypes" value="{{type.value}}">
+              {{type.name}}
+            </md-option>
+          </md-select>
+          <div class="select-message-container">
+            <div ng-show="form.type.$invalid" ng-messages="form.type.$error">
+              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                <span>一覧から選択してください。</span>
+              </div>
+            </div>
+          </div>
+        </md-input-container>
+        <md-input-container class="md-block" flex="50" flex-xs="100">
+          <label>支払金額</label>
+          <input name="amount" type="number" ng-model="ctrl.payment.amount" ng-required="true" min="0" max="9999999" ng-change="ctrl.payment.changed = -(ctrl.invoice.total - ctrl.payment.amount)"></input>
+          <div ng-show="form.amount.$invalid" ng-messages="form.amount.$error">
+            <div ng-message-exp="['required', 'min', 'max', 'pattern']">
+              <span>0 - 9,999,999 の間で入力してください。</span>
+            </div>
+          </div>
+        </md-input-container>
+        <md-input-container class="md-block" flex="100">
+          <label>メモ・備考</label>
+          <textarea name="memo" ng-model="ctrl.payment.memo" maxlength="2000" md-maxlength="2000" rows="5"></textarea>
+          <div ng-show="form.memo.$invalid" ng-messages="form.memo.$error">
+            <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+              <span>2000 文字以内で入力してください。</span>
+            </div>
+          </div>
+        </md-input-container>
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <md-button class="md-primary md-raised" ng-disabled="form.$invalid" ng-click="ctrl.save(ctrl.payment)">受領した</md-button>
+      <md-button ng-click="ctrl.close()">閉じる</md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

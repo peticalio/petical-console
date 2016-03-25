@@ -1,0 +1,170 @@
+@import '../assets/sass/bootstrap.variables';
+$icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
+@import '../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap';
+$fa-font-path: "../bower_components/font-awesome/fonts";
+@import '../bower_components/font-awesome/scss/font-awesome';
+
+/**
+ * App-wide Styles
+ */
+
+.browserupgrade {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+// Component styles are injected through grunt
+// injector
+@import 'app.overwrite';
+@import 'app.print';
+@import 'app.utils';
+// endinjector
+
+// body
+body {
+  font-family: 'Roboto', 'Noto Sans Japanese', sans-serif;
+  font-weight: 400;
+}
+body, body > div.main {
+  max-width: 100%;
+  max-height: 100%;
+  overflow: hidden;
+}
+body > div.main {
+  height: 100%;
+}
+
+// pre
+.pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+// overlay
+.state-loading-indicator {
+  position: fixed;
+  top: 0;
+  left:0;
+  width: 100%;
+  height:100%;
+  text-align: center;
+  z-index: 9;
+  background: rgba(0,0,0,0.1);
+}
+
+// background
+.bg-color {
+  background-color: #F5F5F5 !important;
+}
+
+// navbar
+.navbar-brand {
+  background: url('/assets/images/logo_236x75_1.png') no-repeat left center;
+  background-size: contain;
+  height: 30px;
+  width: 150px;
+}
+
+// note
+.note {
+  background: #FDD835;
+  color: #222;
+  display: block;
+  font-size: 14px;
+  font-weight: 400;
+  margin: 16px;
+  padding: 24px 24px 24px 24px;
+  text-align: center;
+}
+
+// card
+.flat-card {
+  background: #FFFFFF;
+  border-radius: 2px;
+  border: 1px solid rgba(0,0,0,0.12);
+}
+
+// sidenav menu
+.side-menu {
+  padding: 8px 0;
+}
+.side-menu li {
+  margin: 0px;
+}
+md-sidenav {
+  max-width: 250px;
+}
+md-sidenav md-content ul {
+  margin: 0;
+  padding: 0;
+}
+md-sidenav md-content ul li {
+  margin: 0;
+  padding: 0;
+}
+md-sidenav md-content ul li md-icon {
+  width: 46px;
+}
+.side-menu .md-button {
+  border-radius: 0px;
+  padding: 6px 16px;
+  margin: 0;
+  max-height: 48px;
+  min-height: 48px;
+  display: block;
+  width: 100%;
+  text-align: left;
+}
+.side-menu menu-link.active a, .side-menu menu-link.active a md-icon {
+  color: #00BCD4;
+}
+.side-menu menu-link a.active, .side-menu menu-link a.active md-icon {
+  color: #00BCD4;
+}
+
+// custom container
+@media (min-width: 768px) {
+  .container-small {
+    width: 300px;
+  }
+  .container-large {
+    width: 600px;
+  }
+}
+@media (min-width: 992px) {
+  .container-small {
+    width: 500px;
+  }
+  .container-large {
+    width: 850px;
+  }
+}
+@media (min-width: 1200px) {
+  .container-small {
+    width: 600px;
+  }
+  .container-large {
+    width: 980px;
+  }
+}
+
+// copyright
+.copyright {
+  font-size: 10px;
+  margin: 8px 16px;
+}
+
+// pets original styles
+.clinic-label {
+  font-size: 14px;
+  font-weight: 400;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.attachment {
+  border: 2px dashed #ccc;
+}

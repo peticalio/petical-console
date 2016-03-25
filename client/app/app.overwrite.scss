@@ -1,0 +1,198 @@
+// overwrite angular material styles
+
+$base-height: 56px;
+$base-size:   8px;
+
+// fade in and out
+.fadein.ng-enter {
+  transition:0.5s linear all;
+  opacity:0;
+}
+.fadein.ng-enter.ng-enter-active {
+  opacity:1;
+}
+
+// toolbar
+md-toolbar {
+  min-height: $base-height;
+}
+md-toolbar.navigation {
+  z-index: 10;
+}
+md-toolbar.navigation .navigation-title {
+  font-size: 18px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-left: $base-size;
+}
+md-toolbar.md-content-theme:not(.md-menu-toolbar) {
+  background-color: transparent;
+}
+.md-toolbar-tools {
+  font-weight: 200;
+  height: $base-height;
+}
+.md-toolbar-tools .md-button {
+  margin: 0;
+}
+// toolbar custom extension
+.md-toolbar-tools.toolbar-nav {
+}
+.md-toolbar-tools.toolbar-nav .md-title {
+  margin-left: $base-size;
+}
+
+// tabs
+md-tabs.md-console-theme.md-primary > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item:not([disabled]).md-active {
+  color: #fff;
+}
+
+// form
+form {
+  width: 100%;
+  display: inline;
+}
+form .hint {
+  position: absolute;
+  left: 2px;
+  right: auto;
+  bottom: 7px;
+  font-size: 12px;
+  line-height: 14px;
+  transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
+  color: grey;
+}
+label {
+  font-weight: inherit;
+  font-size: 16px;
+  margin: 0;
+}
+input, textarea {
+  font-size: 16px;
+}
+md-autocomplete md-autocomplete-wrap md-input-container {
+  padding-bottom: 2px !important;
+}
+.md-datepicker-input-container {
+  padding-bottom: 2px !important;
+}
+// select
+.select-message-container {
+  min-height: 23px;
+}
+// date picker
+.md-datepicker-wrap {
+  margin-top: 15px;
+  margin-bottom: 16px;
+  padding-bottom: 17px;
+}
+.md-datepicker-input {
+  font-size: 16px;
+}
+md-select-value {
+  font-size: 16px;
+}
+.md-error-message {
+  font-size: 12px;
+  color: rgb(213, 0, 0);
+}
+
+
+// checkbox
+md-checkbox {
+  font-size: 14px;
+}
+md-checkbox .description {
+  font-size: 12px;
+  line-height: 14px;
+  color: grey;
+}
+
+// button
+a.md-button.md-sidemenu-theme.md-ink-ripple {
+  padding-top: 6px;
+}
+a.md-button:hover {
+  color: inherit;
+}
+.md-button.md-console-theme.md-primary.md-raised {
+  color: white;
+}
+a {
+  cursor: pointer;
+}
+.link {
+  cursor: pointer;
+}
+.fab {
+  position: fixed;
+  top: auto;
+  right: 20px;
+  bottom: 20px;
+  left: auto;
+  z-index: 2;
+}
+
+// loading bar
+#loading-bar .bar {
+  background-color: #B2EBF2;
+}
+
+// calendar
+.cal-month-box {
+  background: #fff;
+}
+.cal-row-head {
+  font-weight: 200;
+}
+.cal-day-today {
+  background: #c5e1a5;
+}
+
+// overwrite bootstrap
+.img-circle {
+  width: 32px;
+}
+
+.label-default {
+  @extend .label-primary;
+  background-color: #999999;
+  border: 1px solid #999999;
+}
+.label-default-outline {
+  @extend .label-default;
+  background-color: #fff;
+  color: #999999;
+  border: 1px solid #999999;
+}
+.label-primary-outline {
+  @extend .label-primary;
+  background-color: #fff;
+  color: $brand-primary;
+  border: 1px solid $brand-primary;
+}
+.label-success-outline {
+  @extend .label-success;
+  background-color: #fff;
+  color: $brand-success;
+  border: 1px solid $brand-success;
+}
+.label-info-outline {
+  @extend .label-info;
+  background-color: #fff;
+  color: $brand-info;
+  border: 1px solid $brand-info;
+}
+.label-warning-outline {
+  @extend .label-warning;
+  background-color: #fff;
+  color: $brand-warning;
+  border: 1px solid $brand-warning;
+}
+.label-danger-outline {
+  @extend .label-danger;
+  background-color: #fff;
+  color: $brand-danger;
+  border: 1px solid $brand-danger;
+}

@@ -1,0 +1,96 @@
+<div class="layout-max-width">
+  <section>
+    <md-toolbar md-theme="content" class="pt">
+      <div class="md-toolbar-tools">
+        <h1 class="md-title">チケット作成フォーム</h1>
+      </div>
+    </md-toolbar>
+    <div layout-padding>
+      <div class="flat-card">
+        <form name="form" role="form" novalidate>
+          <div layout="row" layout-wrap>
+            <md-input-container class="md-block" flex="50" flex-xs="100">
+              <label>クリニック</label>
+              <input name="clinicName" ng-model="ctrl.ticket.clinic.name" ng-disabled="true"/>
+            </md-input-container>
+            <div flex="50" hide-xs></div>
+            <md-input-container class="md-block" flex="50" flex-xs="100">
+              <label>飼い主さまお名前（姓）</label>
+              <input name="lastName" ng-model="ctrl.ticket.chart.customer.user.lastName" ng-disabled="true"/>
+            </md-input-container>
+            <md-input-container class="md-block" flex="50" flex-xs="100">
+              <label>飼い主さまお名前（名）</label>
+              <input name="firstName" ng-model="ctrl.ticket.chart.customer.user.firstName" ng-disabled="true"/>
+            </md-input-container>
+            <md-input-container class="md-block" flex="50" flex-xs="100">
+              <label>お名前</label>
+              <input name="petName" ng-model="ctrl.ticket.chart.pet.name" ng-disabled="true"/>
+            </md-input-container>
+            <div flex="50" hide-xs></div>
+            <div class="md-datepicker-wrap" flex="30" flex-xs="100">
+              <md-datepicker name="startDateTime" ng-model="ctrl.ticket.startDateTime" md-placeholder="診察予定日" ng-required="true" md-min-date="ctrl.today">
+              </md-datepicker>
+              <div ng-show="form.startDateTime.$invalid" ng-messages="form.startDateTime.$error">
+                <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']" class="md-error-message">
+                  <span>yyyy/MM/dd の形式で入力してください。</span>
+                </div>
+              </div>
+            </div>
+            <md-input-container class="md-block" flex="20" flex-xs="100">
+              <label>診察開始時刻</label>
+              <md-select name="startTime" ng-model="ctrl.startTime" ng-required="true" md-on-close="ctrl.copyStartDateTime(ctrl.startTime)">
+                <md-option ng-repeat="time in ctrl.timetable" value="{{time}}">
+                  {{time}}
+                </md-option>
+              </md-select>
+              <div ng-show="form.startTime.$invalid" ng-messages="form.startTime.$error">
+                <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                  <span>一覧から選択してください。</span>
+                </div>
+              </div>
+            </md-input-container>
+            <div class="md-datepicker-wrap" flex="30" flex-xs="100">
+              <md-datepicker name="endDateTime" ng-model="ctrl.ticket.endDateTime" md-placeholder="診察予定日" ng-required="true" md-min-date="ctrl.today">
+              </md-datepicker>
+              <div ng-show="form.endDateTime.$invalid" ng-messages="form.endDateTime.$error">
+                <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']" class="md-error-message">
+                  <span>yyyy/MM/dd の形式で入力してください。</span>
+                </div>
+              </div>
+            </div>
+            <md-input-container class="md-block" flex="20" flex-xs="100">
+              <label>診察終了時刻</label>
+              <md-select name="endTime" ng-model="ctrl.endTime" ng-required="true" md-on-close="ctrl.changeTime(ctrl.ticket.endDateTime, ctrl.endTime)">
+                <md-option ng-repeat="time in ctrl.timetable" value="{{time}}">
+                  {{time}}
+                </md-option>
+              </md-select>
+              <div ng-show="form.endTime.$invalid" ng-messages="form.endTime.$error">
+                <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                  <span>一覧から選択してください。</span>
+                </div>
+              </div>
+            </md-input-container>
+            <md-input-container class="md-block" flex="100">
+              <label>メモ、要望事項</label>
+              <textarea name="memo" ng-model="ctrl.ticket.memo" maxlength="2000" md-maxlength="2000" rows="5"></textarea>
+              <div ng-show="form.memo.$invalid" ng-messages="form.memo.$error">
+                <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                  <span>2000 文字以内で入力してください。</span>
+                </div>
+              </div>
+            </md-input-container>
+          </div>
+          <div layout="row" layout-align="end center" ng-if="!ctrl.ticket.id">
+            <md-button class="md-primary md-raised" ng-disabled="form.$invalid" ng-click="ctrl.save(ctrl.ticket)">登録する</md-button>
+            <md-button ui-sref="app.dashboard.chart.detail({chartId: ctrl.ticket.chart.id})">キャンセル</md-button>
+          </div>
+          <div layout="row" layout-align="end center" ng-if="ctrl.ticket.id">
+            <md-button class="md-primary md-raised" ng-disabled="form.$invalid" ng-click="ctrl.update(ctrl.ticket)">更新する</md-button>
+            <md-button ui-sref="app.dashboard.ticket.detail({ticketId: ctrl.ticket.id})">キャンセル</md-button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>

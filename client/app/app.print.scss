@@ -1,0 +1,76 @@
+section.print-page {
+  width: 180mm;
+  // height: 250mm;
+}
+
+@media print {
+  .table-bordered tr td, .table-bordered tr th {
+    border-color: #000 !important;
+  }
+
+  section.print-page {
+    display: block;
+    page-break-after: always;
+    .print-title {
+      margin-top: 0 !important;
+    }
+  }
+  section.print-page:last-child {
+    page-break-after: auto;
+  }
+
+  .flat-card {
+    border-width: 0 !important;
+  }
+
+  pre code {
+    page-break-after: always;
+  }
+
+  @page {
+    margin-top: 0.4cm;
+    margin: 0.5cm;
+  }
+
+  p a, code, pre {
+    word-wrap: break-word;
+  }
+
+  img {
+    display: none;
+  }
+
+  pre a[href]:after {
+    content: "";
+  }
+
+  pre abbr[title]:after {
+    content: "";
+  }
+
+  pre .ir a:after, pre a[href^="javascript:"]:after, pre a[href^="#"]:after {
+    content: "";
+  }
+
+  .sidebar,
+  .topnavbar,
+  .offsidebar,
+  .no-print,
+  .btn {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+
+  .wrapper,
+  .wrapper > section,
+  .content-wrapper {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+
+  .content-wrapper {
+    overflow: hidden !important;
+  }
+}
