@@ -123,6 +123,9 @@ md-sidenav md-content ul li md-icon {
 .side-menu menu-link a.active, .side-menu menu-link a.active md-icon {
   color: #00BCD4;
 }
+md-menu-item a.active, md-menu-item a.active:hover, md-menu-item a.active md-icon {
+  color: #00BCD4;
+}
 
 // custom container
 @media (min-width: 768px) {

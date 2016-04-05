@@ -2,30 +2,31 @@
   'use strict';
 
   class SigninController {
-    constructor($rootScope, $state, $location, $cacheFactory, Auth) {
-      this.root = $rootScope;
-      this.state = $state;
-      this.location = $location;
-      this.cache = $cacheFactory;
+    constructor($rootScope, $state, $location, $cacheFactory, toaster, Auth) {
+      this.$rootScope = $rootScope;
+      this.$state = $state;
+      this.$location = $location;
+      this.$cacheFactory = $cacheFactory;
+      this.toaster = toaster;
       this.Auth = Auth;
     }
 
     // ログインする
     login(form) {
-      this.Auth.login(form)
+      this.Auth.login(form, () => this.toaster.info('ログインIDかパスワードが間違っています。'))
         .then(() => {
-          if (this.root.returnToState) {
+          if (this.$rootScope.returnToState) {
             var path = this.root.returnToState + this.root.returnToStateParams;
-            this.location.path(path);
+            this.$location.path(path);
           } else {
-            this.cache.get('$http').removeAll();
-            this.state.go('app.main', {}, {reload: true});
+            this.$cacheFactory.get('$http').removeAll();
+            this.$state.go('app.main', {}, {reload: true});
           }
         });
     }
   }
 
-  SigninController.$inject = ['$rootScope', '$state', '$location', '$cacheFactory', 'Auth'];
+  SigninController.$inject = ['$rootScope', '$state', '$location', '$cacheFactory', 'toaster', 'Auth'];
   angular.module('petzApp')
     .controller('SigninController', SigninController);
 

@@ -31,6 +31,9 @@
         .then(function(token) {
           _this.currentUser = MyAccount.get();
           return $q.resolve(_this.currentUser);
+        })
+        .catch(function(response) {
+          return $q.reject(response);
         });
     }
 

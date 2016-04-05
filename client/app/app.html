@@ -177,12 +177,12 @@
         <md-menu-content width="4">
           <md-subheader><h4 class="mt0">{{ctrl.account.username}}</h4>{{ctrl.account.login}}</md-subheader>
           <md-menu-item>
-            <md-button>
+            <md-button ui-sref="app.main.account.form" ui-sref-active="active">
               <md-icon class="material-icons" aria-label="Account">person_outline</md-icon>アカウント
             </md-button>
           </md-menu-item>
           <md-menu-item>
-            <md-button>
+            <md-button ui-sref="app.main.account.password" ui-sref-active="active">
               <md-icon class="material-icons" aria-label="Password">security</md-icon>パスワード変更
             </md-button>
           </md-menu-item>
