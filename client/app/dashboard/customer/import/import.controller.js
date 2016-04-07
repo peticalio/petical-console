@@ -3,10 +3,11 @@
   'use strict';
 
   class CustomerImportController {
-    constructor($state, $stateParams, ClinicUser, clinic) {
-      this.state = $state;
-      this.params = $stateParams;
+    constructor($state, $stateParams, ClinicUser, ClinicCustomer, clinic) {
+      this.$state = $state;
+      this.$stateParams = $stateParams;
       this.ClinicUser = ClinicUser;
+      this.ClinicCustomer = ClinicCustomer;
       this.clinic = clinic;
     }
 
@@ -17,7 +18,7 @@
 
     // 認証して顧客候補の情報を表示する
     authenticate(token) {
-      this.ClinicUser.authenticate({clinicId: this.params.clinicId}, token).$promise
+      this.ClinicUser.authenticate({clinicId: this.$stateParams.clinicId}, token).$promise
         .then((response) => {
           this.customer = {clinic: this.clinic, user: response};
         });
@@ -25,14 +26,13 @@
 
     // 飼い主のデータをインポートする
     imp(token) {
-      this.ClinicUser.imp({clinicId: this.params.clinicId}, token).$promise
-        .then((response) => {
-          this.state.go('app.dashboard.customer.list', {clinicId: this.params.clinicId, customerId: response.id});
-        });
+      this.ClinicUser.imp({clinicId: this.$stateParams.clinicId}, token).$promise
+        .then(() => this.ClinicCustomer.fetch({clinicId: this.$stateParams.clinicId}).$promise)
+        .then(() => this.$state.go('app.dashboard.customer.list', {}, {reload:true}));
     }
   }
 
-  CustomerImportController.$inject = ['$state', '$stateParams', 'ClinicUser', 'clinic'];
+  CustomerImportController.$inject = ['$state', '$stateParams', 'ClinicUser', 'ClinicCustomer', 'clinic'];
   angular.module('petzApp')
     .controller('CustomerImportController', CustomerImportController);
 

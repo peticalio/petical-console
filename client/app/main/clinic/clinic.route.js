@@ -5,13 +5,6 @@
     return {country:'JP'};
   }
 
-  function getInvitation($stateParams, MyInvitation) {
-    return MyInvitation.load({invitationId:$stateParams.invitationId}).$promise
-      .then(function(response) {
-        return response;
-      });
-  }
-
   function ClinicRouter($stateProvider){
     $stateProvider
       // register new clinic
@@ -30,20 +23,6 @@
         },
         resolve: {
           clinic:         empty
-        }
-      })
-      .state('app.main.clinic.invitation', {
-        authenticate:     true,
-        url:              '^/invitations/:invitationId',
-        views: {
-          '@app': {
-            templateUrl:  'app/clinic/invitation/invitation.html',
-            controller:   'ClinicInvitationController',
-            controllerAs: 'ctrl'
-          }
-        },
-        resolve: {
-          invitation:     getInvitation
         }
       })
     ;

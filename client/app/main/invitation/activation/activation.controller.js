@@ -1,7 +1,7 @@
 (()=> {
   'use strict';
 
-  class ClinicInvitationController {
+  class InvitationActivationController {
     constructor($state, $stateParams, toaster, MyInvitation) {
       this.state = $state;
       this.params = $stateParams;
@@ -13,14 +13,14 @@
     accept(activation) {
       this.MyInvitation.save({invitationId: this.params.invitationId}, activation).$promise
         .then(() => {
-          this.toaster.info('招待状を承認して、勤務先のクリニックに追加しました。');
-          this.state.go('app.home');
+          this.toaster.info('招待状を承認しました。');
+          this.state.go('app.main');
         });
     }
   }
 
-  ClinicInvitationController.$inject = ['$state', '$stateParams', 'toaster', 'MyInvitation'];
+  InvitationActivationController.$inject = ['$state', '$stateParams', 'toaster', 'MyInvitation'];
   angular.module('petzApp')
-    .controller('ClinicInvitationController', ClinicInvitationController);
+    .controller('InvitationActivationController', InvitationActivationController);
 
 })();

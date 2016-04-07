@@ -2,7 +2,12 @@
   <section>
     <md-toolbar md-theme="content" class="pt">
       <div class="md-toolbar-tools">
-        <h2 class="md-title">カルテ</h2>
+        <h2 class="md-title">
+          カルテ
+          <span class="hint--large hint--bounce hint--rounded clickable" data-hint="カルテの作成は飼い主さまの検索から行います。既に飼い主さまがペットを登録している場合は、簡易入力機能を使ってカルテの作成をすると便利です。">
+            <md-icon class="material-icons small">help</md-icon>
+          </span>
+        </h2>
         <span flex></span>
         <md-button class="md-icon-button" ng-click="ctrl.refresh()">
           <md-tooltip md-direction="left">更新</md-tooltip>

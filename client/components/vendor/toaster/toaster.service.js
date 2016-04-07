@@ -42,8 +42,10 @@
                 message = cause.data.errors[i].message;
               }
             }
-            this.error(message);
-          } else if (cause.data) {
+            if (message) {
+              this.error(message);
+            }
+          } else if (cause.data && cause.data.detail) {
             this.error(cause.data.detail);
           }
           break;

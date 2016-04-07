@@ -13,7 +13,7 @@
 
     // ログインする
     login(form) {
-      this.Auth.login(form, () => this.toaster.info('ログインIDかパスワードが間違っています。'))
+      this.Auth.login(form)
         .then(() => {
           if (this.$rootScope.returnToState) {
             var path = this.root.returnToState + this.root.returnToStateParams;
@@ -22,7 +22,8 @@
             this.$cacheFactory.get('$http').removeAll();
             this.$state.go('app.main', {}, {reload: true});
           }
-        });
+        })
+        .catch(() => this.toaster.info('ログインIDかパスワードが間違っています。'));
     }
   }
 
