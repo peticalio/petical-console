@@ -19,7 +19,9 @@ angular.module('petz.core')
       responseError: function(response) {
         var toaster = $injector.get('toaster');
         if (response.status === 400) {
-          toaster.handle(response);
+          if (!(response.config.params && response.config.params.not)) {
+            toaster.handle(response);
+          }
           $log.info(response);
         } else if (response.status === 404) {
           $log.info(response);

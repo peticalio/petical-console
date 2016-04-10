@@ -1,0 +1,43 @@
+<div class="layout-max-width">
+  <section>
+    <md-toolbar md-theme="content" class="pt">
+      <div class="md-toolbar-tools">
+        <h2 class="md-title">
+          飼い主さま一括登録（データ移行用）
+          <span class="hint--large hint--bounce hint--rounded clickable"
+          data-hint="500件まで、飼い主さまを一度に登録することができます。Excel等で整理したデータをコピー＆ペーストして、一括登録ボタンをクリックしてください。行の追加や削除は右クリックしてください。">
+            <md-icon class="material-icons small">help</md-icon>
+          </span>
+        </h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ui-sref="app.dashboard.customer.list">
+          <md-tooltip>一覧</md-tooltip>
+          <md-icon class="material-icons">list</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <div layout-padding>
+      <div id="upload-table-container" class="p0">
+        <hot-table settings="ctrl.settings" row-headers="false" min-spare-rows="1" datarows="ctrl.customers" class="p0" height="ctrl.getHeight()">
+          <hot-column width="100" data="customerCode" title="'飼主コード'" validator="ctrl.requiredNameValidator"></hot-column>
+          <hot-column width="100" data="user.lastName" title="'お名前（姓）'" validator="ctrl.requiredNameValidator"></hot-column>
+          <hot-column width="100" data="user.firstName" title="'お名前（名）'" validator="ctrl.requiredNameValidator"></hot-column>
+          <hot-column width="100" data="user.lastNameKana" title="'フリガナ（姓）'" validator="ctrl.nameValidator"></hot-column>
+          <hot-column width="100" data="user.firstNameKana" title="'フリガナ（名）'" validator="ctrl.nameValidator"></hot-column>
+          <hot-column width="100" data="user.zipCode" title="'郵便番号'" validator="ctrl.requiredZipCodeValidator"></hot-column>
+          <hot-column width="100" data="user.state" title="'都道府県'" validator="ctrl.requiredNameValidator"></hot-column>
+          <hot-column width="200" data="user.city" title="'市区町村'" validator="ctrl.requiredNameValidator"></hot-column>
+          <hot-column width="200" data="user.street" title="'番地'" validator="ctrl.requiredNameValidator"></hot-column>
+          <hot-column width="200" data="user.other" title="'その他'" validator="ctrl.nameValidator"></hot-column>
+          <hot-column width="200" data="user.phoneNo" title="'電話番号（自宅）'" validator="ctrl.requiredPhoneNoValidator"></hot-column>
+          <hot-column width="200" data="user.mobilePhoneNo" title="'電話番号（携帯）'" validator="ctrl.phoneNoValidator"></hot-column>
+          <hot-column width="200" data="user.email" title="'メールアドレス'" validator="ctrl.emailValidator"></hot-column>
+        </hot-table>
+      </div>
+      <div layout="row" layout-align="end center">
+        <md-button class="md-primary md-raised" ng-disabled="!ctrl.isValid()" ng-click="ctrl.save(ctrl.customers)">一括登録</md-button>
+        <md-button ui-sref="app.dashboard.customer.list">キャンセル</md-button>
+      </div>
+    </div>
+  </section>
+</div>

@@ -196,3 +196,31 @@ a {
   color: $brand-danger;
   border: 1px solid $brand-danger;
 }
+
+// handsontable bug fix style
+.ht_clone_top {
+  z-index: 0 !important;
+}
+.ht_clone_left {
+  z-index: 0 !important;
+}
+.ht_clone_top_left_corner,
+.ht_clone_bottom_left_corner {
+  z-index: 0 !important;
+}
+.ht_clone_debug {
+  z-index: 0 !important;
+}
+
+.handsontable thead th .relative {
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 12px;
+  font-weight: bold;
+}
+.handsontable td {
+  color: rgba(0, 0, 0, 0.87);
+  font-size: 13px;
+}
+.handsontable td.htInvalid {
+  background-color: #FFCDD2 !important;
+}

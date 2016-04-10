@@ -3,6 +3,7 @@
 angular
   .module('petzApp', [
     'petzApp.constants',
+    'petzApp.util',
     'petz.core',
     'petz.api',
     'petz.vendor',
@@ -19,6 +20,7 @@ angular
     'angularMoment',
     'md.data.table',
     'mwl.calendar',
+    'ngHandsontable',
     'nvd3'
   ])
 

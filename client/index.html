@@ -18,6 +18,8 @@
       <link rel="stylesheet" href="bower_components/angular-bootstrap-calendar/dist/css/angular-bootstrap-calendar.css" />
       <link rel="stylesheet" href="bower_components/nvd3/build/nv.d3.css" />
       <link rel="stylesheet" href="bower_components/hint.css/hint.min.css" />
+      <link rel="stylesheet" href="bower_components/pikaday/css/pikaday.css" />
+      <link rel="stylesheet" href="bower_components/handsontable/dist/handsontable.css" />
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
@@ -76,6 +78,10 @@
       <script src="bower_components/d3/d3.js"></script>
       <script src="bower_components/nvd3/build/nv.d3.js"></script>
       <script src="bower_components/angular-nvd3/dist/angular-nvd3.js"></script>
+      <script src="bower_components/zeroclipboard/dist/ZeroClipboard.js"></script>
+      <script src="bower_components/pikaday/pikaday.js"></script>
+      <script src="bower_components/handsontable/dist/handsontable.js"></script>
+      <script src="bower_components/ngHandsontable/dist/ngHandsontable.js"></script>
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js(.tmp) app/app.js -->
@@ -102,6 +108,7 @@
       <script src="app/dashboard/customer/form/form.controller.js"></script>
       <script src="app/dashboard/customer/import/import.controller.js"></script>
       <script src="app/dashboard/customer/list/list.controller.js"></script>
+      <script src="app/dashboard/customer/upload/upload.controller.js"></script>
       <script src="app/dashboard/dashboard.controller.js"></script>
       <script src="app/dashboard/dashboard.route.js"></script>
       <script src="app/dashboard/product/detail/detail.controller.js"></script>
@@ -181,6 +188,7 @@
       <script src="components/api/user/pet/UserPet.service.js"></script>
       <script src="components/common/ptz-ticket-status/ptz-ticket-status.controller.js"></script>
       <script src="components/common/util.service.js"></script>
+      <script src="components/common/validator/factory/Factory.service.js"></script>
       <script src="components/core/account/MyAccount.factory.js"></script>
       <script src="components/core/auth/Auth.factory.js"></script>
       <script src="components/core/auth/Auth.interceptor.js"></script>

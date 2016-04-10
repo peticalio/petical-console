@@ -67,13 +67,24 @@
           customer:       getEmpty
         }
       })
-      // 飼い主インポート
+      // 飼い主アップロード
       .state('app.dashboard.customer.import', {
         url: '/import',
         views: {
           '@app': {
             templateUrl:  'app/dashboard/customer/import/import.html',
             controller:   'CustomerImportController',
+            controllerAs: 'ctrl'
+          }
+        }
+      })
+      // 飼い主アップロード
+      .state('app.dashboard.customer.upload', {
+        url: '/upload',
+        views: {
+          '@app': {
+            templateUrl:  'app/dashboard/customer/upload/upload.html',
+            controller:   'CustomerUploadController',
             controllerAs: 'ctrl'
           }
         }
