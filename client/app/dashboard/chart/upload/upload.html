@@ -1,12 +1,52 @@
-<h3>
-  カルテをアップロードする
-  <small>他の動物病院アプリのデータをエクスポートしたCSVファイルをアップロードして取り込みます。</small>
-</h3>
-
-<div class="alert alert-default text-center" ng-show="!ctrl.chart.customer.id">
-  <p class="large-icon"><i class="fa fa-shield"></i></p>
-  <h4>鋭意開発中！</h4>
-  <p>
-    この機能は現在開発中です。機能が使えるようになるまでしばらくお待ちください。
-  </p>
+<div class="layout-max-width">
+  <section>
+    <md-toolbar md-theme="content" class="pt">
+      <div class="md-toolbar-tools">
+        <h2 class="md-title">
+          カルテ一括登録（データ移行用）
+          <span class="hint--large hint--bounce hint--rounded clickable" data-hint="500件まで、カルテを一度に登録することができます。Excel等で整理したデータをコピー＆ペーストして、一括登録ボタンをクリックしてください。行の追加や削除は右クリックしてください。">
+            <md-icon class="material-icons small">help</md-icon>
+          </span>
+        </h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ui-sref="app.dashboard.chart.list">
+          <md-tooltip>一覧</md-tooltip>
+          <md-icon class="material-icons">list</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <div layout-padding>
+      <div id="upload-table-container" class="p0">
+        <hot-table settings="ctrl.settings" row-headers="false" datarows="ctrl.charts" class="p0" height="ctrl.getHeight()">
+          <hot-column width="100" data="customer.customerCode" title="'飼い主コード'" validator="ctrl.requiredNameValidator"></hot-column>
+          <hot-column width="100" data="chartNo" title="'カルテ番号'" validator="ctrl.requiredNameValidator"></hot-column>
+          <hot-column width="200" data="pet.name" title="'お名前'" validator="ctrl.requiredNameValidator"></hot-column>
+          <hot-column width="200" data="pet.nameKana" title="'フリガナ'" validator="ctrl.nameValidator"></hot-column>
+          <hot-column width="100" data="pet.kind" title="'種類'" validator="ctrl.requiredNameValidator"></hot-column>
+          <hot-column width="300" data="pet.type" title="'品種'" validator="ctrl.requiredNameValidator"></hot-column>
+          <hot-column width="200" data="pet.color" title="'毛色'" validator="ctrl.requiredNameValidator"></hot-column>
+          <hot-column width="100" data="pet.blood" title="'血液型'" validator="ctrl.nameValidator"></hot-column>
+          <hot-column width="100" data="pet.sex" title="'性別'" validator="ctrl.sexValidator"></hot-column>
+          <hot-column width="100" data="pet.birthDate" title="'生年月日'" validator="ctrl.dateValidator"></hot-column>
+          <hot-column width="150" data="pet.rabidRegisterNo" title="'狂犬病登録番号'" validator="ctrl.nameValidator"></hot-column>
+          <hot-column width="150" data="pet.injectionReportNo" title="'注射済票番号'" validator="ctrl.nameValidator"></hot-column>
+          <hot-column width="150" data="pet.microchipNo" title="'チップ番号'" validator="ctrl.nameValidator"></hot-column>
+          <hot-column width="100" data="pet.microchipDate" title="'チップ登録日'" validator="ctrl.dateValidator"></hot-column>
+          <hot-column width="100" data="pet.neutral" title="'去勢・避妊'" validator="ctrl.flagValidator"></hot-column>
+          <hot-column width="100" data="pet.dead" title="'死亡フラグ'" validator="ctrl.flagValidator"></hot-column>
+          <hot-column width="100" data="memo" title="'メモ'" validator="ctrl.memoValidator"></hot-column>
+          <hot-column width="100" data="creationDate" title="'初診日'" validator="ctrl.dateValidator"></hot-column>
+          <hot-column width="100" data="rabidVaccineDate" title="'狂犬病ワクチン接種日'" validator="ctrl.dateValidator"></hot-column>
+          <hot-column width="200" data="mixVaccineName" title="'混合ワクチン種'" validator="ctrl.nameValidator"></hot-column>
+          <hot-column width="100" data="mixVaccineDate" title="'混合ワクチン接種日'" validator="ctrl.dateValidator"></hot-column>
+          <hot-column width="100" data="filariaDate" title="'フィラリア予防接種日'" validator="ctrl.dateValidator"></hot-column>
+          <hot-column width="100" data="fleaDate" title="'ノミ予防接種日'" validator="ctrl.dateValidator"></hot-column>
+        </hot-table>
+      </div>
+      <div layout="row" layout-align="end center">
+        <md-button class="md-primary md-raised" ng-disabled="!ctrl.isValid()" ng-click="ctrl.save(ctrl.charts)">一括登録</md-button>
+        <md-button ui-sref="app.dashboard.chart.list">キャンセル</md-button>
+      </div>
+    </div>
+  </section>
 </div>

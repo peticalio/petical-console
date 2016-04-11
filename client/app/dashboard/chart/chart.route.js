@@ -79,6 +79,20 @@
         abstract: true,
         url:      '^/clinics/:clinicId/charts'
       })
+      // カルテ一覧
+      .state('app.dashboard.chart.list', {
+        url: '/list',
+        views: {
+          '@app': {
+            templateUrl:  'app/dashboard/chart/list/list.html',
+            controller:   'ChartListController',
+            controllerAs: 'ctrl'
+          }
+        },
+        resolve: {
+          charts:         getCharts
+        }
+      })
       // カルテ新規作成（顧客特定済みの場合）
       .state('app.dashboard.chart.form', {
         url: '^/clinics/:clinicId/customers/:customerId/charts/form',
@@ -142,20 +156,6 @@
             controller:   'ChartUploadController',
             controllerAs: 'ctrl'
           }
-        }
-      })
-      // カルテ一覧
-      .state('app.dashboard.chart.list', {
-        url: '/list',
-        views: {
-          '@app': {
-            templateUrl:  'app/dashboard/chart/list/list.html',
-            controller:   'ChartListController',
-            controllerAs: 'ctrl'
-          }
-        },
-        resolve: {
-          charts:         getCharts
         }
       })
       // カルテ詳細

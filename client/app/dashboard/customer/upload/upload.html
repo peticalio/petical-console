@@ -18,7 +18,7 @@
     </md-toolbar>
     <div layout-padding>
       <div id="upload-table-container" class="p0">
-        <hot-table settings="ctrl.settings" row-headers="false" min-spare-rows="1" datarows="ctrl.customers" class="p0" height="ctrl.getHeight()">
+        <hot-table settings="ctrl.settings" row-headers="false" datarows="ctrl.customers" class="p0" height="ctrl.getHeight()">
           <hot-column width="100" data="customerCode" title="'飼主コード'" validator="ctrl.requiredNameValidator"></hot-column>
           <hot-column width="100" data="user.lastName" title="'お名前（姓）'" validator="ctrl.requiredNameValidator"></hot-column>
           <hot-column width="100" data="user.firstName" title="'お名前（名）'" validator="ctrl.requiredNameValidator"></hot-column>

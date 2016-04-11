@@ -98,6 +98,17 @@ md-select-value {
   color: rgb(213, 0, 0);
 }
 
+// toolbar search form
+md-toolbar.md-table-toolbar form > input {
+  width: 100%;
+  margin: 0;
+  border: 0;
+  background-color: inherit;
+  font-size: 100%;
+}
+md-toolbar.md-table-toolbar form {
+  margin-left: 16px;
+}
 
 // checkbox
 md-checkbox {

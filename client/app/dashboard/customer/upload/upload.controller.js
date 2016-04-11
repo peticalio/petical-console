@@ -20,7 +20,7 @@
       this.emailValidator = ValidatorFactory.createEmailValidator();
 
       // set default form values
-      this.customers = [];
+      this.customers = [{}];
       this.settings = {contextMenu: ['row_above', 'row_below', 'remove_row']};
       this.container = document.getElementById('main-content');
     }
@@ -64,6 +64,7 @@
         } else {
           this.toaster.info(counter + '件の飼い主さまを登録しました。');
         }
+        customers.push({});
       });
     }
   }

@@ -1,18 +1,34 @@
 <div class="layout-max-width">
   <section>
-    <md-toolbar md-theme="content" class="pt">
+    <md-toolbar md-theme="content" class="pt" ng-show="!ctrl.showSearchBox">
       <div class="md-toolbar-tools">
         <h2 class="md-title">飼い主さま</h2>
         <span flex></span>
+        <md-button class="md-icon-button" ng-click="ctrl.showSearchBox = true">
+          <md-tooltip>検索</md-tooltip>
+          <md-icon class="material-icons">search</md-icon>
+        </md-button>
         <md-button class="md-icon-button" ng-click="ctrl.refresh()">
           <md-tooltip>更新</md-tooltip>
           <md-icon class="material-icons">refresh</md-icon>
         </md-button>
       </div>
     </md-toolbar>
+    <md-toolbar md-theme="content" class="md-table-toolbar pt" ng-show="ctrl.showSearchBox">
+      <div class="md-toolbar-tools">
+        <md-icon class="material-icons">search</md-icon>
+        <form flex name="form" class="ng-pristine">
+          <input type="text" ng-model="ctrl.query" ng-model-options="{debounce: 500}" placeholder="キーワードを入力"/>
+        </form>
+        <md-button class="md-icon-button" ng-click="ctrl.showSearchBox = false">
+          <md-tooltip>閉じる</md-tooltip>
+          <md-icon class="material-icons">close</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
     <div layout-padding>
       <md-table-container class="flat-card">
-        <table md-table md-row-select class="table-hover table-clickable">
+        <table md-table class="table-hover table-clickable">
           <thead md-head>
             <tr md-row>
               <th md-column md-order-by="customer.customerCode"><span>飼い主コード</span></th>
@@ -22,7 +38,7 @@
             </tr>
           </thead>
           <tbody md-body>
-            <tr md-row ng-repeat="customer in ctrl.customers" ui-sref="app.dashboard.customer.detail({customerId: customer.id})">
+            <tr md-row ng-repeat="customer in ctrl.customers | filter:ctrl.query" ui-sref="app.dashboard.customer.detail({customerId: customer.id})">
               <td md-cell>
                 {{customer.customerCode}}
               </td>
@@ -60,7 +76,7 @@
         <md-tooltip md-direction="left">インポート</md-tooltip>
         <md-icon class="material-icons">file_upload</md-icon>
       </md-button>
-      <md-button aria-label="import" class="md-fab md-raised md-mini" ui-sref="app.dashboard.customer.upload">
+      <md-button aria-label="upload" class="md-fab md-raised md-mini" ui-sref="app.dashboard.customer.upload">
         <md-tooltip md-direction="left">一括登録（移行）</md-tooltip>
         <md-icon class="material-icons">backup</md-icon>
       </md-button>

@@ -40,6 +40,30 @@
         callback((value + '').length <= 100);
       };
     }
+
+    createSexValidator() {
+      return function(value, callback) {
+        callback((value + '').length > 0 && (value.toUpperCase() === 'MALE' || value.toUpperCase() === 'FEMALE'));
+      };
+    }
+
+    createFlagValidator() {
+      return function(value, callback) {
+        callback((value + '').length > 0 && (value === 'true' || value === 'false'));
+      };
+    }
+
+    createDateValidator() {
+      return function(value, callback) {
+        callback((value + '').length === 0 || (/\d{4}\/\d{1,2}\/\d{1,2}/).test(value));
+      };
+    }
+
+    createMemoValidator() {
+      return function(value, callback) {
+        callback((value + '').length <= 2000);
+      };
+    }
   }
 
   ValidatorFactory.$inject = [];
