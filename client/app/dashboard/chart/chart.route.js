@@ -1,7 +1,13 @@
 (() => {
   'use strict';
 
-  // ペットの種別を取得する
+  // ペットの種類を取得する
+  function getKinds(Kind) {
+    return Kind.query().$promise
+      .then((response) => response);
+  }
+
+  // ペットの品種を取得する
   function getTypes(Type) {
     return Type.query().$promise
       .then((response) => response);
@@ -104,6 +110,7 @@
           }
         },
         resolve: {
+          kinds:          getKinds,
           types:          getTypes,
           colors:         getColors,
           bloods:         getBloods,
@@ -122,6 +129,7 @@
           }
         },
         resolve: {
+          kinds:          getKinds,
           types:          getTypes,
           colors:         getColors,
           bloods:         getBloods,
@@ -140,6 +148,7 @@
           }
         },
         resolve: {
+          kinds:          getKinds,
           types:          getTypes,
           colors:         getColors,
           bloods:         getBloods,

@@ -2,7 +2,12 @@
   <section>
     <md-toolbar md-theme="content" class="pt" ng-show="!ctrl.showSearchBox">
       <div class="md-toolbar-tools">
-        <h2 class="md-title">飼い主さま</h2>
+        <h2 class="md-title">
+          飼い主さま
+          <span class="hint--large hint--bounce hint--rounded clickable" data-hint="飼い主さまを検索します。">
+            <md-icon class="material-icons small">help</md-icon>
+          </span>
+        </h2>
         <span flex></span>
         <md-button class="md-icon-button" ng-click="ctrl.showSearchBox = true">
           <md-tooltip>検索</md-tooltip>
@@ -20,7 +25,7 @@
         <form flex name="form" class="ng-pristine">
           <input type="text" ng-model="ctrl.query" ng-model-options="{debounce: 500}" placeholder="キーワードを入力"/>
         </form>
-        <md-button class="md-icon-button" ng-click="ctrl.showSearchBox = false">
+        <md-button class="md-icon-button" ng-click="ctrl.showSearchBox = false; ctrl.query = '';">
           <md-tooltip>閉じる</md-tooltip>
           <md-icon class="material-icons">close</md-icon>
         </md-button>
@@ -31,7 +36,7 @@
         <table md-table class="table-hover table-clickable">
           <thead md-head>
             <tr md-row>
-              <th md-column md-order-by="customer.customerCode"><span>飼い主コード</span></th>
+              <th md-column md-order-by="customer.customerCode"><span>飼い主さまコード</span></th>
               <th md-column md-order-by="customer.lastName"><span>飼い主さま</span></th>
               <th md-column><span>飼い主さま（よみがな）</span></th>
               <th md-column><span>住所・連絡先</span></th>
@@ -49,8 +54,8 @@
                 {{customer.user.lastNameKana}} {{customer.user.firstNameKana}}<span ng-show="customer.user.lastNameKana || customer.user.firstNameKana"> 様</span>
               </td>
               <td md-cell>
-                {{customer.user.zipCode}}<br/>
-                {{customer.user.state}}{{customer.user.city}}{{customer.user.street}}
+                〒 {{customer.user.zipCode}}<br/>
+                {{customer.user.state}}{{customer.user.city}}{{customer.user.street}}{{customer.user.other}}
               </td>
             </tr>
           </tbody>

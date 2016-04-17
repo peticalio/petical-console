@@ -54,6 +54,10 @@
       this.Auth.logout();
       this.$state.go('app.signin', {}, {reload: true});
     }
+    // サインインしているかどうかチェックする
+    isSignin() {
+      return this.Auth.isLoggedIn();
+    }
 
     // サイドメニューを開く
     toggleMainMenu() {

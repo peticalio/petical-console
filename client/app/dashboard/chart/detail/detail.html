@@ -40,14 +40,28 @@
             </md-list-item>
             <md-list-item>
               <md-icon class="material-icons">
-                pets
+                label
                 <md-tooltip>お名前</md-tooltip>
               </md-icon>
               <p>{{ctrl.chart.pet.name}} ちゃん</p>
             </md-list-item>
             <md-list-item>
               <md-icon class="material-icons">
-                format_list_bulleted
+                label_outline
+                <md-tooltip>お名前（よみがな）</md-tooltip>
+              </md-icon>
+              <p>{{ctrl.chart.pet.nameKana}} ちゃん</p>
+            </md-list-item>
+            <md-list-item>
+              <md-icon class="material-icons">
+                bookmark
+                <md-tooltip>種別</md-tooltip>
+              </md-icon>
+              <p>{{ctrl.chart.pet.kind}}</p>
+            </md-list-item>
+            <md-list-item>
+              <md-icon class="material-icons">
+                bookmark_border
                 <md-tooltip>品種</md-tooltip>
               </md-icon>
               <p>{{ctrl.chart.pet.type}}</p>
@@ -94,6 +108,16 @@
               <p>
                 <span ng-show="ctrl.chart.pet.neutral">済み</span>
                 <span ng-show="!ctrl.chart.pet.neutral">していない</span>
+              </p>
+            </md-list-item>
+            <md-list-item>
+              <md-icon class="material-icons">
+                close
+                <md-tooltip>生死</md-tooltip>
+              </md-icon>
+              <p>
+                <span ng-show="ctrl.chart.pet.dead">死亡</span>
+                <span ng-show="!ctrl.chart.pet.dead">生存</span>
               </p>
             </md-list-item>
           </md-list>
@@ -162,6 +186,86 @@
                 <md-tooltip>マイクロチップ番号</md-tooltip>
               </md-icon>
               <p>{{ctrl.chart.pet.microchipNo}}</p>
+            </md-list-item>
+          </md-list>
+        </div>
+      </div>
+      <md-toolbar md-theme="content">
+        <div class="md-toolbar-tools">
+          <h1 class="md-title">管理番号</h1>
+        </div>
+      </md-toolbar>
+      <div layout-padding>
+        <div layout-gt-xs="row" class="flat-card" layout-padding>
+          <md-list flex>
+            <md-list-item>
+              <md-icon class="material-icons">
+                bug_report
+                <md-tooltip>狂犬病登録番号</md-tooltip>
+              </md-icon>
+              <p>{{ctrl.chart.pet.rabidRegisterNo}}</p>
+            </md-list-item>
+          </md-list>
+          <md-list flex>
+            <md-list-item>
+              <md-icon class="material-icons">
+                report
+                <md-tooltip>注射済票番号</md-tooltip>
+              </md-icon>
+              <p>{{ctrl.chart.pet.injectionReportNo}}</p>
+            </md-list-item>
+          </md-list>
+        </div>
+      </div>
+      <md-toolbar md-theme="content">
+        <div class="md-toolbar-tools">
+          <h1 class="md-title">予防接種予定</h1>
+        </div>
+      </md-toolbar>
+      <div layout-padding>
+        <div layout-gt-xs="row" class="flat-card" layout-padding>
+          <md-list flex>
+            <md-list-item>
+              <md-icon class="material-icons">
+                today
+                <md-tooltip>狂犬病予防予定日</md-tooltip>
+              </md-icon>
+              <p ng-if="ctrl.chart.rabidVaccineDate">{{ctrl.chart.rabidVaccineDate | date:'yyyy/MM/dd'}}（次回予定日）</p>
+              <p ng-if="!ctrl.chart.rabidVaccineDate">自院実績なし</p>
+            </md-list-item>
+            <md-list-item>
+              <md-icon class="material-icons">
+                colorize
+                <md-tooltip>混合ワクチン名</md-tooltip>
+              </md-icon>
+              <p ng-if="ctrl.chart.mixVaccineName">{{ctrl.chart.mixVaccineName}}</p>
+              <p ng-if="!ctrl.chart.mixVaccineName">自院実績なし</p>
+            </md-list-item>
+            <md-list-item>
+              <md-icon class="material-icons">
+                today
+                <md-tooltip>混合ワクチン予定日</md-tooltip>
+              </md-icon>
+              <p ng-if="ctrl.chart.mixVaccineDate">{{ctrl.chart.mixVaccineDate | date:'yyyy/MM/dd'}}（次回予定日）</p>
+              <p ng-if="!ctrl.chart.mixVaccineDate">自院実績なし</p>
+            </md-list-item>
+          </md-list>
+          <md-list flex>
+            <md-list-item>
+              <md-icon class="material-icons">
+                today
+                <md-tooltip>フィラリア予防予定日</md-tooltip>
+              </md-icon>
+              <p ng-if="ctrl.chart.filariaDate">{{ctrl.chart.filariaDate | date:'yyyy/MM/dd'}}（次回予定日）</p>
+              <p ng-if="!ctrl.chart.filariaDate">自院実績なし</p>
+            </md-list-item>
+            <md-list-item>
+              <md-icon class="material-icons">
+                today
+                <md-tooltip>ノミ予防予定日</md-tooltip>
+              </md-icon>
+              <p ng-if="ctrl.chart.fleaDate">{{ctrl.chart.fleaDate | date:'yyyy/MM/dd'}}（次回予定日）</p>
+              <p ng-if="!ctrl.chart.fleaDate">自院実績なし</p>
             </md-list-item>
           </md-list>
         </div>

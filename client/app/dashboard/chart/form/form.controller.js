@@ -2,11 +2,13 @@
   'use strict';
 
   class ChartFormController {
-    constructor($state, $stateParams, toaster, ClinicChart, types, colors, bloods, tags, chart) {
+    constructor($state, $stateParams, toaster, ClinicChart, clinic, kinds, types, colors, bloods, tags, chart) {
       this.$state = $state;
       this.$stateParams = $stateParams;
       this.toaster = toaster;
       this.ClinicChart = ClinicChart;
+      this.clinic = clinic;
+      this.kinds = kinds;
       this.types = types;
       this.colors = colors;
       this.bloods = bloods;
@@ -14,10 +16,18 @@
       this.chart = chart;
       this.sexes = [{name:'不明', value:''}, {name:'オス', value:'MALE'}, {name:'メス', value:'FEMALE'}];
       this.neutrals = [{name:'していない', value:false}, {name:'済み', value:true}];
+      this.deads = [{name:'生存', value:false}, {name:'死亡', value:true}];
       this.today = new Date();
     }
 
     // 種類を取得する（オートコンプリート用）
+    getKinds(text) {
+      return this.kinds.filter((item) => {
+        return (item.indexOf(text) >= 0) ? true : false;
+      });
+    }
+
+    // 品種を取得する（オートコンプリート用）
     getTypes(text) {
       return this.types.filter((item) => {
         return (item.indexOf(text) >= 0) ? true : false;
@@ -41,6 +51,7 @@
     // カルテを登録する
     save(chart) {
       this.supportAutocomplete(chart);
+      chart.clinic = this.clinic;
       return this.ClinicChart.save({clinicId: this.$stateParams.clinicId}, chart).$promise
         .then((response) => {
           this.toaster.info('新しくカルテを作成しました。');
@@ -52,6 +63,7 @@
     // カルテを保存する
     update(chart) {
       this.supportAutocomplete(chart);
+      chart.clinic = this.clinic;
       return this.ClinicChart.update({clinicId: this.$stateParams.clinicId, chartId: chart.id}, chart).$promise
         .then((response) => {
           this.toaster.info('カルテを保存しました。');
@@ -62,6 +74,9 @@
 
     // FIXME md-autocompleteにバグがあるため
     supportAutocomplete(chart) {
+      if (angular.isDefined(this.kindText)) {
+        chart.pet.kind = this.kindText;
+      }
       if (angular.isDefined(this.typeText)) {
         chart.pet.type = this.typeText;
       }
@@ -74,7 +89,7 @@
     }
   }
 
-  ChartFormController.$inject = ['$state', '$stateParams', 'toaster', 'ClinicChart', 'types', 'colors', 'bloods', 'tags', 'chart'];
+  ChartFormController.$inject = ['$state', '$stateParams', 'toaster', 'ClinicChart', 'clinic', 'kinds', 'types', 'colors', 'bloods', 'tags', 'chart'];
   angular
     .module('petzApp')
     .controller('ChartFormController', ChartFormController);

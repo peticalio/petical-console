@@ -1,14 +1,14 @@
 'use strict';
 
-describe('Service: Type', function () {
+describe('Service: Kind', function () {
 
   // load the service's module
   beforeEach(module('petz.api'));
 
   // instantiate service
   var sut;
-  beforeEach(inject(function (_Type_) {
-    sut = _Type_;
+  beforeEach(inject(function (_Kind_) {
+    sut = _Kind_;
   }));
 
   it('should do something', function () {

@@ -10,6 +10,13 @@
     </md-list-item>
     <md-list-item>
       <md-icon class="material-icons">
+        account_circle
+        <md-tooltip>飼い主さまコード</md-tooltip>
+      </md-icon>
+      <p>{{ctrl.customer.customerCode}}</p>
+    </md-list-item>
+    <md-list-item>
+      <md-icon class="material-icons">
         person
         <md-tooltip>氏名</md-tooltip>
       </md-icon>
@@ -20,7 +27,7 @@
         person_outline
         <md-tooltip>氏名（フリガナ）</md-tooltip>
       </md-icon>
-      <p ng-show="ctrl.customer.user.lastNameKana">{{ctrl.customer.user.lastNameKana}} {{ctrl.customer.user.firstNameKana}}</p>
+      <p ng-show="ctrl.customer.user.lastNameKana">{{ctrl.customer.user.lastNameKana}} {{ctrl.customer.user.firstNameKana}} 様</p>
       <p ng-show="!ctrl.customer.user.lastNameKana">未登録</p>
     </md-list-item>
     <md-list-item>
@@ -46,7 +53,7 @@
         import_contacts
         <md-tooltip>住所</md-tooltip>
       </md-icon>
-      <p ng-show="ctrl.customer.user.state">{{ctrl.customer.user.state}}{{ctrl.customer.user.city}}{{ctrl.customer.user.street}}</p>
+      <p ng-show="ctrl.customer.user.state">{{ctrl.customer.user.state}}{{ctrl.customer.user.city}}{{ctrl.customer.user.street}}{{ctrl.customer.user.other}}</p>
       <p ng-show="!ctrl.customer.user.state">未登録</p>
     </md-list-item>
     <md-list-item>

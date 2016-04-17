@@ -1,6 +1,6 @@
 <div class="layout-max-width">
   <section>
-    <md-toolbar md-theme="content" class="pt">
+    <md-toolbar md-theme="content" class="pt" ng-show="!ctrl.showSearchBox">
       <div class="md-toolbar-tools">
         <h2 class="md-title">
           カルテ
@@ -9,9 +9,25 @@
           </span>
         </h2>
         <span flex></span>
+        <md-button class="md-icon-button" ng-click="ctrl.showSearchBox = true">
+          <md-tooltip>検索</md-tooltip>
+          <md-icon class="material-icons">search</md-icon>
+        </md-button>
         <md-button class="md-icon-button" ng-click="ctrl.refresh()">
-          <md-tooltip md-direction="left">更新</md-tooltip>
+          <md-tooltip>更新</md-tooltip>
           <md-icon class="material-icons">refresh</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-toolbar md-theme="content" class="md-table-toolbar pt" ng-show="ctrl.showSearchBox">
+      <div class="md-toolbar-tools">
+        <md-icon class="material-icons">search</md-icon>
+        <form flex name="form" class="ng-pristine">
+          <input type="text" ng-model="ctrl.query" ng-model-options="{debounce: 500}" placeholder="キーワードを入力"/>
+        </form>
+        <md-button class="md-icon-button" ng-click="ctrl.showSearchBox = false; ctrl.query = '';">
+          <md-tooltip>閉じる</md-tooltip>
+          <md-icon class="material-icons">close</md-icon>
         </md-button>
       </div>
     </md-toolbar>
@@ -23,22 +39,26 @@
               <th md-column><span>カルテ番号</span></th>
               <th md-column><span>ペットのお名前</span></th>
               <th md-column><span>飼い主さま</span></th>
-              <th md-column><span>作成日時</span></th>
+              <th md-column><span>種別</span></th>
+              <th md-column><span>品種</span></th>
             </tr>
           </thead>
           <tbody md-body>
-            <tr md-row ng-repeat="chart in ctrl.charts" ui-sref="app.dashboard.chart.detail({chartId: chart.id})">
+            <tr md-row ng-repeat="chart in ctrl.charts | filter:ctrl.query" ui-sref="app.dashboard.chart.detail({chartId: chart.id})">
               <td md-cell>
                 {{chart.chartNo}}
               </td>
               <td md-cell>
-                {{chart.pet.name}}
+                {{chart.pet.name}} ちゃん
               </td>
               <td md-cell>
                 <a ui-sref="app.dashboard.customer.detail({customerId: chart.customer.id})" ui-sref-ignore>{{chart.customer.user.lastName}} {{chart.customer.user.firstName}}</a> 様
               </td>
               <td md-cell>
-                {{chart.createdDate | date:'yyyy/MM/dd HH:mm'}}
+                {{chart.pet.kind}}
+              </td>
+              <td md-cell>
+                {{chart.pet.type}}
               </td>
             </tr>
           </tbody>

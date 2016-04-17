@@ -166,13 +166,13 @@
       <span flex></span> -->
 
       <!-- account menu -->
-      <md-button class="md-icon-button" ui-sref="app.main">
+      <md-button class="md-icon-button" ui-sref="app.main" ng-if="ctrl.isSignin()">
         <md-icon class="material-icons white">apps</md-icon>
       </md-button>
-      <md-button class="md-icon-button">
+      <md-button class="md-icon-button" ng-if="ctrl.isSignin()">
         <md-icon class="material-icons white">notifications</md-icon>
       </md-button>
-      <md-menu md-position-mode="target-right target" style="margin-right:0;" class="link">
+      <md-menu md-position-mode="target-right target" style="margin-right:0;" class="link" ng-if="ctrl.isSignin()">
         <img gravatar-src-once="ctrl.account.login" class="img-circle ml" style="width:32px;" ng-click="ctrl.openMenu($mdOpenMenu, $event)"/>
         <md-menu-content width="4">
           <md-subheader><h4 class="mt0">{{ctrl.account.username}}</h4>{{ctrl.account.login}}</md-subheader>
