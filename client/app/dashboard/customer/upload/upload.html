@@ -17,6 +17,7 @@
       </div>
     </md-toolbar>
     <div layout-padding>
+      <ptc-progressbar value="ctrl.progress" ng-show="ctrl.progress > 0"></ptc-progressbar>
       <div id="upload-table-container" class="p0">
         <hot-table settings="ctrl.settings" row-headers="false" datarows="ctrl.customers" class="p0" height="ctrl.getHeight()">
           <hot-column width="100" data="customerCode" title="'飼主コード'" validator="ctrl.requiredNameValidator"></hot-column>
@@ -27,7 +28,7 @@
           <hot-column width="100" data="user.zipCode" title="'郵便番号'" validator="ctrl.requiredZipCodeValidator"></hot-column>
           <hot-column width="100" data="user.state" title="'都道府県'" validator="ctrl.requiredNameValidator"></hot-column>
           <hot-column width="200" data="user.city" title="'市区町村'" validator="ctrl.requiredNameValidator"></hot-column>
-          <hot-column width="200" data="user.street" title="'番地'" validator="ctrl.requiredNameValidator"></hot-column>
+          <hot-column width="200" data="user.street" title="'番地'" validator="ctrl.nameValidator"></hot-column>
           <hot-column width="200" data="user.other" title="'その他'" validator="ctrl.nameValidator"></hot-column>
           <hot-column width="200" data="user.phoneNo" title="'電話番号（自宅）'" validator="ctrl.requiredPhoneNoValidator"></hot-column>
           <hot-column width="200" data="user.mobilePhoneNo" title="'電話番号（携帯）'" validator="ctrl.phoneNoValidator"></hot-column>

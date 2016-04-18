@@ -22,6 +22,7 @@
       this.charts = [{}];
       this.settings = {contextMenu: ['row_above', 'row_below', 'remove_row']};
       this.container = document.getElementById('main-content');
+      this.progress = 0;
     }
 
     // 高さを計算する
@@ -46,8 +47,10 @@
 
     // 一括登録する
     save(charts) {
+      this.progress = 1; // すぐにブロックしたいので1%にする
       var counter = 0; // 処理成功数
       var array = [];  // エラーレコードを保持する配列
+      var size = charts.length;
 
       // 順番に削除する（非同期処理）
       var promises = [];
@@ -63,7 +66,10 @@
           chart.filariaDate = this.getDate(item.filariaDate);
           chart.fleaDate = this.getDate(item.fleaDate);
           var promise = this.ClinicChart.save({clinicId: this.clinic.id}, chart).$promise
-            .then(() => counter++)
+            .then(() => {
+              counter++;
+              this.progress = Math.ceil(counter / size * 100);
+            })
             .catch(() => array.push(item));
           promises.push(promise);
         }
@@ -79,6 +85,7 @@
         } else {
           this.toaster.info(counter + '件のカルテを登録しました。');
         }
+        this.progress = 0; // プログレスバーをリセット
         charts.push({});
       });
     }

@@ -23,6 +23,7 @@
       this.customers = [{}];
       this.settings = {contextMenu: ['row_above', 'row_below', 'remove_row']};
       this.container = document.getElementById('main-content');
+      this.progress = 0;
     }
 
     // 高さを計算する
@@ -39,6 +40,8 @@
 
     // 一括登録する
     save(customers) {
+      this.progress = 1; // すぐにブロックしたいので1%にする
+      var size = customers.length;
       var counter = 0; // 処理成功数
       var array = [];  // エラーレコードを保持する配列
 
@@ -48,7 +51,10 @@
         if (item && item.user && item.user.firstName && item.user.lastName) {
           item.clinic = this.clinic;
           var promise = this.ClinicCustomer.save({clinicId: this.clinic.id}, item).$promise
-            .then(() => counter++)
+            .then(() => {
+              counter++;
+              this.progress = Math.ceil(counter / size * 100);
+            })
             .catch(() => array.push(item));
           promises.push(promise);
         }
@@ -65,6 +71,7 @@
           this.toaster.info(counter + '件の飼い主さまを登録しました。');
         }
         customers.push({});
+        this.progress = 0; // プログレスバーをリセット
       });
     }
   }

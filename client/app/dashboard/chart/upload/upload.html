@@ -16,6 +16,7 @@
       </div>
     </md-toolbar>
     <div layout-padding>
+      <ptc-progressbar value="ctrl.progress" ng-show="ctrl.progress > 0"></ptc-progressbar>
       <div id="upload-table-container" class="p0">
         <hot-table settings="ctrl.settings" row-headers="false" datarows="ctrl.charts" class="p0" height="ctrl.getHeight()">
           <hot-column width="100" data="customer.customerCode" title="'飼い主コード'" validator="ctrl.requiredNameValidator"></hot-column>
