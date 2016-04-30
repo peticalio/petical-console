@@ -32,38 +32,42 @@
       </div>
     </md-toolbar>
     <div layout-padding>
-      <md-table-container class="flat-card">
-        <table md-table class="table-hover table-clickable">
-          <thead md-head>
-            <tr md-row>
-              <th md-column><span>カルテ番号</span></th>
-              <th md-column><span>ペットのお名前</span></th>
-              <th md-column><span>飼い主さま</span></th>
-              <th md-column><span>種別</span></th>
-              <th md-column><span>品種</span></th>
-            </tr>
-          </thead>
-          <tbody md-body>
-            <tr md-row ng-repeat="chart in ctrl.charts | filter:ctrl.query" ui-sref="app.dashboard.chart.detail({chartId: chart.id})">
-              <td md-cell>
-                {{chart.chartNo}}
-              </td>
-              <td md-cell>
-                {{chart.pet.name}} ちゃん
-              </td>
-              <td md-cell>
-                <a ui-sref="app.dashboard.customer.detail({customerId: chart.customer.id})" ui-sref-ignore>{{chart.customer.user.lastName}} {{chart.customer.user.firstName}}</a> 様
-              </td>
-              <td md-cell>
-                {{chart.pet.kind}}
-              </td>
-              <td md-cell>
-                {{chart.pet.type}}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </md-table-container>
+      <div class="flat-card">
+        <md-table-container>
+          <table md-table class="table-hover table-clickable">
+            <thead md-head md-order="ctrl.order">
+              <tr md-row>
+                <th md-column md-order-by="chartNo"><span>カルテ番号</span></th>
+                <th md-column md-order-by="pet.name"><span>ペットのお名前</span></th>
+                <th md-column md-order-by="customer.user.lastName"><span>飼い主さま</span></th>
+                <th md-column md-order-by="pet.kind"><span>種別</span></th>
+                <th md-column md-order-by="pet.type"><span>品種</span></th>
+              </tr>
+            </thead>
+            <tbody md-body>
+              <tr md-row ng-repeat="chart in ctrl.charts | filter:ctrl.query | filter:ctrl.query | orderBy:ctrl.order | limitTo:ctrl.limit:(ctrl.page-1)*ctrl.limit" ui-sref="app.dashboard.chart.detail({chartId: chart.id})">
+                <td md-cell>
+                  {{chart.chartNo}}
+                </td>
+                <td md-cell>
+                  {{chart.pet.name}} ちゃん
+                </td>
+                <td md-cell>
+                  {{chart.customer.user.lastName}} {{chart.customer.user.firstName}} 様
+                </td>
+                <td md-cell>
+                  {{chart.pet.kind}}
+                </td>
+                <td md-cell>
+                  {{chart.pet.type}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </md-table-container>
+        <md-table-pagination md-limit="ctrl.limit" md-limit-options="[20,40,60,80,100]" md-page="ctrl.page" md-total="{{ctrl.charts.length}}" md-page-select="true" md-boundary-links="true">
+        </md-table-pagination>
+      </div>
     </div>
   </section>
 </div>

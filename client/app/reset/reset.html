@@ -1,0 +1,24 @@
+<div layout="row" layout-align="center start">
+  <div layout-padding class="container-small flat-card mt3 mb3">
+    <h3>パスワードを再設定する</h3>
+    <div>
+      <form name="form" novalidate="">
+        <div layout-gt-xs="row">
+          <md-input-container class="md-icon-float md-block" flex>
+            <label>ログインID</label>
+            <md-icon class="material-icons" aria-label="Login">mail_outline</md-icon>
+            <input name="login" type="email" ng-model="ctrl.login" ng-required="true" ng-maxlength="100">
+            <div ng-show="form.login.$invalid" ng-messages="form.login.$error">
+              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                <span>100 文字以内でログインIDを入力してください。</span>
+              </div>
+            </div>
+          </md-input-container>
+        </div>
+        <div layout-gt-xs="row" layout-align="end center">
+          <md-button class="md-primary md-raised" ng-disabled="form.$invalid" ng-click="ctrl.reset(ctrl.login)">再設定する</md-button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

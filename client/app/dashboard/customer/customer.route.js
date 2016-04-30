@@ -7,30 +7,23 @@
 
   function getCustomers($stateParams, ClinicCustomer) {
     return ClinicCustomer.query({clinicId: $stateParams.clinicId}).$promise
-      .then(function(response) {
-        return response;
-      });
+      .then((response) => response);
   }
 
   function getCustomer($stateParams, ClinicCustomer) {
     return ClinicCustomer.load({clinicId: $stateParams.clinicId, customerId: $stateParams.customerId}).$promise
-      .then(function(response) {
-        return response;
-      });
+      .then((response) => response);
   }
 
-  function getPets(customer, UserPet) {
-    return UserPet.query({userId:customer.user.id}).$promise
-      .then(function(response) {
-        return response;
-      });
+  // 飼い主のペットを取得する
+  function getCustomerPets(clinic, $stateParams, ClinicCustomerPet) {
+    return ClinicCustomerPet.query({clinicId: clinic.id, customerId: $stateParams.customerId}).$promise
+      .then((response) => response);
   }
-
-  function getCharts($stateParams, ClinicCustomerChart) {
-    return ClinicCustomerChart.query({clinicId:$stateParams.clinicId, customerId:$stateParams.customerId}).$promise
-      .then(function(response) {
-        return response;
-      });
+  // 飼い主のカルテを取得する
+  function getCustomerCharts(clinic, $stateParams, ClinicCustomerChart) {
+    return ClinicCustomerChart.query({clinicId: clinic.id, customerId: $stateParams.customerId}).$promise
+      .then((response) => response);
   }
 
   function RouteConfig($stateProvider){
@@ -115,8 +108,8 @@
         },
         resolve: {
           customer:       getCustomer,
-          pets:           getPets,
-          charts:         getCharts
+          pets:           getCustomerPets,
+          charts:         getCustomerCharts
         }
       })
     ;

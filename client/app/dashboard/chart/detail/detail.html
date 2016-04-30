@@ -21,6 +21,14 @@
         </div>
       </md-toolbar>
       <div layout-padding>
+        <div layout-gt-xs="row" class="p0 m0" ng-if="ctrl.showMixVaccineAlert() || ctrl.showRabidAlert() || ctrl.showFilariaAlert() || ctrl.showFleaAlert()">
+          <div class="note" flex>
+            <p ng-if="ctrl.showRabidAlert()">狂犬病予防接種のお注射を行う時期です。次回予定日は「{{ctrl.chart.rabidVaccineDate | date:'yyyy/MM/dd'}}」です。</p>
+            <p ng-if="ctrl.showMixVaccineAlert()">混合ワクチン予防接種のお注射を行う時期です。次回予定日は「{{ctrl.chart.mixVaccineDate | date:'yyyy/MM/dd'}}」です。</p>
+            <p ng-if="ctrl.showFilariaAlert()">フィラリア予防のお注射を行う時期です。次回予定日は「{{ctrl.chart.filariaDate | date:'yyyy/MM/dd'}}」です。</p>
+            <p ng-if="ctrl.showFleaAlert()">ノミ予防のお薬の処方を行う時期です。次回予定日は「{{ctrl.chart.fleaDate | date:'yyyy/MM/dd'}}」です。</p>
+          </div>
+        </div>
         <div layout-gt-xs="row" class="flat-card">
           <md-list flex>
             <md-subheader class="md-no-sticky">ペット</md-subheader>
@@ -29,7 +37,7 @@
                 local_hospital
                 <md-tooltip>所属動物病院</md-tooltip>
               </md-icon>
-              <p>{{ctrl.chart.clinic.name}}</p>
+              <p>{{ctrl.clinic.name}}</p>
             </md-list-item>
             <md-list-item>
               <md-icon class="material-icons">

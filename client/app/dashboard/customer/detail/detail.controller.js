@@ -50,7 +50,7 @@
     relate() {
       this.pets.some((pet) => {
         this.charts.some((chart) => {
-          if (pet.id === chart.pet.id) {
+          if (chart.pet && pet.id === chart.pet.id) {
             pet.chart = chart;
           }
         });

@@ -11,6 +11,7 @@
       this.clinic = clinic;
       this.chart = chart;
       this.selected = this.getSelectedTabNo();
+      this.target = new Date(new Date().setMonth(new Date().getMonth() - 3));
     }
 
     // ステートから選択されているタブ番号を取得する
@@ -19,6 +20,23 @@
       no = this.$state.includes('app.dashboard.chart.detail.ticket') ? 1 : no;
       no = this.$state.includes('app.dashboard.chart.detail.reservation') ? 2 : no;
       return no;
+    }
+
+    showRabidAlert() {
+      var vaccine = new Date(this.chart.rabidVaccineDate);
+      return this.target >= vaccine;
+    }
+    showMixVaccineAlert() {
+      var vaccine = new Date(this.chart.mixVaccineDate);
+      return this.target >= vaccine;
+    }
+    showFilariaAlert() {
+      var vaccine = new Date(this.chart.filariaDate);
+      return this.target >= vaccine;
+    }
+    showFleaAlert() {
+      var vaccine = new Date(this.chart.fleaDate);
+      return this.target >= vaccine;
     }
 
     // カルテを削除する

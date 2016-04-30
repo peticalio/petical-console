@@ -87,9 +87,17 @@ body > div.main {
   display: block;
   font-size: 14px;
   font-weight: 400;
-  margin: 16px;
-  padding: 24px 24px 24px 24px;
+  margin: 0 0 16px 0;
+  padding: 24px;
   text-align: center;
+  p {
+    margin: 0;
+  }
+}
+.info {
+  @extend .note;
+  border: 1px solid #e1e1e8;
+  background: #f7f7f9;
 }
 
 // card

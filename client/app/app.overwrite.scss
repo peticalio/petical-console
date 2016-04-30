@@ -238,3 +238,16 @@ a {
 .handsontable td.htInvalid {
   background-color: #FFCDD2 !important;
 }
+
+// md-table-select
+md-table-pagination .label {
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+md-table-pagination .md-table-select {
+  padding: 0;
+}
+md-table-pagination .md-table-select .md-select-value {
+  font-size: inherit;
+}

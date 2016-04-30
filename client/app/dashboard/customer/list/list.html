@@ -32,35 +32,39 @@
       </div>
     </md-toolbar>
     <div layout-padding>
-      <md-table-container class="flat-card">
-        <table md-table class="table-hover table-clickable">
-          <thead md-head>
-            <tr md-row>
-              <th md-column md-order-by="customer.customerCode"><span>飼い主さまコード</span></th>
-              <th md-column md-order-by="customer.lastName"><span>飼い主さま</span></th>
-              <th md-column><span>飼い主さま（よみがな）</span></th>
-              <th md-column><span>住所・連絡先</span></th>
-            </tr>
-          </thead>
-          <tbody md-body>
-            <tr md-row ng-repeat="customer in ctrl.customers | filter:ctrl.query" ui-sref="app.dashboard.customer.detail({customerId: customer.id})">
-              <td md-cell>
-                {{customer.customerCode}}
-              </td>
-              <td md-cell>
-                {{customer.user.lastName}} {{customer.user.firstName}} 様
-              </td>
-              <td md-cell>
-                {{customer.user.lastNameKana}} {{customer.user.firstNameKana}}<span ng-show="customer.user.lastNameKana || customer.user.firstNameKana"> 様</span>
-              </td>
-              <td md-cell>
-                〒 {{customer.user.zipCode}}<br/>
-                {{customer.user.state}}{{customer.user.city}}{{customer.user.street}}{{customer.user.other}}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </md-table-container>
+      <div class="flat-card">
+        <md-table-container>
+          <table md-table class="table-hover table-clickable">
+            <thead md-head md-order="ctrl.order">
+              <tr md-row>
+                <th md-column md-order-by="customerCode"><span>飼い主さまコード</span></th>
+                <th md-column md-order-by="user.lastName"><span>飼い主さま</span></th>
+                <th md-column md-order-by="user.lastNameKana"><span>飼い主さま（よみがな）</span></th>
+                <th md-column md-order-by="user.zipCode"><span>住所・連絡先</span></th>
+              </tr>
+            </thead>
+            <tbody md-body>
+              <tr md-row ng-repeat="customer in ctrl.customers | filter:ctrl.query | orderBy:ctrl.order | limitTo:ctrl.limit:(ctrl.page-1)*ctrl.limit" ui-sref="app.dashboard.customer.detail({customerId: customer.id})">
+                <td md-cell>
+                  {{customer.customerCode}}
+                </td>
+                <td md-cell>
+                  {{customer.user.lastName}} {{customer.user.firstName}} 様
+                </td>
+                <td md-cell>
+                  {{customer.user.lastNameKana}} {{customer.user.firstNameKana}}<span ng-show="customer.user.lastNameKana || customer.user.firstNameKana"> 様</span>
+                </td>
+                <td md-cell>
+                  〒 {{customer.user.zipCode}}<br/>
+                  {{customer.user.state}}{{customer.user.city}}{{customer.user.street}}{{customer.user.other}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </md-table-container>
+        <md-table-pagination md-limit="ctrl.limit" md-limit-options="[20,40,60,80,100]" md-page="ctrl.page" md-total="{{ctrl.customers.length}}" md-page-select="true" md-boundary-links="true">
+        </md-table-pagination>
+      </div>
     </div>
   </section>
 </div>

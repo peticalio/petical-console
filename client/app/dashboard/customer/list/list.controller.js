@@ -8,6 +8,8 @@
       this.ClinicCustomer = ClinicCustomer;
       this.clinic = clinic;
       this.customers = customers;
+      this.page = 1;
+      this.limit = 20;
     }
 
     // 一覧を更新する
