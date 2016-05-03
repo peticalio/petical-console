@@ -2,7 +2,6 @@
 
 angular
   .module('petzApp', [
-    'petzApp.constants',
     'petzApp.util',
     'petz.core',
     'petz.api',
