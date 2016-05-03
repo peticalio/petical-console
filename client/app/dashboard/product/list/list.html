@@ -1,0 +1,56 @@
+<div class="layout-max-width">
+  <section>
+    <md-toolbar md-theme="content" class="pt">
+      <div class="md-toolbar-tools">
+        <h2 class="md-title">商品・料金マスタ</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="ctrl.refresh()">
+          <md-tooltip md-direction="left">更新</md-tooltip>
+          <md-icon class="material-icons">refresh</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <div layout-padding>
+      <md-table-container class="flat-card">
+        <table md-table class="table-hover table-clickable">
+          <thead md-head>
+            <tr md-row>
+              <th md-column><span>診察・商品名</span></th>
+              <th md-column><span>価格（単価）</span></th>
+              <th md-column><span>税区分</span></th>
+              <th md-column><span>消費税率</span></th>
+              <th md-column><span>作成日時</span></th>
+            </tr>
+          </thead>
+          <tbody md-body>
+            <tr md-row ng-repeat="product in ctrl.products" ui-sref="app.dashboard.product.detail({productId: product.id})">
+              <td md-cell>
+                {{product.name}}
+              </td>
+              <td md-cell>
+                {{product.price | currency:'¥ ':0}}
+              </td>
+              <td md-cell>
+                <span class="label label-info" ng-if="product.taxType === 'EXCLUSIVE'">外税</span>
+                <span class="label label-warning" ng-if="product.taxType !== 'EXCLUSIVE'">内税</span>
+              </td>
+              <td md-cell>
+                {{product.taxRate | percentage:1}}
+              </td>
+              <td md-cell>
+                {{product.createdDate | date:'yyyy/MM/dd HH:mm'}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </md-table-container>
+    </div>
+  </section>
+</div>
+
+<div class="fab" md-theme="fab">
+  <md-button aria-label="add" class="md-fab md-primary" ui-sref="app.dashboard.product.form">
+    <md-tooltip md-direction="left">新規追加</md-tooltip>
+    <md-icon class="material-icons">add</md-icon>
+  </md-button>
+</div>

@@ -1,0 +1,55 @@
+<div class="layout-max-width">
+  <section>
+    <md-toolbar md-theme="content" class="pt">
+      <div class="md-toolbar-tools">
+        <h2 class="md-title">スタッフ</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="ctrl.refresh()">
+          <md-tooltip md-direction="left">更新</md-tooltip>
+          <md-icon class="material-icons">refresh</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <div layout-padding>
+      <md-table-container class="flat-card">
+        <table md-table class="table-hover table-clickable">
+          <thead md-head>
+            <tr md-row>
+              <th md-column></th>
+              <th md-column><span>スタッフ</span></th>
+              <th md-column><span>メールアドレス</span></th>
+              <th md-column><span>役割</span></th>
+              <th md-column><span>作成日時</span></th>
+            </tr>
+          </thead>
+          <tbody md-body>
+            <tr md-row ng-repeat="staff in ctrl.staffs" ui-sref="app.dashboard.staff.detail({staffId: staff.id})">
+              <td md-cell>
+                <img gravatar-src-once="staff.user.login" class="img-circle"/>
+              </td>
+              <td md-cell>
+                {{staff.user.lastName}} {{staff.user.firstName}}
+              </td>
+              <td md-cell>
+                {{staff.user.email}}
+              </td>
+              <td md-cell>
+                <span class="label label-info">{{staff.role}}<span>
+              </td>
+              <td md-cell>
+                {{staff.createdDate | date:'yyyy/MM/dd HH:mm'}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </md-table-container>
+    </div>
+  </section>
+</div>
+
+<div class="fab" md-theme="fab">
+  <md-button aria-label="add" class="md-fab md-primary" ui-sref="app.dashboard.staff.form">
+    <md-tooltip md-direction="left">新規追加</md-tooltip>
+    <md-icon class="material-icons">add</md-icon>
+  </md-button>
+</div>

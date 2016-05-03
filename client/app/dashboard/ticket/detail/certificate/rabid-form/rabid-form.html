@@ -1,0 +1,59 @@
+<div class="layout-max-width">
+  <md-toolbar md-theme="content" class="pt">
+    <div class="md-toolbar-tools">
+      <h1 class="md-title">{{ctrl.ticket.chart.pet.name}} ちゃんの狂犬病予防注射済証発行</h1>
+    </div>
+  </md-toolbar>
+  <div layout-padding>
+    <div class="flat-card">
+      <form name="form" role="form" novalidate>
+        <div layout="row" layout-wrap>
+          <div class="md-datepicker-wrap" flex="100">
+            <md-datepicker name="vaccinatedDate" ng-model="ctrl.certificate.vaccinatedDate" md-placeholder="予防接種日" ng-required="true" md-min-date="ctrl.today">
+            </md-datepicker>
+            <div ng-show="form.vaccinatedDate.$invalid" ng-messages="form.vaccinatedDate.$error">
+              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']" class="md-error-message">
+                <span>yyyy/MM/dd の形式で入力してください。</span>
+              </div>
+            </div>
+          </div>
+          <md-input-container class="md-block" flex="50" flex-xs="100">
+            <label>鑑札番号</label>
+            <input name="licenseNo" ng-model="ctrl.certificate.licenseNo" maxlength="50" ng-maxlength="50"/>
+            <div ng-show="form.licenseNo.$invalid" ng-messages="form.licenseNo.$error">
+              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                <span>50 文字以内で入力してください。</span>
+              </div>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-block" flex="50" flex-xs="100">
+            <label>済票番号</label>
+            <input name="reportNo" ng-model="ctrl.certificate.reportNo" maxlength="50" ng-maxlength="50"/>
+            <div ng-show="form.reportNo.$invalid" ng-messages="form.reportNo.$error">
+              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                <span>50 文字以内で入力してください。</span>
+              </div>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-block" flex="100">
+            <label>その他特徴</label>
+            <textarea name="memo" ng-model="ctrl.certificate.memo" maxlength="2000" md-maxlength="2000" rows="5"></textarea>
+            <div ng-show="form.memo.$invalid" ng-messages="form.memo.$error">
+              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                <span>2000 文字以内で入力してください。</span>
+              </div>
+            </div>
+          </md-input-container>
+        </div>
+        <div layout="row" layout-align="end center" ng-if="!ctrl.certificate.id">
+          <md-button class="md-primary md-raised" ng-disabled="form.$invalid" ng-click="ctrl.save(ctrl.certificate)">登録する</md-button>
+          <md-button ui-sref="app.dashboard.ticket.detail.certificate.list">キャンセル</md-button>
+        </div>
+        <div layout="row" layout-align="end center" ng-if="ctrl.certificate.id">
+          <md-button class="md-primary md-raised" ng-disabled="form.$invalid" ng-click="ctrl.update(ctrl.certificate)">更新する</md-button>
+          <md-button ui-sref="app.dashboard.ticket.detail.certificate.detail({certificateId: ctrl.certificate.id})">キャンセル</md-button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

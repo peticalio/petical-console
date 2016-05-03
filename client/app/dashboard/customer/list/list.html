@@ -1,0 +1,94 @@
+<div class="layout-max-width">
+  <section>
+    <md-toolbar md-theme="content" class="pt" ng-show="!ctrl.showSearchBox">
+      <div class="md-toolbar-tools">
+        <h2 class="md-title">
+          飼い主さま
+          <span class="hint--large hint--bounce hint--rounded clickable" data-hint="飼い主さまを検索します。">
+            <md-icon class="material-icons small">help</md-icon>
+          </span>
+        </h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="ctrl.showSearchBox = true">
+          <md-tooltip>検索</md-tooltip>
+          <md-icon class="material-icons">search</md-icon>
+        </md-button>
+        <md-button class="md-icon-button" ng-click="ctrl.refresh()">
+          <md-tooltip>更新</md-tooltip>
+          <md-icon class="material-icons">refresh</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-toolbar md-theme="content" class="md-table-toolbar pt" ng-show="ctrl.showSearchBox">
+      <div class="md-toolbar-tools">
+        <md-icon class="material-icons">search</md-icon>
+        <form flex name="form" class="ng-pristine">
+          <input type="text" ng-model="ctrl.query" ng-model-options="{debounce: 500}" placeholder="キーワードを入力"/>
+        </form>
+        <md-button class="md-icon-button" ng-click="ctrl.showSearchBox = false; ctrl.query = '';">
+          <md-tooltip>閉じる</md-tooltip>
+          <md-icon class="material-icons">close</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <div layout-padding>
+      <div class="flat-card">
+        <md-table-container>
+          <table md-table class="table-hover table-clickable">
+            <thead md-head md-order="ctrl.order">
+              <tr md-row>
+                <th md-column md-order-by="customerCode"><span>飼い主さまコード</span></th>
+                <th md-column md-order-by="user.lastName"><span>飼い主さま</span></th>
+                <th md-column md-order-by="user.lastNameKana"><span>飼い主さま（よみがな）</span></th>
+                <th md-column md-order-by="user.zipCode"><span>住所・連絡先</span></th>
+              </tr>
+            </thead>
+            <tbody md-body>
+              <tr md-row ng-repeat="customer in ctrl.customers | filter:ctrl.query | orderBy:ctrl.order | limitTo:ctrl.limit:(ctrl.page-1)*ctrl.limit" ui-sref="app.dashboard.customer.detail({customerId: customer.id})">
+                <td md-cell>
+                  {{customer.customerCode}}
+                </td>
+                <td md-cell>
+                  {{customer.user.lastName}} {{customer.user.firstName}} 様
+                </td>
+                <td md-cell>
+                  {{customer.user.lastNameKana}} {{customer.user.firstNameKana}}<span ng-show="customer.user.lastNameKana || customer.user.firstNameKana"> 様</span>
+                </td>
+                <td md-cell>
+                  〒 {{customer.user.zipCode}}<br/>
+                  {{customer.user.state}}{{customer.user.city}}{{customer.user.street}}{{customer.user.other}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </md-table-container>
+        <md-table-pagination md-limit="ctrl.limit" md-limit-options="[20,40,60,80,100]" md-page="ctrl.page" md-total="{{ctrl.customers.length}}" md-page-select="true" md-boundary-links="true">
+        </md-table-pagination>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="fab" md-theme="fab">
+  <md-fab-speed-dial md-direction="up" md-open="ctrl.isOpen" class="md-scale" ng-mouseenter="ctrl.isOpen=true" ng-mouseleave="ctrl.isOpen=false" ng-cloak>
+    <md-fab-trigger>
+      <md-button aria-label="add" class="md-fab md-primary">
+        <md-icon class="material-icons">add</md-icon>
+      </md-button>
+    </md-fab-trigger>
+    <md-fab-actions>
+      <md-button aria-label="add" class="md-fab md-raised md-mini" ui-sref="app.dashboard.customer.form">
+        <md-tooltip md-direction="left">新規追加</md-tooltip>
+        <md-icon class="material-icons">edit</md-icon>
+      </md-button>
+      <md-button aria-label="import" class="md-fab md-raised md-mini" ui-sref="app.dashboard.customer.import">
+        <md-tooltip md-direction="left">インポート</md-tooltip>
+        <md-icon class="material-icons">file_upload</md-icon>
+      </md-button>
+      <md-button aria-label="upload" class="md-fab md-raised md-mini" ui-sref="app.dashboard.customer.upload">
+        <md-tooltip md-direction="left">一括登録（移行）</md-tooltip>
+        <md-icon class="material-icons">backup</md-icon>
+      </md-button>
+    </md-fab-actions>
+  </md-fab-speed-dial>
+</div>

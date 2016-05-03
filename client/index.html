@@ -1,0 +1,212 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <base href="/">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(client) app/vendor.css -->
+      <!-- bower:css -->
+      <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+      <link rel="stylesheet" href="bower_components/angular-material-data-table/dist/md-data-table.css" />
+      <link rel="stylesheet" href="bower_components/angular-bootstrap-calendar/dist/css/angular-bootstrap-calendar.css" />
+      <link rel="stylesheet" href="bower_components/nvd3/build/nv.d3.css" />
+      <link rel="stylesheet" href="bower_components/hint.css/hint.min.css" />
+      <link rel="stylesheet" href="bower_components/pikaday/css/pikaday.css" />
+      <link rel="stylesheet" href="bower_components/handsontable/dist/handsontable.css" />
+      <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css({.tmp,client}) app/app.css -->
+      <link rel="stylesheet" href="app/app.css">
+      <!-- injector:css -->
+      <!-- endinjector -->
+    <!-- endbuild -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons"/>
+    <link rel='stylesheet' href='//fonts.googleapis.com/css?family=Roboto:600,500,400,200'/>
+    <link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/notosansjapanese.css"/>
+  </head>
+  <body ng-app="petzApp">
+    <!--[if lt IE 7]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Add your site or application content here -->
+    <div class="main" ui-view layout="row" flex></div>
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-XXXXX-X');
+      ga('send', 'pageview');
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <![endif]-->
+    <!-- build:js({client,node_modules}) app/vendor.js -->
+      <!-- bower:js -->
+      <script src="bower_components/jquery/dist/jquery.js"></script>
+      <script src="bower_components/angular/angular.js"></script>
+      <script src="bower_components/angular-resource/angular-resource.js"></script>
+      <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+      <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+      <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+      <script src="bower_components/lodash/dist/lodash.compat.js"></script>
+      <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+      <script src="bower_components/angular-animate/angular-animate.js"></script>
+      <script src="bower_components/angular-aria/angular-aria.js"></script>
+      <script src="bower_components/angular-messages/angular-messages.js"></script>
+      <script src="bower_components/angular-material/angular-material.js"></script>
+      <script src="bower_components/angular-material-data-table/dist/md-data-table.js"></script>
+      <script src="bower_components/angular-ui-validate/dist/validate.js"></script>
+      <script src="bower_components/angular-gravatar/build/angular-gravatar.js"></script>
+      <script src="bower_components/moment/moment.js"></script>
+      <script src="bower_components/angular-moment/angular-moment.js"></script>
+      <script src="bower_components/angular-bootstrap-calendar/dist/js/angular-bootstrap-calendar-tpls.js"></script>
+      <script src="bower_components/d3/d3.js"></script>
+      <script src="bower_components/nvd3/build/nv.d3.js"></script>
+      <script src="bower_components/angular-nvd3/dist/angular-nvd3.js"></script>
+      <script src="bower_components/zeroclipboard/dist/ZeroClipboard.js"></script>
+      <script src="bower_components/pikaday/pikaday.js"></script>
+      <script src="bower_components/handsontable/dist/handsontable.js"></script>
+      <script src="bower_components/ngHandsontable/dist/ngHandsontable.js"></script>
+      <script src="bower_components/immutable/dist/immutable.js"></script>
+      <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:js(.tmp) app/app.js -->
+      <script src="app/app.js"></script>
+      <!-- injector:js -->
+      <script src="components/api/api.module.js"></script>
+      <script src="components/common/util.module.js"></script>
+      <script src="components/core/core.module.js"></script>
+      <script src="components/vendor/vendor.module.js"></script>
+      <script src="app/app.constant.js"></script>
+      <script src="app/app.controller.js"></script>
+      <script src="app/app.route.js"></script>
+      <script src="app/dashboard/calendar/calendar.controller.js"></script>
+      <script src="app/dashboard/calendar/calendar.route.js"></script>
+      <script src="app/dashboard/chart/chart.route.js"></script>
+      <script src="app/dashboard/chart/detail/detail.controller.js"></script>
+      <script src="app/dashboard/chart/detail/reservation/reservation.controller.js"></script>
+      <script src="app/dashboard/chart/detail/ticket/ticket.controller.js"></script>
+      <script src="app/dashboard/chart/form/form.controller.js"></script>
+      <script src="app/dashboard/chart/list/list.controller.js"></script>
+      <script src="app/dashboard/chart/upload/upload.controller.js"></script>
+      <script src="app/dashboard/customer/customer.route.js"></script>
+      <script src="app/dashboard/customer/detail/detail.controller.js"></script>
+      <script src="app/dashboard/customer/form/form.controller.js"></script>
+      <script src="app/dashboard/customer/import/import.controller.js"></script>
+      <script src="app/dashboard/customer/list/list.controller.js"></script>
+      <script src="app/dashboard/customer/upload/upload.controller.js"></script>
+      <script src="app/dashboard/dashboard.controller.js"></script>
+      <script src="app/dashboard/dashboard.route.js"></script>
+      <script src="app/dashboard/product/detail/detail.controller.js"></script>
+      <script src="app/dashboard/product/form/form.controller.js"></script>
+      <script src="app/dashboard/product/list/list.controller.js"></script>
+      <script src="app/dashboard/product/product.route.js"></script>
+      <script src="app/dashboard/staff/detail/detail.controller.js"></script>
+      <script src="app/dashboard/staff/form/form.controller.js"></script>
+      <script src="app/dashboard/staff/list/list.controller.js"></script>
+      <script src="app/dashboard/staff/staff.route.js"></script>
+      <script src="app/dashboard/ticket/detail/attachment/attachment.controller.js"></script>
+      <script src="app/dashboard/ticket/detail/attachment/form/form.controller.js"></script>
+      <script src="app/dashboard/ticket/detail/certificate/certificate-form/certificate-form.controller.js"></script>
+      <script src="app/dashboard/ticket/detail/certificate/certificate.controller.js"></script>
+      <script src="app/dashboard/ticket/detail/certificate/detail/detail.controller.js"></script>
+      <script src="app/dashboard/ticket/detail/certificate/rabid-form/rabid-form.controller.js"></script>
+      <script src="app/dashboard/ticket/detail/detail.controller.js"></script>
+      <script src="app/dashboard/ticket/detail/examination/detail/detail.controller.js"></script>
+      <script src="app/dashboard/ticket/detail/examination/examination.controller.js"></script>
+      <script src="app/dashboard/ticket/detail/examination/form/form.controller.js"></script>
+      <script src="app/dashboard/ticket/detail/invoice/detail/detail.controller.js"></script>
+      <script src="app/dashboard/ticket/detail/invoice/detail/payment/payment.controller.js"></script>
+      <script src="app/dashboard/ticket/detail/invoice/invoice.controller.js"></script>
+      <script src="app/dashboard/ticket/form/form.controller.js"></script>
+      <script src="app/dashboard/ticket/list/list.controller.js"></script>
+      <script src="app/dashboard/ticket/ticket.route.js"></script>
+      <script src="app/dashboard/vaccine/detail/detail.controller.js"></script>
+      <script src="app/dashboard/vaccine/form/form.controller.js"></script>
+      <script src="app/dashboard/vaccine/list/list.controller.js"></script>
+      <script src="app/dashboard/vaccine/vaccine.route.js"></script>
+      <script src="app/main/account/account.route.js"></script>
+      <script src="app/main/account/form/form.controller.js"></script>
+      <script src="app/main/account/password/form.controller.js"></script>
+      <script src="app/main/clinic/clinic.route.js"></script>
+      <script src="app/main/clinic/form/form.controller.js"></script>
+      <script src="app/main/invitation/activation/activation.controller.js"></script>
+      <script src="app/main/invitation/invitation.route.js"></script>
+      <script src="app/main/invitation/list/list.controller.js"></script>
+      <script src="app/main/main.controller.js"></script>
+      <script src="app/main/main.route.js"></script>
+      <script src="app/reset/finish/finish.controller.js"></script>
+      <script src="app/reset/password/password.controller.js"></script>
+      <script src="app/reset/reset.controller.js"></script>
+      <script src="app/reset/reset.route.js"></script>
+      <script src="app/signin/signin.controller.js"></script>
+      <script src="app/signin/signin.route.js"></script>
+      <script src="app/signup/signup.controller.js"></script>
+      <script src="app/signup/signup.route.js"></script>
+      <script src="components/api/blood/blood.service.js"></script>
+      <script src="components/api/clinic/Clinic.service.js"></script>
+      <script src="components/api/clinic/chart/ClinicChart.service.js"></script>
+      <script src="components/api/clinic/chart/ticket/ClinicChartTicket.service.js"></script>
+      <script src="components/api/clinic/customer/ClinicCustomer.service.js"></script>
+      <script src="components/api/clinic/customer/chart/ClinicCustomerChart.service.js"></script>
+      <script src="components/api/clinic/customer/pet/ClinicCustomerPet.service.js"></script>
+      <script src="components/api/clinic/invitation/invitation.service.js"></script>
+      <script src="components/api/clinic/invoice/ClinicInvoice.service.js"></script>
+      <script src="components/api/clinic/invoice/payment/ClinicInvoicePayment.service.js"></script>
+      <script src="components/api/clinic/outline/ClinicOutline.service.js"></script>
+      <script src="components/api/clinic/product/ClinicProduct.service.js"></script>
+      <script src="components/api/clinic/sales/ClinicSales.service.js"></script>
+      <script src="components/api/clinic/staff/ClinicStaff.service.js"></script>
+      <script src="components/api/clinic/ticket/ClinicTicket.service.js"></script>
+      <script src="components/api/clinic/ticket/attachment/ClinicTicketAttachment.service.js"></script>
+      <script src="components/api/clinic/ticket/certificate/ClinicTicketCertificate.service.js"></script>
+      <script src="components/api/clinic/ticket/examination/ClinicTicketExamination.service.js"></script>
+      <script src="components/api/clinic/ticket/invoice/ClinicTicketInvoice.service.js"></script>
+      <script src="components/api/clinic/ticket/status/ClinicTicketStatus.service.js"></script>
+      <script src="components/api/clinic/ticket/summary/ClinicTicketSummary.service.js"></script>
+      <script src="components/api/clinic/user/ClinicUser.service.js"></script>
+      <script src="components/api/clinic/vaccine/ClinicVaccine.service.js"></script>
+      <script src="components/api/color/color.service.js"></script>
+      <script src="components/api/kind/kind.service.js"></script>
+      <script src="components/api/me/clinic/MyClinic.service.js"></script>
+      <script src="components/api/me/invitation/MyInvitation.service.js"></script>
+      <script src="components/api/me/password/MyPassword.js"></script>
+      <script src="components/api/me/pet/MyPet.service.js"></script>
+      <script src="components/api/password/Password.service.js"></script>
+      <script src="components/api/pet/Pet.service.js"></script>
+      <script src="components/api/signup/Signup.service.js"></script>
+      <script src="components/api/tag/tag.service.js"></script>
+      <script src="components/api/type/type.service.js"></script>
+      <script src="components/api/user/pet/UserPet.service.js"></script>
+      <script src="components/common/ptc-progressbar/ptc-progressbar.controller.js"></script>
+      <script src="components/common/ptz-ticket-status/ptz-ticket-status.controller.js"></script>
+      <script src="components/common/util.service.js"></script>
+      <script src="components/common/validator/factory/Factory.service.js"></script>
+      <script src="components/core/account/MyAccount.factory.js"></script>
+      <script src="components/core/auth/Auth.factory.js"></script>
+      <script src="components/core/auth/Auth.interceptor.js"></script>
+      <script src="components/core/auth/base64.service.js"></script>
+      <script src="components/core/filter/percentage-filter.js"></script>
+      <script src="components/core/ptz-state-loading-indicator/ptz-state-loading-indicator.directive.js"></script>
+      <script src="components/core/ui-sref-ignore/ui-sref-ignore.directive.js"></script>
+      <script src="components/vendor/dialog/dialog.service.js"></script>
+      <script src="components/vendor/resource/resource.factory.js"></script>
+      <script src="components/vendor/toaster/toaster.service.js"></script>
+      <!-- endinjector -->
+    <!-- endbuild -->
+  </body>
+</html>

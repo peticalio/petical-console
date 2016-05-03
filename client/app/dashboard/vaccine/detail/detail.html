@@ -1,0 +1,63 @@
+<div class="layout-max-width">
+  <section>
+    <md-toolbar md-theme="content" class="pt">
+      <div class="md-toolbar-tools">
+        <h1 class="md-title">{{ctrl.vaccine.name}}の詳細</h1>
+        <span flex></span>
+        <md-button class="md-icon-button" ui-sref="app.dashboard.vaccine.list">
+          <md-tooltip md-direction="left">一覧</md-tooltip>
+          <md-icon class="material-icons">list</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <div layout-padding>
+      <div layout-gt-xs="row" class="flat-card">
+        <md-list flex>
+          <md-list-item>
+            <md-icon class="material-icons">
+              colorize
+              <md-tooltip>予防接種ワクチン名</md-tooltip>
+            </md-icon>
+            <p>{{ctrl.vaccine.name}}</p>
+          </md-list-item>
+          <md-list-item>
+            <md-icon class="material-icons">
+              create
+              <md-tooltip>作成日時</md-tooltip>
+            </md-icon>
+            <p>{{ctrl.vaccine.createdDate | date:'yyyy/MM/dd HH:mm'}}</p>
+          </md-list-item>
+        </md-list>
+        <md-list flex>
+          <md-list-item>
+            <md-icon class="material-icons">
+              note
+              <md-tooltip>説明</md-tooltip>
+            </md-icon>
+            <p class="pre">{{ctrl.vaccine.memo}}</p>
+          </md-list-item>
+        </md-list>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="fab" md-theme="fab">
+  <md-fab-speed-dial md-direction="up" md-open="ctrl.isOpen" class="md-scale" ng-mouseenter="ctrl.isOpen=true" ng-mouseleave="ctrl.isOpen=false" ng-cloak>
+    <md-fab-trigger>
+      <md-button aria-label="menu" class="md-fab md-primary">
+        <md-icon class="material-icons">menu</md-icon>
+      </md-button>
+    </md-fab-trigger>
+    <md-fab-actions>
+      <md-button class="md-fab md-raised md-mini" ui-sref="app.dashboard.vaccine.update({vaccineId:ctrl.vaccine.id})">
+        <md-tooltip md-direction="left">編集する</md-tooltip>
+        <md-icon class="material-icons">create</md-icon>
+      </md-button>
+      <md-button class="md-fab md-raised md-mini" ng-click="ctrl.delete($event, ctrl.vaccine)">
+        <md-tooltip md-direction="left">削除する</md-tooltip>
+        <md-icon class="material-icons">delete</md-icon>
+      </md-button>
+    </md-fab-actions>
+  </md-fab-speed-dial>
+</div>

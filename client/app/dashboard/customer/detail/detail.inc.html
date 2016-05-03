@@ -1,0 +1,83 @@
+<div layout-gt-xs="row" class="flat-card">
+  <md-list flex>
+    <md-subheader class="md-no-sticky">飼い主さま基本情報</md-subheader>
+    <md-list-item>
+      <md-icon class="material-icons">
+        local_hospital
+        <md-tooltip>所属動物病院</md-tooltip>
+      </md-icon>
+      <p>{{ctrl.clinic.name}}</p>
+    </md-list-item>
+    <md-list-item>
+      <md-icon class="material-icons">
+        account_circle
+        <md-tooltip>飼い主さまコード</md-tooltip>
+      </md-icon>
+      <p>{{ctrl.customer.customerCode}}</p>
+    </md-list-item>
+    <md-list-item>
+      <md-icon class="material-icons">
+        person
+        <md-tooltip>氏名</md-tooltip>
+      </md-icon>
+      <p>{{ctrl.customer.user.lastName}} {{ctrl.customer.user.firstName}} 様</p>
+    </md-list-item>
+    <md-list-item>
+      <md-icon class="material-icons">
+        person_outline
+        <md-tooltip>氏名（フリガナ）</md-tooltip>
+      </md-icon>
+      <p ng-show="ctrl.customer.user.lastNameKana">{{ctrl.customer.user.lastNameKana}} {{ctrl.customer.user.firstNameKana}} 様</p>
+      <p ng-show="!ctrl.customer.user.lastNameKana">未登録</p>
+    </md-list-item>
+    <md-list-item>
+      <md-icon class="material-icons">
+        account_box
+        <md-tooltip>ログインID</md-tooltip>
+      </md-icon>
+      <p>{{ctrl.customer.user.login}}</p>
+    </md-list-item>
+  </md-list>
+  <md-list flex>
+    <md-subheader class="md-no-sticky">飼い主さま連絡先</md-subheader>
+    <md-list-item>
+      <md-icon class="material-icons">
+        location_on
+        <md-tooltip>郵便番号</md-tooltip>
+      </md-icon>
+      <p ng-show="ctrl.customer.user.zipCode">〒 {{ctrl.customer.user.zipCode}}</p>
+      <p ng-show="!ctrl.customer.user.zipCode">未登録</p>
+    </md-list-item>
+    <md-list-item>
+      <md-icon class="material-icons">
+        import_contacts
+        <md-tooltip>住所</md-tooltip>
+      </md-icon>
+      <p ng-show="ctrl.customer.user.state">{{ctrl.customer.user.state}}{{ctrl.customer.user.city}}{{ctrl.customer.user.street}}{{ctrl.customer.user.other}}</p>
+      <p ng-show="!ctrl.customer.user.state">未登録</p>
+    </md-list-item>
+    <md-list-item>
+      <md-icon class="material-icons">
+        phone
+        <md-tooltip>電話番号（自宅）</md-tooltip>
+      </md-icon>
+      <p ng-show="ctrl.customer.user.phoneNo">{{ctrl.customer.user.phoneNo}}</p>
+      <p ng-show="!ctrl.customer.user.phoneNo">未登録</p>
+    </md-list-item>
+    <md-list-item>
+      <md-icon class="material-icons">
+        phone_android
+        <md-tooltip>電話番号（携帯）</md-tooltip>
+      </md-icon>
+      <p ng-show="ctrl.customer.user.mobilePhoneNo">{{ctrl.customer.user.mobilePhoneNo}}</p>
+      <p ng-show="!ctrl.customer.user.mobilePhoneNo">未登録</p>
+    </md-list-item>
+    <md-list-item>
+      <md-icon class="material-icons">
+        mail_outline
+        <md-tooltip>メールアドレス</md-tooltip>
+      </md-icon>
+      <p>{{ctrl.customer.user.email}}</p>
+    </md-list-item>
+  </md-list>
+</div>

@@ -1,0 +1,62 @@
+<div class="layout-max-width">
+  <md-toolbar md-theme="content" class="pt">
+    <div class="md-toolbar-tools">
+      <h1 class="md-title">{{ctrl.ticket.chart.pet.name}} ちゃんの請求書</h1>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="ctrl.refresh()">
+        <md-tooltip md-direction="left">更新する</md-tooltip>
+        <md-icon class="material-icons">refresh</md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <div layout-padding>
+    <md-table-container class="flat-card">
+      <table md-table class="table-hover table-clickable">
+        <thead md-head>
+          <tr md-row>
+            <th md-column>ステータス</th>
+            <th md-column>請求額</th>
+            <th md-column>消費税</th>
+            <th md-column>受領金額</th>
+            <th md-column>作成日時</th>
+          </tr>
+        </thead>
+        <tbody md-body>
+          <tr md-row ng-repeat="invoice in ctrl.invoices" ui-sref="app.dashboard.ticket.detail.invoice.detail({invoiceId: invoice.id})">
+            <td md-cell>
+              <span ng-if="invoice.removed" class="label label-default">キャンセル</span>
+              <span ng-if="!invoice.removed && invoice.paid" class="label label-success">支払済み</span>
+              <span ng-if="!invoice.removed && !invoice.paid" class="label label-danger">支払未了</span>
+            </td>
+            <td md-cell>
+              {{invoice.total | currency:'¥ ':0}}
+            </td>
+            <td md-cell>
+              {{invoice.tax | currency:'¥ ':0}}
+            </td>
+            <td md-cell>
+              {{invoice.receiptAmount | currency:'¥ ':0}}
+            </td>
+            <td md-cell>
+              {{invoice.createdDate | date:'yyyy/MM/dd HH:mm'}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </md-table-container>
+  </div>
+  <md-toolbar md-theme="content">
+    <div class="md-toolbar-tools">
+      <h1 class="md-title">代金のお支払い</h1>
+    </div>
+  </md-toolbar>
+  <div layout-padding>
+  </div>
+</div>
+
+<div class="fab" md-theme="fab">
+  <md-button class="md-fab md-primary">
+    <md-tooltip md-direction="left">会計する</md-tooltip>
+    <md-icon class="material-icons">shopping_cart</md-icon>
+  </md-button>
+</div>

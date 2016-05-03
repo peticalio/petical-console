@@ -1,0 +1,39 @@
+<div class="layout-max-width">
+  <md-toolbar md-theme="content" class="pt">
+    <div class="md-toolbar-tools">
+      <h1 class="md-title">添付ファイル</h1>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="ctrl.refresh()">
+        <md-tooltip md-direction="left">更新する</md-tooltip>
+        <md-icon class="material-icons">refresh</md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <div layout-padding>
+    <md-table-container class="flat-card">
+      <table md-table class="table-hover table-clickable">
+        <thead md-head>
+          <tr md-row>
+            <th md-column>ファイル名</th>
+            <th md-column>作成日時</th>
+          </tr>
+        </thead>
+        <tbody md-body>
+          <tr md-row ng-repeat="attachment in ctrl.attachments">
+            <td md-cell>
+              {{attachment.name}}
+            </td>
+            <td md-cell>
+              {{attachment.createdDate | date:'yyyy/MM/dd HH:mm'}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </md-table-container>
+    <div class="attachment text-center p3 mt3" ngf-drop ngf-select ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="false" accept="*" ng-model="file">
+      <p class="large-icon"><i class="fa fa-paperclip"></i></p>
+      <p class="md-headline">ファイルを添付</p>
+      <p>ここにアップロードするファイルをドラッグしてください。</p>
+    </div>
+  </div>
+</div>

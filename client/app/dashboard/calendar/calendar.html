@@ -1,0 +1,23 @@
+<div class="layout-max-width">
+  <section>
+    <md-toolbar md-theme="content" class="pt">
+      <div class="md-toolbar-tools">
+        <h1 class="md-title">{{ctrl.today | date:'yyyy年MM月'}}の予定</h1>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="ctrl.refresh(ctrl.today)">
+          <md-tooltip md-direction="left">更新</md-tooltip>
+          <md-icon class="material-icons">refresh</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <div layout-padding>
+      <mwl-calendar flex="100" view="'month'" view-date="ctrl.today" events="ctrl.events" on-event-click="ctrl.showEventDetail(calendarEvent)" class="p0">
+      </mwl-calendar>
+      <div layout="row" flex="100" class="p0">
+        <md-button mwl-date-modifier date="ctrl.today" decrement="ctrl.viewCalendar" ng-click="ctrl.refresh(ctrl.today)">&lt;&nbsp;前月</md-button>
+        <span flex></span>
+        <md-button mwl-date-modifier date="ctrl.today" increment="ctrl.viewCalendar" ng-click="ctrl.refresh(ctrl.today)">次月&nbsp;&gt;</md-button>
+      </div>
+    </div>
+  </section>
+</div>
