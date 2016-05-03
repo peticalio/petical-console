@@ -27,7 +27,7 @@ angular
   // base config
   .config(['$urlRouterProvider', '$locationProvider', '$httpProvider', function($urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider.otherwise('/');
-    $locationProvider.html5Mode(true);
+    $locationProvider.html5Mode(true).hashPrefix('!');
 
     $httpProvider.interceptors.push('AuthInterceptor');
   }])
