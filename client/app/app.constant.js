@@ -1,5 +1,5 @@
 (function(angular, undefined) {
-  angular.module("petzApp.constants", [])
+  angular.module("petz.env", [])
 
 .constant("appConfig", {
 	"userRoles": [
@@ -7,6 +7,12 @@
 		"user",
 		"admin"
 	]
+})
+
+.constant("api", {
+	"domain": "http://localhost:8080",
+	"CLIENT_ID": "majimenatestapp",
+	"CLIENT_SECRET": "mySecretOAuthSecret"
 })
 
 ;

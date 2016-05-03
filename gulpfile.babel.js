@@ -453,6 +453,24 @@ gulp.task('build', cb => {
         ],
         cb);
 });
+gulp.task('build:prod', cb => {
+    runSequence(
+        'clean:dist',
+        'clean:tmp',
+        'inject',
+        'wiredep:client',
+        'env:prod',
+        [
+            'build:images',
+            'copy:extras',
+            'copy:assets',
+            'copy:bower',
+            'copy:server',
+            'transpile:server',
+            'build:client'
+        ],
+        cb);
+});
 
 gulp.task('clean:dist', () => del([`${paths.dist}/!(.git*|.openshift|Procfile)**`], {dot: true}));
 
@@ -496,14 +514,17 @@ gulp.task('html', function() {
 });
 
 gulp.task('constant', function() {
+  // switch local env & production env
+  var env = process.env.NODE_ENV || 'local';
   let sharedConfig = require(`./${serverPath}/config/environment/shared`);
+  let envConfig = require(`./${serverPath}/config/${env}.env`)
   return plugins.ngConstant({
-    name: 'petzApp.constants',
-    deps: [],
-    wrap: true,
-    stream: true,
-    constants: { appConfig: sharedConfig }
-  })
+      name: 'petz.env',
+      deps: [],
+      wrap: true,
+      stream: true,
+      constants: { appConfig: sharedConfig, api: envConfig }
+    })
     .pipe(plugins.rename({
       basename: 'app.constant'
     }))

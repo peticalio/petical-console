@@ -6,9 +6,7 @@
 // You will need to set these on the server you deploy to.
 
 module.exports = {
-  DOMAIN:           'http://localhost:9000',
-  SESSION_SECRET:   'petzioconsole-secret',
-
-  // Control debug level for modules using visionmedia/debug
-  DEBUG: ''
+  domain:           'http://localhost:8080',
+  CLIENT_ID:        'majimenatestapp',
+  CLIENT_SECRET:    'mySecretOAuthSecret',
 };
