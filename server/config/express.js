@@ -29,7 +29,7 @@ export default function(app) {
   app.use(methodOverride());
   app.use(cookieParser());
 
-  // Persist sessions with mongoStore / sequelizeStore
+  // Persist sessions with MongoStore / sequelizeStore
   // We need to enable sessions for passport-twitter because it's an
   // oauth 1.0 strategy, and Lusca depends on sessions
   app.use(session({
@@ -66,7 +66,13 @@ export default function(app) {
   }
 
   if ('development' === env) {
-    app.use(require('connect-livereload')());
+    app.use(require('connect-livereload')({
+      ignore: [
+        /^\/api\/(.*)/,
+        /\.js(\?.*)?$/, /\.css(\?.*)?$/, /\.svg(\?.*)?$/, /\.ico(\?.*)?$/, /\.woff(\?.*)?$/,
+        /\.png(\?.*)?$/, /\.jpg(\?.*)?$/, /\.jpeg(\?.*)?$/, /\.gif(\?.*)?$/, /\.pdf(\?.*)?$/
+      ]
+    }));
   }
 
   if ('development' === env || 'test' === env) {
