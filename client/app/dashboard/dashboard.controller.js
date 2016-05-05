@@ -10,6 +10,7 @@
       this.ClinicSales = ClinicSales;
       this.clinic = clinic;
       this.clinics = clinics;
+      console.log(clinics);
 
       this.today = new Date();
       this.ticketChartOptions = this.getTicketChartOptions();

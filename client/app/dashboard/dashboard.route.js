@@ -1,8 +1,8 @@
 (() => {
   'use strict';
 
-  function getClinics($rootScope, Clinic) {
-    return Clinic.query().$promise
+  function getClinics($rootScope, MyClinic) {
+    return MyClinic.query().$promise
       .then((response) => {
         $rootScope.clinics = response;
         return response;

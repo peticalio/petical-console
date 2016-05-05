@@ -11,6 +11,10 @@
       </div>
     </md-toolbar>
     <div layout-padding>
+      <div class="note-default" flex ng-if="!ctrl.pets || ctrl.pets.length < 1">
+        現在、飼育しているペットはございません。<br/>
+        ペティカルをお使いの動物病院で診察を受けると、ペットの診察情報や診察履歴を見られるようになります。
+      </div>
       <md-grid-list md-cols="4" md-cols-xs="1" md-cols-sm="3" md-gutter="1em" md-row-height="4:3" class="pt0">
         <md-grid-tile ng-repeat="pet in ctrl.pets" class="flat-card clickable">
           <md-grid-tile-footer>
@@ -32,6 +36,10 @@
       </div>
     </md-toolbar>
     <div layout-padding>
+      <div class="note-default" flex ng-if="!ctrl.clinics || ctrl.clinics.length < 1">
+        現在、利用できる動物病院はございません。<br/>
+        ご自分が勤務している動物病院を「追加する」か、管理者の方に依頼して「招待」してもらってください。
+      </div>
       <md-grid-list md-cols="4" md-cols-xs="1" md-cols-sm="3" md-gutter="1em" md-row-height="4:3" class="pt0">
         <md-grid-tile ng-repeat="clinic in ctrl.clinics" class="flat-card clickable" ui-sref="app.dashboard({clinicId: clinic.id})">
           <md-grid-tile-footer>
@@ -40,30 +48,5 @@
         </md-grid-tile>
       </md-grid-list>
     </md-content>
-  </div>
-
-  <div ng-if="ctrl.invitations && ctrl.invitations.length !== 0">
-    <h5><i class="fa fa-envelope fa-lg m"></i>招待状が届いています</h5>
-    <div class="row">
-      <div class="col-lg-4 col-sm-6" ng-repeat="invitation in ctrl.invitations">
-        <div class="panel widget bg-warning">
-          <a ui-sref="main.clinic.invitation({invitationId:invitation.id})">
-            <div class="row row-table dash-card p">
-              <div class="col-xs-3 p0">
-                <!-- <img src="assets/images/dummy.png" alt="" class="media-box-object img-responsive img-rounded thumb64" /> -->
-              </div>
-              <div class="col-xs-9 p0">
-                <h5 class="mt0 overflow">{{invitation.clinic.name}}</h5>
-                <div class="small overflow">
-                  {{invitation.clinic.state}}{{invitation.clinic.city}}{{invitation.clinic.street}}<br/>
-                  <i class="fa fa-user-md mr"></i>
-                  {{invitation.user.lastName}} {{invitation.user.firstName}} 様より
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
   </div>
 </div>

@@ -1,6 +1,6 @@
 <div layout="row" layout-align="center start">
   <div layout-padding class="container-small flat-card mt3 mb3">
-    <h3>petz.io にサインアップ</h3>
+    <h3>ペティカル（petical.io）にサインアップ</h3>
     <div>
       <p class="text-right">
         <a ui-sref="app.signin">既にアカウントをお持ちの方はこちら！</a>
@@ -69,8 +69,12 @@
         <div layout-gt-xs="row" md-theme="content">
           <div layout-xs="column" flex-xs="100">
             <md-checkbox ng-model="ctrl.accept" class="md-accent md-align-top-left" flex ui-validate="{same: '$value === true'}">
-              私は<a href="https://petical.io/terms/">利用規約</a>及び<a href="https://petical.io/privacy/">プライバシーポリシー</a>に同意してアカウントを作成します。<br/>
+              私は<a href="https://petical.io/docs/terms/">利用規約</a>及び<a href="https://petical.io/docs/privacy/">プライバシーポリシー</a>に同意してアカウントを作成します。<br/>
             </md-checkbox>
+          </div>
+        </div>
+        <div layout-gt-xs="row" layout-align="center center">
+          <div vc-recaptcha key="ctrl.api.RECAPTCHA_KEY" on-create="setWidgetId(widgetId)" on-success="ctrl.success(response)" on-expire="ctrl.expirate()">
           </div>
         </div>
         <div layout-gt-xs="row" layout-align="end center">

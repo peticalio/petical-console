@@ -2,21 +2,14 @@
   'use strict';
 
   class MainController {
-    constructor($state, MyClinic, MyPet, MyInvitation) {
+    constructor($state, clinics, pets) {
       this.state = $state;
-      MyClinic.query().$promise.then((response) => {
-        this.clinics = response;
-      });
-      MyPet.query().$promise.then((response) => {
-        this.pets = response;
-      });
-      MyInvitation.query().$promise.then((response) => {
-        this.invitations = response;
-      });
+      this.clinics = clinics;
+      this.pets = pets;
     }
   }
 
-  MainController.$inject = ['$state', 'MyClinic', 'MyPet', 'MyInvitation'];
+  MainController.$inject = ['$state', 'clinics', 'pets'];
   angular.module('petzApp')
     .controller('MainController', MainController);
 

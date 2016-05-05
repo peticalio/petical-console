@@ -20,6 +20,7 @@ angular
     'md.data.table',
     'mwl.calendar',
     'ngHandsontable',
+    'vcRecaptcha',
     'nvd3'
   ])
 

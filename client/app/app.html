@@ -21,7 +21,7 @@
             <div layout="row" flex>
               <md-icon class="material-icons" aria-label="Invitations">inbox</md-icon>招待状
               <span flex></span>
-              <span class="img-circle">2</span>
+              <span class="img-circle"></span>
             </div>
           </md-button>
         </menu-link>
@@ -86,13 +86,13 @@
           </md-button>
         </menu-link>
       </il>
-      <li>
+      <!-- <li>
         <menu-link section="section" ui-sref-active="active" ui-sref="app.dashboard.mail">
           <md-button ui-sref="app.dashboard.mail.list" ui-sref-ignore>
             <md-icon class="material-icons" aria-label="Mails">mail</md-icon>メール
           </md-button>
         </menu-link>
-      </il>
+      </il> -->
     </ul>
     <md-divider></md-divider>
     <ul class="side-menu">
@@ -120,20 +120,20 @@
     </ul>
     <md-divider></md-divider>
     <ul class="side-menu">
-      <li>
+      <!-- <li>
         <menu-link section="section">
           <md-button ui-sref-active="active" ui-sref="app.dashboard.setting({clinicId:1})">
             設定
           </md-button>
         </menu-link>
-      </il>
-      <li>
+      </il> -->
+      <!-- <li>
         <menu-link section="section">
           <md-button ui-sref-active="active" ui-sref="app.dashboard.feedback({clinicId:1})">
             ヘルプとフィードバック
           </md-button>
         </menu-link>
-      </il>
+      </il> -->
     </ul>
     <div class="copyright">
       © 2016 <a href="https://petical.io">petical.io</a>
@@ -167,11 +167,12 @@
 
       <!-- account menu -->
       <md-button class="md-icon-button" ui-sref="app.main" ng-if="ctrl.isSignin()">
-        <md-icon class="material-icons white">apps</md-icon>
+        <md-tooltip>ホーム</md-tooltip>
+        <md-icon class="material-icons white" md-tooltip="ホーム">apps</md-icon>
       </md-button>
-      <md-button class="md-icon-button" ng-if="ctrl.isSignin()">
+      <!-- <md-button class="md-icon-button" ng-if="ctrl.isSignin()">
         <md-icon class="material-icons white">notifications</md-icon>
-      </md-button>
+      </md-button> -->
       <md-menu md-position-mode="target-right target" style="margin-right:0;" class="link" ng-if="ctrl.isSignin()">
         <img gravatar-src-once="ctrl.account.login" class="img-circle ml" style="width:32px;" ng-click="ctrl.openMenu($mdOpenMenu, $event)"/>
         <md-menu-content width="4">

@@ -103,6 +103,10 @@
             </div>
           </md-input-container>
         </div>
+        <div layout-gt-xs="row" layout-align="center center">
+          <div vc-recaptcha key="ctrl.api.RECAPTCHA_KEY" on-create="setWidgetId(widgetId)" on-success="ctrl.success(response)" on-expire="ctrl.expirate()">
+          </div>
+        </div>
         <div layout="row" layout-align="end center">
           <md-button class="md-primary md-raised" ng-disabled="form.$invalid" ng-click="ctrl.save(ctrl.clinic)">登録する</md-button>
           <md-button class="md-link" ui-sref="app.home">キャンセル</md-button>

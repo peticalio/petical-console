@@ -88,7 +88,8 @@ body > div.main {
   font-size: 14px;
   font-weight: 400;
   margin: 0 0 16px 0;
-  padding: 24px;
+  padding: 16px !important;
+  border-radius: 2px;
   text-align: center;
   p {
     margin: 0;
@@ -98,6 +99,16 @@ body > div.main {
   @extend .note;
   border: 1px solid #e1e1e8;
   background: #f7f7f9;
+}
+.note-default {
+  @extend .note;
+  background: #E0E0E0;
+  text-align: justify;
+}
+.note-info {
+  @extend .note;
+  background: #03A9F4;
+  color: #fff;
 }
 
 // card
