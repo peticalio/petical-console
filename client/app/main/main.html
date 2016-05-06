@@ -1,5 +1,11 @@
 <div class="layout-max-width" md-theme="content">
   <section>
+    <div layout-padding>
+      <div class="note note-warning" flex ng-if="!ctrl.account.activated">
+        お使いのアカウントはアクティベートされていません。アクティベートして、すべての機能が使えるようにしましょう！<br/>
+        <a ui-sref="app.activate">アクティベートはこちらのページ</a>で行えます。
+      </div>
+    </div>
     <md-toolbar class="pt">
       <div class="md-toolbar-tools">
         <h1 class="md-title">わたしのペット</h1>
@@ -11,7 +17,7 @@
       </div>
     </md-toolbar>
     <div layout-padding>
-      <div class="note-default" flex ng-if="!ctrl.pets || ctrl.pets.length < 1">
+      <div class="note note-default" flex ng-if="!ctrl.pets || ctrl.pets.length < 1">
         現在、飼育しているペットはございません。<br/>
         ペティカルをお使いの動物病院で診察を受けると、ペットの診察情報や診察履歴を見られるようになります。
       </div>
@@ -30,13 +36,13 @@
       <div class="md-toolbar-tools">
         <h1 class="md-title">勤務先動物病院</h1>
         <span flex></span>
-        <md-button class="md-primary" ui-sref="app.main.clinic.form">
+        <md-button class="md-primary" ui-sref="app.main.clinic.form" ng-if="ctrl.account.activated">
           追加する
         </md-button>
       </div>
     </md-toolbar>
     <div layout-padding>
-      <div class="note-default" flex ng-if="!ctrl.clinics || ctrl.clinics.length < 1">
+      <div class="note note-default" flex ng-if="!ctrl.clinics || ctrl.clinics.length < 1">
         現在、利用できる動物病院はございません。<br/>
         ご自分が勤務している動物病院を「追加する」か、管理者の方に依頼して「招待」してもらってください。
       </div>

@@ -95,6 +95,10 @@ body > div.main {
     margin: 0;
   }
 }
+.note a, .note a:hover, .note a:active {
+  color: #fff;
+  text-decoration: underline;
+}
 .info {
   @extend .note;
   border: 1px solid #e1e1e8;
@@ -106,9 +110,13 @@ body > div.main {
   text-align: justify;
 }
 .note-info {
-  @extend .note;
+  @extend .note-default;
   background: #03A9F4;
   color: #fff;
+}
+.note-warning {
+  @extend .note-info;
+  background: #E91E63;
 }
 
 // card

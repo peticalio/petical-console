@@ -16,16 +16,13 @@
     // サインアップする
     signup(user) {
       this.Signup.save({captcha:this.response}, {email: user.email, password: user.password, firstName: user.firstName, lastName: user.lastName}).$promise
-        .then(() => {
-          return this.Auth.login(user);
-        })
+        .then(() => this.Auth.login(user))
         .then(() => {
           if (this.$rootScope.returnToState) {
             var path = this.$rootScope.returnToState + this.$rootScope.returnToStateParams;
             this.$location.path(path);
           } else {
-            this.$cacheFactory.get('$http').removeAll();
-            this.$state.go('app.main', {}, {reload: true});
+            this.$state.go('app.activate', {}, {reload: true});
           }
         });
     }
