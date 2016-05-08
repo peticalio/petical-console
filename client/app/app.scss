@@ -73,11 +73,17 @@ body > div.main {
 }
 
 // navbar
+// .navbar-brand {
+//   background: url('/assets/images/logo_236x75_1.png') no-repeat left center;
+//   background-size: contain;
+//   height: 30px;
+//   width: 150px;
+// }
 .navbar-brand {
-  background: url('/assets/images/logo_236x75_1.png') no-repeat left center;
-  background-size: contain;
-  height: 30px;
-  width: 150px;
+  padding: 0;
+}
+.navbar-brand img {
+  height: 50px;
 }
 
 // note
@@ -88,16 +94,35 @@ body > div.main {
   font-size: 14px;
   font-weight: 400;
   margin: 0 0 16px 0;
-  padding: 24px;
+  padding: 16px !important;
+  border-radius: 2px;
   text-align: center;
   p {
     margin: 0;
   }
 }
+.note a, .note a:hover, .note a:active {
+  color: #fff;
+  text-decoration: underline;
+}
 .info {
   @extend .note;
   border: 1px solid #e1e1e8;
   background: #f7f7f9;
+}
+.note-default {
+  @extend .note;
+  background: #E0E0E0;
+  text-align: justify;
+}
+.note-info {
+  @extend .note-default;
+  background: #03A9F4;
+  color: #fff;
+}
+.note-warning {
+  @extend .note-info;
+  background: #E91E63;
 }
 
 // card

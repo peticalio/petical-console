@@ -1,9 +1,10 @@
-// Generated on 2016-02-03 using generator-angular-fullstack 3.3.0
+// Generated on 2016-05-03 using generator-angular-fullstack 3.6.1
 'use strict';
 
 import _ from 'lodash';
 import del from 'del';
 import gulp from 'gulp';
+import grunt from 'grunt';
 import path from 'path';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import http from 'http';
@@ -38,7 +39,10 @@ const paths = {
         bower: `${clientPath}/bower_components/`
     },
     server: {
-        scripts: [`${serverPath}/**/!(*.spec|*.integration).js`],
+        scripts: [
+          `${serverPath}/**/!(*.spec|*.integration).js`,
+          `!${serverPath}/config/local.env.sample.js`
+        ],
         json: [`${serverPath}/**/*.json`],
         test: {
           integration: [`${serverPath}/**/*.integration.js`, 'mocha.global.js'],
@@ -123,20 +127,22 @@ let lintServerTestScripts = lazypipe()
 let styles = lazypipe()
     .pipe(plugins.sourcemaps.init)
     .pipe(plugins.sass)
+
     .pipe(plugins.autoprefixer, {browsers: ['last 1 version']})
     .pipe(plugins.sourcemaps.write, '.');
 
 let transpileClient = lazypipe()
     .pipe(plugins.sourcemaps.init)
-    .pipe(plugins.babel, {
-        optional: ['es7.classProperties']
-    })
+    .pipe(plugins.babel)
     .pipe(plugins.sourcemaps.write, '.');
 
 let transpileServer = lazypipe()
     .pipe(plugins.sourcemaps.init)
     .pipe(plugins.babel, {
-        optional: ['runtime']
+        plugins: [
+            'transform-class-properties',
+            'transform-runtime'
+        ]
     })
     .pipe(plugins.sourcemaps.write, '.');
 
@@ -214,7 +220,7 @@ gulp.task('inject:js', () => {
 gulp.task('inject:css', () => {
     return gulp.src(paths.client.mainView)
         .pipe(plugins.inject(
-            gulp.src(`/${clientPath}/{app,components}/**/*.css`, {read: false})
+            gulp.src(`${clientPath}/{app,components}/**/*.css`, {read: false})
                 .pipe(plugins.sort()),
             {
                 starttag: '<!-- injector:css -->',
@@ -230,8 +236,6 @@ gulp.task('inject:scss', () => {
             gulp.src(_.union(paths.client.styles, ['!' + paths.client.mainStyle]), {read: false})
                 .pipe(plugins.sort()),
             {
-                starttag: '// injector',
-                endtag: '// endinjector',
                 transform: (filepath) => {
                     let newPath = filepath
                         .replace(`/${clientPath}/app/`, '')
@@ -246,6 +250,7 @@ gulp.task('inject:scss', () => {
 
 gulp.task('styles', () => {
     return gulp.src(paths.client.mainStyle)
+
         .pipe(styles())
         .pipe(gulp.dest('.tmp/app'));
 });
@@ -303,6 +308,13 @@ gulp.task('start:client', cb => {
     });
 });
 
+gulp.task('start:server', () => {
+    process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+    config = require(`./${serverPath}/config/environment`);
+    nodemon(`-w ${serverPath} ${serverPath}`)
+        .on('log', onServerLog);
+});
+
 gulp.task('start:server:prod', () => {
     process.env.NODE_ENV = process.env.NODE_ENV || 'production';
     config = require(`./${paths.dist}/${serverPath}/config/environment`);
@@ -310,10 +322,15 @@ gulp.task('start:server:prod', () => {
         .on('log', onServerLog);
 });
 
-gulp.task('start:server', () => {
+gulp.task('start:inspector', () => {
+    gulp.src([])
+        .pipe(plugins.nodeInspector());
+});
+
+gulp.task('start:server:debug', () => {
     process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-    config = require(`./${serverPath}/config/environment`);
-    nodemon(`-w ${serverPath} ${serverPath}`)
+        config = require(`./${serverPath}/config/environment`);
+    nodemon(`-w ${serverPath} --debug-brk ${serverPath}`)
         .on('log', onServerLog);
 });
 
@@ -349,7 +366,7 @@ gulp.task('watch', () => {
 });
 
 gulp.task('serve', cb => {
-    runSequence(['clean:tmp', 'constant'],
+    runSequence(['clean:tmp', 'constant', 'env:all'],
         ['lint:scripts', 'inject'],
         ['wiredep:client'],
         ['transpile:client', 'styles'],
@@ -364,6 +381,17 @@ gulp.task('serve:dist', cb => {
         'env:all',
         'env:prod',
         ['start:server:prod', 'start:client'],
+        cb);
+});
+
+gulp.task('serve:debug', cb => {
+    runSequence(['clean:tmp', 'constant'],
+        ['lint:scripts', 'inject'],
+        ['wiredep:client'],
+        ['transpile:client', 'styles'],
+        'start:inspector',
+        ['start:server:debug', 'start:client'],
+        'watch',
         cb);
 });
 
@@ -403,12 +431,12 @@ gulp.task('wiredep:client', () => {
     return gulp.src(paths.client.mainView)
         .pipe(wiredep({
             exclude: [
-                /bootstrap-sass-official/,
                 /bootstrap.js/,
-                /json3/,
-                /es5-shim/,
-                /bootstrap.css/,
-                /font-awesome.css/
+                '/json3/',
+                '/es5-shim/',
+                /font-awesome\.css/,
+                /bootstrap\.css/,
+                /bootstrap-sass-official/
             ],
             ignorePath: clientPath
         }))
@@ -419,12 +447,12 @@ gulp.task('wiredep:test', () => {
     return gulp.src(paths.karma)
         .pipe(wiredep({
             exclude: [
-                /bootstrap-sass-official/,
                 /bootstrap.js/,
                 '/json3/',
                 '/es5-shim/',
-                /bootstrap.css/,
-                /font-awesome.css/
+                /font-awesome\.css/,
+                /bootstrap\.css/,
+                /bootstrap-sass-official/
             ],
             devDependencies: true
         }))
@@ -438,15 +466,17 @@ gulp.task('wiredep:test', () => {
 //FIXME: looks like font-awesome isn't getting loaded
 gulp.task('build', cb => {
     runSequence(
-        'clean:dist',
-        'clean:tmp',
+        [
+            'clean:dist',
+            'clean:tmp'
+        ],
         'inject',
         'wiredep:client',
         [
             'build:images',
             'copy:extras',
+            'copy:fonts',
             'copy:assets',
-            'copy:bower',
             'copy:server',
             'transpile:server',
             'build:client'
@@ -455,16 +485,18 @@ gulp.task('build', cb => {
 });
 gulp.task('build:prod', cb => {
     runSequence(
-        'clean:dist',
-        'clean:tmp',
+        [
+            'clean:dist',
+            'clean:tmp'
+        ],
         'inject',
         'wiredep:client',
         'env:prod',
         [
             'build:images',
             'copy:extras',
+            'copy:fonts',
             'copy:assets',
-            'copy:bower',
             'copy:server',
             'transpile:server',
             'build:client'
@@ -474,33 +506,32 @@ gulp.task('build:prod', cb => {
 
 gulp.task('clean:dist', () => del([`${paths.dist}/!(.git*|.openshift|Procfile)**`], {dot: true}));
 
-gulp.task('build:client', ['transpile:client', 'styles', 'html', 'constant'], () => {
+gulp.task('build:client', ['transpile:client', 'styles', 'html', 'constant', 'build:images'], () => {
     var manifest = gulp.src(`${paths.dist}/${clientPath}/assets/rev-manifest.json`);
 
-    var appFilter = plugins.filter('**/app.js');
-    var jsFilter = plugins.filter('**/*.js');
-    var cssFilter = plugins.filter('**/*.css');
-    var htmlBlock = plugins.filter(['**/*.!(html)']);
+    var appFilter = plugins.filter('**/app.js', {restore: true});
+    var jsFilter = plugins.filter('**/*.js', {restore: true});
+    var cssFilter = plugins.filter('**/*.css', {restore: true});
+    var htmlBlock = plugins.filter(['**/*.!(html)'], {restore: true});
 
     return gulp.src(paths.client.mainView)
         .pipe(plugins.useref())
             .pipe(appFilter)
                 .pipe(plugins.addSrc.append('.tmp/templates.js'))
                 .pipe(plugins.concat('app/app.js'))
-            .pipe(appFilter.restore())
+            .pipe(appFilter.restore)
             .pipe(jsFilter)
                 .pipe(plugins.ngAnnotate())
                 .pipe(plugins.uglify())
-            .pipe(jsFilter.restore())
+            .pipe(jsFilter.restore)
             .pipe(cssFilter)
-                .pipe(plugins.minifyCss({
-                    cache: true,
+                .pipe(plugins.cleanCss({
                     processImportFrom: ['!fonts.googleapis.com']
                 }))
-            .pipe(cssFilter.restore())
+            .pipe(cssFilter.restore)
             .pipe(htmlBlock)
                 .pipe(plugins.rev())
-            .pipe(htmlBlock.restore())
+            .pipe(htmlBlock.restore)
         .pipe(plugins.revReplace({manifest}))
         .pipe(gulp.dest(`${paths.dist}/${clientPath}`));
 });
@@ -514,17 +545,16 @@ gulp.task('html', function() {
 });
 
 gulp.task('constant', function() {
-  // switch local env & production env
-  var env = process.env.NODE_ENV || 'local';
+  var mode = process.env.NODE_ENV || 'local';
   let sharedConfig = require(`./${serverPath}/config/environment/shared`);
-  let envConfig = require(`./${serverPath}/config/${env}.env`)
+  let envConfig = require(`./${serverPath}/config/${mode}.env.js`);
   return plugins.ngConstant({
-      name: 'petz.env',
-      deps: [],
-      wrap: true,
-      stream: true,
-      constants: { appConfig: sharedConfig, api: envConfig }
-    })
+    name: 'petz.env',
+    deps: [],
+    wrap: true,
+    stream: true,
+    constants: { appConfig: sharedConfig, api: envConfig }
+  })
     .pipe(plugins.rename({
       basename: 'app.constant'
     }))
@@ -556,14 +586,14 @@ gulp.task('copy:extras', () => {
         .pipe(gulp.dest(`${paths.dist}/${clientPath}`));
 });
 
+gulp.task('copy:fonts', () => {
+    return gulp.src(`${clientPath}/bower_components/{bootstrap,font-awesome}/fonts/**/*`, { dot: true })
+        .pipe(gulp.dest(`${paths.dist}/${clientPath}/bower_components`));
+});
+
 gulp.task('copy:assets', () => {
     return gulp.src([paths.client.assets, '!' + paths.client.images])
         .pipe(gulp.dest(`${paths.dist}/${clientPath}/assets`));
-});
-
-gulp.task('copy:bower', () => {
-    return gulp.src([paths.client.bower + '**/*'])
-        .pipe(gulp.dest(`${paths.dist}/${clientPath}/bower_components`));
 });
 
 gulp.task('copy:server', () => {
@@ -621,4 +651,49 @@ gulp.task('test:e2e', ['env:all', 'env:test', 'start:server', 'webdriver_update'
         }).on('end', () => {
             process.exit();
         });
+});
+
+/********************
+ * Grunt ported tasks
+ ********************/
+
+grunt.initConfig({
+    buildcontrol: {
+        options: {
+            dir: paths.dist,
+            commit: true,
+            push: true,
+            connectCommits: false,
+            message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%'
+        },
+        heroku: {
+            options: {
+                remote: 'heroku',
+                branch: 'master'
+            }
+        },
+        openshift: {
+            options: {
+                remote: 'openshift',
+                branch: 'master'
+            }
+        }
+    }
+});
+
+grunt.loadNpmTasks('grunt-build-control');
+
+gulp.task('buildcontrol:heroku', function(done) {
+    grunt.tasks(
+        ['buildcontrol:heroku'],    //you can add more grunt tasks in this array
+        {gruntfile: false}, //don't look for a Gruntfile - there is none. :-)
+        function() {done();}
+    );
+});
+gulp.task('buildcontrol:openshift', function(done) {
+    grunt.tasks(
+        ['buildcontrol:openshift'],    //you can add more grunt tasks in this array
+        {gruntfile: false}, //don't look for a Gruntfile - there is none. :-)
+        function() {done();}
+    );
 });

@@ -5,7 +5,7 @@
 module.exports = {
   // MongoDB connection options
   mongo: {
-    uri: 'mongodb://localhost/petzioconsole-test'
+    uri: 'mongodb://localhost/sample-test'
   },
   sequelize: {
     uri: 'sqlite://',

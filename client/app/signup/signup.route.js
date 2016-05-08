@@ -13,6 +13,16 @@
           }
         }
       })
+      .state('app.activate', {
+        url: '/activate',
+        views: {
+          '@app': {
+            templateUrl:      'app/signup/finish/finish.html',
+            controller:       'SignupFinishController',
+            controllerAs:     'ctrl'
+          }
+        }
+      })
     ;
   }
 

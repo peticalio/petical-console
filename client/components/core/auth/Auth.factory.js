@@ -24,6 +24,7 @@
 
       // deprecated
       _this.getCurrentUser = getCurrentUser;
+      _this.replaceUser = replaceUser;
     }
 
     function login(user, callback) {
@@ -137,38 +138,15 @@
       return _this.currentUser;
     }
 
+    function replaceUser(newUser) {
+      _this.currentUser = newUser;
+    }
+
     // トークンがあるかどうかを調べる
     function isLoggedIn() {
       var token = $cookieStore.get('token');
       return !angular.isUndefined(token) && token !== null;
     }
-
-    // function isLoggedInAsync(cb) {
-    //   // if(currentUser.hasOwnProperty('$promise')) {
-    //   //   currentUser.$promise.then(function() {
-    //   //     cb(true);
-    //   //   }).catch(function() {
-    //   //     cb(false);
-    //   //   });
-    //   // } else if(currentUser.hasOwnProperty('authorities')) {
-    //   //   cb(true);
-    //   // } else {
-    //   //   cb(false);
-    //   // }
-    //   return cb();
-    // }
-
-    // function isAdmin() {
-    //   var roles = currentUser.authorities;
-    //   if (roles) {
-    //     return roles.indexOf('ROLE_ADMIN' >= 0);
-    //   }
-    //   return false;
-    // }
-
-    // function getToken = function() {
-    //   return $cookieStore.get('token');
-    // }
 
     constructor();
   }

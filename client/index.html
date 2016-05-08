@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons"/>
     <link rel='stylesheet' href='//fonts.googleapis.com/css?family=Roboto:600,500,400,200'/>
     <link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/notosansjapanese.css"/>
+    <script src="//www.google.com/recaptcha/api.js?render=explicit&onload=vcRecaptchaApiLoaded" async defer></script>
   </head>
   <body ng-app="petzApp">
     <!--[if lt IE 7]>
@@ -82,6 +83,7 @@
       <script src="bower_components/handsontable/dist/handsontable.js"></script>
       <script src="bower_components/ngHandsontable/dist/ngHandsontable.js"></script>
       <script src="bower_components/immutable/dist/immutable.js"></script>
+      <script src="bower_components/angular-recaptcha/release/angular-recaptcha.js"></script>
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js(.tmp) app/app.js -->
@@ -155,8 +157,10 @@
       <script src="app/reset/reset.route.js"></script>
       <script src="app/signin/signin.controller.js"></script>
       <script src="app/signin/signin.route.js"></script>
+      <script src="app/signup/finish/finish.controller.js"></script>
       <script src="app/signup/signup.controller.js"></script>
       <script src="app/signup/signup.route.js"></script>
+      <script src="components/api/activate/Activate.service.js"></script>
       <script src="components/api/blood/blood.service.js"></script>
       <script src="components/api/clinic/Clinic.service.js"></script>
       <script src="components/api/clinic/chart/ClinicChart.service.js"></script>
