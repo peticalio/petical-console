@@ -73,11 +73,17 @@ body > div.main {
 }
 
 // navbar
+// .navbar-brand {
+//   background: url('/assets/images/logo_236x75_1.png') no-repeat left center;
+//   background-size: contain;
+//   height: 30px;
+//   width: 150px;
+// }
 .navbar-brand {
-  background: url('/assets/images/logo_236x75_1.png') no-repeat left center;
-  background-size: contain;
-  height: 30px;
-  width: 150px;
+  padding: 0;
+}
+.navbar-brand img {
+  height: 50px;
 }
 
 // note
