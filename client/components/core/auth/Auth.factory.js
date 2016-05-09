@@ -42,7 +42,7 @@
       var cb = callback || angular.noop;
       var deferred = $q.defer();
 
-      var data = 'username=' + encodeURIComponent(user.email) + '&password=' + encodeURIComponent(user.password) + '&grant_type=password&scope=read%20write&' + 'client_secret=mySecretOAuthSecret&client_id=majimenatestapp';
+      var data = 'username=' + encodeURIComponent(user.email) + '&password=' + encodeURIComponent(user.password) + '&grant_type=password&scope=read%20write&' + 'client_secret=' + api.CLIENT_SECRET + '&client_id=' + api.CLIENT_ID;
       return $http.post(
         api.domain + '/oauth/token',
         data,
@@ -50,7 +50,7 @@
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
             'Accept': 'application/json',
-            'Authorization': 'Basic ' + Base64.encode('majimenatestapp' + ':' + 'mySecretOAuthSecret')
+            'Authorization': 'Basic ' + Base64.encode(api.CLIENT_ID + ':' + api.CLIENT_SECRET)
           }
         })
         .success(function(token) {
@@ -72,12 +72,12 @@
 
     function refresh() {
       var token = $cookieStore.get('token');
-      var data = 'refresh_token=' + token.refresh_token + '&grant_type=refresh_token&client_id=majimenatestapp&client_secret=mySecretOAuthSecret';
+      var data = 'refresh_token=' + token.refresh_token + '&grant_type=refresh_token&client_id=' + api.CLIENT_ID + '&client_secret=' + api.CLIENT_SECRET;
       return $http.post(api.domain + '/oauth/token', data, {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
           'Accept': 'application/json',
-          'Authorization': 'Basic ' + Base64.encode('majimenatestapp' + ':' + 'mySecretOAuthSecret')
+          'Authorization': 'Basic ' + Base64.encode(api.CLIENT_ID + ':' + api.CLIENT_SECRET)
         }})
         .success(function(token) {
           console.log(token);
