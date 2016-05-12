@@ -20,7 +20,7 @@
           <div flex="50" hide-xs></div>
           <md-input-container class="md-icon-float md-block" flex="50" flex-xs="100">
             <label>新しいパスワード</label>
-            <input name="newPassword" type="password" ng-model="ctrl.account.newPassword" ng-required="true" ng-minlength="5" ng-maxlength="100">
+            <input name="newPassword" type="password" class="inspectletIgnore" ng-model="ctrl.account.newPassword" ng-required="true" ng-minlength="5" ng-maxlength="100">
             <div ng-show="form.newPassword.$invalid" ng-messages="form.newPassword.$error">
               <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
                 <span>5 文字以上 100 文字以内の半角英数字記号で新しいパスワードを入力してください。</span>
@@ -31,7 +31,7 @@
           <div flex="50" hide-xs></div>
           <md-input-container class="md-icon-float md-block" flex="50" flex-xs="100">
             <label>パスワード（確認のためもう一度入力してください）</label>
-            <input id="confirm" name="confirm" type="password" ng-model="ctrl.confirm" ng-required="true" ui-validate="{same : '$value === ctrl.account.newPassword'}">
+            <input id="confirm" name="confirm" type="password" class="inspectletIgnore" ng-model="ctrl.confirm" ng-required="true" ui-validate="{same : '$value === ctrl.account.newPassword'}">
             <div ng-show="form.confirm.$invalid" ng-messages="form.confirm.$error">
               <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern', 'same']">
                 <span>新しいパスワードに入力した値と異なっています。</span>
