@@ -8,6 +8,8 @@
       this.ClinicProduct = ClinicProduct;
       this.clinic = clinic;
       this.products = products;
+      this.page = 1;
+      this.limit = 20;
     }
 
     // 商品マスタをリフレッシュする

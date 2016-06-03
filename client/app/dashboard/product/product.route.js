@@ -17,18 +17,21 @@
   function ClinicProductRouter($stateProvider) {
     $stateProvider
       .state('app.dashboard.product', {
-        abstract: true,
-        url: '^/clinics/:clinicId/products'
-      })
+        // abstract: true,
+        url: '^/clinics/:clinicId/products',
+      // })
       // 商品一覧
-      .state('app.dashboard.product.list', {
-        url: '/list',
+      // .state('app.dashboard.product.list', {
+        // url: '/list',
         views: {
           '@app': {
             templateUrl:  'app/dashboard/product/list/list.html',
             controller:   'ProductListController',
             controllerAs: 'ctrl'
           }
+        },
+        ncyBreadcrumb: {
+          label: '診察料金'
         },
         resolve: {
           products: getClinicProducts
@@ -44,6 +47,9 @@
             controllerAs: 'ctrl'
           }
         },
+        ncyBreadcrumb: {
+          label: '登録フォーム'
+        },
         resolve: {
           product: getClinicProduct
         }
@@ -58,6 +64,9 @@
             controllerAs: 'ctrl'
           }
         },
+        ncyBreadcrumb: {
+          label: '更新フォーム'
+        },
         resolve: {
           product: getClinicProduct
         }
@@ -71,6 +80,9 @@
             controller:   'ProductDetailController',
             controllerAs: 'ctrl'
           }
+        },
+        ncyBreadcrumb: {
+          label: '詳細'
         },
         resolve: {
           product: getClinicProduct

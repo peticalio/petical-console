@@ -1,4 +1,6 @@
 @import '../assets/sass/bootstrap.variables';
+$input-border-focus: $brand-primary;
+
 $icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
 @import '../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap';
 $fa-font-path: "../bower_components/font-awesome/fonts";
@@ -125,11 +127,13 @@ body > div.main {
   background: #E91E63;
 }
 
-// card
+// card Uhh deprecated
 .flat-card {
   background: #FFFFFF;
   border-radius: 2px;
-  border: 1px solid rgba(0,0,0,0.12);
+  border: 1px solid #e1e1e8;
+  // padding: 16px;
+  // margin-bottom: 16px;
 }
 
 // sidenav menu
@@ -214,6 +218,140 @@ md-menu-item a.active, md-menu-item a.active:hover, md-menu-item a.active md-ico
   text-overflow: ellipsis;
 }
 
+// custom layout
 .attachment {
   border: 2px dashed #ccc;
+}
+
+// ----------------------------------------
+// overwrite bootstrap styles
+// ----------------------------------------
+
+// overwrite bootstrap
+.container {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+@media (min-width: 320px) {
+  .container {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.img-circle {
+  width: 32px;
+}
+
+// overwrite panel
+.panel {
+  border-radius: $border-radius-small;
+  border-color: $table-border-color;
+  box-shadow: none;
+}
+.panel-heading {
+  padding: 16px 24px;
+  border-color: $table-border-color;
+}
+.panel-body {
+  padding: 24px;
+  .row {
+    p {
+      margin-bottom: 24px;
+    }
+    .fa {
+      margin-right: 16px;
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
+
+// overwrite form
+.form-control, .form-control:focus {
+  box-shadow: none !important;
+  border-width: 1px;
+}
+.form-error {
+  // color: darken($btn-danger-bg, 5%);
+  color: darken(#d9534f, 20%);
+  margin-top: 4px;
+}
+
+// extends bootstrap styles
+
+// labels
+.label-default {
+  @extend .label-primary;
+  background-color: #999999;
+  border: 1px solid #999999;
+}
+.label-default-outline {
+  @extend .label-default;
+  background-color: #fff;
+  color: #999999;
+  border: 1px solid #999999;
+}
+.label-primary-outline {
+  @extend .label-primary;
+  background-color: #fff;
+  color: $brand-primary;
+  border: 1px solid $brand-primary;
+}
+.label-success-outline {
+  @extend .label-success;
+  background-color: #fff;
+  color: $brand-success;
+  border: 1px solid $brand-success;
+}
+.label-info-outline {
+  @extend .label-info;
+  background-color: #fff;
+  color: $brand-info;
+  border: 1px solid $brand-info;
+}
+.label-warning-outline {
+  @extend .label-warning;
+  background-color: #fff;
+  color: $brand-warning;
+  border: 1px solid $brand-warning;
+}
+.label-danger-outline {
+  @extend .label-danger;
+  background-color: #fff;
+  color: $brand-danger;
+  border: 1px solid $brand-danger;
+}
+.label-required {
+  @extend .label-danger;
+  vertical-align: middle;
+  font-weight: normal;
+  font-size: 50%;
+  margin-left: 8px;
+}
+
+// ----------------------------------------
+// page header - custom styles
+// ----------------------------------------
+
+// header
+.page-header-content {
+  padding: 32px 24px;
+}
+.page-title h4 {
+  font-size: 20px;
+  font-weight: 200;
+  margin: 0;
+}
+.page-title .breadcrumb {
+  margin: 0;
+  padding: 8px 0 0 0;
+}
+.breadcrumb-caret>li+li:before {
+  content: '\203A\00a0';
+}
+.heading-elements {
+  float: right;
+  margin-top: -5px;
 }

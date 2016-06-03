@@ -1,29 +1,42 @@
-<div class="layout-max-width">
-  <section>
-    <md-toolbar md-theme="content" class="pt">
-      <div class="md-toolbar-tools">
-        <h2 class="md-title">商品・料金マスタ</h2>
-        <span flex></span>
-        <md-button class="md-icon-button" ng-click="ctrl.refresh()">
-          <md-tooltip md-direction="left">更新</md-tooltip>
-          <md-icon class="material-icons">refresh</md-icon>
-        </md-button>
-      </div>
-    </md-toolbar>
-    <div layout-padding>
-      <md-table-container class="flat-card">
+<div class="container">
+  <div class="page-header-content">
+    <div class="heading-elements">
+      <a class="btn btn-link" ui-sref="app.dashboard.product.form">
+        <md-icon class="material-icons">add</md-icon>
+        <p><small>追加する</small></p>
+      </a>
+      <a href="#" class="btn btn-link">
+        <md-icon class="material-icons">refresh</md-icon>
+        <p><small>更新する</small></p>
+      </a>
+		</div>
+    <div class="page-title">
+      <h4>診察料金マスタ</h4>
+      <ul class="breadcrumb breadcrumb-caret small" ncy-breadcrumb></ul>
+    </div>
+  </div>
+  <section class="panel">
+    <div class="panel-body">
+      <md-table-container>
         <table md-table class="table-hover table-clickable">
           <thead md-head>
             <tr md-row>
-              <th md-column><span>診察・商品名</span></th>
+              <th md-column><span>科目</span></th>
+              <th md-column><span>分類</span></th>
+              <th md-column><span>診察料金名</span></th>
               <th md-column><span>価格（単価）</span></th>
               <th md-column><span>税区分</span></th>
-              <th md-column><span>消費税率</span></th>
               <th md-column><span>作成日時</span></th>
             </tr>
           </thead>
           <tbody md-body>
-            <tr md-row ng-repeat="product in ctrl.products" ui-sref="app.dashboard.product.detail({productId: product.id})">
+            <tr md-row ng-repeat="product in ctrl.products | filter:ctrl.query | orderBy:ctrl.order | limitTo:ctrl.limit:(ctrl.page-1)*ctrl.limit" ui-sref="app.dashboard.product.detail({productId: product.id})">
+              <td md-cell>
+                {{product.course}}
+              </td>
+              <td md-cell>
+                {{product.category}}
+              </td>
               <td md-cell>
                 {{product.name}}
               </td>
@@ -31,11 +44,8 @@
                 {{product.price | currency:'¥ ':0}}
               </td>
               <td md-cell>
-                <span class="label label-info" ng-if="product.taxType === 'EXCLUSIVE'">外税</span>
+                <span class="label label-default" ng-if="product.taxType === 'EXCLUSIVE'">外税</span>
                 <span class="label label-warning" ng-if="product.taxType !== 'EXCLUSIVE'">内税</span>
-              </td>
-              <td md-cell>
-                {{product.taxRate | percentage:1}}
               </td>
               <td md-cell>
                 {{product.createdDate | date:'yyyy/MM/dd HH:mm'}}
@@ -44,13 +54,8 @@
           </tbody>
         </table>
       </md-table-container>
+      <md-table-pagination md-limit="ctrl.limit" md-limit-options="[20,40,60,80,100]" md-page="ctrl.page" md-total="{{ctrl.products.length}}" md-page-select="true" md-boundary-links="true">
+      </md-table-pagination>
     </div>
   </section>
-</div>
-
-<div class="fab" md-theme="fab">
-  <md-button aria-label="add" class="md-fab md-primary" ui-sref="app.dashboard.product.form">
-    <md-tooltip md-direction="left">新規追加</md-tooltip>
-    <md-icon class="material-icons">add</md-icon>
-  </md-button>
 </div>

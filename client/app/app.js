@@ -19,6 +19,7 @@ angular
     'angularMoment',
     'md.data.table',
     'mwl.calendar',
+    'ncy-angular-breadcrumb',
     'ngHandsontable',
     'vcRecaptcha',
     'nvd3'

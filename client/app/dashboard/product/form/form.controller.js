@@ -16,7 +16,7 @@
       this.ClinicProduct.save({clinicId: this.clinic.id}, product).$promise
         .then(() => {
           this.toaster.info('診察料金を新しく登録しました。');
-          this.$state.go('app.dashboard.product.list');
+          this.$state.go('app.dashboard.product');
         });
     }
 
