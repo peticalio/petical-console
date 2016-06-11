@@ -2,13 +2,16 @@
   'use strict';
 
   class ProductFormController {
-    constructor($state, toaster, ClinicProduct, clinic, product) {
+    constructor($state, toaster, ClinicProduct, clinic, product, products) {
       this.$state = $state;
       this.toaster = toaster;
       this.ClinicProduct = ClinicProduct;
       this.clinic = clinic;
       this.product = product;
       this.taxTypes = [{name: '外税', value: 'EXCLUSIVE'}, {name: '内税', value: 'INCLUSIVE'}];
+
+      this.courses = Array.from(new Set(products.map((item) => item.course)));
+      this.categories = Array.from(new Set(products.map((item) => item.category)));
     }
 
     // 診察料金を登録する
@@ -29,9 +32,20 @@
           this.$state.go('app.dashboard.product.detail', {productId: product.id});
         });
     }
+
+    transfrom(value) {
+      if (value) {
+        return value;
+      }
+      return null;
+    }
+
+    create(value) {
+      return value;
+    }
   }
 
-  ProductFormController.$inject = ['$state', 'toaster', 'ClinicProduct', 'clinic', 'product'];
+  ProductFormController.$inject = ['$state', 'toaster', 'ClinicProduct', 'clinic', 'product', 'products'];
   angular.module('petzApp')
     .controller('ProductFormController', ProductFormController);
 

@@ -19,22 +19,6 @@
     <div class="panel-body">
       <div class="row">
         <div class="col-md-2">
-          <i class="fa fa-hashtag"></i>診察名:
-        </div>
-        <div class="col-md-4">
-          <p>{{ctrl.product.name}}</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-2">
-          <i class="fa fa-tag"></i>診察料金:
-        </div>
-        <div class="col-md-4">
-          <p>{{ctrl.product.price | currency:'¥ ':0}}</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-2">
           <i class="fa fa-briefcase"></i>科目:
         </div>
         <div class="col-md-4">
@@ -51,11 +35,29 @@
       </div>
       <div class="row">
         <div class="col-md-2">
+          <i class="fa fa-hashtag"></i>診察名:
+        </div>
+        <div class="col-md-4">
+          <p>{{ctrl.product.name}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          <i class="fa fa-tag"></i>診察料金:
+        </div>
+        <div class="col-md-4">
+          <p>{{ctrl.product.price | currency:'¥ ':0}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
           <i class="fa fa-clock-o"></i>作成日時:
         </div>
         <div class="col-md-4">
-          <p class="m0">{{ctrl.product.createdDate | date:'yyyy/MM/dd HH:mm'}}</p>
+          <p>{{ctrl.product.createdDate | date:'yyyy/MM/dd HH:mm'}}</p>
         </div>
+      </div>
+      <div class="row">
         <div class="col-md-2">
           <i class="fa fa-clock-o"></i>最終更新日時:
         </div>

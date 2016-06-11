@@ -275,8 +275,15 @@ md-menu-item a.active, md-menu-item a.active:hover, md-menu-item a.active md-ico
 }
 .form-error {
   // color: darken($btn-danger-bg, 5%);
-  color: darken(#d9534f, 20%);
+  color: #a94442;
   margin-top: 4px;
+}
+// for ui-select (他のパーツと同じになるように微調整)
+.has-error .btn-default {
+  border-color: #a94442;
+}
+.ui-select-match-text {
+  color: #555555;
 }
 
 // extends bootstrap styles
@@ -325,6 +332,7 @@ md-menu-item a.active, md-menu-item a.active:hover, md-menu-item a.active md-ico
 }
 .label-required {
   @extend .label-danger;
+  background-color: #d9534f;
   vertical-align: middle;
   font-weight: normal;
   font-size: 50%;

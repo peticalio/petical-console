@@ -16,6 +16,7 @@ angular
     'ui.validate',
     'ui.gravatar',
     'ui.bootstrap',
+    'ui.select',
     'angularMoment',
     'md.data.table',
     'mwl.calendar',

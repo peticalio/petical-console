@@ -1,0 +1,12 @@
+<div class="form-group" ng-class="{'has-error': $ctrl.form[$ctrl.name].$invalid}">
+  <label for="{{$ctrl.name}}">
+    <span ng-if="$ctrl.label">{{$ctrl.label}}</span>
+    <span ng-if="$ctrl.required" class="label label-required">必須</span>
+  </label>
+  <textarea name="{{$ctrl.name}}" ng-model="$ctrl.model" maxlength="{{$ctrl.maxlenth}}" ng-minlength="{{$ctrl.minlength}}" ng-maxlength="$ctrl.maxlength" ng-required="$ctrl.required" ng-pattern="$ctrl.pattern" placeholder="{{$ctrl.message}}" class="form-control" rows="5"/>
+  <div class="form-error" ng-show="$ctrl.form[$ctrl.name].$invalid" ng-messages="$ctrl.form[$ctrl.name].$error">
+    <div ng-message-exp="['required', 'minlength', 'maxlength', 'min', 'max' 'pattern']">
+      <span>{{$ctrl.message}}</span>
+    </div>
+  </div>
+</div>

@@ -10,65 +10,27 @@
       <form name="form">
         <div class="row">
           <div class="col-sm-6 col-xs-12">
-            <div class="form-group" ng-class="{'has-error': form.name.$invalid}">
-              <label for="name">診察名<span class="label label-required">必須</span></label>
-              <input type="text" name="name" class="form-control" ng-model="ctrl.product.name" maxlength="50" ng-required="true" ng-maxlength="50" placeholder="50 文字以内で入力してください。"/>
-              <div class="form-error" ng-show="form.name.$invalid" ng-messages="form.name.$error">
-                <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-                  <span>50 文字以内で入力してください。</span>
-                </div>
-              </div>
-            </div>
+            <ptc-input form="form" name="name" label="診察名" model="ctrl.product.name" maxlength="50" required="true" message="50 文字以内で入力してください。"></ptc-input>
           </div>
         </div>
         <div class="row">
           <div class="col-sm-6 col-xs-12">
-            <div class="form-group" ng-class="{'has-error': form.price.$invalid}">
-              <label for="price">診察料金（単価）<span class="label label-required">必須</span></label>
-              <div class="input-group">
-                <span class="input-group-addon">¥</span>
-                <input name="price" type="number" class="form-control" ng-model="ctrl.product.price" ng-required="true" min="0" max="9999999" placeholder="0 - 9,999,999 の間の数字で入力してください。">
-              </div>
-              <div class="form-error" ng-show="form.price.$invalid" ng-messages="form.price.$error">
-                <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-                  <span>0 - 9,999,999 の間の数字で入力してください。</span>
-                </div>
-              </div>
-            </div>
+            <ptc-input form="form" name="price" label="診察料金（単価）" model="ctrl.product.price" type="price" min="0" max="9999999" required="true" message="0 - 9,999,999 の間の数字で入力してください。"></ptc-input>
           </div>
         </div>
         <div class="row">
           <div class="col-sm-6 col-xs-12">
-            <div class="form-group" ng-class="{'has-error': form.course.$invalid}">
-              <label for="course">科目<span class="label label-required">必須</span></label>
-              <input type="text" name="course" class="form-control" ng-model="ctrl.product.course" maxlength="50" ng-required="true" ng-maxlength="50" placeholder="50 文字以内で入力してください。"/>
-              <div class="form-error" ng-show="form.course.$invalid" ng-messages="form.course.$error">
-                <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-                  <span>50 文字以内で入力してください。</span>
-                </div>
-              </div>
-            </div>
+            <ptc-select name="category" label="科目" model="ctrl.product.course" data="ctrl.courses" on-transform="ctrl.transfrom(value)" on-create="ctrl.create(value)" maxlength="50" pattern="" required="true"></ptc-select>
           </div>
         </div>
         <div class="row">
           <div class="col-sm-6 col-xs-12">
-            <div class="form-group" ng-class="{'has-error': form.category.$invalid}">
-              <label for="category">カテゴリ<span class="label label-required">必須</span></label>
-              <input type="text" name="category" class="form-control" ng-model="ctrl.product.category" maxlength="50" ng-required="true" ng-maxlength="50" placeholder="50 文字以内で入力してください。"/>
-              <div class="form-error" ng-show="form.category.$invalid" ng-messages="form.category.$error">
-                <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-                  <span>50 文字以内で入力してください。</span>
-                </div>
-              </div>
-            </div>
+            <ptc-select name="category" label="カテゴリ" model="ctrl.product.category" data="ctrl.categories" on-transform="ctrl.transfrom(value)" on-create="ctrl.create(value)" maxlength="50" pattern="" required="true"></ptc-select>
           </div>
         </div>
         <div class="row">
           <div class="col-sm-12">
-            <div class="form-group" ng-class="{'has-error': form.description.$invalid}">
-              <label for="description">説明</label>
-              <textarea name="description" class="form-control" ng-model="ctrl.product.description" ng-maxlength="2000" placeholder="2000文字以内で入力してください。" rows="5"/>
-            </div>
+            <ptc-textarea form="form" name="description" label="説明" model="ctrl.product.description" maxlength="2000" message="2000文字以内で入力してください。"></ptc-textarea>
           </div>
         </div>
         <div class="row">
