@@ -1,0 +1,12 @@
+<div class="form-group" ng-class="{'has-error': $ctrl.form[$ctrl.name].$invalid}">
+  <label for="{{$ctrl.name}}">
+    <span ng-if="$ctrl.label">{{$ctrl.label}}</span>
+    <span ng-if="$ctrl.required" class="label label-required">必須</span>
+  </label>
+  <input type="text" name="{{$ctrl.name}}" ng-model="$ctrl.model" maxlength="{{$ctrl.maxlength}}" ng-minlength="$ctrl.minlength" ng-maxlength="$ctrl.maxlength" ng-pattern="$ctrl.pattern" ng-required="$ctrl.required" uib-typeahead="value for value in $ctrl.data | filter: $viewValue | limitTo: 10" typeahead-min-length="0" placeholder="{{$ctrl.message}}" class="form-control" autocomplete="off"/>
+  <div class="form-error" ng-show="$ctrl.form[$ctrl.name].$invalid" ng-messages="$ctrl.form[$ctrl.name].$error">
+    <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+      <span>{{$ctrl.message}}</span>
+    </div>
+  </div>
+</div>

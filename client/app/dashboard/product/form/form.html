@@ -20,12 +20,13 @@
         </div>
         <div class="row">
           <div class="col-sm-6 col-xs-12">
-            <ptc-select name="category" label="科目" model="ctrl.product.course" data="ctrl.courses" on-transform="ctrl.transfrom(value)" on-create="ctrl.create(value)" maxlength="50" pattern="" required="true"></ptc-select>
+            <ptc-input-select form="form" name="course" label="科目" model="ctrl.product.course" data="ctrl.courses" maxlength="50" pattern="" required="true"></ptc-select>
           </div>
         </div>
         <div class="row">
           <div class="col-sm-6 col-xs-12">
-            <ptc-select name="category" label="カテゴリ" model="ctrl.product.category" data="ctrl.categories" on-transform="ctrl.transfrom(value)" on-create="ctrl.create(value)" maxlength="50" pattern="" required="true"></ptc-select>
+            <ptc-input-select form="form" name="category" label="カテゴリ" model="ctrl.product.categories" data="ctrl.categories" maxlength="50" pattern="" required="true"></ptc-select>
+            <!-- <ptc-select name="category" label="カテゴリ" model="ctrl.product.category" data="ctrl.categories" on-transform="ctrl.transfrom(value)" on-create="ctrl.create(value)" maxlength="50" pattern="" required="true"></ptc-select> -->
           </div>
         </div>
         <div class="row">
