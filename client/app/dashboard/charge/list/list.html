@@ -1,7 +1,7 @@
 <div class="container">
   <div class="page-header-content">
     <div class="heading-elements">
-      <a class="btn btn-link" ui-sref="app.dashboard.product.form">
+      <a class="btn btn-link" ui-sref="app.dashboard.charge.form">
         <md-icon class="material-icons">add</md-icon>
         <p><small>追加する</small></p>
       </a>
@@ -30,31 +30,31 @@
             </tr>
           </thead>
           <tbody md-body>
-            <tr md-row ng-repeat="product in ctrl.products | filter:ctrl.query | orderBy:ctrl.order | limitTo:ctrl.limit:(ctrl.page-1)*ctrl.limit" ui-sref="app.dashboard.product.detail({productId: product.id})">
+            <tr md-row ng-repeat="charge in ctrl.charges | filter:ctrl.query | orderBy:ctrl.order | limitTo:ctrl.limit:(ctrl.page-1)*ctrl.limit" ui-sref="app.dashboard.charge.detail({chargeId: charge.id})">
               <td md-cell>
-                {{product.course}}
+                {{charge.course}}
               </td>
               <td md-cell>
-                {{product.category}}
+                {{charge.category}}
               </td>
               <td md-cell>
-                {{product.name}}
+                {{charge.name}}
               </td>
               <td md-cell>
-                {{product.price | currency:'¥ ':0}}
+                {{charge.price | currency:'¥ ':0}}
               </td>
               <td md-cell>
-                <span class="label label-default" ng-if="product.taxType === 'EXCLUSIVE'">外税</span>
-                <span class="label label-warning" ng-if="product.taxType !== 'EXCLUSIVE'">内税</span>
+                <span class="label label-default" ng-if="charge.taxType === 'EXCLUSIVE'">外税</span>
+                <span class="label label-warning" ng-if="charge.taxType !== 'EXCLUSIVE'">内税</span>
               </td>
               <td md-cell>
-                {{product.createdDate | date:'yyyy/MM/dd HH:mm'}}
+                {{charge.createdDate | date:'yyyy/MM/dd HH:mm'}}
               </td>
             </tr>
           </tbody>
         </table>
       </md-table-container>
-      <md-table-pagination md-limit="ctrl.limit" md-limit-options="[20,40,60,80,100]" md-page="ctrl.page" md-total="{{ctrl.products.length}}" md-page-select="true" md-boundary-links="true">
+      <md-table-pagination md-limit="ctrl.limit" md-limit-options="[20,40,60,80,100]" md-page="ctrl.page" md-total="{{ctrl.charges.length}}" md-page-select="true" md-boundary-links="true">
       </md-table-pagination>
     </div>
   </section>

@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: ProductDetailController', function () {
+describe('Controller: ChargeDetailController', function () {
 
   // load the controller's module
   beforeEach(module('petzApp'));
@@ -10,7 +10,7 @@ describe('Controller: ProductDetailController', function () {
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    sut = $controller('ProductDetailController', {
+    sut = $controller('ChargeDetailController', {
       $scope: scope
     });
   }));
