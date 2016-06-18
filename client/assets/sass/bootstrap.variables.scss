@@ -1,8 +1,12 @@
 
-$brand-primary:  #00acc1;
-$brand-success:  #8BC34A;
-$brand-info:     #2196F3;
-$brand-warning:  #FFC107;
-$brand-danger:   #E91E63;
+$brand-primary:  #5bc0de;
+$brand-success:  #5cb85c;
+$brand-info:     darken(#428bca, 6.5%);
+$brand-warning:  #f0ad4e;
+$brand-danger:   #d9534f;
+
+$table-bg-hover: #fcf8e3;
 
 $input-border-focus: $brand-info;
+
+$navbar-height: 45px;

@@ -190,3 +190,35 @@ table.table-clickable > tbody > tr {
 .text-left {
   text-align: left !important;
 }
+
+/* status */
+.position-left {
+  margin-right: 7px;
+}
+.status-mark {
+  border-radius: 50%;
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  border: 3px solid;
+}
+
+/* border color */
+.border-primary {
+  border-color: $brand-primary !important;
+}
+.border-success {
+  border-color: $brand-success !important;
+}
+.border-info {
+  border-color: $brand-info !important;
+}
+.border-warning {
+  border-color: $brand-warning !important;
+}
+.border-danger {
+  border-color: $brand-danger !important;
+}
+.border-default {
+  border-color: #ccc !important;
+}

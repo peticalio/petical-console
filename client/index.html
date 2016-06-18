@@ -39,7 +39,7 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="main" ui-view layout="row" flex></div>
+    <div class="main" ui-view></div>
 
     <!-- Google Analytics -->
     <script>
@@ -62,22 +62,6 @@
       })();
     </script>
     <!-- End Inspectlet Embed Code -->
-
-    <!-- Ptengine -->
-    <script type="text/javascript">
-    	  window._pt_lt = new Date().getTime();
-    	  window._pt_sp_2 = [];
-    	  _pt_sp_2.push('setAccount,3885a307');
-    	  var _protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-    	  (function() {
-    		var atag = document.createElement('script'); atag.type = 'text/javascript'; atag.async = true;
-    		atag.src = _protocol + 'js.ptengine.jp/pta.js';
-    		var stag = document.createElement('script'); stag.type = 'text/javascript'; stag.async = true;
-    		stag.src = _protocol + 'js.ptengine.jp/pts.js';
-    		var s = document.getElementsByTagName('script')[0];
-    		s.parentNode.insertBefore(atag, s);s.parentNode.insertBefore(stag, s);
-    	  })();
-    </script>
 
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
@@ -113,6 +97,7 @@
       <script src="bower_components/immutable/dist/immutable.js"></script>
       <script src="bower_components/angular-recaptcha/release/angular-recaptcha.js"></script>
       <script src="bower_components/angular-ui-select/dist/select.js"></script>
+      <script src="bower_components/angularUtils-pagination/dirPagination.js"></script>
       <!-- endbower -->
       <script src="bower_components/angular-breadcrumb/release/angular-breadcrumb.min.js"></script>
     <!-- endbuild -->

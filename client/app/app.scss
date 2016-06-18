@@ -19,6 +19,7 @@ $fa-font-path: "../bower_components/font-awesome/fonts";
 
 // Component styles are injected through grunt
 // injector
+@import 'app.bootstrap';
 @import 'app.overwrite';
 @import 'app.print';
 @import 'app.utils';
@@ -30,12 +31,12 @@ body {
   font-weight: 400;
 }
 body, body > div.main {
-  max-width: 100%;
-  max-height: 100%;
-  overflow: hidden;
+  // max-width: 100%;
+  // max-height: 100%;
+  // overflow: hidden;
 }
 body > div.main {
-  height: 100%;
+  // height: 100%;
 }
 
 // pre
@@ -81,12 +82,6 @@ body > div.main {
 //   height: 30px;
 //   width: 150px;
 // }
-.navbar-brand {
-  padding: 0;
-}
-.navbar-brand img {
-  height: 50px;
-}
 
 // note
 .note {
@@ -224,67 +219,13 @@ md-menu-item a.active, md-menu-item a.active:hover, md-menu-item a.active md-ico
 }
 
 // ----------------------------------------
-// overwrite bootstrap styles
+// fontawesome
 // ----------------------------------------
-
-// overwrite bootstrap
-.container {
-  padding-left: 16px;
-  padding-right: 16px;
-}
-@media (min-width: 320px) {
-  .container {
-    width: 100%;
-    margin-left: 0;
-    margin-right: 0;
-  }
+.fa-main {
+  font-size: 16px;
 }
 
-.img-circle {
-  width: 32px;
-}
 
-// overwrite panel
-.panel {
-  border-radius: $border-radius-small;
-  border-color: $table-border-color;
-  box-shadow: none;
-}
-.panel-heading {
-  padding: 16px 24px;
-  border-color: $table-border-color;
-}
-.panel-body {
-  padding: 24px;
-  .row {
-    p {
-      margin-bottom: 24px;
-    }
-    .fa {
-      margin-right: 16px;
-      width: 16px;
-      height: 16px;
-    }
-  }
-}
-
-// overwrite form
-.form-control, .form-control:focus {
-  box-shadow: none !important;
-  border-width: 1px;
-}
-.form-error {
-  // color: darken($btn-danger-bg, 5%);
-  color: #a94442;
-  margin-top: 4px;
-}
-// for ui-select (他のパーツと同じになるように微調整)
-.has-error .btn-default {
-  border-color: #a94442;
-}
-.ui-select-match-text {
-  color: #555555;
-}
 
 // extends bootstrap styles
 
@@ -345,7 +286,7 @@ md-menu-item a.active, md-menu-item a.active:hover, md-menu-item a.active md-ico
 
 // header
 .page-header-content {
-  padding: 32px 24px;
+  padding: 32px 16px;
 }
 .page-title h4 {
   font-size: 20px;

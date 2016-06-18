@@ -1,0 +1,167 @@
+// --------------------------------------------------
+// bootstrap container
+// --------------------------------------------------
+.container {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+@media (min-width: 320px) {
+  .container {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.img-circle {
+  width: 32px;
+}
+
+// --------------------------------------------------
+// bootstrap navbar
+// --------------------------------------------------
+.navbar-default {
+  background-color: #fff;
+  .navbar-nav > .active > a, .navbar-nav > .active > a:focus, .navbar-nav > .active > a:hover, .navbar-nav > li > a:focus, .navbar-nav > li > a:hover,
+  .navbar-nav > .open > a, .navbar-nav > .open > a:hover, .navbar-nav > .open > a:focus {
+    color: #333;
+    background: $gray-lighter;
+  }
+  .navbar-nav > li > a.active {
+    color: darken($brand-primary, 13.5%);
+  }
+}
+.navbar-inverse {
+  background-color: $brand-primary;
+  border: 0;
+  .navbar-nav > li > a {
+    color: #fff;
+  }
+  .navbar-nav > li > a.lnk-gravatar {
+    color: #fff;
+    padding-top: 7px;
+    padding-bottom: 6px;
+  }
+  .navbar-nav > .open > a, .navbar-nav > .open > a:hover, .navbar-nav > .open > a:focus, .navbar-nav > li > a:hover, .navbar-nav > li > a:focus, .navbar-nav > li > a.active {
+    background-color: darken($brand-primary, 13.5%);
+  }
+}
+.navbar-brand {
+  padding: 0;
+}
+.navbar-brand img {
+  height: $navbar-height;
+}
+.navbar-toggle {
+  z-index: 2;
+}
+.navbar-brand-center {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+  text-align:center;
+  margin: auto;
+}
+@media (min-width: 768px) {
+  .navbar-brand-center {
+    margin-left: 0 !important;
+  }
+  .navbar-swich {
+    margin-left: -15px;
+  }
+  .navbar-swith-dropdown-menu {
+    margin-left: -15px;
+  }
+}
+.navbar-swich {
+  color: #fff;
+  font-size: 16px;
+}
+.navbar-swich {
+  color: #fff;
+  font-size: 16px;
+}
+#sub-navbar {
+  z-index: initial;
+}
+
+// --------------------------------------------------
+// bootstrap dropdown
+// --------------------------------------------------
+.dropdown-menu > li > a {
+  padding: 8px 20px;
+}
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:active {
+  color: #fff;
+  background-color: $brand-primary !important;
+}
+.dropdown-menu > li > a.active {
+  background-color: $gray-lighter;
+}
+@media (min-width: 768px) {
+  .navbar-nav > li > a {
+    padding-top: 13px;
+    padding-bottom: 13px;
+  }
+}
+
+// --------------------------------------------------
+// bootstrap panel
+// --------------------------------------------------
+.panel {
+  border-radius: $border-radius-small;
+  border-color: $table-border-color;
+  box-shadow: none;
+}
+.panel-heading {
+  padding: 16px 24px;
+  border-color: $table-border-color;
+}
+.panel-body {
+  padding: 24px 16px;
+  .row {
+    p {
+      margin-bottom: 24px;
+    }
+    .fa {
+      margin-right: 16px;
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
+
+// --------------------------------------------------
+// bootstrap table and pagination
+// --------------------------------------------------
+.pagination {
+  margin: 0;
+}
+.table-sortable {
+  th {
+    color: $gray-light;
+    a {
+      color: $gray-dark;
+    }
+  }
+}
+
+// --------------------------------------------------
+// bootstrap form
+// --------------------------------------------------
+.form-control, .form-control:focus {
+  box-shadow: none !important;
+  border-width: 2px;
+}
+.form-error {
+  color: $brand-danger;
+  margin-top: 4px;
+}
+// for ui-select (他のパーツと同じになるように微調整)
+.has-error .btn-default {
+  border-color: #a94442;
+}
+.ui-select-match-text {
+  color: #555555;
+}

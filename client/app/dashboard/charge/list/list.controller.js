@@ -20,6 +20,11 @@
           this.toaster.info('診察料金の一覧を更新しました。');
         });
     }
+
+    sort(key) {
+      this.order = key;
+      this.reverse = !this.reverse;
+    }
   }
 
   ChargeListController.$inject = ['$state', 'toaster', 'ClinicCharge', 'clinic', 'charges'];

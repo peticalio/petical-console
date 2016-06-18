@@ -18,7 +18,8 @@ angular
     'ui.bootstrap',
     'ui.select',
     'angularMoment',
-    'md.data.table',
+    'angularUtils.directives.dirPagination',
+    'md.data.table', // @Deprecated
     'mwl.calendar',
     'ncy-angular-breadcrumb',
     'ngHandsontable',
@@ -30,7 +31,6 @@ angular
   .config(['$urlRouterProvider', '$locationProvider', '$httpProvider', function($urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider.otherwise('/');
     $locationProvider.html5Mode(true).hashPrefix('!');
-
     $httpProvider.interceptors.push('AuthInterceptor');
   }])
 
@@ -182,4 +182,10 @@ angular
     '23:00',
     '23:30'
   ])
+
+  .run(function($rootScope) {
+    $rootScope.$on('$stateChangeSuccess', function(){
+      document.body.scrollTop = document.documentElement.scrollTop = 0;
+    });
+  })
 ;
