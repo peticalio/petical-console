@@ -21,6 +21,7 @@
         });
     }
 
+    // ソートキーを指定する
     sort(key) {
       this.order = key;
       this.reverse = !this.reverse;

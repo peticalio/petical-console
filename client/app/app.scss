@@ -224,6 +224,11 @@ md-menu-item a.active, md-menu-item a.active:hover, md-menu-item a.active md-ico
 .fa-main {
   font-size: 16px;
 }
+.fa-nav {
+  width: 16px;
+  margin-right: 8px;
+  text-align: center;
+}
 
 
 
@@ -303,4 +308,11 @@ md-menu-item a.active, md-menu-item a.active:hover, md-menu-item a.active md-ico
 .heading-elements {
   float: right;
   margin-top: -5px;
+}
+.lnk-submenu {
+  font-size: 16px;
+  p {
+    margin: 0;
+    font-size: $font-size-base;
+  }
 }

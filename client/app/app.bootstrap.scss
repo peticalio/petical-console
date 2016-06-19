@@ -28,7 +28,7 @@
     background: $gray-lighter;
   }
   .navbar-nav > li > a.active {
-    color: darken($brand-primary, 13.5%);
+    color: $link-color;
   }
 }
 .navbar-inverse {
@@ -145,6 +145,9 @@
       color: $gray-dark;
     }
   }
+}
+.table-middle tbody tr td {
+  vertical-align: middle;
 }
 
 // --------------------------------------------------

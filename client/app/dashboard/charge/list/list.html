@@ -1,13 +1,13 @@
-<div class="container">
+<div class="container-fluid">
   <div class="page-header-content">
-    <div class="heading-elements">
-      <a class="btn btn-link" ui-sref="app.dashboard.charge.form">
-        <md-icon class="material-icons">add</md-icon>
-        <p><small>追加する</small></p>
+    <div class="heading-elements hide-xs">
+      <a class="btn btn-link lnk-submenu" ui-sref="app.dashboard.charge.form">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        <p>追加する</p>
       </a>
-      <a href="#" class="btn btn-link">
-        <md-icon class="material-icons">refresh</md-icon>
-        <p><small>更新する</small></p>
+      <a class="btn btn-link lnk-submenu" ng-click="ctrl.refresh()">
+        <i class="fa fa-refresh" aria-hidden="true"></i>
+        <p>更新する</p>
       </a>
 		</div>
     <div class="page-title">
@@ -24,7 +24,7 @@
         </div>
       </form>
       <div class="table-responsive">
-        <table class="table table-hover table-clickable table-sortable">
+        <table class="table table-hover table-clickable table-sortable table-middle">
           <thead>
             <tr>
               <th>
@@ -76,12 +76,10 @@
             </tr>
           </tbody>
         </table>
-        <div class="text-center m0">
-          <dir-pagination-controls max-size="10" direction-links="true" boundary-links="true"></dir-pagination-controls>
-        </div>
       </div>
-      <!-- <md-table-pagination md-limit="ctrl.limit" md-limit-options="[20,40,60,80,100]" md-page="ctrl.page" md-total="{{ctrl.charges.length}}" md-page-select="true" md-boundary-links="true">
-      </md-table-pagination> -->
+      <div class="text-center m0">
+        <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true"></dir-pagination-controls>
+      </div>
     </div>
   </section>
 </div>

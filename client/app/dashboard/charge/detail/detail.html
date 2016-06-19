@@ -1,13 +1,13 @@
 <div class="container">
   <div class="page-header-content">
-    <div class="heading-elements">
-      <a class="btn btn-link" ui-sref="app.dashboard.charge.update({chargeId:ctrl.charge.id})">
-        <md-icon class="material-icons">create</md-icon>
-        <p><small>編集する</small></p>
+    <div class="heading-elements hide-xs">
+      <a class="btn btn-link lnk-submenu" ui-sref="app.dashboard.charge.update({chargeId:ctrl.charge.id})">
+        <i class="fa fa-pencil" aria-hidden="true"></i>
+        <p>編集する</p>
       </a>
-      <a class="btn btn-link" ng-click="ctrl.delete($event, ctrl.charge)">
-        <md-icon class="material-icons">delete</md-icon>
-        <p><small>削除する</small></p>
+      <a class="btn btn-link lnk-submenu" ng-click="ctrl.delete($event, ctrl.charge)">
+        <i class="fa fa-trash" aria-hidden="true"></i>
+        <p>削除する</p>
       </a>
 		</div>
     <div class="page-title">

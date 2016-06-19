@@ -18,7 +18,7 @@
             <i class="fa fa-bars" aria-hidden="true"></i>
           </a>
           <ul class="dropdown-menu navbar-swith-dropdown-menu" uib-dropdown-menu>
-            <li><a href="/"><i class="fa fa-home mr" aria-hidden="true"></i>ホーム</a></li>
+            <li><a ui-sref="app.main" ui-sref-active-eq="active"><i class="fa fa-home fa-nav" aria-hidden="true"></i>ホーム</a></li>
             <li role="separator" class="divider"></li>
             <li class="dropdown-header">利用可能動物病院</li>
             <li ng-repeat="clinic in clinics">
@@ -42,18 +42,18 @@
           <ul class="dropdown-menu" uib-dropdown-menu>
             <li>
               <a ui-sref="app.main.account.form" ui-sref-active="active">
-                <i class="fa fa-user mr" aria-hidden="true"></i>マイアカウント
+                <i class="fa fa-user fa-nav" aria-hidden="true"></i>マイアカウント
               </a>
             </li>
             <li>
               <a ui-sref="app.main.account.password" ui-sref-active="active">
-                <i class="fa fa-key mr" aria-hidden="true"></i>パスワード変更
+                <i class="fa fa-key fa-nav" aria-hidden="true"></i>パスワード変更
               </a>
             </li>
             <li role="separator" class="divider"></li>
             <li>
               <a ng-click="ctrl.signout()">
-                <i class="fa fa-sign-out mr" aria-hidden="true"></i>サインアウト
+                <i class="fa fa-sign-out fa-nav" aria-hidden="true"></i>サインアウト
               </a>
             </li>
           </ul>
@@ -66,18 +66,30 @@
   <div class="container-fluid">
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li><a ui-sref="app.dashboard" ui-sref-active-eq="active">ダッシュボード</a></li>
-        <li><a ui-sref="app.dashboard.customer.list" ui-sref-active="active">飼い主<i class="fa fa-angle-down ml" aria-hidden="true"></i></a></li>
-        <li><a ui-sref="app.dashboard.chart.list" ui-sref-active="active">カルテ<i class="fa fa-angle-down ml" aria-hidden="true"></i></a></li>
-        <li><a ui-sref="app.dashboard.ticket.list" ui-sref-active="active">チケット<i class="fa fa-angle-down ml" aria-hidden="true"></i></a></li>
-        <li><a ui-sref="app.dashboard.calendar" ui-sref-active="active">予約<i class="fa fa-angle-down ml" aria-hidden="true"></i></a></li>
-        <li><a ui-sref="app.dashboard.mail" ui-sref-active="active">メール<i class="fa fa-angle-down ml" aria-hidden="true"></i></a></li>
+        <li>
+          <a ui-sref="app.dashboard" ui-sref-active-eq="active"><i class="fa fa-dashboard mr" aria-hidden="true"></i>ダッシュボード</a>
+        </li>
+        <li>
+          <a ui-sref="app.dashboard.customer.list" ui-sref-active="active"><i class="fa fa-user mr" aria-hidden="true"></i>飼い主<i class="fa fa-angle-down ml" aria-hidden="true"></i></a>
+        </li>
+        <li>
+          <a ui-sref="app.dashboard.chart.list" ui-sref-active="active"><i class="fa fa-folder-open-o mr" aria-hidden="true"></i>カルテ<i class="fa fa-angle-down ml" aria-hidden="true"></i></a>
+        </li>
+        <li>
+          <a ui-sref="app.dashboard.ticket.list" ui-sref-active="active"><i class="fa fa-ticket mr" aria-hidden="true"></i>チケット<i class="fa fa-angle-down ml" aria-hidden="true"></i></a>
+        </li>
+        <li>
+          <a ui-sref="app.dashboard.calendar" ui-sref-active="active"><i class="fa fa-calendar mr" aria-hidden="true"></i>予約<i class="fa fa-angle-down ml" aria-hidden="true"></i></a>
+        </li>
+        <li>
+          <a ui-sref="app.dashboard.mail" ui-sref-active="active"><i class="fa fa-envelope-o mr" aria-hidden="true"></i>メール<i class="fa fa-angle-down ml" aria-hidden="true"></i></a>
+        </li>
         <li class="dropdown" uib-dropdown>
-          <a href="" uib-dropdown-toggle>管理<i class="fa fa-angle-down ml" aria-hidden="true"></i></a>
+          <a href="" uib-dropdown-toggle><i class="fa fa-database mr" aria-hidden="true"></i>管理<i class="fa fa-angle-down ml" aria-hidden="true"></i></a>
           <ul class="dropdown-menu" uib-dropdown-menu>
-            <li><a ui-sref="app.dashboard.staff.list" ui-sref-active="active">スタッフ管理</a></li>
-            <li><a ui-sref="app.dashboard.charge" ui-sref-active="active">診察料金管理</a></li>
-            <li><a ui-sref="app.dashboard.vaccine.list" ui-sref-active="active">予防接種ワクチン管理</a></li>
+            <li><a ui-sref="app.dashboard.staff.list" ui-sref-active="active"><i class="fa fa-user-md fa-nav" aria-hidden="true"></i>スタッフ管理</a></li>
+            <li><a ui-sref="app.dashboard.charge" ui-sref-active="active"><i class="fa fa-usd fa-nav" aria-hidden="true"></i>診察料金管理</a></li>
+            <li><a ui-sref="app.dashboard.vaccine.list" ui-sref-active="active"><i class="fa fa-medkit fa-nav" aria-hidden="true"></i>予防接種ワクチン管理</a></li>
           </ul>
         </li>
       </ul>
@@ -95,187 +107,3 @@
 <ptz-state-loading-indicator></ptz-state-loading-indicator>
 <div id="main-content" class="bg-color fadein" ui-view="">
 </div>
-
-
-<!-- <md-sidenav class="md-sidenav-left no-print" md-component-id="mainmenu" md-is-locked-open="$mdMedia('gt-md')" ng-show="ctrl.showMainMenu()">
-  <md-toolbar>
-    <div class="md-toolbar-tools">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="/">
-          <img alt="Brand" src="/assets/images/logo@2x.png">
-        </a>
-      </div>
-    </div>
-  </md-toolbar>
-  <md-content class="bg-color" flex>
-    <ul class="side-menu">
-      <li>
-        <menu-link section="section">
-          <md-button class="md-default" ui-sref-active-eq="active" ui-sref="app.main">
-            <md-icon class="material-icons" aria-label="Apps">apps</md-icon>マイメニュー
-          </md-button>
-        </menu-link>
-      </il>
-      <li>
-        <menu-link section="section">
-          <md-button class="md-default" ui-sref-active-eq="active" ui-sref="app.main.invitation.list">
-            <div layout="row" flex>
-              <md-icon class="material-icons" aria-label="Invitations">inbox</md-icon>招待状
-              <span flex></span>
-              <span class="img-circle"></span>
-            </div>
-          </md-button>
-        </menu-link>
-      </il>
-    </ul>
-  </md-content>
-</md-sidenav> -->
-
-<!-- <md-sidenav class="md-sidenav-left br no-print" md-theme="sidemenu" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" ng-show="ctrl.showDashboardMenu()">
-  <md-toolbar class="bb">
-    <div class="md-toolbar-tools">
-      <h2><span class="clinic-label">{{clinic.name}}</span></h2>
-      <span flex></span>
-      <md-menu>
-        <md-button class="md-icon-button" ng-click="ctrl.openMenu($mdOpenMenu, $event)">
-          <md-icon class="material-icons">arrow_drop_down</md-icon>
-        </md-button>
-        <md-menu-content width="4">
-          <md-menu-item ng-repeat="c in clinics">
-            <md-button ui-sref="app.dashboard({clinicId: c.id})">
-              {{c.name}}
-            </md-button>
-          </md-menu-item>
-        </md-menu-content>
-      </md-menu>
-    </div>
-  </md-toolbar>
-  <md-content flex>
-    <ul class="side-menu">
-      <li>
-        <menu-link section="section">
-          <md-button class="md-default" ui-sref-active-eq="active" ui-sref="app.dashboard">
-            <md-icon class="material-icons" aria-label="Dashboard">dashboard</md-icon>ダッシュボード
-          </md-button>
-        </menu-link>
-      </il>
-      <li>
-        <menu-link section="section" ui-sref-active="active" ui-sref="app.dashboard.customer">
-          <md-button ui-sref="app.dashboard.customer.list" ui-sref-ignore>
-            <md-icon class="material-icons" aria-label="Customers">face</md-icon>飼い主さま
-          </md-button>
-        </menu-link>
-      </il>
-      <li>
-        <menu-link section="section" ui-sref-active="active" ui-sref="app.dashboard.chart">
-          <md-button ui-sref="app.dashboard.chart.list" ui-sref-ignore>
-            <md-icon class="material-icons" aria-label="Charts">pets</md-icon>カルテ
-          </md-button>
-        </menu-link>
-      </il>
-      <li>
-        <menu-link section="section" ui-sref-active="active" ui-sref="app.dashboard.ticket">
-          <md-button ui-sref="app.dashboard.ticket.list" ui-sref-ignore>
-            <md-icon class="material-icons" aria-label="Tickets">receipt</md-icon>チケット
-          </md-button>
-        </menu-link>
-      </il>
-      <li>
-        <menu-link section="section" ui-sref-active="active" ui-sref="app.dashboard.calendar">
-          <md-button ui-sref="app.dashboard.calendar" ui-sref-ignore>
-            <md-icon class="material-icons" aria-label="Calendar">event</md-icon>カレンダー
-          </md-button>
-        </menu-link>
-      </il>
-    </ul>
-    <md-divider></md-divider>
-    <ul class="side-menu">
-      <li>
-        <menu-link section="section" ui-sref-active="active" ui-sref="app.dashboard.staff">
-          <md-button ui-sref="app.dashboard.staff.list" ui-sref-ignore>
-            <md-icon class="material-icons" aria-label="Clinic Staffs">person</md-icon>クリニックスタッフ
-          </md-button>
-        </menu-link>
-      </il>
-      <li>
-        <menu-link section="section" ui-sref-active="active" ui-sref="app.dashboard.charge">
-          <md-button ui-sref="app.dashboard.charge" ui-sref-ignore>
-            <md-icon class="material-icons" aria-label="Charges">loyalty</md-icon>診察料金マスタ
-          </md-button>
-        </menu-link>
-      </il>
-      <li>
-        <menu-link section="section" ui-sref-active="active" ui-sref="app.dashboard.vaccine">
-          <md-button ui-sref="app.dashboard.vaccine.list" ui-sref-ignore>
-            <md-icon class="material-icons" aria-label="Vaccine">colorize</md-icon>予防接種ワクチン
-          </md-button>
-        </menu-link>
-      </il>
-    </ul>
-    <md-divider></md-divider>
-    <ul class="side-menu">
-    </ul>
-    <div class="copyright">
-      © 2016 <a href="https://petical.io">petical.io</a>
-      Produced by <a href="https://majimena.co.jp" target="_blank">majimena Inc.</a>
-    </div>
-  </md-content>
-</md-sidenav> -->
-
-<!--<div layout="column" role="main" flex>
-  <md-toolbar class="navigation md-primary white no-print">
-    <div class="md-toolbar-tools">
-      <md-button class="md-icon-button" ng-if="ctrl.showMainMenuIcon()" ng-click="ctrl.toggleMainMenu()">
-        <md-icon class="material-icons white" aria-label="Menu">menu</md-icon>
-      </md-button>
-      <md-button class="md-icon-button" ng-if="ctrl.showDashboardMenuIcon()" ng-click="ctrl.toggleLeft()">
-        <md-icon class="material-icons white" aria-label="Menu">menu</md-icon>
-      </md-button>
-
-      <md-button class="md-icon-button" ng-if="ctrl.showDashboardMenu()" ng-click="ctrl.goBack()" hide-xs hide-sm>
-        <md-icon class="material-icons white" aria-label="Menu">keyboard_backspace</md-icon>
-      </md-button>
-
-      <div class="navbar-header" ng-if="!ctrl.showMainMenu() && !ctrl.showDashboardMenu()">
-        <a class="navbar-brand" href="/">
-          <img alt="Brand" src="/assets/images/logo@2x.png">
-        </a>
-      </div>
-      <span class="navigation-title">{{ctrl.getTitle()}}</span>
-      <span flex></span>
-
-      <md-button class="md-icon-button" ui-sref="app.main" ng-if="ctrl.isSignin()">
-        <md-tooltip>ホーム</md-tooltip>
-        <md-icon class="material-icons white" md-tooltip="ホーム">apps</md-icon>
-      </md-button>
-      <md-menu md-position-mode="target-right target" style="margin-right:0;" class="link" ng-if="ctrl.isSignin()">
-        <img gravatar-src-once="ctrl.account.login" class="img-circle ml" style="width:32px;" ng-click="ctrl.openMenu($mdOpenMenu, $event)"/>
-        <md-menu-content width="4">
-          <md-subheader><h4 class="mt0">{{ctrl.account.username}}</h4>{{ctrl.account.login}}</md-subheader>
-          <md-menu-item>
-            <md-button ui-sref="app.main.account.form" ui-sref-active="active">
-              <md-icon class="material-icons" aria-label="Account">person_outline</md-icon>アカウント
-            </md-button>
-          </md-menu-item>
-          <md-menu-item>
-            <md-button ui-sref="app.main.account.password" ui-sref-active="active">
-              <md-icon class="material-icons" aria-label="Password">security</md-icon>パスワード変更
-            </md-button>
-          </md-menu-item>
-          <md-menu-divider></md-menu-divider>
-          <md-menu-item>
-            <md-button ng-click="ctrl.signout()">
-              <md-icon class="material-icons" aria-label="Signout">exit_to_app</md-icon>サインアウト
-            </md-button>
-          </md-menu-item>
-        </md-menu-content>
-      </md-menu>
-    </div>
-  </md-toolbar>
-
-  <ptz-state-loading-indicator></ptz-state-loading-indicator>
-
-  <md-content id="main-content" layout="row" flex="" class="bg-color fadein" layout-align="center start" ui-view="">
-  </md-content>
-
-</div> -->
