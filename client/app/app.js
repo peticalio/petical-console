@@ -17,6 +17,7 @@ angular
     'ui.gravatar',
     'ui.bootstrap',
     'ui.select',
+    'ui.sortable',
     'angularMoment',
     'angularUtils.directives.dirPagination',
     'md.data.table', // @Deprecated

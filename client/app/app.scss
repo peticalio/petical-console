@@ -30,13 +30,7 @@ body {
   font-family: 'Roboto', 'Noto Sans Japanese', sans-serif;
   font-weight: 400;
 }
-body, body > div.main {
-  // max-width: 100%;
-  // max-height: 100%;
-  // overflow: hidden;
-}
 body > div.main {
-  // height: 100%;
 }
 
 // pre
@@ -234,56 +228,6 @@ md-menu-item a.active, md-menu-item a.active:hover, md-menu-item a.active md-ico
 
 // extends bootstrap styles
 
-// labels
-.label-default {
-  @extend .label-primary;
-  background-color: #999999;
-  border: 1px solid #999999;
-}
-.label-default-outline {
-  @extend .label-default;
-  background-color: #fff;
-  color: #999999;
-  border: 1px solid #999999;
-}
-.label-primary-outline {
-  @extend .label-primary;
-  background-color: #fff;
-  color: $brand-primary;
-  border: 1px solid $brand-primary;
-}
-.label-success-outline {
-  @extend .label-success;
-  background-color: #fff;
-  color: $brand-success;
-  border: 1px solid $brand-success;
-}
-.label-info-outline {
-  @extend .label-info;
-  background-color: #fff;
-  color: $brand-info;
-  border: 1px solid $brand-info;
-}
-.label-warning-outline {
-  @extend .label-warning;
-  background-color: #fff;
-  color: $brand-warning;
-  border: 1px solid $brand-warning;
-}
-.label-danger-outline {
-  @extend .label-danger;
-  background-color: #fff;
-  color: $brand-danger;
-  border: 1px solid $brand-danger;
-}
-.label-required {
-  @extend .label-danger;
-  background-color: #d9534f;
-  vertical-align: middle;
-  font-weight: normal;
-  font-size: 50%;
-  margin-left: 8px;
-}
 
 // ----------------------------------------
 // page header - custom styles
@@ -315,4 +259,50 @@ md-menu-item a.active, md-menu-item a.active:hover, md-menu-item a.active md-ico
     margin: 0;
     font-size: $font-size-base;
   }
+}
+
+// ----------------------------------------
+// swimlane - custom styles
+// ----------------------------------------
+.ptc-swimlane {
+  padding: 8px 0;
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
+.ptc-swimlane-column {
+  border-right: 1px solid $table-border-color;
+  display: table-cell;
+  padding: 8px;
+  h5 {
+    text-align: center;
+    padding-bottom: 8px;
+    border-bottom: 5px solid $dropdown-link-hover-bg;
+  }
+}
+.ptc-sortable {
+  @extend .alert;
+  background-color: $dropdown-link-hover-bg;
+  border: 1px dashed $table-border-color;
+  margin-bottom: 8px;
+  min-height: 90px;
+}
+.ptc-not-sortable {
+  cursor: default;
+}
+.ptc-swimlane-content {
+  @extend .alert;
+  background-color: #fff;
+  border: 1px solid $table-border-color;
+  padding: 8px 16px;
+  margin-bottom: 8px;
+  cursor: grab;
+  z-index: 9;
+  p {
+    margin: 4px 0 0 0;
+  }
+}
+.ptc-swimlane-content:hover, .ptc-swimlane-content:active {
+  @extend .ptc-swimlane-content;
+  background-color: rgba(240,240,240,0.8);
 }

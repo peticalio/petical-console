@@ -150,6 +150,9 @@ $base-size: 8px;
 .bl {
   border-left: 1px solid #ddd;
 }
+.b0 {
+  border-width: 0 !important;
+}
 
 @media print {
   .b {
@@ -189,6 +192,11 @@ table.table-clickable > tbody > tr {
 // text
 .text-left {
   text-align: left !important;
+}
+.text-overflow {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 /* status */

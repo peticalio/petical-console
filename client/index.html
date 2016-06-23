@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/notosansjapanese.css"/>
     <script src="//www.google.com/recaptcha/api.js?render=explicit&onload=vcRecaptchaApiLoaded" async defer></script>
   </head>
-  <body ng-app="petzApp">
+  <body ng-app="petzApp" class="bg-color">
     <!--[if lt IE 7]>
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -98,6 +98,8 @@
       <script src="bower_components/angular-recaptcha/release/angular-recaptcha.js"></script>
       <script src="bower_components/angular-ui-select/dist/select.js"></script>
       <script src="bower_components/angularUtils-pagination/dirPagination.js"></script>
+      <script src="bower_components/jquery-ui/jquery-ui.js"></script>
+      <script src="bower_components/angular-ui-sortable/sortable.js"></script>
       <!-- endbower -->
       <script src="bower_components/angular-breadcrumb/release/angular-breadcrumb.min.js"></script>
     <!-- endbuild -->
@@ -217,6 +219,7 @@
       <script src="components/common/ptc-progressbar/ptc-progressbar.controller.js"></script>
       <script src="components/common/ptc-select/ptc-select.controller.js"></script>
       <script src="components/common/ptc-textarea/ptc-textarea.controller.js"></script>
+      <script src="components/common/ptc-ticket/ptc-ticket.controller.js"></script>
       <script src="components/common/ptz-ticket-status/ptz-ticket-status.controller.js"></script>
       <script src="components/common/util.service.js"></script>
       <script src="components/common/validator/factory/Factory.service.js"></script>
