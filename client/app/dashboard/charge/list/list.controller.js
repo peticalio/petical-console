@@ -8,8 +8,8 @@
       this.ClinicCharge = ClinicCharge;
       this.clinic = clinic;
       this.charges = charges;
-      this.page = 1;
-      this.limit = 20;
+      this.order = 'lastModifiedDate';
+      this.reverse = false;
     }
 
     // 商品マスタをリフレッシュする

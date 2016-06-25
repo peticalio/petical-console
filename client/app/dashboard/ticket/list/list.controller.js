@@ -48,7 +48,7 @@
       this.completedListOptions = {
         placeholder: 'ptc-sortable',
         connectWith: '.dropable-container',
-        items:       'div:not(.ptc-not-sortable)',
+        // items:       'div:not(.ptc-not-sortable)',
         receive:      (elm, ui) => {
           var id = ui.item.context.id;
           var params = {clinicId:this.clinic.id, ticketId: id, status:'COMPLETED'};

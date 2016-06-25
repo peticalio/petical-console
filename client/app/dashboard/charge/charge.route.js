@@ -27,7 +27,7 @@
           }
         },
         ncyBreadcrumb: {
-          label: '診察料金'
+          label: '診察料金管理'
         },
         resolve: {
           charges: getClinicCharges
@@ -44,7 +44,7 @@
           }
         },
         ncyBreadcrumb: {
-          label: '登録フォーム'
+          label: '新規登録'
         },
         resolve: {
           charge: getClinicCharge
@@ -61,7 +61,7 @@
           }
         },
         ncyBreadcrumb: {
-          label: '更新フォーム'
+          label: '更新'
         },
         resolve: {
           charge: getClinicCharge
@@ -78,7 +78,7 @@
           }
         },
         ncyBreadcrumb: {
-          label: '詳細'
+          label: '診察料金詳細'
         },
         resolve: {
           charge: getClinicCharge

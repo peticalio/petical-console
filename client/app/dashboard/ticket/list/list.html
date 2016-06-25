@@ -15,7 +15,7 @@
     <div class="panel-body p0">
       <div class="ptc-swimlane">
         <div class="ptc-swimlane-column dropable-container" ui-sortable="ctrl.waitingListOptions" ng-model="ctrl.waitings">
-          <h5><i class="fa fa-users mr hide-xs" aria-hidden="true"></i>診察待ち</h5>
+          <h5><i class="fa fa-hand-paper-o mr hide-xs" aria-hidden="true"></i>診察待ち</h5>
           <div id="{{ticket.id}}" class="ptc-sortable ptc-swimlane-content" ng-repeat="ticket in ctrl.waitings">
             <ptc-ticket ticket="ticket" params="{ticketId: ticket.id}"></ptc-ticket>
           </div>
@@ -27,13 +27,13 @@
           </div>
         </div>
         <div class="ptc-swimlane-column dropable-container" ui-sortable="ctrl.accountingListOptions" ng-model="ctrl.accountings">
-          <h5><i class="fa fa-credit-card-alt mr hide-xs" aria-hidden="true"></i>会計待ち</h5>
+          <h5><i class="fa fa-credit-card mr hide-xs" aria-hidden="true"></i>会計待ち</h5>
           <div id="{{ticket.id}}" class="ptc-sortable ptc-swimlane-content" ng-repeat="ticket in ctrl.accountings">
             <ptc-ticket ticket="ticket" params="{ticketId: ticket.id}"></ptc-ticket>
           </div>
         </div>
         <div class="ptc-swimlane-column dropable-container b0" ui-sortable="ctrl.completedListOptions" ng-model="ctrl.completed">
-          <h5><i class="fa fa-thumbs-up mr hide-xs" aria-hidden="true"></i>完了</h5>
+          <h5><i class="fa fa-thumbs-o-up mr hide-xs" aria-hidden="true"></i>完了</h5>
           <div id="{{ticket.id}}" class="ptc-sortable ptc-swimlane-content" ng-repeat="ticket in ctrl.completed">
             <ptc-ticket ticket="ticket" params="{ticketId: ticket.id}"></ptc-ticket>
           </div>

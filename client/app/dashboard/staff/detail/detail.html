@@ -1,73 +1,79 @@
-<div class="layout-max-width">
-  <section>
-    <md-toolbar md-theme="content" class="pt">
-      <div class="md-toolbar-tools">
-        <h1 class="md-title">{{ctrl.staff.user.lastName}} {{ctrl.staff.user.firstName}}の詳細</h1>
-        <span flex></span>
-        <md-button class="md-icon-button" ui-sref="app.dashboard.staff.list">
-          <md-tooltip md-direction="left">一覧</md-tooltip>
-          <md-icon class="material-icons">list</md-icon>
-        </md-button>
+<div class="container">
+  <div class="page-header-content">
+    <div class="heading-elements hide-xs">
+      <a class="btn btn-link lnk-submenu" ng-click="ctrl.delete($event, ctrl.staff)">
+        <i class="fa fa-trash" aria-hidden="true"></i>
+        <p>削除する</p>
+      </a>
+		</div>
+    <div class="page-title">
+      <h4>管理 - スタッフ管理</h4>
+      <ul class="breadcrumb breadcrumb-caret small" ncy-breadcrumb></ul>
+    </div>
+  </div>
+  <section class="panel">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-2">
+          <i class="fa fa-user"></i>氏名:
+        </div>
+        <div class="col-md-4">
+          <p>{{ctrl.staff.user.lastName}}&nbsp;{{ctrl.staff.user.firstName}}</p>
+        </div>
       </div>
-    </md-toolbar>
-    <div layout-padding>
-      <div layout-gt-xs="row" class="flat-card" layout-wrap>
-        <md-list flex="50" flex-xs="100">
-          <md-list-item>
-            <md-icon class="material-icons">
-              person
-              <md-tooltip>氏名</md-tooltip>
-            </md-icon>
-            <p>{{ctrl.staff.user.lastName}} {{ctrl.staff.user.firstName}}</p>
-          </md-list-item>
-          <md-list-item>
-            <md-icon class="material-icons">
-              person_outline
-              <md-tooltip>氏名（フリガナ）</md-tooltip>
-            </md-icon>
-            <p ng-show="ctrl.staff.user.lastNameKana">{{ctrl.staff.user.lastNameKana}} {{ctrl.staff.user.firstNameKana}}</p>
-            <p ng-show="!ctrl.staff.user.lastNameKana">未登録</p>
-          </md-list-item>
-          <md-list-item>
-            <md-icon class="material-icons">
-              create
-              <md-tooltip>作成日時</md-tooltip>
-            </md-icon>
-            <p>{{ctrl.staff.createdDate | date:'yyyy/MM/dd HH:mm'}}</p>
-          </md-list-item>
-        </md-list>
-        <md-list flex="50" flex-xs="100">
-          <md-list-item>
-            <md-icon class="material-icons">
-              mail_outline
-              <md-tooltip>ログインID</md-tooltip>
-            </md-icon>
-            <p>{{ctrl.staff.user.login}}</p>
-          </md-list-item>
-          <md-list-item>
-            <md-icon class="material-icons">
-              hourglass_empty
-              <md-tooltip>ステータス</md-tooltip>
-            </md-icon>
-            <p ng-if="ctrl.staff.activatedDate"><span class="label label-primary">アクティブ</span></p>
-            <p ng-if="!ctrl.staff.activatedDate"><span class="label label-default">インアクティブ</span></p>
-          </md-list-item>
-          <md-list-item>
-            <md-icon class="material-icons">
-              check_circle
-              <md-tooltip>アクティベート日時</md-tooltip>
-            </md-icon>
-            <p ng-if="ctrl.staff.activatedDate">{{ctrl.staff.activatedDate | date:'yyyy/MM/dd HH:mm'}}</p>
-          </md-list-item>
-        </md-list>
+      <div class="row">
+        <div class="col-md-2">
+          <i class="fa fa-user"></i>ふりがな:
+        </div>
+        <div class="col-md-4">
+          <p>{{ctrl.staff.user.lastNameKana}}&nbsp;{{ctrl.staff.user.firstNameKana}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          <i class="fa fa-hashtag"></i>ログインID:
+        </div>
+        <div class="col-md-4">
+          <p>{{ctrl.staff.user.login}}</p>
+        </div>
+        <div class="col-md-2">
+          <i class="fa fa-flag-o"></i>ステータス:
+        </div>
+        <div class="col-md-4">
+          <p ng-if="ctrl.staff.activatedDate"><span class="label label-success">アクティブ</span></p>
+          <p ng-if="!ctrl.staff.activatedDate"><span class="label label-default">インアクティブ</span></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          <i class="fa fa-envelope-o"></i>メールアドレス:
+        </div>
+        <div class="col-md-4">
+          <p>{{ctrl.staff.user.email}}</p>
+        </div>
+        <div class="col-md-2">
+          <i class="fa fa-check-circle-o"></i>アクティベート日時:
+        </div>
+        <div class="col-md-4">
+          <p>{{ctrl.staff.activatedDate | date:'yyyy/MM/dd HH:mm'}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          <i class="fa fa-clock-o"></i>作成日時:
+        </div>
+        <div class="col-md-4">
+          <p>{{ctrl.staff.createdDate | date:'yyyy/MM/dd HH:mm'}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          <i class="fa fa-clock-o"></i>最終更新日時:
+        </div>
+        <div class="col-md-4">
+          <p class="m0">{{ctrl.staff.lastModifiedDate | date:'yyyy/MM/dd HH:mm'}}</p>
+        </div>
       </div>
     </div>
   </section>
-</div>
-
-<div class="fab" md-theme="fab">
-  <md-button class="md-fab md-primary" ng-click="ctrl.delete($event, ctrl.staff)">
-    <md-tooltip md-direction="left">削除する</md-tooltip>
-    <md-icon class="material-icons">delete</md-icon>
-  </md-button>
 </div>
