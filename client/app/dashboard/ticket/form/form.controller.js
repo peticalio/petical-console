@@ -75,7 +75,7 @@
         })
         .then(() => {
           this.toaster.info('チケットを削除しました。');
-          this.$state.go('app.dashboard.ticket.list', {clinicId: ticket.clinic.id});
+          this.$state.go('app.dashboard.ticket', {clinicId: ticket.clinic.id});
         });
     }
   }

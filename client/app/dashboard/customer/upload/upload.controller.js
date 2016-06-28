@@ -22,14 +22,7 @@
       // set default form values
       this.customers = [{}];
       this.settings = {contextMenu: ['row_above', 'row_below', 'remove_row']};
-      this.container = document.getElementById('main-content');
       this.progress = 0;
-    }
-
-    // 高さを計算する
-    getHeight() {
-      var height = this.container.offsetHeight;
-      return height - 72 - 72;
     }
 
     // 不正値がないことをチェックする

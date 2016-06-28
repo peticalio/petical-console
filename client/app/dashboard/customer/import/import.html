@@ -4,7 +4,7 @@
       <div class="md-toolbar-tools">
         <h2 class="md-title">飼い主さまのインポート</h2>
         <span flex></span>
-        <md-button class="md-icon-button" ui-sref="app.dashboard.customer.list">
+        <md-button class="md-icon-button" ui-sref="app.dashboard.customer">
           <md-tooltip>一覧</md-tooltip>
           <md-icon class="material-icons">list</md-icon>
         </md-button>
@@ -58,7 +58,7 @@
           </div>
           <div layout-gt-xs="row" layout-align="end center">
             <md-button class="md-raised md-primary" ng-disabled="form.$invalid" ng-click="ctrl.authenticate(ctrl.token)">認証する</md-button>
-            <md-button ui-sref="app.dashboard.customer.list">キャンセル</md-button>
+            <md-button ui-sref="app.dashboard.customer">キャンセル</md-button>
           </div>
         </form>
       </div>

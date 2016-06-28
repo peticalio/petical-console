@@ -46,7 +46,7 @@
         .then(() => this.ClinicChart.fetch({clinicId: this.clinic.id}).$promise)
         .then(() => {
           this.toaster.info(chart.pet.name + ' ちゃんのカルテを削除しました。');
-          this.$state.go('app.dashboard.chart.list');
+          this.$state.go('app.dashboard.chart');
         });
     }
   }

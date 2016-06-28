@@ -82,12 +82,7 @@
   function ClinicChartRouter($stateProvider) {
     $stateProvider
       .state('app.dashboard.chart', {
-        abstract: true,
-        url:      '^/clinics/:clinicId/charts'
-      })
-      // カルテ一覧
-      .state('app.dashboard.chart.list', {
-        url: '/list',
+        url:      '^/clinics/:clinicId/charts',
         views: {
           '@app': {
             templateUrl:  'app/dashboard/chart/list/list.html',

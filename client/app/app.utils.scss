@@ -153,6 +153,18 @@ $base-size: 8px;
 .b0 {
   border-width: 0 !important;
 }
+.bt0 {
+  border-top-width: 0 !important;
+}
+.br0 {
+  border-right-width: 0 !important;
+}
+.bl0 {
+  border-left-width: 0 !important;
+}
+.bb0 {
+  border-bottom-width: 0 !important;
+}
 
 @media print {
   .b {

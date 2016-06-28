@@ -23,7 +23,7 @@
       this.ClinicCustomer.save({clinicId: this.params.clinicId}, customer).$promise
         .then(() => {
           this.toaster.info('新しい飼い主さまを登録しました。');
-          this.state.go('app.dashboard.customer.list', {clinicId: this.params.clinicId});
+          this.state.go('app.dashboard.customer', {clinicId: this.params.clinicId});
         });
     }
 

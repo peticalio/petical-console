@@ -84,18 +84,16 @@
   function DashboardTicketRouter($stateProvider){
     $stateProvider
       .state('app.dashboard.ticket', {
-        abstract: true,
-        url: '^/clinics/:clinicId/tickets'
-      })
-      // チケット一覧
-      .state('app.dashboard.ticket.list', {
-        url: '/list',
+        url: '^/clinics/:clinicId/tickets',
         views: {
           '@app': {
             templateUrl:  'app/dashboard/ticket/list/list.html',
             controller:   'TicketListController',
             controllerAs: 'ctrl'
           }
+        },
+        ncyBreadcrumb: {
+          label: 'チケット一覧'
         },
         resolve: {
           tickets:        getTickets

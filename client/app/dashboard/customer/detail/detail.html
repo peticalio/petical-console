@@ -1,58 +1,146 @@
-<div class="layout-max-width">
-  <section>
-    <md-toolbar md-theme="content" class="pt">
-      <div class="md-toolbar-tools">
-        <h1 class="md-title">{{ctrl.customer.user.lastName}} {{ctrl.customer.user.firstName}} 様</h1>
-        <span flex></span>
-        <md-button class="md-icon-button" ui-sref="app.dashboard.customer.list">
-          <md-tooltip md-direction="left">一覧</md-tooltip>
-          <md-icon class="material-icons">list</md-icon>
-        </md-button>
+<div class="container-fluid">
+  <div class="page-header-content">
+    <div class="heading-elements hide-xs">
+      <a class="btn btn-link lnk-submenu" ui-sref="app.dashboard.customer">
+        <i class="fa fa-search" aria-hidden="true"></i>
+        <p>検索する</p>
+      </a>
+      <a class="btn btn-link lnk-submenu" ui-sref="app.dashboard.chart.form({customerId:ctrl.customer.id})">
+        <i class="fa fa-file-text-o" aria-hidden="true"></i>
+        <p>カルテ作成</p>
+      </a>
+      <a class="btn btn-link lnk-submenu" ui-sref="app.dashboard.customer.update({customerId:ctrl.customer.id})">
+        <i class="fa fa-pencil" aria-hidden="true"></i>
+        <p>編集する</p>
+      </a>
+      <a class="btn btn-link lnk-submenu" ng-click="ctrl.delete($event, ctrl.customer)">
+        <i class="fa fa-trash" aria-hidden="true"></i>
+        <p>削除する</p>
+      </a>
+		</div>
+    <div class="page-title">
+      <h4>飼い主 - {{ctrl.customer.user.lastName}} {{ctrl.customer.user.firstName}} 様</h4>
+      <ul class="breadcrumb breadcrumb-caret small" ncy-breadcrumb></ul>
+    </div>
+  </div>
+  <section class="panel">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-2">
+          <i class="fa fa-nav fa-hospital-o"></i>所属動物病院:
+        </div>
+        <div class="col-md-4">
+          <p>{{ctrl.clinic.name}}</p>
+        </div>
       </div>
-    </md-toolbar>
-    <div layout-padding ng-include="'app/dashboard/customer/detail/detail.inc.html'">
+      <div class="row">
+        <div class="col-md-2">
+          <i class="fa fa-nav fa-hashtag"></i>飼い主さまコード:
+        </div>
+        <div class="col-md-4">
+          <p ng-if="ctrl.customer.customerCode">{{ctrl.customer.customerCode}}</p>
+          <p ng-if="!ctrl.customer.customerCode">未登録</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          <i class="fa fa-nav fa-user"></i>氏名:
+        </div>
+        <div class="col-md-4">
+          <p>{{ctrl.customer.user.lastName}}&nbsp;{{ctrl.customer.user.firstName}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          <i class="fa fa-nav fa-user"></i>氏名（フリガナ）:
+        </div>
+        <div class="col-md-4">
+          <p>{{ctrl.customer.user.lastNameKana}}&nbsp;{{ctrl.customer.user.firstNameKana}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          <i class="fa fa-nav fa-sort-numeric-asc"></i>郵便番号:
+        </div>
+        <div class="col-md-4">
+          <p ng-show="ctrl.customer.user.zipCode">〒 {{ctrl.customer.user.zipCode}}</p>
+          <p ng-show="!ctrl.customer.user.zipCode">未登録</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          <i class="fa fa-nav fa-home"></i>住所:
+        </div>
+        <div class="col-md-10">
+          <p ng-show="ctrl.customer.user.state">{{ctrl.customer.user.state}}{{ctrl.customer.user.city}}{{ctrl.customer.user.street}}{{ctrl.customer.user.other}}</p>
+          <p ng-show="!ctrl.customer.user.state">未登録</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          <i class="fa fa-nav fa-phone"></i>電話番号（自宅）:
+        </div>
+        <div class="col-md-4">
+          <p ng-show="ctrl.customer.user.phoneNo">{{ctrl.customer.user.phoneNo}}</p>
+          <p ng-show="!ctrl.customer.user.phoneNo">未登録</p>
+        </div>
+        <div class="col-md-2">
+          <i class="fa fa-nav fa-mobile"></i>電話番号（携帯）:
+        </div>
+        <div class="col-md-4">
+          <p ng-show="ctrl.customer.user.mobilePhoneNo">{{ctrl.customer.user.mobilePhoneNo}}</p>
+          <p ng-show="!ctrl.customer.user.mobilePhoneNo">未登録</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          <i class="fa fa-nav fa-envelope-o"></i>メールアドレス:
+        </div>
+        <div class="col-md-10">
+          <p class="m0">{{ctrl.customer.user.email}}</p>
+        </div>
+      </div>
     </div>
   </section>
-
-  <section>
-    <md-toolbar md-theme="content">
-      <div class="md-toolbar-tools">
-        <h1 class="md-title">飼育ペット</h1>
-        <span flex></span>
-        <md-button class="md-icon-button">
-          <md-tooltip md-direction="left">更新する</md-tooltip>
-          <md-icon class="material-icons" ng-click="ctrl.refresh()">refresh</md-icon>
-        </md-button>
-      </div>
-    </md-toolbar>
-    <div layout-padding>
-      <md-table-container class="flat-card">
-        <table md-table class="table-hover table-clickable">
-          <thead md-head>
-            <tr md-row>
-              <th md-column>カルテ番号</th>
-              <th md-column>ペットのお名前</th>
-              <th md-column>種類</th>
-              <th md-column>色</th>
-              <th md-column>性別</th>
+  <section class="panel">
+    <div class="panel-body">
+      <div class="table-responsive">
+        <table class="table table-hover table-clickable table-sortable table-middle">
+          <thead>
+            <tr>
+              <th>
+                カルテ番号
+              </th>
+              <th>
+                ペットのお名前
+              </th>
+              <th>
+                種類
+              </th>
+              <th>
+                色
+              </th>
+              <th>
+                性別
+              </th>
             </tr>
           </thead>
-          <tbody md-body>
-            <tr md-row ng-repeat="pet in ctrl.pets" ng-click="ctrl.goChart(ctrl.customer, pet)">
-              <td md-cell>
+          <tbody>
+            <tr dir-paginate="pet in ctrl.pets | orderBy:ctrl.order:ctrl.reverse | itemsPerPage:20" ng-click="ctrl.goChart(ctrl.customer, pet)">
+              <td>
                 <span class="label label-default" ng-if="!pet.chart">カルテ未作成</span>
                 <span ng-if="pet.chart">{{pet.chart.chartNo}}</span>
               </td>
-              <td md-cell>
+              <td>
                 {{pet.name}} ちゃん
               </td>
-              <td md-cell>
+              <td>
                 {{pet.type}}
               </td>
-              <td md-cell>
+              <td>
                 <span class="label label-info">{{pet.color}}</span>
               </td>
-              <td md-cell>
+              <td>
                 <i class="fa fa-mars mr" ng-show="pet.sex === 'MALE'"></i>
                 <i class="fa fa-venus mr" ng-show="pet.sex === 'FEMALE'"></i>
                 <span ng-show="pet.sex === 'MALE'">オス</span>
@@ -61,31 +149,7 @@
             </tr>
           </tbody>
         </table>
-      </md-table-container>
+      </div>
     </div>
   </section>
-</div>
-
-<div class="fab" md-theme="fab">
-  <md-fab-speed-dial md-direction="up" md-open="ctrl.isOpen" class="md-scale" ng-mouseenter="ctrl.isOpen=true" ng-mouseleave="ctrl.isOpen=false" ng-cloak>
-    <md-fab-trigger>
-      <md-button aria-label="menu" class="md-fab md-primary">
-        <md-icon class="material-icons">menu</md-icon>
-      </md-button>
-    </md-fab-trigger>
-    <md-fab-actions>
-      <md-button class="md-fab md-raised md-mini" ui-sref="app.dashboard.chart.form({customerId:ctrl.customer.id})">
-        <md-tooltip md-direction="left">カルテを追加</md-tooltip>
-        <md-icon class="material-icons">add</md-icon>
-      </md-button>
-      <md-button class="md-fab md-raised md-mini" ui-sref="app.dashboard.customer.update({customerId:ctrl.customer.id})">
-        <md-tooltip md-direction="left">編集する</md-tooltip>
-        <md-icon class="material-icons">create</md-icon>
-      </md-button>
-      <md-button class="md-fab md-raised md-mini" ng-click="ctrl.delete($event, ctrl.customer)">
-        <md-tooltip md-direction="left">削除する</md-tooltip>
-        <md-icon class="material-icons">delete</md-icon>
-      </md-button>
-    </md-fab-actions>
-  </md-fab-speed-dial>
 </div>
