@@ -3,8 +3,15 @@
 angular.module('petz.core')
   .directive('ptzStateLoadingIndicator', ['$rootScope', function($rootScope) {
     var template =
-      '<div ng-show="isStateLoading" layout="row" layout-align="center center" class="state-loading-indicator">' +
-      '<i class="fa fa-repeat fa-spin fa-4x fa-fw text-primary"></i>' +
+      '<div ng-show="isStateLoading" class="ptc-spinner-container">' +
+      '<div class="ptc-spinner-cell">' +
+      '<ul class="ptc-spinner">' +
+	    '<li></li>' +
+	    '<li></li>' +
+	    '<li></li>' +
+	    '<li></li>' +
+      '</ul>' +
+      '</div>' +
       '</div>';
 
     return {

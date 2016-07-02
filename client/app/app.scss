@@ -40,6 +40,7 @@ body > div.main {
 }
 
 // overlay
+// @deprecated
 .state-loading-indicator {
   position: fixed;
   top: 0;
@@ -62,6 +63,87 @@ body > div.main {
 }
 .uploading-indicator div.progress {
   width: 50%;
+}
+// state change loading spinner
+.ptc-spinner-container {
+  position: fixed;
+  top: 0;
+  left:0;
+  width: 100%;
+  height:100%;
+  text-align: center;
+  display: table;
+  z-index: 9;
+  background: rgba(255,255,255,0.5);
+}
+.ptc-spinner-cell {
+  display: table-cell;
+  vertical-align: middle;
+}
+.ptc-spinner {
+  font-size: 100px;
+  width: 1em;
+  height: 1em;
+  margin: 100px auto;
+  position: relative;
+  list-style: none;
+  border-radius: 50%;
+  // border: .01em solid rgba(150,150,150,0.1);
+  li {
+    width: .2em;
+    height: .2em;
+    position: absolute;
+    border-radius: 50%;
+  }
+  li:nth-child(1) {
+	  background: $brand-primary;
+    top: 0;
+    left: 50%;
+    margin-left: -.1em;
+    transform-origin: 50% 250%;
+    animation: rota 1.13s linear infinite, opa 3.67s ease-in-out infinite alternate;
+  }
+  li:nth-child(2) {
+    background: $brand-danger;
+    top: 50%;
+    right: 0;
+    margin-top: -.1em;
+    transform-origin: -150% 50%;
+    animation: rota 1.86s linear infinite, opa 4.29s ease-in-out infinite alternate;
+  }
+  li:nth-child(3) {
+    background: $brand-warning;
+    bottom: 0;
+    left: 50%;
+    margin-left: -.1em;
+    transform-origin: 50% -150%;
+    animation: rota 1.45s linear infinite, opa 5.12s ease-in-out infinite alternate;
+  }
+  li:nth-child(4) {
+    background: $brand-success;
+    top: 50%;
+    left: 0;
+    margin-top: -.1em;
+    transform-origin: 250% 50%;
+    animation: rota 1.72s linear infinite, opa 5.25s ease-in-out infinite alternate;
+  }
+}
+// for the rotation and one for the opacity
+@keyframes rota {
+    to { transform: rotate(360deg); }
+}
+@keyframes opa {
+    12.0% { opacity: 0.80; }
+    19.5% { opacity: 0.88; }
+    37.2% { opacity: 0.64; }
+    40.5% { opacity: 0.52; }
+    52.7% { opacity: 0.69; }
+    60.2% { opacity: 0.60; }
+    66.6% { opacity: 0.52; }
+    70.0% { opacity: 0.63; }
+    79.9% { opacity: 0.60; }
+    84.2% { opacity: 0.75; }
+    91.0% { opacity: 0.87; }
 }
 
 // background
@@ -164,32 +246,6 @@ md-sidenav md-content ul li md-icon {
 }
 md-menu-item a.active, md-menu-item a.active:hover, md-menu-item a.active md-icon {
   color: #00BCD4;
-}
-
-// custom container
-@media (min-width: 768px) {
-  .container-small {
-    width: 300px;
-  }
-  .container-large {
-    width: 600px;
-  }
-}
-@media (min-width: 992px) {
-  .container-small {
-    width: 500px;
-  }
-  .container-large {
-    width: 850px;
-  }
-}
-@media (min-width: 1200px) {
-  .container-small {
-    width: 600px;
-  }
-  .container-large {
-    width: 980px;
-  }
 }
 
 // copyright

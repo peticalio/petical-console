@@ -69,16 +69,6 @@
       .then((response) => response);
   }
 
-  function getClinicChartTickets(clinic, chart, ClinicChartTicket) {
-    return ClinicChartTicket.query({clinicId: clinic.id, chartId: chart.id, state: 'COMPLETED'}).$promise
-      .then((response) => response);
-  }
-
-  function getClinicChartReservations(clinic, chart, ClinicChartTicket) {
-    return ClinicChartTicket.query({clinicId: clinic.id, chartId: chart.id, state: 'RESERVED'}).$promise
-      .then((response) => response);
-  }
-
   function ClinicChartRouter($stateProvider) {
     $stateProvider
       .state('app.dashboard.chart', {
@@ -89,6 +79,9 @@
             controller:   'ChartListController',
             controllerAs: 'ctrl'
           }
+        },
+        ncyBreadcrumb: {
+          label: 'カルテ検索'
         },
         resolve: {
           charts:         getCharts
@@ -103,6 +96,9 @@
             controller:   'ChartFormController',
             controllerAs: 'ctrl'
           }
+        },
+        ncyBreadcrumb: {
+          label: 'カルテ新規登録'
         },
         resolve: {
           kinds:          getKinds,
@@ -123,6 +119,9 @@
             controllerAs: 'ctrl'
           }
         },
+        ncyBreadcrumb: {
+          label: 'カルテ編集'
+        },
         resolve: {
           kinds:          getKinds,
           types:          getTypes,
@@ -142,6 +141,9 @@
             controllerAs: 'ctrl'
           }
         },
+        ncyBreadcrumb: {
+          label: 'カルテインポート'
+        },
         resolve: {
           kinds:          getKinds,
           types:          getTypes,
@@ -160,6 +162,9 @@
             controller:   'ChartUploadController',
             controllerAs: 'ctrl'
           }
+        },
+        ncyBreadcrumb: {
+          label: 'カルテ一括登録'
         }
       })
       // カルテ詳細
@@ -172,48 +177,11 @@
             controllerAs: 'ctrl'
           }
         },
+        ncyBreadcrumb: {
+          label: 'カルテ詳細'
+        },
         resolve: {
           chart:          getClinicChart
-        }
-      })
-
-      // カルテ詳細（診察履歴）
-      .state('app.dashboard.chart.detail.ticket', {
-        abstract: true,
-        url: '/tickets'
-      })
-      // カルテ詳細（診察履歴一覧）
-      .state('app.dashboard.chart.detail.ticket.list', {
-        url: '/list',
-        views: {
-          '@app.dashboard.chart.detail': {
-            templateUrl:  'app/dashboard/chart/detail/ticket/ticket.html',
-            controller:   'ChartDetailTicketController',
-            controllerAs: 'ctrl'
-          }
-        },
-        resolve: {
-          tickets:   getClinicChartTickets
-        }
-      })
-
-      // カルテ詳細（診察予約）
-      .state('app.dashboard.chart.detail.reservation', {
-        abstract: true,
-        url: '/reservations'
-      })
-      // カルテ詳細（診察予約一覧）
-      .state('app.dashboard.chart.detail.reservation.list', {
-        url: '/list',
-        views: {
-          '@app.dashboard.chart.detail': {
-            templateUrl:  'app/dashboard/chart/detail/reservation/reservation.html',
-            controller:   'ChartDetailReservationController',
-            controllerAs: 'ctrl'
-          }
-        },
-        resolve: {
-          tickets:   getClinicChartReservations
         }
       })
     ;
