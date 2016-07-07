@@ -81,6 +81,16 @@
       });
   }
 
+  function getDiagnosises(Diagnosis) {
+    return Diagnosis.query().$promise.then((response) => response);
+  }
+  function getMedicines(ClinicMedicine, clinic) {
+    return ClinicMedicine.query({clinicId: clinic.id}).$promise.then((response) => response);
+  }
+  function getCharges(ClinicCharge, clinic) {
+    return ClinicCharge.query({clinicId: clinic.id}).$promise.then((response) => response);
+  }
+
   function DashboardTicketRouter($stateProvider){
     $stateProvider
       .state('app.dashboard.ticket', {
@@ -137,8 +147,14 @@
             controllerAs: 'ctrl'
           }
         },
+        ncyBreadcrumb: {
+          label: 'チケット詳細'
+        },
         resolve: {
-          ticket:         getTicket
+          ticket:         getTicket,
+          charges:        getCharges,
+          medicines:      getMedicines,
+          diagnosises:    getDiagnosises
         }
       })
 

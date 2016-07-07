@@ -1,137 +1,248 @@
-<div layout="column" flex>
-  <md-tabs md-dynamic-height md-selected="ctrl.selected" class="md-primary no-print" flex="100">
-    <md-tab label="基本情報" ui-sref="app.dashboard.ticket.detail">
-    </md-tab>
-    <md-tab label="診察内容" ui-sref="app.dashboard.ticket.detail.examination.list">
-    </md-tab>
-    <md-tab label="証明書" ui-sref="app.dashboard.ticket.detail.certificate.list">
-    </md-tab>
-    <md-tab label="添付" ui-sref="app.dashboard.ticket.detail.attachment.list">
-    </md-tab>
-    <md-tab label="会計" ui-sref="app.dashboard.ticket.detail.invoice.list">
-    </md-tab>
-  </md-tabs>
-
-  <div layout="row" layout-align="center start" layout-align-xs="start start" flex="100" ui-view="" class="fadein overflow">
-    <div class="layout-max-width">
-      <md-toolbar md-theme="content" class="pt">
-        <div class="md-toolbar-tools">
-          <h1 class="md-title">{{ctrl.ticket.chart.pet.name}} ちゃんのチケット</h1>
-          <span flex></span>
-          <md-button class="md-icon-button" ui-sref="app.dashboard.ticket.list">
-            <md-tooltip md-direction="left">一覧</md-tooltip>
-            <md-icon class="material-icons">list</md-icon>
-          </md-button>
-        </div>
-      </md-toolbar>
-      <div layout-padding>
-        <div layout="row" layout-wrap class="flat-card">
-          <md-list flex="50" flex-xs="100">
-            <md-subheader class="md-no-sticky">チケット詳細</md-subheader>
-            <md-list-item>
-              <md-icon class="material-icons">
-                local_hospital
-                <md-tooltip>所属動物病院</md-tooltip>
-              </md-icon>
-              <p>{{ctrl.clinic.name}}</p>
-            </md-list-item>
-            <md-list-item>
-              <md-icon class="material-icons">
-                receipt
-                <md-tooltip>チケット番号</md-tooltip>
-              </md-icon>
-              <p>{{ctrl.ticket.id}}</p>
-            </md-list-item>
-            <md-list-item>
-              <md-icon class="material-icons">
-                access_time
-                <md-tooltip>予定日時</md-tooltip>
-              </md-icon>
-              <p>{{ctrl.ticket.startDateTime | date:'yyyy/MM/dd HH:mm'}} - {{ctrl.ticket.endDateTime | date:'HH:mm'}}</p>
-            </md-list-item>
-            <md-list-item>
-              <md-icon class="material-icons">
-                hourglass_empty
-                <md-tooltip>ステータス</md-tooltip>
-              </md-icon>
-              <p><ptz-ticket-status value="ctrl.ticket.state"></ptz-ticket-status></p>
-            </md-list-item>
-            <md-list-item>
-              <md-icon class="material-icons">
-                create
-                <md-tooltip>作成日時</md-tooltip>
-              </md-icon>
-              <p>{{ctrl.ticket.createdDate | date:'yyyy/MM/dd HH:mm'}}</p>
-            </md-list-item>
-          </md-list>
-          <md-list flex="50" flex-xs="100">
-            <md-subheader class="md-no-sticky">ペット・飼い主さま</md-subheader>
-            <md-list-item>
-              <md-icon class="material-icons">
-                folder
-                <md-tooltip>カルテ番号</md-tooltip>
-              </md-icon>
-              <p><a ui-sref="app.dashboard.chart.detail({chartId: ctrl.ticket.chart.id})">{{ctrl.ticket.chart.chartNo}}</a></p>
-            </md-list-item>
-            <md-list-item>
-              <md-icon class="material-icons">
-                pets
-                <md-tooltip>ペット</md-tooltip>
-              </md-icon>
-              <p>{{ctrl.ticket.chart.pet.name}} ちゃん</p>
-            </md-list-item>
-            <md-list-item>
-              <md-icon class="material-icons">
-                person
-                <md-tooltip>飼い主さま</md-tooltip>
-              </md-icon>
-              <p><a ui-sref="app.dashboard.customer.detail({customerId: ctrl.ticket.chart.customer.id})">{{ctrl.ticket.chart.customer.user.lastName}} {{ctrl.ticket.chart.customer.user.firstName}}</a> 様</p>
-            </md-list-item>
-            <md-list-item>
-              <md-icon class="material-icons">
-                phone
-                <md-tooltip>電話番号（自宅）</md-tooltip>
-              </md-icon>
-              <p ng-show="ctrl.ticket.chart.customer.user.phoneNo">{{ctrl.ticket.chart.customer.user.phoneNo}}</p>
-              <p ng-show="!ctrl.ticket.chart.customer.user.phoneNo">未登録</p>
-            </md-list-item>
-            <md-list-item>
-              <md-icon class="material-icons">
-                phone_android
-                <md-tooltip>電話番号（携帯）</md-tooltip>
-              </md-icon>
-              <p ng-show="ctrl.ticket.chart.customer.user.mobilePhoneNo">{{ctrl.ticket.chart.customer.user.mobilePhoneNo}}</p>
-              <p ng-show="!ctrl.ticket.chart.customer.user.mobilePhoneNo">未登録</p>
-            </md-list-item>
-            <md-list-item>
-              <md-icon class="material-icons">
-                mail_outline
-                <md-tooltip>メールアドレス</md-tooltip>
-              </md-icon>
-              <p>{{ctrl.ticket.chart.customer.user.email}}</p>
-            </md-list-item>
-          </md-list>
-        </div>
-      </div>
-      <div class="fab" md-theme="fab">
-        <md-fab-speed-dial md-direction="up" md-open="ctrl.isOpen" class="md-scale" ng-mouseenter="ctrl.isOpen=true" ng-mouseleave="ctrl.isOpen=false" ng-cloak>
-          <md-fab-trigger>
-            <md-button aria-label="menu" class="md-fab md-primary">
-              <md-icon class="material-icons">menu</md-icon>
-            </md-button>
-          </md-fab-trigger>
-          <md-fab-actions>
-            <md-button class="md-fab md-raised md-mini" ui-sref="app.dashboard.ticket.update({ticketId: ctrl.ticket.id})">
-              <md-tooltip md-direction="left">編集する</md-tooltip>
-              <md-icon class="material-icons">create</md-icon>
-            </md-button>
-            <md-button class="md-fab md-raised md-mini" ng-click="ctrl.delete($event, ctrl.ticket)">
-              <md-tooltip md-direction="left">削除する</md-tooltip>
-              <md-icon class="material-icons">delete</md-icon>
-            </md-button>
-          </md-fab-actions>
-        </md-fab-speed-dial>
-      </div>
+<div class="container-fluid">
+  <div class="page-header-content">
+    <div class="heading-elements hide-xs">
+      <a class="btn btn-link lnk-submenu" ui-sref="app.dashboard.chart.detail({chartId: ctrl.ticket.chart.id})">
+        <i class="fa fa-file-text-o" aria-hidden="true"></i>
+        <p>カルテ</p>
+      </a>
+      <a class="btn btn-link lnk-submenu" ui-sref="app.dashboard.customer.detail({customerId: ctrl.ticket.chart.customer.id})">
+        <i class="fa fa-user" aria-hidden="true"></i>
+        <p>飼い主</p>
+      </a>
+      <a class="btn btn-link lnk-submenu" href="#">
+        <i class="fa fa-calculator" aria-hidden="true"></i>
+        <p>会計する</p>
+      </a>
+      <a class="btn btn-link lnk-submenu" ui-sref="app.dashboard.ticket.update({ticketId: ctrl.ticket.id})">
+        <i class="fa fa-pencil" aria-hidden="true"></i>
+        <p>編集する</p>
+      </a>
+      <a class="btn btn-link lnk-submenu" ng-click="ctrl.delete($event, ctrl.ticket)">
+        <i class="fa fa-trash" aria-hidden="true"></i>
+        <p>削除する</p>
+      </a>
+		</div>
+    <div class="page-title">
+      <h4>チケット - {{ctrl.ticket.chart.pet.name}} ちゃんのチケット</h4>
+      <ul class="breadcrumb breadcrumb-caret small" ncy-breadcrumb></ul>
     </div>
   </div>
+  <section class="panel">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-sm-2">
+          <i class="fa fa-nav fa-hospital-o"></i>動物病院:
+        </div>
+        <div class="col-sm-4">
+          <p>{{ctrl.clinic.name}}</p>
+        </div>
+        <div class="col-sm-2">
+          <i class="fa fa-nav fa-clock-o"></i>診察日:
+        </div>
+        <div class="col-sm-4">
+          <p>{{ctrl.ticket.startDateTime | date:'yyyy/MM/dd HH:mm'}} - {{ctrl.ticket.endDateTime | date:'HH:mm'}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-2">
+          <i class="fa fa-nav fa-user"></i>飼い主:
+        </div>
+        <div class="col-sm-4">
+          <p>{{ctrl.ticket.chart.customer.user.lastName}} {{ctrl.ticket.chart.customer.user.firstName}} 様</p>
+        </div>
+        <div class="col-sm-2">
+          <i class="fa fa-nav fa-circle-o"></i>ステータス:
+        </div>
+        <div class="col-sm-4">
+          <p>
+            <span ng-if="ctrl.ticket.state === 'RESERVED'" class="label label-info">予約済み</span>
+            <span ng-if="ctrl.ticket.state === 'RECEIPTED'" class="label label-info-outline">受付済み</span>
+            <span ng-if="ctrl.ticket.state === 'DOING'" class="label label-success">診察中</span>
+            <span ng-if="ctrl.ticket.state === 'PAYMENT'" class="label label-warning">会計待ち</span>
+            <span ng-if="ctrl.ticket.state === 'COMPLETED'" class="label label-default">診察終了</span>
+            <span ng-if="ctrl.ticket.state === 'CANCEL'" class="label label-default">キャンセル/span>
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-2">
+          <i class="fa fa-nav fa-heart-o"></i>お名前:
+        </div>
+        <div class="col-sm-4">
+          <p>{{ctrl.ticket.chart.pet.name}} ちゃん（{{ctrl.ticket.chart.pet.type}}）</p>
+        </div>
+        <div class="col-sm-2">
+          <i class="fa fa-nav fa-jpy"></i>診察料金:
+        </div>
+        <div class="col-sm-4">
+          <h4 class="m0" ng-if="ctrl.ticket.total">{{ctrl.ticket.total | currency:'¥ ':0}}</h4>
+          <h4 class="m0" ng-if="!ctrl.ticket.total"><code>¥ 0</code></h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <uib-tabset active="active">
+            <uib-tab index="0">
+              <uib-tab-heading>
+                <i class="fa m0 fa-comment-o hide-xs" aria-hidden="true"></i>
+                稟告
+              </uib-tab-heading>
+              <div class="pt2">
+                <form name="autognosis-form" class="">
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <ptc-textarea form="autognosis-form" name="autognosis" label="主訴・稟告内容" model="ctrl.ticket.autognosis" maxlength="2000" message="2000 文字以内で入力してください。"></ptc-input>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-12 text-right">
+                      <button class="btn btn-primary" ng-disabled="autognosis-form.$invalid" ng-click="ctrl.save(ctrl.ticket)">保存する</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </uib-tab>
+            <uib-tab index="1">
+              <uib-tab-heading>
+                <i class="fa m0 fa-file-text-o hide-xs" aria-hidden="true"></i>
+                診断
+              </uib-tab-heading>
+              <div class="pt2">
+                <form name="diagnosis-form" class="">
+                  <div class="row">
+                    <div class="col-sm-6 col-xs-12">
+                      <ptc-diagnosis form="diagnosis-form" name="diagnosis" model="ctrl.ticket.diagnosises" data="ctrl.diagnosises"/>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <ptc-textarea form="diagnosis-form" name="comment" label="所見" model="ctrl.ticket.comment" maxlength="2000" message="2000 文字以内で入力してください。"></ptc-input>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-12 text-right">
+                      <button class="btn btn-primary" ng-disabled="diagnosis-form.$invalid" ng-click="ctrl.save(ctrl.ticket)">保存する</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </uib-tab>
+            <uib-tab index="2">
+              <uib-tab-heading>
+                <i class="fa m0 fa-stethoscope hide-xs" aria-hidden="true"></i>
+                検査
+              </uib-tab-heading>
+              <div class="pt2">
+                <form name="examination-form" class="">
+                  <div class="row">
+                    <div class="col-sm-6 col-xs-12">
+                      <ptc-charges form="examination-form" name="charge" model="ctrl.examination.charge" data="ctrl.charges"/>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <ptc-textarea form="examination-form" name="comment" label="説明" model="ctrl.examination.comment" maxlength="2000" message="2000 文字以内で入力してください。"></ptc-input>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-12 text-right">
+                      <button class="btn btn-primary" ng-disabled="examination-form.$invalid" ng-click="ctrl.saveExamination(ctrl.examination)">追加する</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </uib-tab>
+            <uib-tab index="3">
+              <uib-tab-heading>
+                <i class="fa m0 fa-medkit hide-xs" aria-hidden="true"></i>
+                処方
+              </uib-tab-heading>
+              <div class="pt2">
+                <div class="alert alert-warning">
+                  動物病院での医薬品の処方機能を鋭意開発中！会計機能と連動するので、請求処理や売上の一括管理が可能になります。<br />近日公開予定です。
+                </div>
+                <!-- <form name="prescription-form" class="">
+                  <div class="row">
+                    <div class="col-sm-6 col-xs-12">
+                      <ptc-medicines form="prescription-form" name="medicine" model="ctrl.prescription.medicine" data="ctrl.medicines"/>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6 col-xs-12">
+                      <ptc-input-select form="prescription-form" name="usage" label="用法" model="ctrl.prescription.usage" data="ctrl.usages" maxlength="50"></ptc-select>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                      <ptc-input type="number" form="prescription-form" name="dosage" label="用量" model="ctrl.prescription.dosage" min="0" max="999999999"></ptc-select>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                      <ptc-input-select form="prescription-form" name="unit" label="単位" model="ctrl.prescription.unit" data="ctrl.units" maxlength="50"></ptc-select>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <ptc-textarea form="prescription-form" name="comment" label="説明" model="ctrl.prescription.comment" maxlength="2000" message="2000 文字以内で入力してください。"></ptc-input>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-12 text-right">
+                      <button class="btn btn-primary" ng-disabled="prescription-form.$invalid" ng-click="ctrl.savePrescription(ctrl.prescription)">追加する</button>
+                    </div>
+                  </div>
+                </form> -->
+              </div>
+            </uib-tab>
+            <uib-tab index="4">
+              <uib-tab-heading>
+                <i class="fa m0 fa-certificate hide-xs" aria-hidden="true"></i>
+                証明書
+              </uib-tab-heading>
+              <div class="pt2">
+                <div class="alert alert-warning">
+                  証明書の発行機能を鋭意開発中！証明書をプリントします。<br />近日公開予定です。
+                </div>
+              </div>
+            </uib-tab>
+            <uib-tab index="5">
+              <uib-tab-heading>
+                <i class="fa m0 fa-paperclip hide-xs" aria-hidden="true"></i>
+                添付
+              </uib-tab-heading>
+              <div class="pt2">
+                <div class="ptc-dragdrop" ngf-drop ngf-select ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="false" accept="*" ng-model="file">
+                  <p><i class="fa fa-paperclip fa-3x"></i></p>
+                  <p class="lead">ファイルを添付する（2MBまで）</p>
+                  <p class="m0">ここにアップロードするファイルをドラッグ＆ドロップしてください。または、このエリアをクリックしてファイルを選択してください。</p>
+                  <p class="m0">アップロードしたファイルは安全に管理され、このページからのみアクセスできます。</p>
+                </hr/>
+                </div>
+              </div>
+            </uib-tab>
+            <uib-tab index="6">
+              <uib-tab-heading>
+                <i class="fa m0 fa-comments-o hide-xs" aria-hidden="true"></i>
+                コメント
+              </uib-tab-heading>
+              <div class="pt2">
+                <div class="alert alert-warning">
+                  チケットに自由記述でコメントを積み上げられる機能を鋭意開発中！これにより獣医師とスタッフとの情報連携をスムーズにします。<br />近日公開予定です。
+                </div>
+                <!-- <form name="comment-form" class="">
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <ptc-textarea form="comment-form" name="comment" label="コメント" model="ctrl.comment.comment" maxlength="2000" message="2000 文字以内で入力してください。"></ptc-input>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-12 text-right">
+                      <button class="btn btn-primary" ng-disabled="comment-form.$invalid" ng-click="ctrl.saveComment(ctrl.comment)">追加する</button>
+                    </div>
+                  </div>
+                </form> -->
+              </div>
+            </uib-tab>
+          </uib-tabset>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>

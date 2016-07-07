@@ -11,11 +11,6 @@
       this.message = '一覧から選択するか値を入力してください。';
       this.required = false;
     }
-
-    transform(value) {
-      console.log(value);
-      return value;
-    }
   }
 
   angular.module('petzApp.util')

@@ -12,11 +12,12 @@ angular
     'ngResource',
     'ngSanitize',
     'ngAnimate',
+    'ngFileUpload',
     'ui.router',
     'ui.validate',
     'ui.gravatar',
     'ui.bootstrap',
-    'ui.select',
+    // 'ui.select',
     'ui.sortable',
     'angularMoment',
     'angularUtils.directives.dirPagination',
@@ -24,6 +25,7 @@ angular
     'mwl.calendar',
     'ncy-angular-breadcrumb',
     'ngHandsontable',
+    'nya.bootstrap.select',
     'vcRecaptcha',
     'nvd3'
   ])

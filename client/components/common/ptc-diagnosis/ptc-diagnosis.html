@@ -1,0 +1,56 @@
+<div class="form-group" ng-class="{'has-error': $ctrl.form[$ctrl.name].$invalid}">
+  <label for="{{$ctrl.name}}">
+    <span>診断結果</span>
+    <span ng-if="$ctrl.required" class="label label-required">必須</span>
+  </label>
+  <!-- <input type="text" name="{{$ctrl.name}}" ng-model="$ctrl.model" maxlength="50" ng-maxlength="50" ng-required="$ctrl.required" uib-typeahead="diagnosis.name for diagnosis in $ctrl.data | filter: $viewValue" typeahead-min-length="0" typeahead-popup-template-url="diagnosis-select.html" placeholder="一覧から選択してください。" class="form-control" autocomplete="off"/> -->
+  <!-- <div uib-dropdown ng-init="$ctrl.init($ctrl.data)">
+    <input type="text" name="{{$ctrl.name}}" ng-model="$ctrl.model.name" maxlength="50" ng-maxlength="50" ng-required="$ctrl.required" uib-dropdown-toggle placeholder="一覧から選択してください。" class="form-control" autocomplete="off"/>
+    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+      <li class="dropdown-submenu" role="menuitem" ng-repeat="type in $ctrl.types | filter:$ctrl.model.name">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{type.type}}</a>
+        <ul class="dropdown-menu">
+          <li>
+            <a href="#" ng-repeat="diagnosis in type.values" ng-click="$ctrl.select(diagnosis)">{{diagnosis.name}}</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div> -->
+  <ol class="form-control nya-bs-select" ng-model="$ctrl.model" data-size="10" data-live-search="true">
+    <li nya-bs-option="option in $ctrl.data group by option.type track by option.id">
+      <span class="dropdown-header">{{$group}}</span>
+      <a>
+        <span>{{option.name}}<small> - {{option.type}}</small></span>
+        <span class="fa fa-check check-mark"></span>
+      </a>
+    </li>
+  </ol>
+  <div class="form-error" ng-show="$ctrl.form[$ctrl.name].$invalid" ng-messages="$ctrl.form[$ctrl.name].$error">
+    <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+      <span>診断結果を選択してください。</span>
+    </div>
+  </div>
+</div>
+
+<!-- <script type="text/ng-template" id="diagnosis-select.html">
+  <a>
+    <small>{{match.model.type}}</small><br />
+    <span ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>
+  </a>
+</script> -->
+
+<script type="text/ng-template" id="diagnosis-select.html">
+  <ul class="dropdown-menu multi-level" ng-show="isOpen() && !moveInProgress" ng-style="{top: position().top+'px', left: position().left+'px'}" role="listbox" aria-hidden="{{!isOpen()}}">
+    <li class="uib-typeahead-match" ng-repeat="match in matches track by $index" ng-class="{active: isActive($index) }" ng-mouseenter="selectActive($index)" ng-click="selectMatch($index, $event)" role="option" id="{{::match.id}}">
+      <a href tabindex="-1">
+        <small>{{match.model.type}}</small><br />
+        <span ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>
+      </a>
+    </li>
+  </ul>
+</script>
+
+<script type="text/javascript" ng-jq>
+  jQuery('.selectpicker').selectpicker();
+</script>

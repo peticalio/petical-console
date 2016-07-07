@@ -21,6 +21,7 @@
       <link rel="stylesheet" href="bower_components/pikaday/css/pikaday.css" />
       <link rel="stylesheet" href="bower_components/handsontable/dist/handsontable.css" />
       <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.css" />
+      <link rel="stylesheet" href="bower_components/nya-bootstrap-select/dist/css/nya-bs-select.css" />
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
@@ -100,6 +101,8 @@
       <script src="bower_components/angularUtils-pagination/dirPagination.js"></script>
       <script src="bower_components/jquery-ui/jquery-ui.js"></script>
       <script src="bower_components/angular-ui-sortable/sortable.js"></script>
+      <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
+      <script src="bower_components/nya-bootstrap-select/dist/js/nya-bs-select.js"></script>
       <!-- endbower -->
       <script src="bower_components/angular-breadcrumb/release/angular-breadcrumb.min.js"></script>
     <!-- endbuild -->
@@ -121,8 +124,6 @@
       <script src="app/dashboard/charge/list/list.controller.js"></script>
       <script src="app/dashboard/chart/chart.route.js"></script>
       <script src="app/dashboard/chart/detail/detail.controller.js"></script>
-      <script src="app/dashboard/chart/detail/reservation/reservation.controller.js"></script>
-      <script src="app/dashboard/chart/detail/ticket/ticket.controller.js"></script>
       <script src="app/dashboard/chart/form/form.controller.js"></script>
       <script src="app/dashboard/chart/list/list.controller.js"></script>
       <script src="app/dashboard/chart/upload/upload.controller.js"></script>
@@ -180,7 +181,6 @@
       <script src="components/api/activate/Activate.service.js"></script>
       <script src="components/api/blood/blood.service.js"></script>
       <script src="components/api/clinic/Clinic.service.js"></script>
-      <script src="components/api/clinic/charge/ClinicCharge.service.js"></script>
       <script src="components/api/clinic/chart/ClinicChart.service.js"></script>
       <script src="components/api/clinic/chart/ticket/ClinicChartTicket.service.js"></script>
       <script src="components/api/clinic/customer/ClinicCustomer.service.js"></script>
@@ -202,7 +202,10 @@
       <script src="components/api/clinic/ticket/summary/ClinicTicketSummary.service.js"></script>
       <script src="components/api/clinic/user/ClinicUser.service.js"></script>
       <script src="components/api/clinic/vaccine/ClinicVaccine.service.js"></script>
+      <script src="components/api/clinics/charges/ClinicCharge.service.js"></script>
+      <script src="components/api/clinics/medicines/ClinicMedicine.service.js"></script>
       <script src="components/api/color/color.service.js"></script>
+      <script src="components/api/diagnosises/Diagnosis.service.js"></script>
       <script src="components/api/kind/kind.service.js"></script>
       <script src="components/api/me/clinic/MyClinic.service.js"></script>
       <script src="components/api/me/invitation/MyInvitation.service.js"></script>
@@ -214,8 +217,11 @@
       <script src="components/api/tag/tag.service.js"></script>
       <script src="components/api/type/type.service.js"></script>
       <script src="components/api/user/pet/UserPet.service.js"></script>
+      <script src="components/common/ptc-charges/ptc-charges.controller.js"></script>
+      <script src="components/common/ptc-diagnosis/ptc-diagnosis.controller.js"></script>
       <script src="components/common/ptc-input-select/ptc-input-select.controller.js"></script>
       <script src="components/common/ptc-input/ptc-input.controller.js"></script>
+      <script src="components/common/ptc-medicines/ptc-medicines.controller.js"></script>
       <script src="components/common/ptc-progressbar/ptc-progressbar.controller.js"></script>
       <script src="components/common/ptc-select/ptc-select.controller.js"></script>
       <script src="components/common/ptc-textarea/ptc-textarea.controller.js"></script>
