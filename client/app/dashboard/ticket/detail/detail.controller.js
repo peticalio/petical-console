@@ -22,12 +22,19 @@
     }
 
     // ステータスを受付済みにする
+    // @deprecated
     receipt(ticket) {
       this.ClinicTicketStatus.signal({clinicId: this.clinic.id, ticketId: ticket.id}, {}).$promise
         .then((response) => {
           this.toaster.info('ステータスを「受付済み」に変更しました。');
           this.ticket = response;
         });
+    }
+
+    // 稟告や診断結果を保存する
+    save(ticket) {
+      this.ClinicTicket.update({clinicId: ticket.clinic.id, ticketId: ticket.id}, ticket).$promise
+        .then(() => this.toaster.info('チケットに情報を保存しました。'));
     }
 
     // ステータスをキャンセルにする

@@ -88,7 +88,7 @@
                 稟告
               </uib-tab-heading>
               <div class="pt2">
-                <form name="autognosis-form" class="">
+                <form name="autognosis-form">
                   <div class="row">
                     <div class="col-xs-12">
                       <ptc-textarea form="autognosis-form" name="autognosis" label="主訴・稟告内容" model="ctrl.ticket.autognosis" maxlength="2000" message="2000 文字以内で入力してください。"></ptc-input>
@@ -111,12 +111,12 @@
                 <form name="diagnosis-form" class="">
                   <div class="row">
                     <div class="col-sm-6 col-xs-12">
-                      <ptc-diagnosis form="diagnosis-form" name="diagnosis" model="ctrl.ticket.diagnosises" data="ctrl.diagnosises"/>
+                      <ptc-diagnosis form="diagnosis-form" name="diagnosis" model="ctrl.ticket.diagnosis" data="ctrl.diagnosises"/>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-xs-12">
-                      <ptc-textarea form="diagnosis-form" name="comment" label="所見" model="ctrl.ticket.comment" maxlength="2000" message="2000 文字以内で入力してください。"></ptc-input>
+                      <ptc-textarea form="diagnosis-form" name="memo" label="所見" model="ctrl.ticket.memo" maxlength="10000" message="10000 文字以内で入力してください。"></ptc-input>
                     </div>
                   </div>
                   <div class="row">
