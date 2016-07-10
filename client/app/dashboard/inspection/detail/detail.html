@@ -1,15 +1,15 @@
 <div class="container-fluid">
   <div class="page-header-content">
     <div class="heading-elements hide-xs">
-      <a class="btn btn-link lnk-submenu" ui-sref="app.dashboard.charge">
+      <a class="btn btn-link lnk-submenu" ui-sref="app.dashboard.inspection">
         <i class="fa fa-search" aria-hidden="true"></i>
         <p>検索する</p>
       </a>
-      <a class="btn btn-link lnk-submenu" ui-sref="app.dashboard.charge.update({chargeId:ctrl.charge.id})">
+      <a class="btn btn-link lnk-submenu" ui-sref="app.dashboard.inspection.update({inspectionId:ctrl.inspection.id})">
         <i class="fa fa-pencil" aria-hidden="true"></i>
         <p>編集する</p>
       </a>
-      <a class="btn btn-link lnk-submenu" ng-click="ctrl.delete($event, ctrl.charge)">
+      <a class="btn btn-link lnk-submenu" ng-click="ctrl.delete($event, ctrl.inspection)">
         <i class="fa fa-trash" aria-hidden="true"></i>
         <p>削除する</p>
       </a>
@@ -26,7 +26,7 @@
           <i class="fa fa-briefcase"></i>科目:
         </div>
         <div class="col-md-4">
-          <p>{{ctrl.charge.course}}</p>
+          <p>{{ctrl.inspection.course}}</p>
         </div>
       </div>
       <div class="row">
@@ -34,7 +34,7 @@
           <i class="fa fa-folder-open-o"></i>カテゴリ:
         </div>
         <div class="col-md-4">
-          <p>{{ctrl.charge.category}}</p>
+          <p>{{ctrl.inspection.category}}</p>
         </div>
       </div>
       <div class="row">
@@ -42,7 +42,7 @@
           <i class="fa fa-hashtag"></i>診察名:
         </div>
         <div class="col-md-4">
-          <p>{{ctrl.charge.name}}</p>
+          <p>{{ctrl.inspection.name}}</p>
         </div>
       </div>
       <div class="row">
@@ -50,7 +50,7 @@
           <i class="fa fa-tag"></i>診察料金:
         </div>
         <div class="col-md-4">
-          <p>{{ctrl.charge.price | currency:'¥ ':0}}</p>
+          <p>{{ctrl.inspection.price | currency:'¥ ':0}}</p>
         </div>
       </div>
       <div class="row">
@@ -58,7 +58,7 @@
           <i class="fa fa-clock-o"></i>作成日時:
         </div>
         <div class="col-md-4">
-          <p>{{ctrl.charge.createdDate | date:'yyyy/MM/dd HH:mm'}}</p>
+          <p>{{ctrl.inspection.createdDate | date:'yyyy/MM/dd HH:mm'}}</p>
         </div>
       </div>
       <div class="row">
@@ -66,7 +66,7 @@
           <i class="fa fa-clock-o"></i>最終更新日時:
         </div>
         <div class="col-md-4">
-          <p class="m0">{{ctrl.charge.lastModifiedDate | date:'yyyy/MM/dd HH:mm'}}</p>
+          <p class="m0">{{ctrl.inspection.lastModifiedDate | date:'yyyy/MM/dd HH:mm'}}</p>
         </div>
       </div>
     </div>
@@ -78,8 +78,8 @@
           <i class="fa fa-book"></i>説明:
         </div>
         <div class="col-xs-10">
-          <div class="pre" ng-show="ctrl.charge.description">{{ctrl.charge.description}}</div>
-          <div class="pre" ng-show="!ctrl.charge.description">未入力</div>
+          <div class="pre" ng-show="ctrl.inspection.description">{{ctrl.inspection.description}}</div>
+          <div class="pre" ng-show="!ctrl.inspection.description">未入力</div>
         </div>
       </div>
     </div>

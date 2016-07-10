@@ -87,8 +87,8 @@
   function getMedicines(ClinicMedicine, clinic) {
     return ClinicMedicine.query({clinicId: clinic.id}).$promise.then((response) => response);
   }
-  function getCharges(ClinicCharge, clinic) {
-    return ClinicCharge.query({clinicId: clinic.id}).$promise.then((response) => response);
+  function getInspections(ClinicInspection, clinic) {
+    return ClinicInspection.query({clinicId: clinic.id}).$promise.then((response) => response);
   }
 
   function DashboardTicketRouter($stateProvider){
@@ -152,7 +152,7 @@
         },
         resolve: {
           ticket:         getTicket,
-          charges:        getCharges,
+          inspections:    getInspections,
           medicines:      getMedicines,
           diagnosises:    getDiagnosises
         }

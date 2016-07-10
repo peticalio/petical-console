@@ -1,22 +1,22 @@
 (() => {
   'use strict';
 
-  class ChargeListController {
-    constructor($state, toaster, ClinicCharge, clinic, charges) {
+  class InspectionListController {
+    constructor($state, toaster, ClinicInspection, clinic, inspections) {
       this.$state = $state;
       this.toaster = toaster;
-      this.ClinicCharge = ClinicCharge;
+      this.ClinicInspection = ClinicInspection;
       this.clinic = clinic;
-      this.charges = charges;
+      this.inspections = inspections;
       this.order = 'lastModifiedDate';
       this.reverse = false;
     }
 
     // 商品マスタをリフレッシュする
     refresh() {
-      this.ClinicCharge.fetch({clinicId: this.clinic.id}).$promise
+      this.ClinicInspection.fetch({clinicId: this.clinic.id}).$promise
         .then((response) => {
-          this.charges = response;
+          this.inspections = response;
           this.toaster.info('診察料金の一覧を更新しました。');
         });
     }
@@ -28,8 +28,8 @@
     }
   }
 
-  ChargeListController.$inject = ['$state', 'toaster', 'ClinicCharge', 'clinic', 'charges'];
+  InspectionListController.$inject = ['$state', 'toaster', 'ClinicInspection', 'clinic', 'inspections'];
   angular.module('petzApp')
-    .controller('ChargeListController', ChargeListController);
+    .controller('InspectionListController', InspectionListController);
 
 })();

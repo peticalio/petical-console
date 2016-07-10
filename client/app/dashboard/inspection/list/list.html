@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="page-header-content">
     <div class="heading-elements hide-xs">
-      <a class="btn btn-link lnk-submenu" ui-sref="app.dashboard.charge.form">
+      <a class="btn btn-link lnk-submenu" ui-sref="app.dashboard.inspection.form">
         <i class="fa fa-plus" aria-hidden="true"></i>
         <p>追加する</p>
       </a>
@@ -53,25 +53,25 @@
             </tr>
           </thead>
           <tbody>
-            <tr dir-paginate="charge in ctrl.charges | filter:ctrl.keyword | orderBy:ctrl.order:ctrl.reverse | itemsPerPage:20" ui-sref="app.dashboard.charge.detail({chargeId: charge.id})">
+            <tr dir-paginate="inspection in ctrl.inspections | filter:ctrl.keyword | orderBy:ctrl.order:ctrl.reverse | itemsPerPage:20" ui-sref="app.dashboard.inspection.detail({inspectionId: inspection.id})">
               <td class="col-sm-1">
-                {{charge.course}}
+                {{inspection.course}}
               </td>
               <td class="col-sm-2">
-                {{charge.category}}
+                {{inspection.category}}
               </td>
               <td class="col-sm-4">
-                {{charge.name}}
+                {{inspection.name}}
               </td>
               <td class="col-sm-2">
-                {{charge.price | currency:'¥ ':0}}
+                {{inspection.price | currency:'¥ ':0}}
               </td>
               <td class="col-sm-1">
-                <span class="label label-default" ng-if="charge.taxType === 'EXCLUSIVE'">外税</span>
-                <span class="label label-warning" ng-if="charge.taxType !== 'EXCLUSIVE'">内税</span>
+                <span class="label label-default" ng-if="inspection.taxType === 'EXCLUSIVE'">外税</span>
+                <span class="label label-warning" ng-if="inspection.taxType !== 'EXCLUSIVE'">内税</span>
               </td>
               <td class="col-sm-2">
-                {{charge.lastModifiedDate | date:'yyyy/MM/dd HH:mm'}}
+                {{inspection.lastModifiedDate | date:'yyyy/MM/dd HH:mm'}}
               </td>
             </tr>
           </tbody>

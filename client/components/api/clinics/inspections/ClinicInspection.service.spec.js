@@ -1,14 +1,14 @@
 'use strict';
 
-describe('Service: ClinicCharge', function () {
+describe('Service: ClinicInspection', function () {
 
   // load the service's module
   beforeEach(module('petz.api'));
 
   // instantiate service
   var sut;
-  beforeEach(inject(function (_ClinicCharge_) {
-    sut = _ClinicCharge_;
+  beforeEach(inject(function (_ClinicInspection_) {
+    sut = _ClinicInspection_;
   }));
 
   it('should do something', function () {

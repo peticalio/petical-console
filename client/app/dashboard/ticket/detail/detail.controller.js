@@ -2,32 +2,30 @@
   'use strict';
 
   class TicketDetailController {
-    constructor($scope, $state, $stateParams, toaster, dialog, ClinicTicket, ClinicTicketStatus, ClinicTicketExamination, ClinicTicketCertificate, ClinicTicketAttachment, ClinicTicketInvoice, clinic, ticket, charges, medicines, diagnosises) {
-      this.$scope = $scope;
+    constructor($state, $stateParams, toaster, ClinicTicket, ClinicTicketStatus, TicketInspection, ClinicTicketCertificate, ClinicTicketAttachment, ClinicTicketInvoice, clinic, ticket, inspections, medicines, diagnosises) {
       this.$state = $state;
       this.$stateParams = $stateParams;
       this.toaster = toaster;
-      this.dialog = dialog;
-      this.charges = charges;
+      this.clinic = clinic;
+      this.ticket = ticket;
+      this.total = 0;
+
       this.medicines = medicines;
       this.diagnosises = diagnosises;
       this.ClinicTicket = ClinicTicket;
       this.ClinicTicketStatus = ClinicTicketStatus;
-      this.ClinicTicketExamination = ClinicTicketExamination;
       this.ClinicTicketCertificate = ClinicTicketCertificate;
       this.ClinicTicketAttachment = ClinicTicketAttachment;
       this.ClinicTicketInvoice = ClinicTicketInvoice;
-      this.clinic = clinic;
-      this.ticket = ticket;
-    }
 
-    // ステータスを受付済みにする
-    // @deprecated
-    receipt(ticket) {
-      this.ClinicTicketStatus.signal({clinicId: this.clinic.id, ticketId: ticket.id}, {}).$promise
+      // 検査
+      this.inspection = {quantity:1};
+      this.inspections = inspections;
+      this.TicketInspection = TicketInspection;
+      this.TicketInspection.query({clinicId:this.clinic.id, ticketId:this.ticket.id}).$promise
         .then((response) => {
-          this.toaster.info('ステータスを「受付済み」に変更しました。');
-          this.ticket = response;
+          this.ticketInspections = response;
+          this.ticketInspections.forEach((element) => this.total += element.subtotal);
         });
     }
 
@@ -37,7 +35,20 @@
         .then(() => this.toaster.info('チケットに情報を保存しました。'));
     }
 
+    // 検査情報を保存する
+    saveTicketInspection(inspection) {
+      inspection.ticket = this.ticket;
+      this.TicketInspection.save({clinicId: this.clinic.id, ticketId: this.ticket.id}, inspection).$promise
+        .then((response) => {
+          this.ticketInspections.push(response.data);
+          this.total += response.data.subtotal;
+          this.inspection = {quantity:1};
+          this.toaster.info('チケットに実施した検査情報を追加しました。');
+        });
+    }
+
     // ステータスをキャンセルにする
+    // @deprecated
     delete(event, ticket) {
       this.dialog.delete(event, ticket)
         .then(() => {
@@ -70,7 +81,7 @@
     // };
   }
 
-  TicketDetailController.$inject = ['$scope', '$state', '$stateParams', 'toaster', 'dialog', 'ClinicTicket', 'ClinicTicketStatus', 'ClinicTicketExamination', 'ClinicTicketCertificate', 'ClinicTicketAttachment', 'ClinicTicketInvoice', 'clinic', 'ticket', 'charges', 'medicines', 'diagnosises'];
+  TicketDetailController.$inject = ['$state', '$stateParams', 'toaster', 'ClinicTicket', 'ClinicTicketStatus', 'TicketInspection', 'ClinicTicketCertificate', 'ClinicTicketAttachment', 'ClinicTicketInvoice', 'clinic', 'ticket', 'inspections', 'medicines', 'diagnosises'];
   angular.module('petzApp')
     .controller('TicketDetailController', TicketDetailController);
 

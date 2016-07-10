@@ -75,8 +75,7 @@
           <i class="fa fa-nav fa-jpy"></i>診察料金:
         </div>
         <div class="col-sm-4">
-          <h4 class="m0" ng-if="ctrl.ticket.total">{{ctrl.ticket.total | currency:'¥ ':0}}</h4>
-          <h4 class="m0" ng-if="!ctrl.ticket.total"><code>¥ 0</code></h4>
+          <h4 class="m0"><code>{{ctrl.total | currency:'¥ ':0}}</code></h4>
         </div>
       </div>
       <div class="row">
@@ -127,26 +126,95 @@
                 </form>
               </div>
             </uib-tab>
-            <uib-tab index="2">
+            <uib-tab index="2" ng-click="ctrl.loadTicketInspections()">
               <uib-tab-heading>
                 <i class="fa m0 fa-stethoscope hide-xs" aria-hidden="true"></i>
                 検査
               </uib-tab-heading>
               <div class="pt2">
-                <form name="examination-form" class="">
+                <div class="table-responsive">
+                  <table class="table table-hover table-clickable table-sortable table-middle">
+                    <thead>
+                      <tr>
+                        <th>
+                          検査内容
+                        </th>
+                        <th>
+                          単価
+                        </th>
+                        <th>
+                          数量
+                        </th>
+                        <th>
+                          金額
+                        </th>
+                        <th>
+                          税額
+                        </th>
+                        <th>
+                          小計
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="ti in ctrl.ticketInspections">
+                        <td class="col-sm-3">
+                          {{ti.name}}
+                        </td>
+                        <td class="col-sm-2">
+                          {{ti.price | currency:'¥ ':0}}
+                        </td>
+                        <td class="col-sm-1">
+                          {{ti.quantity}}
+                        </td>
+                        <td class="col-sm-2">
+                          {{ti.amount | currency:'¥ ':0}}
+                        </td>
+                        <td class="col-sm-2">
+                          {{ti.tax | currency:'¥ ':0}}
+                        </td>
+                        <td class="col-sm-2">
+                          {{ti.subtotal | currency:'¥ ':0}}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <form name="inspectionForm">
                   <div class="row">
                     <div class="col-sm-6 col-xs-12">
-                      <ptc-charges form="examination-form" name="charge" model="ctrl.examination.charge" data="ctrl.charges"/>
+                      <ptc-charges form="inspectionForm" name="inspection" model="ctrl.inspection.clinicInspection" data="ctrl.inspections" required="true"/>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6 col-xs-12">
+                      <ptc-input type="price" form="inspectionForm" name="price" label="価格" model="ctrl.inspection.clinicInspection.price" min="0" max="999999999" required="true"></ptc-select>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6 col-xs-12">
+                      <ptc-input type="number" form="inspectionForm" name="quantity" label="数量" model="ctrl.inspection.quantity" min="0" max="999999999" required="true"></ptc-select>
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                      <div class="form-group">
+                        <label>
+                          <span>合計金額</span>
+                        </label>
+                        <h4>
+                          <code ng-if="!!ctrl.inspection.clinicInspection">{{ctrl.inspection.clinicInspection.price * ctrl.inspection.quantity | currency:'¥ ':0}}</code>
+                          <code ng-if="!ctrl.inspection.clinicInspection">¥ 0</code>
+                        </h4>
+                      </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-xs-12">
-                      <ptc-textarea form="examination-form" name="comment" label="説明" model="ctrl.examination.comment" maxlength="2000" message="2000 文字以内で入力してください。"></ptc-input>
+                      <ptc-textarea form="inspectionForm" name="memo" label="説明" model="ctrl.inspection.memo" maxlength="2000" message="2000 文字以内で入力してください。"></ptc-input>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-xs-12 text-right">
-                      <button class="btn btn-primary" ng-disabled="examination-form.$invalid" ng-click="ctrl.saveExamination(ctrl.examination)">追加する</button>
+                      <button class="btn btn-primary" ng-disabled="inspectionForm.$invalid" ng-click="ctrl.saveTicketInspection(ctrl.inspection)">追加する</button>
                     </div>
                   </div>
                 </form>
