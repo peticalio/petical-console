@@ -10,6 +10,17 @@
   width: 32px;
 }
 
+ul.nav-tabs a {
+  font-weight: bold;
+}
+.breadcrumb a {
+  color: $gray-dark;
+}
+.breadcrumb > .active {
+  color: $gray-dark;
+  font-weight: bold;
+}
+
 // --------------------------------------------------
 // bootstrap navbar
 // --------------------------------------------------

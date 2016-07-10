@@ -319,6 +319,9 @@ md-menu-item a.active, md-menu-item a.active:hover, md-menu-item a.active md-ico
 .heading-elements {
   float: right;
   margin-top: -5px;
+  a {
+    font-weight: bold;
+  }
 }
 .lnk-submenu {
   font-size: 18px;

@@ -1,15 +1,15 @@
 (() => {
   'use strict';
 
-  class PtcChargesController {
+  class PtcInspectionsController {
     constructor() {
     }
   }
 
   angular.module('petzApp.util')
-    .component('ptcCharges', {
-      templateUrl: 'components/common/ptc-charges/ptc-charges.html',
-      controller:  PtcChargesController,
+    .component('ptcInspections', {
+      templateUrl: 'components/common/ptc-inspections/ptc-inspections.html',
+      controller:  PtcInspectionsController,
       bindings: {
         form:        '=',
         name:        '@',

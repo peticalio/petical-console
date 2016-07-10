@@ -11,10 +11,10 @@
 
     invite(invitation) {
       invitation.emails = invitation.email.split(',');
-      this.ClinicInvitation.save({clinicId: this.clinic.id}, invitation).$promise
+      this.ClinicInvitation.save({clinicId:this.clinic.id}, invitation).$promise
         .then(() => {
           this.toaster.info('ご指定のメールアドレスに招待状を送信しました。');
-          this.$state.go('app.dashboard.staff.list', {clinicId: this.clinic.id});
+          this.$state.go('app.dashboard.staff', {clinicId:this.clinic.id}, {reload:true});
         });
     }
   }
