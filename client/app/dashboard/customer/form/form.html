@@ -37,7 +37,7 @@
         </div>
         <div class="row">
           <div class="col-sm-3 col-xs-6">
-            <ptc-input type="text" form="form" name="zipCode" label="郵便番号" model="ctrl.customer.user.zipCode" maxlength="50" message="7 文字の半角数字で入力してください。"></ptc-input>
+            <ptc-input type="text" form="form" name="zipCode" label="郵便番号" model="ctrl.customer.user.zipCode" maxlength="50" pattern="^(\d{7})$" message="7 文字の半角数字で入力してください。"></ptc-input>
           </div>
         </div>
         <div class="row">
@@ -50,20 +50,15 @@
             <ptc-input type="text" form="form" name="city" label="市区町村" model="ctrl.customer.user.city" required="true" maxlength="50" message="50 文字以内で入力してください。"></ptc-input>
           </div>
           <div class="col-sm-6 col-xs-12">
-            <ptc-input type="text" form="form" name="street" label="番地" model="ctrl.customer.user.street" required="true" maxlength="50" message="50 文字以内で入力してください。"></ptc-input>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-12 col-xs-12">
-            <ptc-input type="text" form="form" name="other" label="その他（マンション名等）" model="ctrl.customer.user.other" maxlength="50" message="50 文字以内で入力してください。"></ptc-input>
+            <ptc-input type="text" form="form" name="street" label="番地・その他" model="ctrl.customer.user.street" required="true" maxlength="50" message="50 文字以内で入力してください。"></ptc-input>
           </div>
         </div>
         <div class="row">
           <div class="col-sm-6 col-xs-12">
-            <ptc-input type="text" form="form" name="phoneNo" label="電話番号（自宅）" model="ctrl.customer.user.phoneNo" required="true" maxlength="15" pattern="[\d|-]+" message="15 文字以内の半角数字とハイフンで入力してください。"></ptc-input>
+            <ptc-input type="text" form="form" name="phoneNo" label="電話番号（自宅）" model="ctrl.customer.user.phoneNo" required="true" maxlength="15" pattern="^\d{1,4}-\d{4}$|^\d{2,5}-\d{1,4}-\d{4}$" message="15 文字以内の半角数字とハイフンで入力してください。"></ptc-input>
           </div>
           <div class="col-sm-6 col-xs-12">
-            <ptc-input type="text" form="form" name="mobilePhoneNo" label="電話番号（携帯）" model="ctrl.customer.user.mobilePhoneNo" maxlength="15" pattern="[\d|-]+" message="15 文字以内の半角数字とハイフンで入力してください。"></ptc-input>
+            <ptc-input type="text" form="form" name="mobilePhoneNo" label="電話番号（携帯）" model="ctrl.customer.user.mobilePhoneNo" maxlength="15" pattern="^\d{1,4}-\d{4}$|^\d{2,5}-\d{1,4}-\d{4}$" message="15 文字以内の半角数字とハイフンで入力してください。"></ptc-input>
           </div>
         </div>
         <div class="row">

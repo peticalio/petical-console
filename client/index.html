@@ -17,6 +17,7 @@
       <link rel="stylesheet" href="bower_components/angular-material-data-table/dist/md-data-table.css" />
       <link rel="stylesheet" href="bower_components/angular-bootstrap-calendar/dist/css/angular-bootstrap-calendar.css" />
       <link rel="stylesheet" href="bower_components/nvd3/build/nv.d3.css" />
+      <link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.css" />
       <link rel="stylesheet" href="bower_components/hint.css/hint.min.css" />
       <link rel="stylesheet" href="bower_components/pikaday/css/pikaday.css" />
       <link rel="stylesheet" href="bower_components/handsontable/dist/handsontable.css" />
@@ -34,13 +35,13 @@
     <link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/notosansjapanese.css"/>
     <script src="//www.google.com/recaptcha/api.js?render=explicit&onload=vcRecaptchaApiLoaded" async defer></script>
   </head>
-  <body ng-app="petzApp" class="bg-color" id="app">
+  <body id="app">
     <!--[if lt IE 7]>
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="main" ui-view></div>
+    <div class="main" ui-view ng-app="petzApp"></div>
 
     <!-- Google Analytics -->
     <script>
@@ -91,6 +92,7 @@
       <script src="bower_components/d3/d3.js"></script>
       <script src="bower_components/nvd3/build/nv.d3.js"></script>
       <script src="bower_components/angular-nvd3/dist/angular-nvd3.js"></script>
+      <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
       <script src="bower_components/zeroclipboard/dist/ZeroClipboard.js"></script>
       <script src="bower_components/pikaday/pikaday.js"></script>
       <script src="bower_components/handsontable/dist/handsontable.js"></script>

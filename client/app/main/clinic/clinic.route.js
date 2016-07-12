@@ -7,7 +7,6 @@
 
   function ClinicRouter($stateProvider){
     $stateProvider
-      // register new clinic
       .state('app.main.clinic', {
         abstract:         true
       })
@@ -20,6 +19,9 @@
             controller:   'ClinicFormController',
             controllerAs: 'ctrl'
           }
+        },
+        ncyBreadcrumb: {
+          label: '動物病院の登録'
         },
         resolve: {
           clinic:         empty

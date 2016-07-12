@@ -19,6 +19,7 @@ angular
     'ui.bootstrap',
     // 'ui.select',
     'ui.sortable',
+    'toastr',
     'angularMoment',
     'angularUtils.directives.dirPagination',
     'md.data.table', // @Deprecated
@@ -99,6 +100,22 @@ angular
     };
     gravatarServiceProvider.secure = true;
 //    gravatarServiceProvider.protocol = 'https';
+  }])
+  .config(['toastrConfig', (toastrConfig) => {
+    angular.extend(toastrConfig, {
+      allowHtml:  true,
+      closeButton: true,
+      timeOut: 5000,
+      extendedTimeOut: 1000,
+      autoDismiss: false,
+      containerId: 'toast-container',
+      maxOpened: 8,
+      newestOnTop: true,
+      positionClass: 'toast-top-right',
+      preventDuplicates: false,
+      preventOpenDuplicates: false,
+      target: 'body'
+    });
   }])
 
   // ISO-8601対応（FIXME リファクタリングしても良いかも）

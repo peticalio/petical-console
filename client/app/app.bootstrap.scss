@@ -10,11 +10,11 @@
   width: 32px;
 }
 
-ul.nav-tabs a {
-  font-weight: bold;
-}
-.breadcrumb a {
-  color: $gray-dark;
+.breadcrumb {
+  background-color: inherit;
+  a {
+    color: $gray-dark;
+  }
 }
 .breadcrumb > .active {
   color: $gray-dark;
@@ -243,7 +243,7 @@ ul.nav-tabs a {
 }
 .label-required {
   @extend .label-danger;
-  background-color: #d9534f;
+  background-color: $brand-danger;
   vertical-align: middle;
   font-weight: normal;
   font-size: 50%;
@@ -282,7 +282,7 @@ ul.nav-tabs a {
   border-color: $brand-primary;
 }
 .form-error {
-  color: $brand-danger;
+  @extend .text-danger;
   margin-top: 4px;
 }
 // for ui-select (他のパーツと同じになるように微調整)
@@ -291,4 +291,35 @@ ul.nav-tabs a {
 }
 .ui-select-match-text {
   color: #555555;
+}
+
+// --------------------------------------------------
+// text
+// --------------------------------------------------
+.text-muted {
+  color: #666666;
+}
+// pets original styles
+.text-ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+// --------------------------------------------------
+// angular toastr
+// --------------------------------------------------
+#toast-container > div {
+  -webkit-box-shadow: 0 0 8px #333;
+  box-shadow: 0 0 8px #333;
+  width: 300px;
+}
+.toast-success {
+  background-color: $brand-success;
+}
+.toast-error {
+  background-color: $brand-danger;
+}
+.toast-message {
+  padding: 4px 0;
 }
