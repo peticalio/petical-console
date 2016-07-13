@@ -2,10 +2,11 @@
   'use strict';
 
   class TicketDetailController {
-    constructor($state, $stateParams, toaster, ClinicTicket, ClinicTicketStatus, TicketInspection, ClinicTicketCertificate, ClinicTicketAttachment, ClinicTicketInvoice, clinic, ticket, inspections, medicines, diagnosises) {
+    constructor($state, $stateParams, toaster, dialog, ClinicTicket, ClinicTicketStatus, TicketInspection, ClinicTicketCertificate, ClinicTicketAttachment, ClinicTicketInvoice, clinic, ticket, inspections, medicines, diagnosises) {
       this.$state = $state;
       this.$stateParams = $stateParams;
       this.toaster = toaster;
+      this.dialog = dialog;
       this.clinic = clinic;
       this.ticket = ticket;
       this.total = 0;
@@ -48,17 +49,12 @@
     }
 
     // ステータスをキャンセルにする
-    // @deprecated
     delete(event, ticket) {
       this.dialog.delete(event, ticket)
-        .then(() => {
-          return this.ClinicTicket.remove({clinicId: this.clinic.id, ticketId: ticket.id}).$promise;
-        })
+        .then(() => this.ClinicTicket.remove({clinicId:this.clinic.id, ticketId:ticket.id}).$promise)
         .then(() => {
           this.toaster.info('チケットをキャンセルしました。');
-          this.ticket.state = 'CANCEL';
-          var today = new Date();
-          this.ClinicTicket.fetch({clinicId: this.clinic.id, year: today.getFullYear(), month: today.getMonth() + 1, day: today.getDate()});
+          this.$state.go('app.dashboard.chart.detail', {clinicId:this.clinic.id}, {reload:true});
         });
     }
 
@@ -81,7 +77,7 @@
     // };
   }
 
-  TicketDetailController.$inject = ['$state', '$stateParams', 'toaster', 'ClinicTicket', 'ClinicTicketStatus', 'TicketInspection', 'ClinicTicketCertificate', 'ClinicTicketAttachment', 'ClinicTicketInvoice', 'clinic', 'ticket', 'inspections', 'medicines', 'diagnosises'];
+  TicketDetailController.$inject = ['$state', '$stateParams', 'toaster', 'dialog', 'ClinicTicket', 'ClinicTicketStatus', 'TicketInspection', 'ClinicTicketCertificate', 'ClinicTicketAttachment', 'ClinicTicketInvoice', 'clinic', 'ticket', 'inspections', 'medicines', 'diagnosises'];
   angular.module('petzApp')
     .controller('TicketDetailController', TicketDetailController);
 

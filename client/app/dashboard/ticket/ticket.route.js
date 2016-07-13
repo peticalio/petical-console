@@ -119,6 +119,9 @@
             controllerAs: 'ctrl'
           }
         },
+        ncyBreadcrumb: {
+          label: 'チケット予約・受付'
+        },
         resolve: {
           ticket:         getTicketByChart
         }
@@ -131,6 +134,9 @@
             controller:   'TicketFormController',
             controllerAs: 'ctrl'
           }
+        },
+        ncyBreadcrumb: {
+          label: 'チケット変更'
         },
         resolve: {
           ticket:         getTicket

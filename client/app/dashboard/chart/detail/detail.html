@@ -2,8 +2,12 @@
   <div class="page-header-content">
     <div class="heading-elements hide-xs">
       <a class="btn btn-link lnk-submenu" ui-sref="app.dashboard.ticket.form({chartId: ctrl.chart.id})">
-        <i class="fa fa-search" aria-hidden="true"></i>
+        <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
         <p>予約する</p>
+      </a>
+      <a class="btn btn-link lnk-submenu" ui-sref="app.dashboard.chart">
+        <i class="fa fa-search" aria-hidden="true"></i>
+        <p>検索する</p>
       </a>
       <a class="btn btn-link lnk-submenu" ui-sref="app.dashboard.customer.detail({customerId: ctrl.chart.customer.id})">
         <i class="fa fa-user" aria-hidden="true"></i>
@@ -47,7 +51,7 @@
           <p>
             <a ui-sref="app.dashboard.customer.detail({customerId: ctrl.chart.customer.id})">
               {{ctrl.chart.customer.user.lastName}}&nbsp;{{ctrl.chart.customer.user.firstName}}
-              （{{ctrl.chart.customer.user.lastNameKana}}&nbsp;{{ctrl.chart.customer.user.firstNameKana}}）
+              （{{ctrl.chart.customer.user.lastNameKana}}&nbsp;{{ctrl.chart.customer.user.firstNameKana}}） 様
             </a>
           </p>
         </div>
@@ -68,7 +72,7 @@
           <i class="fa fa-nav fa-heart-o"></i>お名前:
         </div>
         <div class="col-md-4">
-          <p>{{ctrl.chart.pet.name}}</p>
+          <p>{{ctrl.chart.pet.name}} ちゃん</p>
         </div>
       </div>
       <div class="row">
@@ -219,7 +223,7 @@
                           <span ng-if="ticket.state === 'DOING'" class="label label-success">診察中</span>
                           <span ng-if="ticket.state === 'PAYMENT'" class="label label-warning">会計待ち</span>
                           <span ng-if="ticket.state === 'COMPLETED'" class="label label-default">診察終了</span>
-                          <span ng-if="ticket.state === 'CANCEL'" class="label label-default">キャンセル/span>
+                          <span ng-if="ticket.state === 'CANCEL'" class="label label-default">キャンセル</span>
                         </td>
                         <td>
                           <span ng-if="!!ticket.diacrisis.name">{{ticket.diacrisis.name}}</span>
