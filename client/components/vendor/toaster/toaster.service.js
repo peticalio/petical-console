@@ -3,30 +3,18 @@
   'use strict';
 
   class ToasterService {
-    constructor($mdToast) {
-      this.toast = $mdToast;
+    constructor(toastr) {
+      this.toastr = toastr;
     }
 
     // インフォメッセージを出力する
     info(message) {
-      this.toast.show(
-        this.toast.simple()
-          .textContent(message)
-          .action('OK')
-          .position('bottom right')
-          .hideDelay(4000)
-      );
+      this.toastr.success(message);
     }
 
     // インフォメッセージを出力する
     error(message) {
-      this.toast.show(
-        this.toast.simple()
-          .textContent(message)
-          .action('OK')
-          .position('bottom right')
-          .hideDelay(4000)
-      );
+      this.toastr.error(message);
     }
 
     // 例外をハンドリングする
@@ -55,7 +43,7 @@
     }
   }
 
-  ToasterService.$inject = ['$mdToast'];
+  ToasterService.$inject = ['toastr'];
   angular.module('petz.vendor')
     .service('toaster', ToasterService);
 

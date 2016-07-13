@@ -13,19 +13,18 @@
 
   function StaffRouter($stateProvider){
     $stateProvider
-      .state('app.dashboard.staff', {
-        abstract: true,
-        url: '^/clinics/:clinicId/staffs'
-      })
       // スタッフ一覧
-      .state('app.dashboard.staff.list', {
-        url: '/list',
+      .state('app.dashboard.staff', {
+        url: '^/clinics/:clinicId/staffs',
         views: {
           '@app': {
             templateUrl:  'app/dashboard/staff/list/list.html',
             controller:   'StaffListController',
             controllerAs: 'ctrl'
           }
+        },
+        ncyBreadcrumb: {
+          label: 'スタッフ管理'
         },
         resolve: {
           staffs: getClinicStaffs
@@ -40,6 +39,9 @@
             controller:   'StaffFormController',
             controllerAs: 'ctrl'
           }
+        },
+        ncyBreadcrumb: {
+          label: 'スタッフを招待'
         }
       })
       // スタッフ詳細フォーム
@@ -51,6 +53,9 @@
             controller:   'StaffDetailController',
             controllerAs: 'ctrl'
           }
+        },
+        ncyBreadcrumb: {
+          label: 'スタッフ詳細'
         },
         resolve: {
           staff: getClinicStaff

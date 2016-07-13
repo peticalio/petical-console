@@ -2,43 +2,53 @@
   'use strict';
 
   class TicketDetailController {
-    constructor($scope, $state, $stateParams, toaster, dialog, ClinicTicket, ClinicTicketStatus, ClinicTicketExamination, ClinicTicketCertificate, ClinicTicketAttachment, ClinicTicketInvoice, clinic, ticket) {
-      this.$scope = $scope;
+    constructor($state, $stateParams, toaster, ClinicTicket, ClinicTicketStatus, TicketInspection, ClinicTicketCertificate, ClinicTicketAttachment, ClinicTicketInvoice, clinic, ticket, inspections, medicines, diagnosises) {
       this.$state = $state;
       this.$stateParams = $stateParams;
       this.toaster = toaster;
-      this.dialog = dialog;
+      this.clinic = clinic;
+      this.ticket = ticket;
+      this.total = 0;
+
+      this.medicines = medicines;
+      this.diagnosises = diagnosises;
       this.ClinicTicket = ClinicTicket;
       this.ClinicTicketStatus = ClinicTicketStatus;
-      this.ClinicTicketExamination = ClinicTicketExamination;
       this.ClinicTicketCertificate = ClinicTicketCertificate;
       this.ClinicTicketAttachment = ClinicTicketAttachment;
       this.ClinicTicketInvoice = ClinicTicketInvoice;
-      this.clinic = clinic;
-      this.ticket = ticket;
-      this.selected = this.getSelectedTabNo();
-    }
 
-    // ステートから選択されているタブ番号を取得する
-    getSelectedTabNo() {
-      var no = 0;
-      no = this.$state.includes('app.dashboard.ticket.detail.examination') ? 1 : no;
-      no = this.$state.includes('app.dashboard.ticket.detail.certificate') ? 2 : no;
-      no = this.$state.includes('app.dashboard.ticket.detail.attachment') ? 3 : no;
-      no = this.$state.includes('app.dashboard.ticket.detail.invoice') ? 4 : no;
-      return no;
-    }
-
-    // ステータスを受付済みにする
-    receipt(ticket) {
-      this.ClinicTicketStatus.signal({clinicId: this.clinic.id, ticketId: ticket.id}, {}).$promise
+      // 検査
+      this.inspection = {quantity:1};
+      this.inspections = inspections;
+      this.TicketInspection = TicketInspection;
+      this.TicketInspection.query({clinicId:this.clinic.id, ticketId:this.ticket.id}).$promise
         .then((response) => {
-          this.toaster.info('ステータスを「受付済み」に変更しました。');
-          this.ticket = response;
+          this.ticketInspections = response;
+          this.ticketInspections.forEach((element) => this.total += element.subtotal);
+        });
+    }
+
+    // 稟告や診断結果を保存する
+    save(ticket) {
+      this.ClinicTicket.update({clinicId: ticket.clinic.id, ticketId: ticket.id}, ticket).$promise
+        .then(() => this.toaster.info('チケットに情報を保存しました。'));
+    }
+
+    // 検査情報を保存する
+    saveTicketInspection(inspection) {
+      inspection.ticket = this.ticket;
+      this.TicketInspection.save({clinicId: this.clinic.id, ticketId: this.ticket.id}, inspection).$promise
+        .then((response) => {
+          this.ticketInspections.push(response.data);
+          this.total += response.data.subtotal;
+          this.inspection = {quantity:1};
+          this.toaster.info('チケットに実施した検査情報を追加しました。');
         });
     }
 
     // ステータスをキャンセルにする
+    // @deprecated
     delete(event, ticket) {
       this.dialog.delete(event, ticket)
         .then(() => {
@@ -53,20 +63,6 @@
     }
 
     ////////////////////////////// 添付
-
-    // チケットの添付ファイルを取得する
-    getAttachments() {
-      this.$scope.$watch('file', function(file) {
-        if (file) {
-          this.$scope.upload(file);
-        }
-      });
-
-      TicketAttachment.fetch({clinicId:$stateParams.clinicId, ticketId:$stateParams.ticketId}).$promise
-        .then(function(response) {
-          _this.attachments = response.data;
-        });
-    }
 
     // $scope.upload = function(file) {
     //   // TODO リファクタリングした方がよさそう
@@ -83,39 +79,9 @@
     //     Notify.error('添付ファイルがアップロードできませんでした。');
     //   })
     // };
-
-    removeAttachment(attachment) {
-      TicketAttachment.remove({clinicId:$stateParams.clinicId, ticketId:$stateParams.ticketId, attachmentId:attachment.id}).$promise
-        .then(function() {
-          _this.attachments.some(function(v, i) {
-            if (v.id === attachment.id) {
-              _this.attachments.splice(i, 1);
-            }
-          });
-          Notify.success('添付ファイルを削除しました。');
-        });
-    }
-
-    ////////////////////////////// 請求書
-
-    getInvoices() {
-      ClinicTicketInvoice.query({clinicId:$stateParams.clinicId, ticketId:$stateParams.ticketId}).$promise
-        .then(function(response) {
-          _this.invoices = response;
-        });
-    }
-
-    removeInvoice(invoice) {
-      ClinicTicketInvoice.remove({clinicId:$stateParams.clinicId, ticketId:$stateParams.ticketId, invoiceId:invoice.id}).$promise
-        .then(function(response) {
-          invoice.removed = true;
-          _this.ticket.state = 'DOING';
-          Notify.success('新しく請求書を作成して、お会計を完了させてください。', '請求書を削除しました。');
-        });
-    }
   }
 
-  TicketDetailController.$inject = ['$scope', '$state', '$stateParams', 'toaster', 'dialog', 'ClinicTicket', 'ClinicTicketStatus', 'ClinicTicketExamination', 'ClinicTicketCertificate', 'ClinicTicketAttachment', 'ClinicTicketInvoice', 'clinic', 'ticket'];
+  TicketDetailController.$inject = ['$state', '$stateParams', 'toaster', 'ClinicTicket', 'ClinicTicketStatus', 'TicketInspection', 'ClinicTicketCertificate', 'ClinicTicketAttachment', 'ClinicTicketInvoice', 'clinic', 'ticket', 'inspections', 'medicines', 'diagnosises'];
   angular.module('petzApp')
     .controller('TicketDetailController', TicketDetailController);
 

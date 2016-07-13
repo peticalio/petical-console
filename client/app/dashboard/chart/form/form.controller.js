@@ -14,77 +14,68 @@
       this.bloods = bloods;
       this.tags = tags;
       this.chart = chart;
-      this.sexes = [{name:'不明', value:''}, {name:'オス', value:'MALE'}, {name:'メス', value:'FEMALE'}];
-      this.neutrals = [{name:'していない', value:false}, {name:'済み', value:true}];
-      this.deads = [{name:'生存', value:false}, {name:'死亡', value:true}];
+      this.sexes = ['不明', 'オス', 'メス'];
+      this.neutrals = ['去勢・避妊手術済み', '去勢・避妊手術していない'];
+      this.deads = ['生存している', '死亡している'];
       this.today = new Date();
-    }
-
-    // 種類を取得する（オートコンプリート用）
-    getKinds(text) {
-      return this.kinds.filter((item) => {
-        return (item.indexOf(text) >= 0) ? true : false;
-      });
-    }
-
-    // 品種を取得する（オートコンプリート用）
-    getTypes(text) {
-      return this.types.filter((item) => {
-        return (item.indexOf(text) >= 0) ? true : false;
-      });
-    }
-
-    // 毛色を取得する（オートコンプリート用）
-    getColors(text) {
-      return this.colors.filter((item) => {
-        return (item.indexOf(text) >= 0) ? true : false;
-      });
-    }
-
-    // 血液型を取得する（オートコンプリート用）
-    getBloods(text) {
-      return this.bloods.filter((item) => {
-        return (item.indexOf(text) >= 0) ? true : false;
-      });
     }
 
     // カルテを登録する
     save(chart) {
-      this.supportAutocomplete(chart);
       chart.clinic = this.clinic;
-      return this.ClinicChart.save({clinicId: this.$stateParams.clinicId}, chart).$promise
+      chart.pet.sex = this.resolveSex(chart.pet.sex);
+      chart.pet.neutral = this.resolveNeutralFlag(chart.pet.neutral);
+      chart.pet.dead = this.resolveDeadFlag(chart.pet.dead);
+      return this.ClinicChart.save({clinicId: this.clinic.id}, chart).$promise
         .then((response) => {
           this.toaster.info('新しくカルテを作成しました。');
-          this.$state.go('app.dashboard.chart.detail', {clinicId: this.$stateParams.clinicId, customerId: this.$stateParams.customerId, chartId: response.data.id});
+          this.$state.go('app.dashboard.chart.detail', {clinicId: this.clinic.id, customerId: this.$stateParams.customerId, chartId: response.data.id});
           return response.$promise;
         });
     }
 
     // カルテを保存する
     update(chart) {
-      this.supportAutocomplete(chart);
       chart.clinic = this.clinic;
-      return this.ClinicChart.update({clinicId: this.$stateParams.clinicId, chartId: chart.id}, chart).$promise
+      chart.pet.sex = this.resolveSex(chart.pet.sex);
+      chart.pet.neutral = this.resolveNeutralFlag(chart.pet.neutral);
+      chart.pet.dead = this.resolveDeadFlag(chart.pet.dead);
+      return this.ClinicChart.update({clinicId: this.clinic.id, chartId: chart.id}, chart).$promise
         .then((response) => {
           this.toaster.info('カルテを保存しました。');
-          this.$state.go('app.dashboard.chart.detail', {clinicId: this.$stateParams.clinicId, customerId: this.$stateParams.customerId, chartId: response.data.id});
+          this.$state.go('app.dashboard.chart.detail', {clinicId: this.clinic.id, customerId: this.$stateParams.customerId, chartId: response.data.id});
           return response.$promise;
         });
     }
 
-    // FIXME md-autocompleteにバグがあるため
-    supportAutocomplete(chart) {
-      if (angular.isDefined(this.kindText)) {
-        chart.pet.kind = this.kindText;
+    resolveSex(value) {
+      switch (value) {
+        case 'オス':
+          return 'MALE';
+        case 'メス':
+          return 'FEMALE';
+        default:
+          return null;
       }
-      if (angular.isDefined(this.typeText)) {
-        chart.pet.type = this.typeText;
+    }
+    resolveNeutralFlag(value) {
+      switch (value) {
+        case '去勢・避妊手術していない':
+          return false;
+        case '去勢・避妊手術済み':
+          return true;
+        default:
+          return null;
       }
-      if (angular.isDefined(this.colorText)) {
-        chart.pet.color = this.colorText;
-      }
-      if (angular.isDefined(this.bloodText)) {
-        chart.pet.blood = this.bloodText;
+    }
+    resolveDeadFlag(value) {
+      switch (value) {
+        case '生存している':
+          return false;
+        case '死亡している':
+          return true;
+        default:
+          return null;
       }
     }
   }

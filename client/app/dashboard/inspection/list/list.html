@@ -1,0 +1,85 @@
+<div class="container-fluid">
+  <div class="page-header-content">
+    <div class="heading-elements hide-xs">
+      <a class="btn btn-link lnk-submenu" ui-sref="app.dashboard.inspection.form">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        <p>追加する</p>
+      </a>
+      <a class="btn btn-link lnk-submenu" ng-click="ctrl.refresh()">
+        <i class="fa fa-refresh" aria-hidden="true"></i>
+        <p>更新する</p>
+      </a>
+		</div>
+    <div class="page-title">
+      <h4>管理 - 診察料金管理</h4>
+      <ul class="breadcrumb breadcrumb-caret small" ncy-breadcrumb></ul>
+    </div>
+  </div>
+  <section class="panel">
+    <div class="panel-body">
+      <form class="col-sm-6 col-md-4 mb2 pl0">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-search"></i></span>
+          <input type="text" class="form-control" ng-model="ctrl.keyword" placeholder="検索キーワードを入力" />
+        </div>
+      </form>
+      <div class="table-responsive">
+        <table class="table table-hover table-clickable table-sortable table-middle">
+          <thead>
+            <tr>
+              <th>
+                <a ng-click="ctrl.sort('course')">科目</a>
+                <i class="fa ml" ng-show="ctrl.order=='course'" ng-class="{'fa-caret-up':ctrl.reverse, 'fa-caret-down':!ctrl.reverse}"></i>
+              </th>
+              <th>
+                <a ng-click="ctrl.sort('category')">分類</a>
+                <i class="fa ml" ng-show="ctrl.order=='category'" ng-class="{'fa-caret-up':ctrl.reverse, 'fa-caret-down':!ctrl.reverse}"></i>
+              </th>
+              <th>
+                <a ng-click="ctrl.sort('name')">診察料金名</a>
+                <i class="fa ml" ng-show="ctrl.order=='name'" ng-class="{'fa-caret-up':ctrl.reverse, 'fa-caret-down':!ctrl.reverse}"></i>
+              </th>
+              <th>
+                <a ng-click="ctrl.sort('price')">単価</a>
+                <i class="fa ml" ng-show="ctrl.order=='price'" ng-class="{'fa-caret-up':ctrl.reverse, 'fa-caret-down':!ctrl.reverse}"></i>
+              </th>
+              <th>
+                税区分
+              </th>
+              <th>
+                <a ng-click="ctrl.sort('lastModifiedDate')">最終更新日時</a>
+                <i class="fa ml" ng-show="ctrl.order=='lastModifiedDate'" ng-class="{'fa-caret-up':ctrl.reverse, 'fa-caret-down':!ctrl.reverse}"></i>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr dir-paginate="inspection in ctrl.inspections | filter:ctrl.keyword | orderBy:ctrl.order:ctrl.reverse | itemsPerPage:20" ui-sref="app.dashboard.inspection.detail({inspectionId: inspection.id})">
+              <td class="col-sm-1">
+                {{inspection.course}}
+              </td>
+              <td class="col-sm-2">
+                {{inspection.category}}
+              </td>
+              <td class="col-sm-4">
+                {{inspection.name}}
+              </td>
+              <td class="col-sm-2">
+                {{inspection.price | currency:'¥ ':0}}
+              </td>
+              <td class="col-sm-1">
+                <span class="label label-default" ng-if="inspection.taxType === 'EXCLUSIVE'">外税</span>
+                <span class="label label-warning" ng-if="inspection.taxType !== 'EXCLUSIVE'">内税</span>
+              </td>
+              <td class="col-sm-2">
+                {{inspection.lastModifiedDate | date:'yyyy/MM/dd HH:mm'}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="text-center m0">
+        <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true"></dir-pagination-controls>
+      </div>
+    </div>
+  </section>
+</div>

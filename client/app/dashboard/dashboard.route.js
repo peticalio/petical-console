@@ -28,6 +28,9 @@
             controllerAs: 'ctrl'
           }
         },
+        ncyBreadcrumb: {
+          label: 'ダッシュボード'
+        },
         resolve: {
           clinics:        getClinics,
           clinic:         getClinic

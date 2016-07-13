@@ -28,7 +28,7 @@
     imp(token) {
       this.ClinicUser.imp({clinicId: this.$stateParams.clinicId}, token).$promise
         .then(() => this.ClinicCustomer.fetch({clinicId: this.$stateParams.clinicId}).$promise)
-        .then(() => this.$state.go('app.dashboard.customer.list', {}, {reload:true}));
+        .then(() => this.$state.go('app.dashboard.customer', {}, {reload:true}));
     }
   }
 

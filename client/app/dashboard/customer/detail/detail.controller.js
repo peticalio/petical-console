@@ -29,7 +29,7 @@
           return this.ClinicCustomer.fetch({clinicId: this.$stateParams.clinicId}).$promise;
         })
         .then(() => {
-          this.$state.go('app.dashboard.customer.list');
+          this.$state.go('app.dashboard.customer');
         });
     }
 

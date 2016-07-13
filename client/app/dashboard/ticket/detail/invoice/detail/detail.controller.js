@@ -2,9 +2,8 @@
   'use strict';
 
   class TicketDetailInvoiceDetailController {
-    constructor($state, $mdDialog, dialog, toaster, ClinicTicketInvoice, ClinicInvoice, clinic, ticket, invoice, examinations) {
+    constructor($state, dialog, toaster, ClinicTicketInvoice, ClinicInvoice, clinic, ticket, invoice, examinations) {
       this.$state = $state;
-      this.$mdDialog = $mdDialog;
       this.dialog = dialog;
       this.toaster = toaster;
       this.ClinicTicketInvoice = ClinicTicketInvoice;
@@ -44,7 +43,7 @@
     }
   }
 
-  TicketDetailInvoiceDetailController.$inject = ['$state', '$mdDialog', 'dialog', 'toaster', 'ClinicTicketInvoice', 'ClinicInvoice', 'clinic', 'ticket', 'invoice', 'examinations'];
+  TicketDetailInvoiceDetailController.$inject = ['$state', 'dialog', 'toaster', 'ClinicTicketInvoice', 'ClinicInvoice', 'clinic', 'ticket', 'invoice', 'examinations'];
   angular.module('petzApp')
     .controller('TicketDetailInvoiceDetailController', TicketDetailInvoiceDetailController);
 

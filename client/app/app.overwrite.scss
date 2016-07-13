@@ -63,11 +63,13 @@ form .hint {
   transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
   color: grey;
 }
-label {
+
+md-input-container label {
   font-weight: inherit;
   font-size: 16px;
   margin: 0;
 }
+
 input, textarea {
   font-size: 16px;
 }
@@ -162,53 +164,6 @@ a {
 }
 .cal-day-today {
   background: #c5e1a5;
-}
-
-// overwrite bootstrap
-.img-circle {
-  width: 32px;
-}
-
-.label-default {
-  @extend .label-primary;
-  background-color: #999999;
-  border: 1px solid #999999;
-}
-.label-default-outline {
-  @extend .label-default;
-  background-color: #fff;
-  color: #999999;
-  border: 1px solid #999999;
-}
-.label-primary-outline {
-  @extend .label-primary;
-  background-color: #fff;
-  color: $brand-primary;
-  border: 1px solid $brand-primary;
-}
-.label-success-outline {
-  @extend .label-success;
-  background-color: #fff;
-  color: $brand-success;
-  border: 1px solid $brand-success;
-}
-.label-info-outline {
-  @extend .label-info;
-  background-color: #fff;
-  color: $brand-info;
-  border: 1px solid $brand-info;
-}
-.label-warning-outline {
-  @extend .label-warning;
-  background-color: #fff;
-  color: $brand-warning;
-  border: 1px solid $brand-warning;
-}
-.label-danger-outline {
-  @extend .label-danger;
-  background-color: #fff;
-  color: $brand-danger;
-  border: 1px solid $brand-danger;
 }
 
 // handsontable bug fix style

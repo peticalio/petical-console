@@ -1,50 +1,52 @@
-<div class="layout-max-width">
-  <md-toolbar md-theme="content" class="pt">
-    <div class="md-toolbar-tools">
-      <h1 class="md-title">パスワード変更</h1>
+<div class="container-fluid">
+  <div class="page-header-content">
+    <div class="heading-elements hide-xs">
+      <a class="btn btn-link lnk-submenu" ui-sref="app.main">
+        <i class="fa fa-home" aria-hidden="true"></i>
+        <p>ホーム</p>
+      </a>
+		</div>
+    <div class="page-title">
+      <h4>パスワード変更</h4>
+      <ul class="breadcrumb breadcrumb-caret small" ncy-breadcrumb></ul>
     </div>
-  </md-toolbar>
-  <div layout-padding>
-    <div class="flat-card">
-      <form name="form" role="form" novalidate>
-        <div layout="row" layout-wrap>
-          <md-input-container class="md-icon-float md-block" flex="50" flex-xs="100">
-            <label>現在のパスワード</label>
-            <input name="oldPassword" type="password" ng-model="ctrl.account.oldPassword" ng-required="true" ng-minlength="5" ng-maxlength="100">
-            <div ng-show="form.oldPassword.$invalid" ng-messages="form.oldPassword.$error">
-              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-                <span>5 文字以上 100 文字以内の半角英数字記号で現在のパスワードを入力してください。</span>
-              </div>
-            </div>
-          </md-input-container>
-          <div flex="50" hide-xs></div>
-          <md-input-container class="md-icon-float md-block" flex="50" flex-xs="100">
-            <label>新しいパスワード</label>
-            <input name="newPassword" type="password" class="inspectletIgnore" ng-model="ctrl.account.newPassword" ng-required="true" ng-minlength="5" ng-maxlength="100">
-            <div ng-show="form.newPassword.$invalid" ng-messages="form.newPassword.$error">
-              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-                <span>5 文字以上 100 文字以内の半角英数字記号で新しいパスワードを入力してください。</span>
-              </div>
-            </div>
-            <password-strength-bar password-to-check="ctrl.account.newPassword"></password-strength-bar>
-          </md-input-container>
-          <div flex="50" hide-xs></div>
-          <md-input-container class="md-icon-float md-block" flex="50" flex-xs="100">
-            <label>パスワード（確認のためもう一度入力してください）</label>
-            <input id="confirm" name="confirm" type="password" class="inspectletIgnore" ng-model="ctrl.confirm" ng-required="true" ui-validate="{same : '$value === ctrl.account.newPassword'}">
-            <div ng-show="form.confirm.$invalid" ng-messages="form.confirm.$error">
-              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern', 'same']">
-                <span>新しいパスワードに入力した値と異なっています。</span>
-              </div>
-            </div>
-          </md-input-container>
-          <div flex="50" hide-xs></div>
+  </div>
+  <section class="container panel">
+    <div class="panel-body">
+      <form name="form">
+        <div class="row">
+          <div class="col-sm-12 col-lg-6">
+            <ptc-input type="password" form="form" name="oldPassword" label="現在のパスワード" model="ctrl.account.oldPassword" maxlength="100" required="true" pattern="^[a-zA-Z0-9!-/:-@¥[-`{-~]+$" message="100 文字以内の半角英数字記号で新しいパスワードを入力してください。"></ptc-input>
+          </div>
         </div>
-        <div layout="row" layout-align="end center">
-          <md-button class="md-primary md-raised" ng-disabled="form.$invalid" ng-click="ctrl.update(ctrl.account)">変更する</md-button>
-          <md-button class="md-link" ui-sref="app.main">キャンセル</md-button>
+        <div class="row">
+          <div class="col-sm-12 col-lg-6">
+            <ptc-input type="password" form="form" name="newPassword" label="新しいパスワード" model="ctrl.account.newPassword" minlength="6" maxlength="100" required="true" pattern="^[a-zA-Z0-9!-/:-@¥[-`{-~]+$" message="6 文字以上 100 文字以内の半角英数字記号で新しいパスワードを入力してください。"></ptc-input>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-lg-6">
+            <div class="form-group" ng-class="{'has-error': form.confirm.$invalid}">
+              <label for="{{$ctrl.name}}">
+                <span>パスワード（確認のためもう一度入力してください）</span>
+                <span class="label label-required">必須</span>
+              </label>
+              <input type="password" name="confirm" ng-model="ctrl.confirm" maxlength="100" ng-minlength="6" ng-maxlength="100" ng-required="true" ui-validate="{same:'$value === ctrl.account.newPassword'}" class="form-control" placeholder="確認のためもう一度入力してください。" />
+              <div class="form-error" ng-show="form.confirm.$invalid" ng-messages="form.confirm.$error">
+                <div ng-message-exp="['required', 'minlength', 'maxlength', 'min', 'max' 'pattern', 'same']">
+                  <span>新しいパスワードに入力した値と異なっています。</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 text-right">
+            <button class="btn btn-primary" ng-disabled="form.$invalid" ng-click="ctrl.update(ctrl.account)">保存する</button>
+            <button class="btn btn-link" ui-sref="app.main">キャンセル</button>
+          </div>
         </div>
       </form>
     </div>
-  </div>
+  </section>
 </div>

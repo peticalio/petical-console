@@ -1,0 +1,19 @@
+<div class="pull-right hide-xs">
+  <img gravatar-src-once="$ctrl.ticket.chart.customer.user.login" class="img-circle ml" style="width:32px;"/>
+</div>
+<div>
+  <p class="text-overflow">
+    <i class="fa fa-arrow-up mr text-primary"></i>
+    <strong>{{$ctrl.ticket.startDateTime | date:'HH:mm'}} - {{$ctrl.ticket.endDateTime | date:'HH:mm'}}</strong>
+  </p>
+  <p><a ui-sref="app.dashboard.ticket.detail({{$ctrl.params}})">{{$ctrl.ticket.chart.customer.user.lastName}}{{$ctrl.ticket.chart.customer.user.firstName}}様（{{$ctrl.ticket.chart.pet.name}}ちゃん）</a></p>
+  <p>
+    <span ng-if="$ctrl.ticket.state === 'RESERVED'" class="label label-info hide-xs">予約済み</span>
+    <span ng-if="$ctrl.ticket.state === 'RECEIPTED'" class="label label-info-outline hide-xs">受付済み</span>
+    <span ng-if="$ctrl.ticket.state === 'DOING'" class="label label-success hide-xs">診察中</span>
+    <span ng-if="$ctrl.ticket.state === 'PAYMENT'" class="label label-warning hide-xs">会計待ち</span>
+    <span ng-if="$ctrl.ticket.state === 'COMPLETED'" class="label label-default hide-xs">診察終了</span>
+    <span ng-if="$ctrl.ticket.state === 'CANCEL'" class="label label-default hide-xs">キャンセル/span>
+    <span class="label label-default-outline hide-xs hide-sm">{{$ctrl.ticket.chart.pet.type}}</span>
+  </p>
+</div>

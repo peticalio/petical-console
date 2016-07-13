@@ -1,40 +1,32 @@
-<div class="layout-max-width">
-  <section>
-    <md-toolbar md-theme="content" class="pt">
-      <div class="md-toolbar-tools">
-        <h2 class="md-title">
-          招待状を承認する
-          <span class="hint--large hint--bounce hint--rounded clickable" data-hint="招待状を承認すると、招待されているクリニックのダッシュボードにアクセスできるようになります。招待状を受け取るには、そのクリニックの運営者に招待状を送信してもらう必要があります。">
-            <md-icon class="material-icons small">help</md-icon>
-          </span>
-        </h2>
-        <span flex></span>
-        <md-button class="md-icon-button" ui-sref="app.main.invitation.list">
-          <md-tooltip>一覧</md-tooltip>
-          <md-icon class="material-icons">list</md-icon>
-        </md-button>
-      </div>
-    </md-toolbar>
-    <div layout-padding>
-      <div class="flat-card">
-        <form name="form" role="form" novalidate>
-          <div layout="row" layout-wrap>
-            <md-input-container class="md-block" flex="100">
-              <label>アクティベーションキー</label>
-              <input name="activationKey" ng-model="ctrl.activation.activationKey" maxlength="50" ng-required="true" ng-maxlength="50"/>
-              <div ng-if="form.activationKey.$invalid" ng-messages="form.activationKey.$error">
-                <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-                  <span>受け取ったメールに記載されているキーを入力してください。</span>
-                </div>
-              </div>
-            </md-input-container>
+<div class="container-fluid">
+  <div class="page-header-content">
+    <div class="heading-elements hide-xs">
+		</div>
+    <div class="page-title">
+      <h4>
+        招待状のアクティベーション
+        <span class="hint--large hint--bounce hint--rounded clickable" data-hint="送信されてきたメールに記載されているアクティベーションキーを入力して、招待を受けている動物病院にアクセスできるようにしましょう。">
+          <md-icon class="material-icons small">help</md-icon>
+        </span>
+      </h4>
+      <ul class="breadcrumb breadcrumb-caret small" ncy-breadcrumb></ul>
+    </div>
+  </div>
+  <section class="container panel">
+    <div class="panel-body">
+      <form name="form">
+        <div class="row">
+          <div class="col-sm-12 col-lg-6">
+            <ptc-input form="form" name="activationKey" label="アクティベーションキー" model="ctrl.activation.activationKey" maxlength="50" required="true" pattern="^[a-zA-Z0-9]+$" message="受け取ったメールに記載されているキーを入力してください。"></ptc-input>
           </div>
-          <div layout="row" layout-align="end center">
-            <md-button class="md-primary md-raised" ng-disabled="form.$invalid" ng-click="ctrl.accept(ctrl.activation)">承認する</md-button>
-            <md-button class="md-link" ui-sref="app.main.invitation.list">キャンセル</md-button>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 text-right">
+            <button class="btn btn-primary" ng-disabled="form.$invalid" ng-click="ctrl.accept(ctrl.activation)">承認する</button>
+            <button class="btn btn-link" ui-sref="app.main.invitation">キャンセル</button>
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   </section>
 </div>

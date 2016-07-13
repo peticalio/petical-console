@@ -13,13 +13,14 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(client) app/vendor.css -->
       <!-- bower:css -->
-      <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
-      <link rel="stylesheet" href="bower_components/angular-material-data-table/dist/md-data-table.css" />
       <link rel="stylesheet" href="bower_components/angular-bootstrap-calendar/dist/css/angular-bootstrap-calendar.css" />
       <link rel="stylesheet" href="bower_components/nvd3/build/nv.d3.css" />
+      <link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.css" />
       <link rel="stylesheet" href="bower_components/hint.css/hint.min.css" />
       <link rel="stylesheet" href="bower_components/pikaday/css/pikaday.css" />
       <link rel="stylesheet" href="bower_components/handsontable/dist/handsontable.css" />
+      <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.css" />
+      <link rel="stylesheet" href="bower_components/nya-bootstrap-select/dist/css/nya-bs-select.css" />
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
@@ -32,13 +33,13 @@
     <link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/notosansjapanese.css"/>
     <script src="//www.google.com/recaptcha/api.js?render=explicit&onload=vcRecaptchaApiLoaded" async defer></script>
   </head>
-  <body ng-app="petzApp">
+  <body id="app">
     <!--[if lt IE 7]>
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="main" ui-view layout="row" flex></div>
+    <div class="main" ui-view ng-app="petzApp"></div>
 
     <!-- Google Analytics -->
     <script>
@@ -62,22 +63,6 @@
     </script>
     <!-- End Inspectlet Embed Code -->
 
-    <!-- Ptengine -->
-    <script type="text/javascript">
-    	  window._pt_lt = new Date().getTime();
-    	  window._pt_sp_2 = [];
-    	  _pt_sp_2.push('setAccount,3885a307');
-    	  var _protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-    	  (function() {
-    		var atag = document.createElement('script'); atag.type = 'text/javascript'; atag.async = true;
-    		atag.src = _protocol + 'js.ptengine.jp/pta.js';
-    		var stag = document.createElement('script'); stag.type = 'text/javascript'; stag.async = true;
-    		stag.src = _protocol + 'js.ptengine.jp/pts.js';
-    		var s = document.getElementsByTagName('script')[0];
-    		s.parentNode.insertBefore(atag, s);s.parentNode.insertBefore(stag, s);
-    	  })();
-    </script>
-
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
     <script src="bower_components/json3/lib/json3.min.js"></script>
@@ -92,11 +77,6 @@
       <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
       <script src="bower_components/lodash/dist/lodash.compat.js"></script>
       <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-      <script src="bower_components/angular-animate/angular-animate.js"></script>
-      <script src="bower_components/angular-aria/angular-aria.js"></script>
-      <script src="bower_components/angular-messages/angular-messages.js"></script>
-      <script src="bower_components/angular-material/angular-material.js"></script>
-      <script src="bower_components/angular-material-data-table/dist/md-data-table.js"></script>
       <script src="bower_components/angular-ui-validate/dist/validate.js"></script>
       <script src="bower_components/angular-gravatar/build/angular-gravatar.js"></script>
       <script src="bower_components/moment/moment.js"></script>
@@ -105,13 +85,21 @@
       <script src="bower_components/d3/d3.js"></script>
       <script src="bower_components/nvd3/build/nv.d3.js"></script>
       <script src="bower_components/angular-nvd3/dist/angular-nvd3.js"></script>
+      <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
       <script src="bower_components/zeroclipboard/dist/ZeroClipboard.js"></script>
       <script src="bower_components/pikaday/pikaday.js"></script>
       <script src="bower_components/handsontable/dist/handsontable.js"></script>
       <script src="bower_components/ngHandsontable/dist/ngHandsontable.js"></script>
       <script src="bower_components/immutable/dist/immutable.js"></script>
       <script src="bower_components/angular-recaptcha/release/angular-recaptcha.js"></script>
+      <script src="bower_components/angular-ui-select/dist/select.js"></script>
+      <script src="bower_components/angularUtils-pagination/dirPagination.js"></script>
+      <script src="bower_components/jquery-ui/jquery-ui.js"></script>
+      <script src="bower_components/angular-ui-sortable/sortable.js"></script>
+      <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
+      <script src="bower_components/nya-bootstrap-select/dist/js/nya-bs-select.js"></script>
       <!-- endbower -->
+      <script src="bower_components/angular-breadcrumb/release/angular-breadcrumb.min.js"></script>
     <!-- endbuild -->
     <!-- build:js(.tmp) app/app.js -->
       <script src="app/app.js"></script>
@@ -127,8 +115,6 @@
       <script src="app/dashboard/calendar/calendar.route.js"></script>
       <script src="app/dashboard/chart/chart.route.js"></script>
       <script src="app/dashboard/chart/detail/detail.controller.js"></script>
-      <script src="app/dashboard/chart/detail/reservation/reservation.controller.js"></script>
-      <script src="app/dashboard/chart/detail/ticket/ticket.controller.js"></script>
       <script src="app/dashboard/chart/form/form.controller.js"></script>
       <script src="app/dashboard/chart/list/list.controller.js"></script>
       <script src="app/dashboard/chart/upload/upload.controller.js"></script>
@@ -140,10 +126,10 @@
       <script src="app/dashboard/customer/upload/upload.controller.js"></script>
       <script src="app/dashboard/dashboard.controller.js"></script>
       <script src="app/dashboard/dashboard.route.js"></script>
-      <script src="app/dashboard/product/detail/detail.controller.js"></script>
-      <script src="app/dashboard/product/form/form.controller.js"></script>
-      <script src="app/dashboard/product/list/list.controller.js"></script>
-      <script src="app/dashboard/product/product.route.js"></script>
+      <script src="app/dashboard/inspection/detail/detail.controller.js"></script>
+      <script src="app/dashboard/inspection/form/form.controller.js"></script>
+      <script src="app/dashboard/inspection/inspection.route.js"></script>
+      <script src="app/dashboard/inspection/list/list.controller.js"></script>
       <script src="app/dashboard/staff/detail/detail.controller.js"></script>
       <script src="app/dashboard/staff/form/form.controller.js"></script>
       <script src="app/dashboard/staff/list/list.controller.js"></script>
@@ -211,7 +197,11 @@
       <script src="components/api/clinic/ticket/summary/ClinicTicketSummary.service.js"></script>
       <script src="components/api/clinic/user/ClinicUser.service.js"></script>
       <script src="components/api/clinic/vaccine/ClinicVaccine.service.js"></script>
+      <script src="components/api/clinics/inspections/ClinicInspection.service.js"></script>
+      <script src="components/api/clinics/medicines/ClinicMedicine.service.js"></script>
+      <script src="components/api/clinics/tickets/inspections/TicketInspection.service.js"></script>
       <script src="components/api/color/color.service.js"></script>
+      <script src="components/api/diagnosises/Diagnosis.service.js"></script>
       <script src="components/api/kind/kind.service.js"></script>
       <script src="components/api/me/clinic/MyClinic.service.js"></script>
       <script src="components/api/me/invitation/MyInvitation.service.js"></script>
@@ -223,7 +213,15 @@
       <script src="components/api/tag/tag.service.js"></script>
       <script src="components/api/type/type.service.js"></script>
       <script src="components/api/user/pet/UserPet.service.js"></script>
+      <script src="components/common/ptc-diagnosis/ptc-diagnosis.controller.js"></script>
+      <script src="components/common/ptc-input-select/ptc-input-select.controller.js"></script>
+      <script src="components/common/ptc-input/ptc-input.controller.js"></script>
+      <script src="components/common/ptc-inspections/ptc-inspections.controller.js"></script>
+      <script src="components/common/ptc-medicines/ptc-medicines.controller.js"></script>
       <script src="components/common/ptc-progressbar/ptc-progressbar.controller.js"></script>
+      <script src="components/common/ptc-select/ptc-select.controller.js"></script>
+      <script src="components/common/ptc-textarea/ptc-textarea.controller.js"></script>
+      <script src="components/common/ptc-ticket/ptc-ticket.controller.js"></script>
       <script src="components/common/ptz-ticket-status/ptz-ticket-status.controller.js"></script>
       <script src="components/common/util.service.js"></script>
       <script src="components/common/validator/factory/Factory.service.js"></script>

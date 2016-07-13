@@ -11,10 +11,10 @@
 
     // クリニックへの招待を承認する
     accept(activation) {
-      this.MyInvitation.save({invitationId: this.params.invitationId}, activation).$promise
+      this.MyInvitation.save({invitationId:this.params.invitationId}, activation).$promise
         .then(() => {
-          this.toaster.info('招待状を承認しました。');
-          this.state.go('app.main');
+          this.toaster.info('招待をアクティベートしました。');
+          this.state.go('app.main', {}, {reload:true});
         });
     }
   }

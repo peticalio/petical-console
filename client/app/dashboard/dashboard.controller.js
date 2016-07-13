@@ -130,7 +130,7 @@
       return {
         chart: {
           type: 'multiChart',
-          height: 300,
+          height: 250,
           useInteractiveGuideline: true,
           margin : {top: 16, right: 40, bottom: 24, left: 40},
           xAxis: {

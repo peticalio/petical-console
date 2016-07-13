@@ -28,19 +28,18 @@
 
   function RouteConfig($stateProvider){
     $stateProvider
-      .state('app.dashboard.customer', {
-        abstract: true,
-        url: '^/clinics/:clinicId/customers',
-      })
       // 飼い主一覧
-      .state('app.dashboard.customer.list', {
-        url: '/list',
+      .state('app.dashboard.customer', {
+        url: '^/clinics/:clinicId/customers',
         views: {
           '@app': {
             templateUrl:  'app/dashboard/customer/list/list.html',
             controller:   'CustomerListController',
             controllerAs: 'ctrl'
           }
+        },
+        ncyBreadcrumb: {
+          label: '飼い主検索'
         },
         resolve: {
           customers:      getCustomers
@@ -56,6 +55,9 @@
             controllerAs: 'ctrl'
           }
         },
+        ncyBreadcrumb: {
+          label: '飼い主新規登録'
+        },
         resolve: {
           customer:       getEmpty
         }
@@ -69,6 +71,9 @@
             controller:   'CustomerImportController',
             controllerAs: 'ctrl'
           }
+        },
+        ncyBreadcrumb: {
+          label: '飼い主インポート'
         }
       })
       // 飼い主アップロード
@@ -80,6 +85,9 @@
             controller:   'CustomerUploadController',
             controllerAs: 'ctrl'
           }
+        },
+        ncyBreadcrumb: {
+          label: '飼い主一括登録'
         }
       })
       // 飼い主変更
@@ -91,6 +99,9 @@
             controller:   'CustomerFormController',
             controllerAs: 'ctrl'
           }
+        },
+        ncyBreadcrumb: {
+          label: '飼い主更新'
         },
         resolve: {
           customer:       getCustomer
@@ -105,6 +116,9 @@
             controller:   'CustomerDetailController',
             controllerAs: 'ctrl'
           }
+        },
+        ncyBreadcrumb: {
+          label: '飼い主詳細'
         },
         resolve: {
           customer:       getCustomer,
