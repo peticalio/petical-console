@@ -2,13 +2,11 @@
   'use strict';
 
   class AppController {
-    constructor($scope, $state, $timeout, $window, $mdMedia, $mdSidenav, Auth) {
+    constructor($scope, $state, $timeout, $window, Auth) {
       this.$scope = $scope;
       this.$state = $state;
       this.$timeout = $timeout;
       this.$window = $window;
-      this.$mdMedia = $mdMedia;
-      this.$mdSidenav = $mdSidenav;
       this.Auth = Auth;
       this.account = Auth.getCurrentUser();
     }
@@ -93,7 +91,7 @@
     // }
   }
 
-  AppController.$inject = ['$scope', '$state', '$timeout', '$window', '$mdMedia', '$mdSidenav', 'Auth'];
+  AppController.$inject = ['$scope', '$state', '$timeout', '$window', 'Auth'];
   angular.module('petzApp')
     .controller('AppController', AppController);
 

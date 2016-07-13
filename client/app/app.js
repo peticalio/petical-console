@@ -7,11 +7,9 @@ angular
     'petz.api',
     'petz.vendor',
     'petz.env',
-    'ngMaterial',
     'ngCookies',
     'ngResource',
     'ngSanitize',
-    'ngAnimate',
     'ngFileUpload',
     'ui.router',
     'ui.validate',
@@ -22,7 +20,6 @@ angular
     'toastr',
     'angularMoment',
     'angularUtils.directives.dirPagination',
-    'md.data.table', // @Deprecated
     'mwl.calendar',
     'ncy-angular-breadcrumb',
     'ngHandsontable',
@@ -38,60 +35,6 @@ angular
     $httpProvider.interceptors.push('AuthInterceptor');
   }])
 
-  // angular material theme config
-  .config(['$mdIconProvider', '$mdThemingProvider', function($mdIconProvider, $mdThemingProvider) {
-    $mdIconProvider
-      .fontSet('fa', 'fontawesome')
-      .defaultFontSet('fontawesome')
-      .iconSet('social', 'img/icons/sets/social-icons.svg', 24)
-      .defaultIconSet('img/icons/sets/core-icons.svg', 24);
-
-    $mdThemingProvider
-      .theme('console')
-      .primaryPalette('cyan', {
-        'default': '600'
-      })
-      .accentPalette('yellow')
-      .warnPalette('red')
-      .backgroundPalette('grey');
-
-    $mdThemingProvider
-      .theme('content')
-      .primaryPalette('grey',{
-        'default': '100',
-        'hue-1': '700',
-        'hue-2': '300',
-        'hue-3': '800'
-      })
-      .accentPalette('amber')
-      .warnPalette('red')
-      .backgroundPalette('grey');
-
-    $mdThemingProvider
-      .theme('fab')
-      .primaryPalette('pink')
-      .accentPalette('indigo')
-      .warnPalette('red')
-      .backgroundPalette('grey');
-
-    $mdThemingProvider
-      .theme('sidemenu')
-      .primaryPalette('grey',{
-        'default': '50',
-        'hue-1': '700',
-        'hue-2': '300',
-        'hue-3': '800'
-      });
-
-    $mdThemingProvider
-      .theme('progress')
-      .primaryPalette('grey',{
-        'default': '800'
-      });
-
-    $mdThemingProvider.setDefaultTheme('console');
-  }])
-
   // gravator config
   .config(['gravatarServiceProvider', function(gravatarServiceProvider) {
     gravatarServiceProvider.defaults = {
@@ -101,11 +44,13 @@ angular
     gravatarServiceProvider.secure = true;
 //    gravatarServiceProvider.protocol = 'https';
   }])
+
+  // toaster config
   .config(['toastrConfig', (toastrConfig) => {
     angular.extend(toastrConfig, {
       allowHtml:  true,
       closeButton: true,
-      timeOut: 5000,
+      timeOut: 8000,
       extendedTimeOut: 1000,
       autoDismiss: false,
       containerId: 'toast-container',

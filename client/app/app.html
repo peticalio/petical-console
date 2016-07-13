@@ -35,7 +35,7 @@
         </li>
         <li class="dropdown" uib-dropdown ng-if="ctrl.isSignin()">
           <a href="" class="dropdown-toggle lnk-gravatar" uib-dropdown-toggle>
-            <img gravatar-src-once="ctrl.account.login" gravatar-size="100" class="img-circle mr" style="width:32px;" ng-click="ctrl.openMenu($mdOpenMenu, $event)"/>
+            <img gravatar-src-once="ctrl.account.login" gravatar-size="100" class="img-circle mr" style="width:32px;"/>
             <strong>{{ctrl.account.username}}</strong>
             <i class="fa fa-angle-down ml" aria-hidden="true"></i>
           </a>
@@ -107,3 +107,17 @@
 <ptz-state-loading-indicator></ptz-state-loading-indicator>
 <div id="main-content" class="bg-color fadein" ui-view="">
 </div>
+
+<script type="text/ng-template" id="confirm-modal.html">
+  <div class="modal-header">
+    <h4 class="modal-title">確認ダイアログ</h4>
+  </div>
+  <div class="modal-body pt0 pb0">
+    <h4>{{ctrl.contents.title}}</h4>
+    <p class="pre">{{ctrl.contents.message}}</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="ctrl.execute()">{{ctrl.contents.action}}</button>
+    <button class="btn btn-link" type="button" ng-click="ctrl.close()">キャンセル</button>
+  </div>
+</script>

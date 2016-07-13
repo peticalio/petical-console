@@ -14,8 +14,6 @@
     "font-awesome": "4.5.0",
     "lodash": "~2.4.1",
     "angular-ui-router": "~0.2.15",
-    "angular-material": "^1.0.6",
-    "angular-material-data-table": "^0.10.5",
     "angular-ui-validate": "^1.2.2",
     "angular-gravatar": "^0.4.1",
     "angular-moment": "^0.10.3",
