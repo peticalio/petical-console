@@ -156,7 +156,6 @@
 // bootstrap panel
 // --------------------------------------------------
 .panel {
-  border-radius: $border-radius-small;
   border-color: $table-border-color;
   box-shadow: none;
 }
@@ -180,6 +179,13 @@
       height: 16px;
     }
   }
+}
+
+// --------------------------------------------------
+// bootstrap alert
+// --------------------------------------------------
+.alert-default {
+  border: 1px solid $table-border-color;
 }
 
 // --------------------------------------------------

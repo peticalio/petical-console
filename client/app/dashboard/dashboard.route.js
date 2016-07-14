@@ -36,6 +36,19 @@
           clinic:         getClinic
         }
       })
+      .state('app.dashboard.form', {
+        url: '^/clinics/:clinicId/form',
+        views: {
+          '@app': {
+            templateUrl:  'app/main/clinic/form/form.html',
+            controller:   'ClinicFormController',
+            controllerAs: 'ctrl'
+          }
+        },
+        ncyBreadcrumb: {
+          label: '動物病院基本情報編集'
+        }
+      })
     ;
   }
 

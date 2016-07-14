@@ -2,12 +2,13 @@
   'use strict';
 
   class TicketFormController {
-    constructor($state, $filter, toaster, ClinicTicket, timetable, ticket) {
+    constructor($state, $filter, toaster, ClinicTicket, timetable, clinic, ticket) {
       this.$state = $state;
       this.$filter = $filter;
       this.toaster = toaster;
       this.ClinicTicket = ClinicTicket;
       this.timetable = timetable;
+      this.clinic = clinic;
       this.ticket = ticket;
       this.setupInitialDateTime();
     }
@@ -66,7 +67,7 @@
     }
   }
 
-  TicketFormController.$inject = ['$state', '$filter', 'toaster', 'ClinicTicket', 'timetable', 'ticket'];
+  TicketFormController.$inject = ['$state', '$filter', 'toaster', 'ClinicTicket', 'timetable', 'clinic', 'ticket'];
   angular.module('petzApp')
     .controller('TicketFormController', TicketFormController);
 
