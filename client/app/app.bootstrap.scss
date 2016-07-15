@@ -26,6 +26,7 @@
 // --------------------------------------------------
 .navbar-default {
   background-color: #fff;
+  border-color: $input-border;
   .navbar-nav > .active > a, .navbar-nav > .active > a:focus, .navbar-nav > .active > a:hover, .navbar-nav > li > a:focus, .navbar-nav > li > a:hover,
   .navbar-nav > .open > a, .navbar-nav > .open > a:hover, .navbar-nav > .open > a:focus {
     color: #333;
@@ -156,12 +157,12 @@
 // bootstrap panel
 // --------------------------------------------------
 .panel {
-  border-color: $table-border-color;
+  border-color: $input-border;
   box-shadow: none;
 }
 .panel-heading {
+  border-color: $input-border;
   padding: 16px;
-  border-color: $table-border-color;
 }
 .panel-heading-none {
   padding-bottom: 0px;

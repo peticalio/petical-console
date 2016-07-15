@@ -24,7 +24,7 @@
         }
       })
       .state('app.signup.activate', {
-        url: '/activate:param',
+        url: '/activate',
         views: {
           '@app': {
             templateUrl:      'app/signup/activate/activate.html',
