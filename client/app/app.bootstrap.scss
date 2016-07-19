@@ -26,7 +26,7 @@
 // --------------------------------------------------
 .navbar-default {
   background-color: #fff;
-  border-color: $input-border;
+  border-color: $table-border-color;
   .navbar-nav > .active > a, .navbar-nav > .active > a:focus, .navbar-nav > .active > a:hover, .navbar-nav > li > a:focus, .navbar-nav > li > a:hover,
   .navbar-nav > .open > a, .navbar-nav > .open > a:hover, .navbar-nav > .open > a:focus {
     color: #333;
@@ -94,10 +94,13 @@
 // --------------------------------------------------
 // bootstrap dropdown
 // --------------------------------------------------
+.dropdown-menu li:focus, .dropdown-menu li a:focus {
+  outline: none !important;
+}
 .dropdown-menu > li > a {
   padding: 6px 20px;
 }
-.dropdown-menu > li > a:hover, .dropdown-menu > li > a:active {
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:active, .dropdown-menu > li > a:focus {
   color: #fff;
   background-color: $brand-primary !important;
 }
@@ -154,14 +157,24 @@
 }
 
 // --------------------------------------------------
+// ui-bootstrap calendar
+// --------------------------------------------------
+.uib-datepicker-popup {
+  padding: 4px;
+}
+.uib-daypicker {
+  outline: none !important;
+}
+
+// --------------------------------------------------
 // bootstrap panel
 // --------------------------------------------------
 .panel {
-  border-color: $input-border;
+  border-color: $table-border-color;
   box-shadow: none;
 }
 .panel-heading {
-  border-color: $input-border;
+  border-color: $table-border-color;
   padding: 16px;
 }
 .panel-heading-none {
@@ -185,8 +198,25 @@
 // --------------------------------------------------
 // bootstrap alert
 // --------------------------------------------------
+.alert {
+  p {
+    margin-bottom: 0 !important;
+  }
+}
 .alert-default {
   border: 1px solid $table-border-color;
+}
+.alert-info {
+  background-color: $state-info-border;
+}
+.alert-success {
+  background-color: $state-success-border;
+}
+.alert-warning {
+  background-color: $state-warning-border;
+}
+.alert-danger {
+  background-color: $state-danger-border;
 }
 
 // --------------------------------------------------
@@ -278,6 +308,9 @@
 // --------------------------------------------------
 // bootstrap form
 // --------------------------------------------------
+button {
+  outline: none !important;
+}
 .form-control, .form-control:focus {
   box-shadow: none !important;
   border-width: 2px;

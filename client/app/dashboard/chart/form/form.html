@@ -47,38 +47,36 @@
         </div>
         <div class="row">
           <div class="col-sm-3 col-xs-12">
-            <ptc-input type="date" form="form" name="birthDate" label="生年月日" model="ctrl.chart.pet.birthDate" message="日付（yyyy-MM-dd）を入力してください。"></ptc-select>
+            <ptc-input type="date" form="form" name="birthDate" label="生年月日" model="ctrl.chart.pet.birthDate" message="日付（yyyy-MM-dd）を入力してください。"></ptc-input>
           </div>
         </div>
         <div class="row">
           <div class="col-sm-6 col-xs-12">
-            <ptc-input-select form="form" name="kind" label="種別" model="ctrl.chart.pet.kind" data="ctrl.kinds" maxlength="50" required="true"></ptc-select>
+            <ptc-input-select form="form" name="kind" label="種別" model="ctrl.chart.pet.kind" data="ctrl.kinds" maxlength="50" required="true"></ptc-input-select>
           </div>
           <div class="col-sm-6 col-xs-12">
-            <ptc-input-select form="form" name="type" label="品種" model="ctrl.chart.pet.type" data="ctrl.types" maxlength="50" required="true"></ptc-select>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-6 col-xs-12">
-            <ptc-input-select form="form" name="color" label="毛色" model="ctrl.chart.pet.color" data="ctrl.colors" maxlength="50" required="true"></ptc-select>
+            <ptc-input-select form="form" name="type" label="品種" model="ctrl.chart.pet.type" data="ctrl.types" maxlength="50" required="true"></ptc-input-select>
           </div>
         </div>
         <div class="row">
           <div class="col-sm-6 col-xs-12">
-            <ptc-input-select form="form" name="sex" label="性別" model="ctrl.chart.pet.sex" data="ctrl.sexes" maxlength="50"></ptc-select>
-          </div>
-          <div class="col-sm-6 col-xs-12">
-            <ptc-input-select form="form" name="blood" label="血液型" model="ctrl.chart.pet.blood" data="ctrl.bloods" maxlength="50"></ptc-select>
+            <ptc-input-select form="form" name="color" label="毛色" model="ctrl.chart.pet.color" data="ctrl.colors" maxlength="50" required="true"></ptc-input-select>
           </div>
         </div>
         <div class="row">
           <div class="col-sm-6 col-xs-12">
+            <ptc-select form="form" name="sex" label="性別" model="ctrl.chart.pet.sex" data="ctrl.sexes"></ptc-select>
+          </div>
+          <div class="col-sm-6 col-xs-12">
+            <ptc-input-select form="form" name="blood" label="血液型" model="ctrl.chart.pet.blood" data="ctrl.bloods" maxlength="50"></ptc-input-select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3 col-xs-12">
             <ptc-input type="text" form="form" name="microchipNo" label="マイクロチップ番号" model="ctrl.chart.pet.microchipNo" maxlength="50" message="50 文字以内で入力してください。"></ptc-input>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-6 col-xs-12">
-            <ptc-input-select form="form" name="neutral" label="去勢・避妊" model="ctrl.chart.pet.neutral" data="ctrl.neutrals" maxlength="50"></ptc-select>
+          <div class="col-sm-3 col-xs-12">
+            <ptc-input type="date" form="form" name="microchipDate" label="マイクロチップ埋込日" model="ctrl.chart.pet.microchipDate" message="日付（yyyy-MM-dd）を入力してください。"></ptc-input>
           </div>
         </div>
         <div class="row">
@@ -90,23 +88,28 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-12 col-xs-12">
-            <ptc-textarea form="form" name="allergia" label="アレルギーの有無や注意事項" model="ctrl.chart.pet.allergia" maxlength="2000" message="2000 文字以内で入力してください。"></ptc-input>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-12 col-xs-12">
-            <ptc-textarea form="form" name="drug" label="薬剤に関する注意事項" model="ctrl.chart.pet.drug" maxlength="2000" message="2000 文字以内で入力してください。"></ptc-input>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-12 col-xs-12">
-            <ptc-textarea form="form" name="other" label="その他、備考・注意事項" model="ctrl.chart.pet.other" maxlength="2000" message="2000 文字以内で入力してください。"></ptc-input>
+          <div class="col-sm-3 col-xs-12">
+            <ptc-select form="form" name="neutral" label="去勢・避妊" model="ctrl.chart.pet.neutral" data="ctrl.neutrals"></ptc-select>
           </div>
         </div>
         <div class="row">
           <div class="col-sm-3 col-xs-12">
-            <ptc-input-select form="form" name="dead" label="死亡" model="ctrl.chart.pet.dead" data="ctrl.deads" maxlength="50"></ptc-select>
+            <ptc-select form="form" name="dead" label="死亡" model="ctrl.chart.pet.dead" data="ctrl.deads"></ptc-select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-xs-12">
+            <ptc-textarea form="form" name="allergia" label="アレルギーの有無や注意事項" model="ctrl.chart.pet.allergia" maxlength="2000" message="2000 文字以内で入力してください。"></ptc-textarea>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-xs-12">
+            <ptc-textarea form="form" name="drug" label="薬剤に関する注意事項" model="ctrl.chart.pet.drug" maxlength="2000" message="2000 文字以内で入力してください。"></ptc-textarea>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-xs-12">
+            <ptc-textarea form="form" name="other" label="その他、備考・注意事項" model="ctrl.chart.pet.other" maxlength="2000" message="2000 文字以内で入力してください。"></ptc-textarea>
           </div>
         </div>
         <div class="row">

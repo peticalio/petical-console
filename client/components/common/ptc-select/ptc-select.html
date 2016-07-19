@@ -4,8 +4,8 @@
     <span ng-if="$ctrl.required" class="label label-required">必須</span>
   </label>
   <ol class="form-control nya-bs-select" ng-model="$ctrl.model" data-size="7" ng-required="$ctrl.required">
-    <li nya-bs-option="option in $ctrl.data">
-      <a>{{option}}</a>
+    <li ng-repeat="option in $ctrl.data" value="{{$ctrl.getValue(option)}}" class="nya-bs-option">
+      <a>{{$ctrl.getLabel(option)}}</a>
     </li>
   </ol>
   <div class="form-error" ng-show="$ctrl.form[$ctrl.name].$invalid" ng-messages="$ctrl.form[$ctrl.name].$error">

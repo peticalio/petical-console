@@ -24,6 +24,22 @@
     delete(event) {
       return this.confirm(event, '本当に削除してもよろしいですか？', '削除してしまったデータは元に戻すことができません。\n本当に削除してもよろしいですか？', '削除する');
     }
+
+    select(contents) {
+      var modal = this.$uibModal.open({
+        animation: true,
+        backdrop: 'static',
+        templateUrl: 'select-modal.html',
+        controller: 'ConfirmModalController',
+        controllerAs: 'ctrl',
+        resolve: {
+          contents: function () {
+            return contents;
+          }
+        }
+      });
+      return modal.result;
+    }
   }
 
   // 確認モーダルのコントローラ

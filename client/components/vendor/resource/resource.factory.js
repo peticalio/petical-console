@@ -2,7 +2,7 @@
 
 angular.module('petz.vendor')
   .factory('resource', ['$resource', '$cacheFactory', 'api', function ($resource, $cacheFactory, api) {
-    var interceptor = {
+    var cacheClearInterceptor = {
       response: function (response) {
         $cacheFactory.get('$http').remove(response.config.url);
         return response;
@@ -21,19 +21,19 @@ angular.module('petz.vendor')
         'get':     { method: 'GET', cache: false, interceptor: queryInterceptor },
         'query':   { method: 'GET', cache: true, isArray: true },
         'fetch':   { method: 'GET', cache: false, isArray: true },
-        'clear':   { method: 'GET', cache: true, isArray: true, interceptor: interceptor },
-        'save':    { method: 'POST', interceptor: interceptor },
-        'remove':  { method: 'DELETE', interceptor: interceptor },
-        'delete':  { method: 'DELETE', interceptor: interceptor },
-        'update':  { method: 'PUT', interceptor: interceptor },
-        'patch':   { method: 'PATCH', interceptor: interceptor },
+        'clear':   { method: 'GET', cache: true, isArray: true, interceptor: cacheClearInterceptor },
+        'save':    { method: 'POST', interceptor: cacheClearInterceptor },
+        'remove':  { method: 'DELETE', interceptor: cacheClearInterceptor },
+        'delete':  { method: 'DELETE', interceptor: cacheClearInterceptor },
+        'update':  { method: 'PUT', interceptor: cacheClearInterceptor },
+        'patch':   { method: 'PATCH', interceptor: cacheClearInterceptor },
       });
 
       var resource = $resource(api.domain + url, paramDefaults, actions, options);
 
-      resource.prototype.clear = function(url) {
-        $cacheFactory.get('$http').remove(api.domain + url);
-      };
+      // resource.prototype.clear = function(url) {
+      //   $cacheFactory.get('$http').remove(api.domain + url);
+      // };
 
       return resource;
     };

@@ -13,7 +13,7 @@
   </div>
   <section class="panel">
     <div class="panel-body">
-      <form name="form" novalidate="true">
+      <form name="form" novalidate="true" ng-if="!ctrl.confirm">
         <div class="row">
           <div class="col-sm-6 col-xs-12">
             <ptc-input type="text" form="form" name="customerCode" label="飼い主コード" model="ctrl.customer.customerCode" maxlength="50" disabled="!!ctrl.customer.id" message="50 文字以内で入力してください。"></ptc-input>
@@ -80,6 +80,11 @@
             <button class="btn btn-primary" ng-disabled="form.$invalid" ng-click="ctrl.save(ctrl.customer)">登録する</button>
             <button class="btn btn-link" ui-sref="app.dashboard.customer">キャンセル</button>
           </div>
+        </div>
+      </form>
+      <form name="form" novalidate="true" ng-if="!!ctrl.confirm">
+        <div class="alert alert-warning">
+          同じメールアドレスで以下のユーザーが既に存在しています。<br />このユーザーの情報を飼い主の基本情報として使用しますか？
         </div>
       </form>
     </div>

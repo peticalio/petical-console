@@ -72,9 +72,13 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-12 text-right">
+          <div class="col-sm-12 text-right" ng-if="!ctrl.ticket.id">
             <button class="btn btn-primary" ng-disabled="form.$invalid" ng-click="ctrl.save(ctrl.ticket)">登録する</button>
             <button class="btn btn-link" ui-sref="app.dashboard.chart.detail({chartId:ctrl.ticket.chart.id})">キャンセル</button>
+          </div>
+          <div class="col-sm-12 text-right" ng-if="!!ctrl.ticket.id">
+            <button class="btn btn-primary" ng-disabled="form.$invalid" ng-click="ctrl.update(ctrl.ticket)">保存する</button>
+            <button class="btn btn-link" ui-sref="app.dashboard.ticket.detail({ticketId:ctrl.ticket.id})">キャンセル</button>
           </div>
         </div>
       </form>

@@ -70,10 +70,10 @@
           <a ui-sref="app.dashboard" ui-sref-active-eq="active"><i class="fa fa-dashboard mr hide-sm" aria-hidden="true"></i>ダッシュボード</a>
         </li>
         <li>
-          <a ui-sref="app.dashboard.customer" ui-sref-active="active"><i class="fa fa-user mr hide-sm" aria-hidden="true"></i>飼い主<i class="fa fa-angle-down ml" aria-hidden="true"></i></a>
+          <a ui-sref="app.dashboard.customer" ui-sref-active="active"><i class="fa fa-user mr hide-sm" aria-hidden="true"></i>飼い主</a>
         </li>
         <li>
-          <a ui-sref="app.dashboard.chart" ui-sref-active="active"><i class="fa fa-folder-open-o mr hide-sm" aria-hidden="true"></i>カルテ<i class="fa fa-angle-down ml" aria-hidden="true"></i></a>
+          <a ui-sref="app.dashboard.chart" ui-sref-active="active"><i class="fa fa-folder-open-o mr hide-sm" aria-hidden="true"></i>カルテ</a>
         </li>
         <li>
           <a ui-sref="app.dashboard.ticket" ui-sref-active="active"><i class="fa fa-ticket mr hide-sm" aria-hidden="true"></i>チケット</a>
@@ -120,5 +120,19 @@
   <div class="modal-footer">
     <button class="btn btn-primary" type="button" ng-click="ctrl.execute()">{{ctrl.contents.action}}</button>
     <button class="btn btn-link" type="button" ng-click="ctrl.close()">キャンセル</button>
+  </div>
+</script>
+
+<script type="text/ng-template" id="select-modal.html">
+  <div class="modal-header">
+    <h4 class="modal-title">操作の確認</h4>
+  </div>
+  <div class="modal-body pt0 pb0">
+    <h4>{{ctrl.contents.title}}</h4>
+    <p class="pre">{{ctrl.contents.message}}</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="ctrl.execute()">はい</button>
+    <button class="btn btn-default" type="button" ng-click="ctrl.close()">いいえ</button>
   </div>
 </script>
