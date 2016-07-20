@@ -133,7 +133,7 @@
               </uib-tab-heading>
               <div class="pt2">
                 <div class="table-responsive">
-                  <table class="table table-hover table-clickable table-sortable table-middle">
+                  <table class="table table-striped table-middle">
                     <thead>
                       <tr>
                         <th class="col-sm-4">
@@ -148,8 +148,10 @@
                         <th class="col-sm-2">
                           金額
                         </th>
-                        <th class="col-sm-3">
+                        <th class="col-sm-2">
                           小計（消費税）
+                        </th>
+                        <th class="col-sm-1">
                         </th>
                       </tr>
                     </thead>
@@ -170,6 +172,9 @@
                         <td>
                           {{ti.subtotal | currency:'¥ ':0}}
                           ({{ti.tax | currency:'¥ ':0}})
+                        </td>
+                        <td>
+                          <button class="btn btn-danger-outline btn-sm" ng-click="ctrl.removeTicketInspection(ti, $index)">削除</button>
                         </td>
                       </tr>
                     </tbody>

@@ -308,9 +308,6 @@
 // --------------------------------------------------
 // bootstrap form
 // --------------------------------------------------
-button {
-  outline: none !important;
-}
 .form-control, .form-control:focus {
   box-shadow: none !important;
   border-width: 2px;
@@ -331,6 +328,33 @@ button {
 }
 .ui-select-match-text {
   color: #555555;
+}
+
+// --------------------------------------------------
+// bootstrap button
+// --------------------------------------------------
+button {
+  outline: none !important;
+}
+.btn-primary-outline {
+  @extend .btn-primary;
+  color: $brand-primary;
+  background-color: #fff;
+}
+.btn-success-outline {
+  @extend .btn-success;
+  color: $brand-success;
+  background-color: #fff;
+}
+.btn-warning-outline {
+  @extend .btn-warning;
+  color: $brand-warning;
+  background-color: #fff;
+}
+.btn-danger-outline {
+  @extend .btn-danger;
+  color: $brand-danger;
+  background-color: #fff;
 }
 
 // --------------------------------------------------

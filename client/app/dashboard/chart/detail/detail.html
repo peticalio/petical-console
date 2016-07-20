@@ -49,10 +49,8 @@
         </div>
         <div class="col-md-10">
           <p>
-            <a ui-sref="app.dashboard.customer.detail({customerId: ctrl.chart.customer.id})">
-              {{ctrl.chart.customer.user.lastName}}&nbsp;{{ctrl.chart.customer.user.firstName}}
-              （{{ctrl.chart.customer.user.lastNameKana}}&nbsp;{{ctrl.chart.customer.user.firstNameKana}}） 様
-            </a>
+            {{ctrl.chart.customer.user.lastName}}&nbsp;{{ctrl.chart.customer.user.firstName}}
+            （{{ctrl.chart.customer.user.lastNameKana}}&nbsp;{{ctrl.chart.customer.user.firstNameKana}}） 様
           </p>
         </div>
       </div>
@@ -178,9 +176,23 @@
                 予防接種
               </uib-tab-heading>
               <div class="pt2">
+                <div class="alert alert-warning">
+                  予防接種の履歴を管理し、次回予定日を算出する機能を鋭意開発中！これにより飼い主様へのアプローチを自動化します。<br />近日公開予定です。
+                </div>
               </div>
             </uib-tab>
-            <uib-tab index="2" ng-click="ctrl.loadHistories()">
+            <uib-tab index="2">
+              <uib-tab-heading>
+                <i class="fa m0 fa-stethoscope hide-xs" aria-hidden="true"></i>
+                健康診断
+              </uib-tab-heading>
+              <div class="pt2">
+                <div class="alert alert-warning">
+                  健康診断の検査結果の履歴を管理し、推移データをグラフ表示する機能を鋭意開発中！これによりペットの健康管理を総合的に行えるようになります。<br />近日公開予定です。
+                </div>
+              </div>
+            </uib-tab>
+            <uib-tab index="3" ng-click="ctrl.loadHistories()">
               <uib-tab-heading>
                 <i class="fa m0 fa-history hide-xs" aria-hidden="true"></i>
                 診察履歴
@@ -246,7 +258,7 @@
                 </div>
               </div>
             </uib-tab>
-            <uib-tab index="3">
+            <uib-tab index="4">
               <uib-tab-heading>
                 <i class="fa m0 fa-comments-o hide-xs" aria-hidden="true"></i>
                 コメント
