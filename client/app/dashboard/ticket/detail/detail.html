@@ -9,7 +9,7 @@
         <i class="fa fa-user" aria-hidden="true"></i>
         <p>飼い主</p>
       </a>
-      <a class="btn btn-link lnk-submenu" href="#">
+      <a class="btn btn-link lnk-submenu" ui-sref="app.dashboard.ticket.detail.account">
         <i class="fa fa-calculator" aria-hidden="true"></i>
         <p>会計する</p>
       </a>
@@ -128,8 +128,8 @@
             </uib-tab>
             <uib-tab index="2" ng-click="ctrl.loadTicketInspections()">
               <uib-tab-heading>
-                <i class="fa m0 fa-stethoscope hide-xs" aria-hidden="true"></i>
-                検査
+                <i class="fa m0 fa-jpy hide-xs" aria-hidden="true"></i>
+                検査料
               </uib-tab-heading>
               <div class="pt2">
                 <div class="table-responsive">
@@ -181,7 +181,7 @@
                   </table>
                 </div>
                 <div class="text-right">
-                  <button class="btn btn-default" ng-show="!showInspectionForm" ng-click="showInspectionForm = true">検査を追加</button>
+                  <button class="btn btn-default" ng-show="!showInspectionForm" ng-click="showInspectionForm = true">検査料を追加</button>
                   <button class="btn btn-link" ng-show="!!showInspectionForm" ng-click="showInspectionForm = false">フォームを隠す</button>
                 </div>
                 <div ng-show="showInspectionForm">

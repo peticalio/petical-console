@@ -1,0 +1,214 @@
+<div class="container-fluid">
+  <div class="page-header-content">
+    <div class="heading-elements hide-xs">
+      <a class="btn btn-link lnk-submenu" ui-sref="app.dashboard.ticket.detail">
+        <i class="fa fa-ticket" aria-hidden="true"></i>
+        <p>チケット</p>
+      </a>
+      <a class="btn btn-link lnk-submenu" ng-click="ctrl.calculate()">
+        <i class="fa fa-calculator" aria-hidden="true"></i>
+        <p>再計算</p>
+      </a>
+      <a class="btn btn-link lnk-submenu" ui-sref="app.dashboard.ticket.update({ticketId: ctrl.ticket.id})">
+        <i class="fa fa-credit-card" aria-hidden="true"></i>
+        <p>料金支払</p>
+      </a>
+      <a class="btn btn-link lnk-submenu" ui-sref="app.dashboard.ticket.update({ticketId: ctrl.ticket.id})">
+        <i class="fa fa-print" aria-hidden="true"></i>
+        <p>診療明細</p>
+      </a>
+		</div>
+    <div class="page-title">
+      <h4>お会計 - {{ctrl.ticket.chart.pet.name}} ちゃんのご請求</h4>
+      <ul class="breadcrumb breadcrumb-caret small" ncy-breadcrumb></ul>
+    </div>
+  </div>
+  <section class="panel">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="alert alert-warning">
+            お会計の画面からチケットに戻って診察料や処方を変更した場合は、合計料金が変更になった可能性があるため、必ず「再計算」してください。
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-2">
+          <i class="fa fa-nav fa-hospital-o"></i>動物病院:
+        </div>
+        <div class="col-sm-4">
+          <p>{{ctrl.clinic.name}}</p>
+        </div>
+        <div class="col-sm-2">
+          <i class="fa fa-nav fa-clock-o"></i>診察日:
+        </div>
+        <div class="col-sm-4">
+          <p>{{ctrl.ticket.startDateTime | date:'yyyy/MM/dd HH:mm'}} - {{ctrl.ticket.endDateTime | date:'HH:mm'}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-2">
+          <i class="fa fa-nav fa-user"></i>飼い主:
+        </div>
+        <div class="col-sm-4">
+          <p>{{ctrl.ticket.chart.customer.user.lastName}} {{ctrl.ticket.chart.customer.user.firstName}} 様</p>
+        </div>
+        <div class="col-sm-2">
+          <i class="fa fa-nav fa-circle-o"></i>ステータス:
+        </div>
+        <div class="col-sm-4">
+          <p>
+            <span ng-if="ctrl.ticket.state === 'RESERVED'" class="label label-info">予約済み</span>
+            <span ng-if="ctrl.ticket.state === 'RECEIPTED'" class="label label-info-outline">受付済み</span>
+            <span ng-if="ctrl.ticket.state === 'DOING'" class="label label-success">診察中</span>
+            <span ng-if="ctrl.ticket.state === 'PAYMENT'" class="label label-warning">会計待ち</span>
+            <span ng-if="ctrl.ticket.state === 'COMPLETED'" class="label label-default">診察終了</span>
+            <span ng-if="ctrl.ticket.state === 'CANCEL'" class="label label-default">キャンセル</span>
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-2">
+          <i class="fa fa-nav fa-heart-o"></i>お名前:
+        </div>
+        <div class="col-sm-4">
+          <p>{{ctrl.ticket.chart.pet.name}} ちゃん（{{ctrl.ticket.chart.pet.type}}）</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-2">
+          <i class="fa fa-nav fa-jpy"></i>請求金額:
+        </div>
+        <div class="col-sm-4">
+          <p><code>{{ctrl.ticket.total | currency:'¥ ':0}}</code></p>
+        </div>
+        <div class="col-sm-2">
+          <i class="fa fa-nav fa-jpy"></i>不足金額:
+        </div>
+        <div class="col-sm-4">
+          <p ng-show="ctrl.ticket.balance !== 0"><code>{{ctrl.ticket.balance | currency:'¥ ':0}}</code></p>
+          <p ng-show="ctrl.ticket.balance === 0"><code>不足金額はありません</code></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-2">
+          <i class="fa fa-nav fa-jpy"></i>消費税:
+        </div>
+        <div class="col-sm-4">
+          <p>{{ctrl.ticket.tax | currency:'¥ ':0}}</p>
+        </div>
+        <div class="col-sm-2">
+          <i class="fa fa-nav fa-jpy"></i>値引き額:
+        </div>
+        <div class="col-sm-4">
+          <p>{{ctrl.ticket.discount | currency:'¥ ':0}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="table-responsive">
+            <table class="table table-striped table-middle">
+              <thead>
+                <tr>
+                  <th class="col-sm-4">
+                    明細
+                  </th>
+                  <th class="col-sm-2">
+                    数量
+                  </th>
+                  <th class="col-sm-2">
+                    単価
+                  </th>
+                  <th class="col-sm-2">
+                    金額
+                  </th>
+                  <th class="col-sm-2">
+                    小計（消費税）
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="account in ctrl.accounts">
+                  <td>
+                    {{account.name}}
+                  </td>
+                  <td>
+                    {{account.quantity}}
+                  </td>
+                  <td>
+                    {{account.price | currency:'¥ ':0}}
+                  </td>
+                  <td>
+                    {{account.amount | currency:'¥ ':0}}
+                  </td>
+                  <td>
+                    {{account.subtotal | currency:'¥ ':0}}
+                    ({{account.tax | currency:'¥ ':0}})
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="panel">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="alert alert-danger">
+            まだ会計が終わっていない金額が {{ctrl.ticket.balance | currency:'¥ ':0}} あります。「料金支払」より精算してください。
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="table-responsive">
+            <table class="table table-striped table-middle">
+              <thead>
+                <tr>
+                  <th class="col-sm-2">
+                    支払日
+                  </th>
+                  <th class="col-sm-2">
+                    数量
+                  </th>
+                  <th class="col-sm-2">
+                    単価
+                  </th>
+                  <th class="col-sm-2">
+                    金額
+                  </th>
+                  <th class="col-sm-2">
+                    小計（消費税）
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="account in ctrl.accounts">
+                  <td>
+                    {{account.name}}
+                  </td>
+                  <td>
+                    {{account.quantity}}
+                  </td>
+                  <td>
+                    {{account.price | currency:'¥ ':0}}
+                  </td>
+                  <td>
+                    {{account.amount | currency:'¥ ':0}}
+                  </td>
+                  <td>
+                    {{account.subtotal | currency:'¥ ':0}}
+                    ({{account.tax | currency:'¥ ':0}})
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

@@ -379,6 +379,11 @@ button {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+mark {
+  background-color: $state-danger-bg;
+  padding: 0.3em 0.5em;
+  border-radius: 3px;
+}
 
 // --------------------------------------------------
 // angular toastr

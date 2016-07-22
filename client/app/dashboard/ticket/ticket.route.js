@@ -90,9 +90,13 @@
   function getInspections(ClinicInspection, clinic) {
     return ClinicInspection.query({clinicId: clinic.id}).$promise.then((response) => response);
   }
+  function getAccounts(TicketAccount, clinic, ticket) {
+    return TicketAccount.query({clinicId:clinic.id, ticketId:ticket.id}).$promise.then((response) => response);
+  }
 
   function DashboardTicketRouter($stateProvider){
     $stateProvider
+      // チケット一覧
       .state('app.dashboard.ticket', {
         url: '^/clinics/:clinicId/tickets',
         views: {
@@ -126,6 +130,7 @@
           ticket:         getTicketByChart
         }
       })
+      // チケット更新フォーム
       .state('app.dashboard.ticket.update', {
         url: '^/clinics/:clinicId/tickets/:ticketId/form',
         views: {
@@ -142,7 +147,6 @@
           ticket:         getTicket
         }
       })
-
       // チケット詳細
       .state('app.dashboard.ticket.detail', {
         url: '/:ticketId',
@@ -164,69 +168,25 @@
         }
       })
 
-      // チケット詳細（診察内容）
-      .state('app.dashboard.ticket.detail.examination', {
-        abstract: true,
-        url: '/examinations'
-      })
-      // チケット詳細（診察内容一覧）
-      .state('app.dashboard.ticket.detail.examination.list', {
-        url: '/list',
+      // 会計
+      .state('app.dashboard.ticket.detail.account', {
+        url: '/accounts',
         views: {
-          '@app.dashboard.ticket.detail': {
-            templateUrl:  'app/dashboard/ticket/detail/examination/examination.html',
-            controller:   'TicketDetailExaminationController',
+          '@app': {
+            templateUrl:  'app/dashboard/ticket/detail/account/account.html',
+            controller:   'TicketAccountListController',
             controllerAs: 'ctrl'
           }
         },
-        resolve: {
-          examinations:   getClinicTicketExaminations
-        }
-      })
-      // チケット詳細（診察内容登録フォーム）
-      .state('app.dashboard.ticket.detail.examination.form', {
-        url: '/form',
-        views: {
-          '@app.dashboard.ticket.detail': {
-            templateUrl:  'app/dashboard/ticket/detail/examination/form/form.html',
-            controller:   'TicketDetailExaminationFormController',
-            controllerAs: 'ctrl'
-          }
+        ncyBreadcrumb: {
+          label: 'お会計'
         },
         resolve: {
-          examination:    getClinicTicketExamination,
-          products:       getClinicProducts
+          accounts:        getAccounts
         }
       })
-      // チケット詳細（診察内容登録フォーム）
-      .state('app.dashboard.ticket.detail.examination.update', {
-        url: '/:examinationId/form',
-        views: {
-          '@app.dashboard.ticket.detail': {
-            templateUrl:  'app/dashboard/ticket/detail/examination/form/form.html',
-            controller:   'TicketDetailExaminationFormController',
-            controllerAs: 'ctrl'
-          }
-        },
-        resolve: {
-          examination:    getClinicTicketExamination,
-          products:       getClinicProducts
-        }
-      })
-      // チケット詳細（診察内容登録フォーム）
-      .state('app.dashboard.ticket.detail.examination.detail', {
-        url: '/:examinationId',
-        views: {
-          '@app.dashboard.ticket.detail': {
-            templateUrl:  'app/dashboard/ticket/detail/examination/detail/detail.html',
-            controller:   'TicketDetailExaminationDetailController',
-            controllerAs: 'ctrl'
-          }
-        },
-        resolve: {
-          examination:    getClinicTicketExamination
-        }
-      })
+
+
 
       // チケット詳細（証明書）
       .state('app.dashboard.ticket.detail.certificate', {

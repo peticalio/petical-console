@@ -238,16 +238,14 @@
                           <span ng-if="ticket.state === 'CANCEL'" class="label label-default">キャンセル</span>
                         </td>
                         <td>
-                          <span ng-if="!!ticket.diacrisis.name">{{ticket.diacrisis.name}}</span>
-                          <span ng-if="!ticket.diacrisis.name">未定</span>
+                          <span ng-if="!!ticket.diagnosis.name">{{ticket.diagnosis.name}}</span>
+                          <span ng-if="!ticket.diagnosis.name">未定</span>
                         </td>
                         <td>
-                          <span ng-if="!!ticket.billing">{{ticket.billing | currency:'¥ ':0}}</span>
-                          <span ng-if="!ticket.billing">未定</span>
+                          <span>{{ticket.total | currency:'¥ ':0}}</span>
                         </td>
                         <td>
-                          <span ng-if="!!ticket.payment">{{ticket.payment | currency:'¥ ':0}}</span>
-                          <span ng-if="!ticket.payment">未定</span>
+                          <span>{{ticket.total - ticket.balance | currency:'¥ ':0}}</span>
                         </td>
                       </tr>
                     </tbody>
