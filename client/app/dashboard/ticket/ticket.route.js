@@ -17,25 +17,6 @@
       });
   }
 
-  // チケットに関する診察内容を取得する
-  function getClinicTicketExaminations(clinic, ticket, ClinicTicketExamination) {
-    return ClinicTicketExamination.query({clinicId: clinic.id, ticketId: ticket.id}).$promise
-      .then((response) => response);
-  }
-  // 診察内容を取得する（指定がない場合はオブジェクトを返す）
-  function getClinicTicketExamination($stateParams, clinic, ticket, ClinicTicketExamination) {
-    if ($stateParams.examinationId) {
-      return ClinicTicketExamination.load({clinicId: clinic.id, ticketId: ticket.id, examinationId: $stateParams.examinationId}).$promise
-        .then((response) => response);
-    }
-    return {ticket: ticket};
-  }
-  // 商品を取得する
-  function getClinicProducts(clinic, ClinicProduct) {
-    return ClinicProduct.query({clinicId: clinic.id}).$promise
-      .then((response) => response);
-  }
-
   // チケットに関する証明書の一覧を取得する
   function getCertificates(clinic, ticket, ClinicTicketCertificate) {
     return ClinicTicketCertificate.query({clinicId: clinic.id, ticketId: ticket.id}).$promise
@@ -92,6 +73,9 @@
   }
   function getAccounts(TicketAccount, clinic, ticket) {
     return TicketAccount.query({clinicId:clinic.id, ticketId:ticket.id}).$promise.then((response) => response);
+  }
+  function getPayments(TicketPayment, clinic, ticket) {
+    return TicketPayment.query({clinicId:clinic.id, ticketId:ticket.id}).$promise.then((response) => response);
   }
 
   function DashboardTicketRouter($stateProvider){
@@ -182,7 +166,8 @@
           label: 'お会計'
         },
         resolve: {
-          accounts:        getAccounts
+          accounts:        getAccounts,
+          payments:        getPayments
         }
       })
 
@@ -302,7 +287,7 @@
         },
         resolve: {
           invoice:        getClinicInvoice,
-          examinations:   getClinicTicketExaminations
+          examinations:   function(){}
         }
       })
     ;

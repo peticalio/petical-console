@@ -1,15 +1,15 @@
 <div class="container-fluid">
   <div class="page-header-content">
     <div class="heading-elements hide-xs">
-      <a class="btn btn-link lnk-submenu" ui-sref="app.dashboard.ticket.detail">
+      <a class="btn btn-link lnk-submenu" ui-sref="app.dashboard.ticket.detail" ui-sref-opts="{reload: true}">
         <i class="fa fa-ticket" aria-hidden="true"></i>
         <p>チケット</p>
       </a>
-      <a class="btn btn-link lnk-submenu" ng-click="ctrl.calculate()">
+      <a class="btn btn-link lnk-submenu" ng-click="ctrl.calculate()" ng-disabled="ctrl.ticket.state === 'COMPLETED'">
         <i class="fa fa-calculator" aria-hidden="true"></i>
         <p>再計算</p>
       </a>
-      <a class="btn btn-link lnk-submenu" ui-sref="app.dashboard.ticket.update({ticketId: ctrl.ticket.id})">
+      <a class="btn btn-link lnk-submenu" ng-click="ctrl.showPaymentModal(ctrl.ticket)" ng-disabled="ctrl.ticket.state === 'COMPLETED'">
         <i class="fa fa-credit-card" aria-hidden="true"></i>
         <p>料金支払</p>
       </a>
@@ -27,8 +27,11 @@
     <div class="panel-body">
       <div class="row">
         <div class="col-sm-12">
-          <div class="alert alert-warning">
+          <div class="alert alert-warning" ng-if="ctrl.ticket.state !== 'COMPLETED'">
             お会計の画面からチケットに戻って診察料や処方を変更した場合は、合計料金が変更になった可能性があるため、必ず「再計算」してください。
+          </div>
+          <div class="alert alert-success" ng-if="ctrl.ticket.state === 'COMPLETED'">
+            料金の支払が完了しているため、このチケットに関する情報は変更できません。
           </div>
         </div>
       </div>
@@ -155,7 +158,7 @@
   </section>
   <section class="panel">
     <div class="panel-body">
-      <div class="row">
+      <div class="row" ng-if="ctrl.ticket.balance !== 0">
         <div class="col-sm-12">
           <div class="alert alert-danger">
             まだ会計が終わっていない金額が {{ctrl.ticket.balance | currency:'¥ ':0}} あります。「料金支払」より精算してください。
@@ -172,36 +175,41 @@
                     支払日
                   </th>
                   <th class="col-sm-2">
-                    数量
+                    支払方法
                   </th>
                   <th class="col-sm-2">
-                    単価
+                    請求金額
                   </th>
                   <th class="col-sm-2">
-                    金額
+                    割引
                   </th>
                   <th class="col-sm-2">
-                    小計（消費税）
+                    受領金額
+                  </th>
+                  <th class="col-sm-2">
+                    お釣り
                   </th>
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="account in ctrl.accounts">
+                <tr ng-repeat="payment in ctrl.payments">
                   <td>
-                    {{account.name}}
+                    {{payment.date | date:'yyyy/MM/dd'}}
                   </td>
                   <td>
-                    {{account.quantity}}
+                    {{payment.type}}
                   </td>
                   <td>
-                    {{account.price | currency:'¥ ':0}}
+                    {{payment.total | currency:'¥ ':0}}
                   </td>
                   <td>
-                    {{account.amount | currency:'¥ ':0}}
+                    {{payment.discount | currency:'¥ ':0}}
                   </td>
                   <td>
-                    {{account.subtotal | currency:'¥ ':0}}
-                    ({{account.tax | currency:'¥ ':0}})
+                    {{payment.amount | currency:'¥ ':0}}
+                  </td>
+                  <td>
+                    {{payment.changed | currency:'¥ ':0}}
                   </td>
                 </tr>
               </tbody>
@@ -212,3 +220,49 @@
     </div>
   </section>
 </div>
+
+<script type="text/ng-template" id="payment-modal.html">
+  <div class="modal-header">
+    <h4 class="modal-title">料金支払を登録</h4>
+  </div>
+  <div class="modal-body pt0 pb0">
+    <form name="form" novalidate="true">
+      <div class="row">
+        <div class="col-sm-12 mb3">
+          <h3>
+            <span class="mr2">ご請求金額</span>
+            <code>{{ctrl.ticket.balance | currency:'¥ ':0}}</code>
+          </h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <ptc-input type="date" form="form" name="date" label="支払日" model="ctrl.payment.date" required="true"></ptc-input>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <ptc-input-select form="form" name="type" label="支払方法" model="ctrl.payment.type" data="ctrl.types" maxlength="50" required="true"></ptc-input-select>
+        </div>
+        <div class="col-sm-6">
+          <ptc-input type="price" form="form" name="discount" label="割引" model="ctrl.payment.discount"></ptc-input>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <ptc-input type="price" form="form" name="amount" label="お預かり金額" model="ctrl.payment.amount" required="true"></ptc-input>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label><span>おつり</span></label>
+            <h4><code>{{-(ctrl.ticket.balance - ctrl.payment.discount - ctrl.payment.amount) | currency:'¥ ':0}}</code></h4>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-disabled="form.$invalid" ng-click="ctrl.save(ctrl.payment)">保存する</button>
+    <button class="btn btn-link" type="button" ng-click="ctrl.close()">キャンセル</button>
+  </div>
+</script>

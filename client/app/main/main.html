@@ -21,18 +21,6 @@
             </div>
           </a>
         </li>
-        <li class="col-sm-4 mb2" ng-repeat="clinic in ctrl.clinics">
-          <a ui-sref="app.dashboard({clinicId:clinic.id})">
-            <div class="ptc-digest-box">
-              <img gravatar-src-once="clinic.email" class="img-rounded" gravatar-size="100" style="width:56px;"/>
-              <h5 class="mt2">{{clinic.name}}</h5>
-              <p class="text-left text-muted">
-                <span class="text-ellipsis">{{clinic.state}}{{clinic.city}}{{clinic.street}}</span><br/>
-                <span>院長　{{clinic.lastName}} {{clinic.firstName}}</span>
-              </p>
-            </div>
-          </a>
-        </li>
         <li class="col-sm-4 mb2">
           <a ui-sref="app.main.clinic.form">
             <div class="ptc-digest-box">

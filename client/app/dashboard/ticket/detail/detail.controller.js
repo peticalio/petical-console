@@ -29,6 +29,8 @@
           this.ticketInspections = response;
           this.ticketInspections.forEach((element) => this.total += element.subtotal);
         });
+
+      this.editable = this.ticket.state !== 'COMPLETED';
     }
 
     // 稟告や診断結果を保存する

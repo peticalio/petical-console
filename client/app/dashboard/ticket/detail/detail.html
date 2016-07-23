@@ -13,11 +13,11 @@
         <i class="fa fa-calculator" aria-hidden="true"></i>
         <p>会計する</p>
       </a>
-      <a class="btn btn-link lnk-submenu" ui-sref="app.dashboard.ticket.update({ticketId: ctrl.ticket.id})">
+      <a class="btn btn-link lnk-submenu" ui-sref="app.dashboard.ticket.update({ticketId: ctrl.ticket.id})" ng-disabled="!ctrl.editable">
         <i class="fa fa-pencil" aria-hidden="true"></i>
         <p>編集する</p>
       </a>
-      <a class="btn btn-link lnk-submenu" ng-click="ctrl.delete($event, ctrl.ticket)">
+      <a class="btn btn-link lnk-submenu" ng-click="ctrl.delete($event, ctrl.ticket)" ng-disabled="!ctrl.editable">
         <i class="fa fa-trash" aria-hidden="true"></i>
         <p>削除する</p>
       </a>
@@ -29,6 +29,9 @@
   </div>
   <section class="panel">
     <div class="panel-body">
+      <div class="alert alert-success" ng-if="ctrl.ticket.state === 'COMPLETED'">
+        料金の支払が完了しているため、このチケットに関する情報は変更できません。
+      </div>
       <div class="row">
         <div class="col-sm-2">
           <i class="fa fa-nav fa-hospital-o"></i>動物病院:
@@ -93,7 +96,7 @@
                       <ptc-textarea form="autognosis-form" name="autognosis" label="主訴・稟告内容" model="ctrl.ticket.autognosis" maxlength="2000" message="2000 文字以内で入力してください。"></ptc-input>
                     </div>
                   </div>
-                  <div class="row">
+                  <div class="row" ng-if="ctrl.editable">
                     <div class="col-xs-12 text-right">
                       <button class="btn btn-primary" ng-disabled="autognosis-form.$invalid" ng-click="ctrl.save(ctrl.ticket)">保存する</button>
                     </div>
@@ -118,7 +121,7 @@
                       <ptc-textarea form="diagnosis-form" name="memo" label="所見" model="ctrl.ticket.memo" maxlength="10000" message="10000 文字以内で入力してください。"></ptc-input>
                     </div>
                   </div>
-                  <div class="row">
+                  <div class="row" ng-if="ctrl.editable">
                     <div class="col-xs-12 text-right">
                       <button class="btn btn-primary" ng-disabled="diagnosis-form.$invalid" ng-click="ctrl.save(ctrl.ticket)">保存する</button>
                     </div>
@@ -174,55 +177,57 @@
                           ({{ti.tax | currency:'¥ ':0}})
                         </td>
                         <td>
-                          <button class="btn btn-danger-outline btn-sm" ng-click="ctrl.removeTicketInspection(ti, $index)">削除</button>
+                          <button class="btn btn-danger-outline btn-sm" ng-click="ctrl.removeTicketInspection(ti, $index)" ng-disabled="!ctrl.editable">削除</button>
                         </td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
-                <div class="text-right">
-                  <button class="btn btn-default" ng-show="!showInspectionForm" ng-click="showInspectionForm = true">検査料を追加</button>
-                  <button class="btn btn-link" ng-show="!!showInspectionForm" ng-click="showInspectionForm = false">フォームを隠す</button>
-                </div>
-                <div ng-show="showInspectionForm">
-                  <form name="inspectionForm">
-                    <div class="row">
-                      <div class="col-sm-6 col-xs-12">
-                        <ptc-inspections form="inspectionForm" name="inspection" model="ctrl.inspection.clinicInspection" data="ctrl.inspections" required="true"/>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-6 col-xs-12">
-                        <ptc-input type="price" form="inspectionForm" name="price" label="価格" model="ctrl.inspection.clinicInspection.price" min="0" max="999999999" required="true"></ptc-input>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-6 col-xs-12">
-                        <ptc-input type="number" form="inspectionForm" name="quantity" label="数量" model="ctrl.inspection.quantity" min="0" max="999999999" required="true"></ptc-input>
-                      </div>
-                      <div class="col-sm-6 col-xs-12">
-                        <div class="form-group">
-                          <label>
-                            <span>合計金額</span>
-                          </label>
-                          <h4>
-                            <code ng-if="!!ctrl.inspection.clinicInspection">{{ctrl.inspection.clinicInspection.price * ctrl.inspection.quantity | currency:'¥ ':0}}</code>
-                            <code ng-if="!ctrl.inspection.clinicInspection">¥ 0</code>
-                          </h4>
+                <div ng-if="ctrl.editable">
+                  <div class="text-right">
+                    <button class="btn btn-default" ng-show="!showInspectionForm" ng-click="showInspectionForm = true">検査料を追加</button>
+                    <button class="btn btn-link" ng-show="!!showInspectionForm" ng-click="showInspectionForm = false">フォームを隠す</button>
+                  </div>
+                  <div ng-show="!!showInspectionForm">
+                    <form name="inspectionForm">
+                      <div class="row">
+                        <div class="col-sm-6 col-xs-12">
+                          <ptc-inspections form="inspectionForm" name="inspection" model="ctrl.inspection.clinicInspection" data="ctrl.inspections" required="true"/>
                         </div>
                       </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-xs-12">
-                        <ptc-textarea form="inspectionForm" name="memo" label="説明" model="ctrl.inspection.memo" maxlength="2000" message="2000 文字以内で入力してください。"></ptc-input>
+                      <div class="row">
+                        <div class="col-sm-6 col-xs-12">
+                          <ptc-input type="price" form="inspectionForm" name="price" label="価格" model="ctrl.inspection.clinicInspection.price" min="0" max="999999999" required="true"></ptc-input>
+                        </div>
                       </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-xs-12 text-right">
-                        <button class="btn btn-primary" ng-disabled="inspectionForm.$invalid" ng-click="ctrl.saveTicketInspection(ctrl.inspection)">追加する</button>
+                      <div class="row">
+                        <div class="col-sm-6 col-xs-12">
+                          <ptc-input type="number" form="inspectionForm" name="quantity" label="数量" model="ctrl.inspection.quantity" min="0" max="999999999" required="true"></ptc-input>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                          <div class="form-group">
+                            <label>
+                              <span>合計金額</span>
+                            </label>
+                            <h4>
+                              <code ng-if="!!ctrl.inspection.clinicInspection">{{ctrl.inspection.clinicInspection.price * ctrl.inspection.quantity | currency:'¥ ':0}}</code>
+                              <code ng-if="!ctrl.inspection.clinicInspection">¥ 0</code>
+                            </h4>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </form>
+                      <div class="row">
+                        <div class="col-xs-12">
+                          <ptc-textarea form="inspectionForm" name="memo" label="説明" model="ctrl.inspection.memo" maxlength="2000" message="2000 文字以内で入力してください。"></ptc-input>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-xs-12 text-right">
+                          <button class="btn btn-primary" ng-disabled="inspectionForm.$invalid" ng-click="ctrl.saveTicketInspection(ctrl.inspection)">追加する</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
                 </div>
               </div>
             </uib-tab>
