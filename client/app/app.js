@@ -97,6 +97,36 @@ angular
     }
   ])
 
+  // HTTPのイベントを補足して定義するインタセプタ
+  .factory('httpEventInterceptor', ['$q', '$rootScope',
+    function ($q, $rootScope) {
+      var loadingCount = 0;
+      return {
+        request: function (config) {
+          if (++loadingCount === 1) {
+            $rootScope.$broadcast('http:progress');
+          }
+          return config || $q.when(config);
+        },
+        response: function (response) {
+          if (--loadingCount === 0) {
+            $rootScope.$broadcast('http:finish');
+          }
+          return response || $q.when(response);
+        },
+        responseError: function (response) {
+          if (--loadingCount === 0) {
+            $rootScope.$broadcast('http:finish');
+          }
+          return $q.reject(response);
+        }
+      };
+    }
+  ])
+  .config(['$httpProvider', function ($httpProvider) {
+    $httpProvider.interceptors.push('httpEventInterceptor');
+  }])
+
   .constant('timetable', [
     '00:00',
     '00:30',

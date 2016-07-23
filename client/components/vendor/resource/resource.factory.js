@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('petz.vendor')
-  .factory('resource', ['$resource', '$cacheFactory', 'api', function ($resource, $cacheFactory, api) {
+  .factory('resource', ['$resource', '$cacheFactory', '$rootScope', 'api', function ($resource, $cacheFactory, $rootScope, api) {
     var cacheClearInterceptor = {
       response: function (response) {
         $cacheFactory.get('$http').remove(response.config.url);

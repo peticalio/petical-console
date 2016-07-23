@@ -388,10 +388,16 @@ mark {
 // --------------------------------------------------
 // angular toastr
 // --------------------------------------------------
+#toast-container {
+  opacity: 0.9;
+}
 #toast-container > div {
-  -webkit-box-shadow: 0 0 8px #333;
-  box-shadow: 0 0 8px #333;
+  -webkit-box-shadow: 0 0 4px #000;
+  box-shadow: 0 0 4px #000;
   width: 300px;
+}
+.toast-info {
+  background-color: $brand-primary;
 }
 .toast-success {
   background-color: $brand-success;
