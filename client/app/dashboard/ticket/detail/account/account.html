@@ -197,7 +197,9 @@
                     {{payment.date | date:'yyyy/MM/dd'}}
                   </td>
                   <td>
-                    {{payment.type}}
+                    <span class="label label-info" ng-show="payment.type === 'CASH'">現金</span>
+                    <span class="label label-warning" ng-show="payment.type === 'CREDIT_CARD'">クレジットカード</span>
+                    <span class="label label-default" ng-show="payment.type === 'OTHER'">その他</span>
                   </td>
                   <td>
                     {{payment.total | currency:'¥ ':0}}
@@ -242,7 +244,7 @@
       </div>
       <div class="row">
         <div class="col-sm-6">
-          <ptc-input-select form="form" name="type" label="支払方法" model="ctrl.payment.type" data="ctrl.types" maxlength="50" required="true"></ptc-input-select>
+          <ptc-select form="form" name="type" label="支払方法" model="ctrl.payment.type" data="ctrl.types" required="true"></ptc-select>
         </div>
         <div class="col-sm-6">
           <ptc-input type="price" form="form" name="discount" label="割引" model="ctrl.payment.discount"></ptc-input>

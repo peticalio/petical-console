@@ -64,7 +64,8 @@
     constructor($uibModalInstance, ticket) {
       this.$uibModalInstance = $uibModalInstance;
       this.ticket = ticket;
-      this.payment = {ticket:ticket, date:new Date(), amount:0, discount:0};
+      this.types = [{name:'現金', value:'CASH'}, {name:'クレジットカード', value:'CREDIT_CARD'}, {name:'その他', value:'OTHER'}];
+      this.payment = {ticket:ticket, date:new Date(), type:'CASH', amount:0, discount:0};
     }
     // 保存時の処理
     save(payment) {
