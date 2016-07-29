@@ -104,7 +104,7 @@
                 </form>
               </div>
             </uib-tab>
-            <uib-tab index="1">
+            <uib-tab index="1" ng-click="ctrl.loadDiagnosises()">
               <uib-tab-heading>
                 <i class="fa m0 fa-file-text-o hide-xs" aria-hidden="true"></i>
                 診断
@@ -129,7 +129,7 @@
                 </form>
               </div>
             </uib-tab>
-            <uib-tab index="2" ng-click="ctrl.loadTicketInspections()">
+            <uib-tab index="2" ng-click="ctrl.loadClinicInspections()">
               <uib-tab-heading>
                 <i class="fa m0 fa-jpy hide-xs" aria-hidden="true"></i>
                 検査料
@@ -237,7 +237,7 @@
                 処方
               </uib-tab-heading>
               <div class="pt2">
-                <div class="alert alert-success">
+                <div class="alert alert-warning">
                   動物病院での医薬品の処方機能を鋭意開発中！会計機能と連動するので、請求処理や売上の一括管理が可能になります。<br />近日公開予定です。
                 </div>
                 <!-- <form name="prescription-form" class="">
@@ -276,7 +276,7 @@
                 証明書
               </uib-tab-heading>
               <div class="pt2">
-                <div class="alert alert-success">
+                <div class="alert alert-warning">
                   証明書の発行機能を鋭意開発中！証明書をプリントします。<br />近日公開予定です。
                 </div>
               </div>
@@ -287,13 +287,16 @@
                 添付
               </uib-tab-heading>
               <div class="pt2">
-                <div class="ptc-dragdrop" ngf-drop ngf-select ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="false" accept="*" ng-model="file">
+                <div class="alert alert-warning">
+                  ファイルを添付できる機能を開発中！レントゲン写真や紙媒体のファイル等、現況確認するための資料をセキュアに管理できます。<br />近日公開予定です。
+                </div>
+                <!-- <div class="ptc-dragdrop" ngf-drop ngf-select ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="false" accept="*" ng-model="file">
                   <p><i class="fa fa-paperclip fa-3x"></i></p>
                   <p class="lead">ファイルを添付する（2MBまで）</p>
                   <p class="m0">ここにアップロードするファイルをドラッグ＆ドロップしてください。または、このエリアをクリックしてファイルを選択してください。</p>
                   <p class="m0">アップロードしたファイルは安全に管理され、このページからのみアクセスできます。</p>
                 </hr/>
-                </div>
+                </div> -->
               </div>
             </uib-tab>
             <uib-tab index="6">
@@ -302,7 +305,7 @@
                 コメント
               </uib-tab-heading>
               <div class="pt2">
-                <div class="alert alert-success">
+                <div class="alert alert-warning">
                   チケットに自由記述でコメントを積み上げられる機能を鋭意開発中！これにより獣医師とスタッフとの情報連携をスムーズにします。<br />近日公開予定です。
                 </div>
                 <!-- <form name="comment-form" class="">

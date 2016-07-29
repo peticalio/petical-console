@@ -55,15 +55,19 @@
             <ptc-input type="email" form="form" name="email" label="メールアドレス" model="ctrl.clinic.email" maxlength="100" required="true" message="100 文字以内で有効なメールアドレスを入力してください。" onblur="ctrl.copyEmailToLogin()"></ptc-input>
           </div>
         </div>
-        <div class="row">
+        <div class="row" ng-if="!ctrl.clinic.id">
           <div class="col-sm-12 text-center">
             <div vc-recaptcha key="ctrl.api.RECAPTCHA_KEY" on-create="setWidgetId(widgetId)" on-success="ctrl.success(response)" on-expire="ctrl.expirate()">
             </div>
           </div>
         </div>
         <div class="row">
-          <div class="col-xs-12 text-right">
+          <div class="col-xs-12 text-right" ng-if="!ctrl.clinic.id">
             <button class="btn btn-primary" ng-disabled="form.$invalid" ng-click="ctrl.save(ctrl.clinic)">登録する</button>
+            <button class="btn btn-link" ui-sref="app.main">キャンセル</button>
+          </div>
+          <div class="col-xs-12 text-right" ng-if="!!ctrl.clinic.id">
+            <button class="btn btn-primary" ng-disabled="form.$invalid" ng-click="ctrl.update(ctrl.clinic)">保存する</button>
             <button class="btn btn-link" ui-sref="app.main">キャンセル</button>
           </div>
         </div>
@@ -71,96 +75,3 @@
     </div>
   </section>
 </div>
-
-
-
-
-<!-- <div class="layout-max-width">
-  <md-toolbar md-theme="content" class="pt">
-    <div class="md-toolbar-tools">
-      <h1 class="md-title">動物病院登録フォーム</h1>
-    </div>
-  </md-toolbar>
-  <div layout-padding>
-    <div class="flat-card">
-      <form name="form" role="form" novalidate>
-        <div layout="row" layout-wrap>
-          <md-input-container class="md-block" flex="25" flex-xs="50">
-            <label>郵便番号</label>
-            <input name="zipCode" ng-model="ctrl.clinic.zipCode" maxlength="7" ng-required="true" ng-minlength="7" ng-maxlength="7" ng-pattern="/^\d+$/"/>
-            <div ng-show="form.zipCode.$invalid" ng-messages="form.zipCode.$error">
-              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-                <span>7 文字の半角数字で入力してください。</span>
-              </div>
-            </div>
-          </md-input-container>
-          <div flex="75" flex-xs="50"></div>
-          <md-input-container class="md-block" flex="25" flex-xs="50">
-            <label>都道府県</label>
-            <input name="state" ng-model="ctrl.clinic.state" maxlength="10" ng-required="true" ng-maxlength="10"/>
-            <div ng-show="form.state.$invalid" ng-messages="form.state.$error">
-              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-                <span>10 文字以内で入力してください。</span>
-              </div>
-            </div>
-          </md-input-container>
-          <div flex="75" flex-xs="50"></div>
-          <md-input-container class="md-block" flex="100">
-            <label>市区町村</label>
-            <input name="city" ng-model="ctrl.clinic.city" maxlength="50" ng-required="true" ng-maxlength="50"/>
-            <div ng-show="form.city.$invalid" ng-messages="form.city.$error">
-              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-                <span>50 文字で入力してください。</span>
-              </div>
-            </div>
-          </md-input-container>
-          <md-input-container class="md-block" flex="100">
-            <label>番地・その他</label>
-            <input name="street" ng-model="ctrl.clinic.street" maxlength="50" ng-required="true" ng-maxlength="50"/>
-            <div ng-show="form.street.$invalid" ng-messages="form.street.$error">
-              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-                <span>50 文字以内で入力してください。</span>
-              </div>
-            </div>
-          </md-input-container>
-          <md-input-container class="md-block" flex="50" flex-xs="100">
-            <label>代表電話番号</label>
-            <input name="phoneNo" ng-model="ctrl.clinic.phoneNo" maxlength="15" ng-required="true" ng-maxlength="15" ng-pattern="/^\d+$/"/>
-            <div ng-show="form.phoneNo.$invalid" ng-messages="form.phoneNo.$error">
-              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-                <span>15 文字以内の半角数字で入力してください。</span>
-              </div>
-            </div>
-          </md-input-container>
-          <div flex="50" hide-xs></div>
-          <md-input-container class="md-block" flex="50" flex-xs="100">
-            <label>メールアドレス</label>
-            <input name="email" type="email" ng-model="ctrl.clinic.email" maxlength="100" ng-required="true" ng-maxlength="100"/>
-            <div ng-show="form.email.$invalid" ng-messages="form.email.$error">
-              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-                <span>100 文字以内で有効なメールアドレスを入力してください。</span>
-              </div>
-            </div>
-          </md-input-container>
-          <md-input-container class="md-block" flex="100">
-            <label>動物病院の紹介文</label>
-            <textarea name="description" rows="5" ng-model="ctrl.clinic.description" md-maxlength="2000" md-select-on-focus></textarea>
-            <div ng-show="form.description.$invalid" ng-messages="form.description.$error">
-              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-                <span>2000 文字以内で入力してください。</span>
-              </div>
-            </div>
-          </md-input-container>
-        </div>
-        <div layout-gt-xs="row" layout-align="center center">
-          <div vc-recaptcha key="ctrl.api.RECAPTCHA_KEY" on-create="setWidgetId(widgetId)" on-success="ctrl.success(response)" on-expire="ctrl.expirate()">
-          </div>
-        </div>
-        <div layout="row" layout-align="end center">
-          <md-button class="md-primary md-raised" ng-disabled="form.$invalid" ng-click="ctrl.save(ctrl.clinic)">登録する</md-button>
-          <md-button class="md-link" ui-sref="app.home">キャンセル</md-button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div> -->

@@ -11,11 +11,20 @@
       this.clinic = clinic;
     }
 
-    // クリニックを新規登録する
+    // 動物病院を新規登録する
     save(clinic) {
       this.Clinic.save({captcha:this.response}, clinic).$promise
         .then((response) => {
-          this.toaster.info('動物病院を新しく登録しました。');
+          this.toaster.success('動物病院を新しく登録しました。');
+          this.state.go('app.dashboard', {clinicId: response.data.id});
+        });
+    }
+
+    // 動物病院を更新する
+    update(clinic) {
+      this.Clinic.update(clinic).$promise
+        .then((response) => {
+          this.toaster.success('動物病院の情報を更新しました。');
           this.state.go('app.dashboard', {clinicId: response.data.id});
         });
     }

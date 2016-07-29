@@ -3,7 +3,7 @@
     <div class="heading-elements hide-xs">
       <a class="btn btn-link lnk-submenu" ui-sref="app.dashboard.ticket.form({chartId: ctrl.chart.id})">
         <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
-        <p>予約する</p>
+        <p>予約・受付</p>
       </a>
       <a class="btn btn-link lnk-submenu" ui-sref="app.dashboard.chart">
         <i class="fa fa-search" aria-hidden="true"></i>
@@ -118,13 +118,15 @@
                     <i class="fa fa-nav fa-certificate"></i>狂犬病登録番号:
                   </div>
                   <div class="col-sm-4">
-                    <p>{{ctrl.chart.pet.rabidRegisterNo}}</p>
+                    <p ng-if="!ctrl.chart.pet.rabidRegisterNo">登録なし</p>
+                    <p ng-if="!!ctrl.chart.pet.rabidRegisterNo">{{ctrl.chart.pet.rabidRegisterNo}}</p>
                   </div>
                   <div class="col-sm-2">
                     <i class="fa fa-nav fa-eyedropper"></i>注射済票番号:
                   </div>
                   <div class="col-sm-4">
-                    <p>{{ctrl.chart.pet.injectionReportNo}}</p>
+                    <p ng-if="!ctrl.chart.pet.injectionReportNo">登録なし</p>
+                    <p ng-if="!!ctrl.chart.pet.injectionReportNo">{{ctrl.chart.pet.injectionReportNo}}</p>
                   </div>
                 </div>
                 <h5>マイクロチップ情報</h5>

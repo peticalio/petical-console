@@ -43,7 +43,7 @@
       customers.forEach((item) => {
         if (item && item.user && item.user.firstName && item.user.lastName) {
           item.clinic = this.clinic;
-          var promise = this.ClinicCustomer.save({clinicId: this.clinic.id}, item).$promise
+          var promise = this.ClinicCustomer.save({clinicId:this.clinic.id, force:true}, item).$promise
             .then(() => {
               counter++;
               this.progress = Math.ceil(counter / size * 100);

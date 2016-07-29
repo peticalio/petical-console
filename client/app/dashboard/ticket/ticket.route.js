@@ -25,15 +25,6 @@
       });
   }
 
-  function getDiagnosises(Diagnosis) {
-    return Diagnosis.query().$promise.then((response) => response);
-  }
-  function getMedicines(ClinicMedicine, clinic) {
-    return ClinicMedicine.query({clinicId: clinic.id}).$promise.then((response) => response);
-  }
-  function getInspections(ClinicInspection, clinic) {
-    return ClinicInspection.query({clinicId: clinic.id}).$promise.then((response) => response);
-  }
   function getAccounts(TicketAccount, clinic, ticket) {
     return TicketAccount.query({clinicId:clinic.id, ticketId:ticket.id}).$promise.then((response) => response);
   }
@@ -109,10 +100,7 @@
           label: 'チケット詳細'
         },
         resolve: {
-          ticket:         getTicket,
-          inspections:    getInspections,
-          medicines:      getMedicines,
-          diagnosises:    getDiagnosises
+          ticket:         getTicket
         }
       })
 

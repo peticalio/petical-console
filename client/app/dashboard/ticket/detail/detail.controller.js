@@ -2,7 +2,7 @@
   'use strict';
 
   class TicketDetailController {
-    constructor($state, $stateParams, toaster, dialog, ClinicTicket, ClinicChartTicket, ClinicTicketStatus, TicketInspection, ClinicTicketCertificate, ClinicTicketAttachment, ClinicTicketInvoice, clinic, ticket, inspections, medicines, diagnosises) {
+    constructor($state, $stateParams, toaster, dialog, ClinicTicket, ClinicInspection, Diagnosis, TicketInspection, ClinicTicketAttachment, clinic, ticket) {
       this.$state = $state;
       this.$stateParams = $stateParams;
       this.toaster = toaster;
@@ -11,18 +11,12 @@
       this.ticket = ticket;
       this.total = 0;
 
-      this.medicines = medicines;
-      this.diagnosises = diagnosises;
       this.ClinicTicket = ClinicTicket;
-      this.ClinicChartTicket = ClinicChartTicket;
-      this.ClinicTicketStatus = ClinicTicketStatus;
-      this.ClinicTicketCertificate = ClinicTicketCertificate;
-      this.ClinicTicketAttachment = ClinicTicketAttachment;
-      this.ClinicTicketInvoice = ClinicTicketInvoice;
+      this.ClinicInspection = ClinicInspection;
+      this.Diagnosis = Diagnosis;
 
       // 検査
       this.inspection = {quantity:1};
-      this.inspections = inspections;
       this.TicketInspection = TicketInspection;
       this.TicketInspection.query({clinicId:this.clinic.id, ticketId:this.ticket.id}).$promise
         .then((response) => {
@@ -38,7 +32,17 @@
       this.ClinicTicket.update({clinicId:ticket.clinic.id, ticketId:ticket.id}, ticket).$promise
         .then(() => this.toaster.info('チケットに情報を保存しました。'));
     }
+    // 診断結果マスタをロードする
+    loadDiagnosises() {
+      this.Diagnosis.query().$promise
+        .then((response) => this.diagnosises = response);
+    }
 
+    // 動物病院の検査マスタをロードする
+    loadClinicInspections() {
+      this.ClinicInspection.query({clinicId:this.clinic.id}).$promise
+        .then((response) => this.inspections = response);
+    }
     // 検査情報を保存する
     saveTicketInspection(inspection) {
       inspection.ticket = this.ticket;
@@ -90,7 +94,7 @@
     // };
   }
 
-  TicketDetailController.$inject = ['$state', '$stateParams', 'toaster', 'dialog', 'ClinicTicket', 'ClinicChartTicket', 'ClinicTicketStatus', 'TicketInspection', 'ClinicTicketCertificate', 'ClinicTicketAttachment', 'ClinicTicketInvoice', 'clinic', 'ticket', 'inspections', 'medicines', 'diagnosises'];
+  TicketDetailController.$inject = ['$state', '$stateParams', 'toaster', 'dialog', 'ClinicTicket', 'ClinicInspection', 'Diagnosis', 'TicketInspection', 'ClinicTicketAttachment', 'clinic', 'ticket'];
   angular.module('petzApp')
     .controller('TicketDetailController', TicketDetailController);
 
