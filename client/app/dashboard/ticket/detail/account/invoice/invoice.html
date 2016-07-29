@@ -1,0 +1,127 @@
+<div class="container-fluid">
+  <div class="page-header-content no-print">
+    <div class="heading-elements hide-xs">
+      <a class="btn btn-link lnk-submenu" ui-sref="app.dashboard.ticket.detail">
+        <i class="fa fa-ticket" aria-hidden="true"></i>
+        <p>チケット</p>
+      </a>
+      <a class="btn btn-link lnk-submenu" ui-sref="app.dashboard.ticket.detail.account">
+        <i class="fa fa-calculator" aria-hidden="true"></i>
+        <p>会計する</p>
+      </a>
+      <a class="btn btn-link lnk-submenu" onclick="window.print()">
+        <i class="fa fa-print" aria-hidden="true"></i>
+        <p>印刷する</p>
+      </a>
+		</div>
+    <div class="page-title">
+      <h4>診療明細書　兼　領収書の発行</h4>
+      <ul class="breadcrumb breadcrumb-caret small" ncy-breadcrumb></ul>
+    </div>
+  </div>
+  <div class="overflow">
+    <section class="panel-paper">
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-xs-6">
+            <span>カルテ番号：{{ctrl.ticket.chart.chartNo}}</span>
+          </div>
+          <div class="col-xs-6 text-right">
+            <span>発行日：{{ctrl.today | date:'yyyy/MM/dd'}}</span>
+          </div>
+        </div>
+        <h3 class="text-center print-title mb3">診療明細書　兼　領収書</h3>
+        <div class="row">
+          <div class="col-xs-6">
+            <div class="pb bb">
+              <h4 class="mb0"><small>飼い主：　</small>{{ctrl.ticket.chart.customer.user.lastName}} {{ctrl.ticket.chart.customer.user.firstName}} 様</h4>
+              <h4 class="mb0"><small>お名前：　</small>{{ctrl.ticket.chart.pet.name}} ちゃん</h4>
+            </div>
+          </div>
+          <div class="col-xs-6">
+            <p class="mb0 text-right">
+              診察日：{{ctrl.ticket.endDateTime | date:'yyyy/MM/dd'}}<br />
+              保険種類：なし<br />
+              負担割合：１０割
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <h4 class="mb0 pb bb" ng-show="!ctrl.ticket.diagnosis"><small>診断名：　</small>原因不明</h4>
+            <h4 class="mb0 pb bb" ng-show="!!ctrl.ticket.diagnosis"><small>診断名：　</small>{{ctrl.ticket.diagnosis.name}}</h4>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 mt3">
+            <table class="table table-bordered table-condensed middle bb0 bl0">
+              <thead class="small">
+                <tr>
+                  <th class="col-xs-6">詳細</th>
+                  <th class="col-xs-1">数量</th>
+                  <th class="col-xs-2">単価</th>
+                  <th class="col-xs-1">消費税</th>
+                  <th class="col-xs-2">金額</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="account in ctrl.accounts">
+                  <td>{{account.name}}</td>
+                  <td class="text-right">{{account.quantity}}</td>
+                  <td class="text-right">{{account.price | currency:'¥ ':0}}</td>
+                  <td class="text-right">{{account.tax | currency:'¥ ':0}}</td>
+                  <td class="text-right">{{account.subtotal | currency:'¥ ':0}}</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td rowspan="5" class="b0">
+                    <h4 class="b0">{{ctrl.clinic.name}}</h4>
+                    <p class="mb0">
+                      〒 {{ctrl.clinic.zipCode}}<br/>
+                      {{ctrl.clinic.state}}{{ctrl.clinic.city}}{{ctrl.clinic.street}}
+                    </p>
+                    <p class="mb0">
+                      <span class="mr" ng-show="ctrl.clinic.phoneNo">TEL: {{ctrl.clinic.phoneNo}}</span>
+                      <span class="mr" ng-show="ctrl.clinic.faxNo">FAX: {{ctrl.clinic.faxNo}}</span>
+                      <br/>
+                      <span class="mr">{{ctrl.clinic.url}}</span>
+                    </p>
+                    <p class="mb0">
+                      上記のとおり正に受領いたしました。
+                    </p>
+                  </td>
+                  <td colspan="2">小計</td>
+                  <td colspan="2" class="text-right">{{ctrl.ticket.total | currency:'¥ ':0}}</td>
+                </tr>
+                <tr>
+                  <td colspan="2">値引</td>
+                  <td colspan="2" class="text-right">{{ctrl.ticket.discount | currency:'¥ ':0}}</td>
+                </tr>
+                <tr>
+                  <td colspan="2">請求金額（消費税）</td>
+                  <td colspan="2" class="text-right">{{ctrl.ticket.total - ctrl.ticket.discount | currency:'¥ ':0}} ({{ctrl.ticket.tax | currency:'¥ ':0}})</td>
+                </tr>
+                <tr>
+                  <td colspan="2">受領金額</td>
+                  <td colspan="2" class="text-right">{{ctrl.ticket.total - ctrl.ticket.discount - ctrl.ticket.balance | currency:'¥ ':0}}</td>
+                </tr>
+                <tr>
+                  <td colspan="2">未払金額</td>
+                  <td colspan="2" class="text-right">{{ctrl.ticket.balance | currency:'¥ ':0}}</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <p class="m0 small">
+              ※領収書は再発行できませんので、大切に保管ください。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

@@ -170,6 +170,20 @@
           payments:        getPayments
         }
       })
+      // 請求書
+      .state('app.dashboard.ticket.detail.account.invoice', {
+        url: '/invoice',
+        views: {
+          '@app': {
+            templateUrl:  'app/dashboard/ticket/detail/account/invoice/invoice.html',
+            controller:   'TicketInvoiceController',
+            controllerAs: 'ctrl'
+          }
+        },
+        ncyBreadcrumb: {
+          label: '診療明細書兼領収書'
+        }
+      })
 
 
 
@@ -253,41 +267,6 @@
         },
         resolve: {
           attachments:    getAttachments
-        }
-      })
-
-      // チケット詳細（会計）
-      .state('app.dashboard.ticket.detail.invoice', {
-        abstract: true,
-        url: '/invoices'
-      })
-      // チケット詳細（会計一覧）
-      .state('app.dashboard.ticket.detail.invoice.list', {
-        url: '/list',
-        views: {
-          '@app.dashboard.ticket.detail': {
-            templateUrl:  'app/dashboard/ticket/detail/invoice/invoice.html',
-            controller:   'TicketDetailInvoiceController',
-            controllerAs: 'ctrl'
-          }
-        },
-        resolve: {
-          invoices:        getInvoices
-        }
-      })
-      // チケット詳細（請求書詳細）
-      .state('app.dashboard.ticket.detail.invoice.detail', {
-        url: '/:invoiceId',
-        views: {
-          '@app.dashboard.ticket.detail': {
-            templateUrl:  'app/dashboard/ticket/detail/invoice/detail/detail.html',
-            controller:   'TicketDetailInvoiceDetailController',
-            controllerAs: 'ctrl'
-          }
-        },
-        resolve: {
-          invoice:        getClinicInvoice,
-          examinations:   function(){}
         }
       })
     ;
