@@ -1,16 +1,20 @@
-<div layout="row" layout-align="center start">
-  <div layout-padding class="container-small flat-card mt3 mb3">
-    <h3>パスワードを変更しました</h3>
-    <div>
-      <div layout-gt-xs="row">
-        <div class="info text-left" flex>
-        パスワードを変更しました。<br/>
-        下記よりサインインして、ペティカルをご利用ください。
+<div class="container container-sm">
+  <section class="panel panel-danger bw2" style="margin-top:50px;">
+    <div class="panel-heading bw2">
+      <h1 class="panel-title">パスワード変更完了</h1>
+    </div>
+    <div class="panel-body p3">
+      <div class="alert alert-default">
+        <p>新しいパスワードへの変更を行いました。<br />新しいパスワードにて、下記よりサインインして、ペティカルをご利用ください。<br />引き続き、ペティカルをよろしくお願いします。</p>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 text-center mt2">
+          <button class="btn btn-primary btn-lg" ui-sref="app.signin">
+            <i class="fa fa-sign-in m0" aria-hidden="true"></i>
+            サインインへ
+          </button>
         </div>
       </div>
-      <div layout-gt-xs="row" layout-align="end center">
-        <md-button ui-sref="app.signin">サインインへ</md-button>
-      </div>
     </div>
-  </div>
+  </section>
 </div>
