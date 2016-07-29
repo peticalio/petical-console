@@ -20,7 +20,7 @@
             this.$location.path(path);
           } else {
             this.$cacheFactory.get('$http').removeAll();
-            this.$state.go('app.main', {}, {reload: true});
+            this.$state.go('app.main', {}, {reload:true});
           }
         })
         .catch(() => {

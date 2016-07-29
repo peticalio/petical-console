@@ -26,6 +26,7 @@
 // --------------------------------------------------
 .navbar-default {
   background-color: #fff;
+  border-color: $table-border-color;
   .navbar-nav > .active > a, .navbar-nav > .active > a:focus, .navbar-nav > .active > a:hover, .navbar-nav > li > a:focus, .navbar-nav > li > a:hover,
   .navbar-nav > .open > a, .navbar-nav > .open > a:hover, .navbar-nav > .open > a:focus {
     color: #333;
@@ -93,10 +94,13 @@
 // --------------------------------------------------
 // bootstrap dropdown
 // --------------------------------------------------
+.dropdown-menu li:focus, .dropdown-menu li a:focus {
+  outline: none !important;
+}
 .dropdown-menu > li > a {
   padding: 6px 20px;
 }
-.dropdown-menu > li > a:hover, .dropdown-menu > li > a:active {
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:active, .dropdown-menu > li > a:focus {
   color: #fff;
   background-color: $brand-primary !important;
 }
@@ -153,16 +157,25 @@
 }
 
 // --------------------------------------------------
+// ui-bootstrap calendar
+// --------------------------------------------------
+.uib-datepicker-popup {
+  padding: 4px;
+}
+.uib-daypicker {
+  outline: none !important;
+}
+
+// --------------------------------------------------
 // bootstrap panel
 // --------------------------------------------------
 .panel {
-  border-radius: $border-radius-small;
   border-color: $table-border-color;
   box-shadow: none;
 }
 .panel-heading {
-  padding: 16px;
   border-color: $table-border-color;
+  padding: 16px;
 }
 .panel-heading-none {
   padding-bottom: 0px;
@@ -180,6 +193,30 @@
       height: 16px;
     }
   }
+}
+
+// --------------------------------------------------
+// bootstrap alert
+// --------------------------------------------------
+.alert {
+  p {
+    margin-bottom: 0 !important;
+  }
+}
+.alert-default {
+  border: 1px solid $table-border-color;
+}
+.alert-info {
+  background-color: $state-info-border;
+}
+.alert-success {
+  background-color: $state-success-border;
+}
+.alert-warning {
+  background-color: $state-warning-border;
+}
+.alert-danger {
+  background-color: $state-danger-border;
 }
 
 // --------------------------------------------------
@@ -294,6 +331,33 @@
 }
 
 // --------------------------------------------------
+// bootstrap button
+// --------------------------------------------------
+button {
+  outline: none !important;
+}
+.btn-primary-outline {
+  @extend .btn-primary;
+  color: $brand-primary;
+  background-color: #fff;
+}
+.btn-success-outline {
+  @extend .btn-success;
+  color: $brand-success;
+  background-color: #fff;
+}
+.btn-warning-outline {
+  @extend .btn-warning;
+  color: $brand-warning;
+  background-color: #fff;
+}
+.btn-danger-outline {
+  @extend .btn-danger;
+  color: $brand-danger;
+  background-color: #fff;
+}
+
+// --------------------------------------------------
 // bootstrap modal
 // --------------------------------------------------
 .modal-header {
@@ -315,14 +379,25 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+mark {
+  background-color: $state-danger-bg;
+  padding: 0.3em 0.5em;
+  border-radius: 3px;
+}
 
 // --------------------------------------------------
 // angular toastr
 // --------------------------------------------------
+#toast-container {
+  opacity: 0.9;
+}
 #toast-container > div {
-  -webkit-box-shadow: 0 0 8px #333;
-  box-shadow: 0 0 8px #333;
+  -webkit-box-shadow: 0 0 4px #000;
+  box-shadow: 0 0 4px #000;
   width: 300px;
+}
+.toast-info {
+  background-color: $brand-primary;
 }
 .toast-success {
   background-color: $brand-success;

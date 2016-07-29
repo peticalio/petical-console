@@ -26,129 +26,197 @@
   <section class="panel">
     <div class="panel-body">
       <div class="row">
-        <div class="col-md-2">
+        <div class="col-sm-2">
           <i class="fa fa-nav fa-hospital-o"></i>所属動物病院:
         </div>
-        <div class="col-md-4">
+        <div class="col-sm-4">
           <p>{{ctrl.clinic.name}}</p>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-2">
+        <div class="col-sm-2">
           <i class="fa fa-nav fa-hashtag"></i>飼い主さまコード:
         </div>
-        <div class="col-md-4">
+        <div class="col-sm-4">
           <p ng-if="ctrl.customer.customerCode">{{ctrl.customer.customerCode}}</p>
           <p ng-if="!ctrl.customer.customerCode">未登録</p>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-2">
+        <div class="col-sm-2">
           <i class="fa fa-nav fa-user"></i>氏名:
         </div>
-        <div class="col-md-4">
+        <div class="col-sm-4">
           <p>{{ctrl.customer.user.lastName}}&nbsp;{{ctrl.customer.user.firstName}}</p>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-2">
+        <div class="col-sm-2">
           <i class="fa fa-nav fa-user"></i>氏名（フリガナ）:
         </div>
-        <div class="col-md-4">
+        <div class="col-sm-4">
           <p>{{ctrl.customer.user.lastNameKana}}&nbsp;{{ctrl.customer.user.firstNameKana}}</p>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-2">
+        <div class="col-sm-2">
           <i class="fa fa-nav fa-sort-numeric-asc"></i>郵便番号:
         </div>
-        <div class="col-md-4">
+        <div class="col-sm-4">
           <p ng-show="ctrl.customer.user.zipCode">〒 {{ctrl.customer.user.zipCode}}</p>
           <p ng-show="!ctrl.customer.user.zipCode">未登録</p>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-2">
+        <div class="col-sm-2">
           <i class="fa fa-nav fa-home"></i>住所:
         </div>
-        <div class="col-md-10">
+        <div class="col-sm-10">
           <p ng-show="ctrl.customer.user.state">{{ctrl.customer.user.state}}{{ctrl.customer.user.city}}{{ctrl.customer.user.street}}{{ctrl.customer.user.other}}</p>
           <p ng-show="!ctrl.customer.user.state">未登録</p>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-2">
+        <div class="col-sm-2">
           <i class="fa fa-nav fa-phone"></i>電話番号（自宅）:
         </div>
-        <div class="col-md-4">
+        <div class="col-sm-4">
           <p ng-show="ctrl.customer.user.phoneNo">{{ctrl.customer.user.phoneNo}}</p>
           <p ng-show="!ctrl.customer.user.phoneNo">未登録</p>
         </div>
-        <div class="col-md-2">
+        <div class="col-sm-2">
           <i class="fa fa-nav fa-mobile"></i>電話番号（携帯）:
         </div>
-        <div class="col-md-4">
+        <div class="col-sm-4">
           <p ng-show="ctrl.customer.user.mobilePhoneNo">{{ctrl.customer.user.mobilePhoneNo}}</p>
           <p ng-show="!ctrl.customer.user.mobilePhoneNo">未登録</p>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-2">
+        <div class="col-sm-2">
           <i class="fa fa-nav fa-envelope-o"></i>メールアドレス:
         </div>
-        <div class="col-md-10">
-          <p class="m0">{{ctrl.customer.user.email}}</p>
+        <div class="col-sm-10">
+          <p>{{ctrl.customer.user.email}}</p>
         </div>
       </div>
-    </div>
-  </section>
-  <section class="panel">
-    <div class="panel-body">
-      <div class="table-responsive">
-        <table class="table table-hover table-clickable table-sortable table-middle">
-          <thead>
-            <tr>
-              <th>
-                カルテ番号
-              </th>
-              <th>
-                ペットのお名前
-              </th>
-              <th>
-                種類
-              </th>
-              <th>
-                色
-              </th>
-              <th>
-                性別
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr dir-paginate="pet in ctrl.pets | orderBy:ctrl.order:ctrl.reverse | itemsPerPage:20" ng-click="ctrl.goChart(ctrl.customer, pet)">
-              <td>
-                <span class="label label-default" ng-if="!pet.chart">カルテ未作成</span>
-                <span ng-if="pet.chart">{{pet.chart.chartNo}}</span>
-              </td>
-              <td>
-                {{pet.name}} ちゃん
-              </td>
-              <td>
-                {{pet.type}}
-              </td>
-              <td>
-                <span class="label label-info">{{pet.color}}</span>
-              </td>
-              <td>
-                <i class="fa fa-mars mr" ng-show="pet.sex === 'MALE'"></i>
-                <i class="fa fa-venus mr" ng-show="pet.sex === 'FEMALE'"></i>
-                <span ng-show="pet.sex === 'MALE'">オス</span>
-                <span ng-show="pet.sex === 'FEMALE'">メス</span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="row">
+        <div class="col-sm-12">
+          <uib-tabset active="active">
+            <uib-tab index="0">
+              <uib-tab-heading>
+                <i class="fa m0 fa-file-text-o hide-xs" aria-hidden="true"></i>
+                作成済みカルテ
+              </uib-tab-heading>
+              <div class="pt2">
+                <div class="alert alert-warning" ng-show="!ctrl.charts || ctrl.charts.length === 0">
+                  <p>作成済みのカルテはありません。診察を行う場合は、<a class="alert-link" ui-sref="app.dashboard.chart.form({customerId:ctrl.customer.id})">こちらからカルテを作成</a>してください。</p>
+                </div>
+                <div class="table-responsive" ng-show="ctrl.charts && ctrl.charts.length !== 0">
+                  <table class="table table-hover table-clickable table-middle">
+                    <thead>
+                      <tr>
+                        <th class="col-sm-2">
+                          カルテ番号
+                        </th>
+                        <th class="col-sm-3">
+                          ペットのお名前
+                        </th>
+                        <th class="col-sm-3">
+                          種類
+                        </th>
+                        <th class="col-sm-2">
+                          色
+                        </th>
+                        <th class="col-sm-2">
+                          性別
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="chart in ctrl.charts" ui-sref="app.dashboard.chart.detail({chartId:chart.id})">
+                        <td>
+                          <span ng-show="!!chart.chartNo">{{chart.chartNo}}</span>
+                          <span ng-show="!chart.chartNo">なし</span>
+                        </td>
+                        <td>
+                          {{chart.pet.name}} ちゃん
+                        </td>
+                        <td>
+                          {{chart.pet.kind}}（{{chart.pet.type}}）
+                        </td>
+                        <td>
+                          <span class="label label-default-outline">{{chart.pet.color}}</span>
+                        </td>
+                        <td>
+                          <i class="fa fa-mars mr" ng-show="chart.pet.sex === 'MALE'"></i>
+                          <i class="fa fa-venus mr" ng-show="chart.pet.sex === 'FEMALE'"></i>
+                          <span ng-show="chart.pet.sex === 'MALE'">オス</span>
+                          <span ng-show="chart.pet.sex === 'FEMALE'">メス</span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </uib-tab>
+            <uib-tab index="1">
+              <uib-tab-heading>
+                <i class="fa m0 fa-heart-o hide-xs" aria-hidden="true"></i>
+                他のペット
+              </uib-tab-heading>
+              <div class="pt2">
+                <div class="alert alert-warning" ng-show="!ctrl.pets || ctrl.pets.length === 0">
+                  <p>{{ctrl.customer.user.lastName}} {{ctrl.customer.user.firstName}} 様が飼育中のペットはいません。<a class="alert-link" ui-sref="app.dashboard.chart.form({customerId:ctrl.customer.id})">こちらからカルテを作成すると</a>合わせて登録されます。</p>
+                </div>
+                <div class="table-responsive" ng-show="ctrl.pets && ctrl.pets.length !== 0">
+                  <table class="table table-middle">
+                    <thead>
+                      <tr>
+                        <th class="col-sm-3">
+                          ペットのお名前
+                        </th>
+                        <th class="col-sm-3">
+                          種類
+                        </th>
+                        <th class="col-sm-2">
+                          色
+                        </th>
+                        <th class="col-sm-2">
+                          性別
+                        </th>
+                        <th class="col-sm-2">
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="pet in ctrl.pets">
+                        <td>
+                          {{pet.name}} ちゃん
+                        </td>
+                        <td>
+                          {{pet.kind}}（{{pet.type}}）
+                        </td>
+                        <td>
+                          <span class="label label-default-outline">{{pet.color}}</span>
+                        </td>
+                        <td>
+                          <i class="fa fa-mars mr" ng-show="pet.sex === 'MALE'"></i>
+                          <i class="fa fa-venus mr" ng-show="pet.sex === 'FEMALE'"></i>
+                          <span ng-show="pet.sex === 'MALE'">オス</span>
+                          <span ng-show="pet.sex === 'FEMALE'">メス</span>
+                        </td>
+                        <td class="text-center">
+                          <button class="btn btn-default btn-sm" ui-sref="app.dashboard.chart.import({customerId:ctrl.customer.id, petId:pet.id})">カルテを作成</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </uib-tab>
+          </uib-tabset>
+        </div>
       </div>
     </div>
   </section>

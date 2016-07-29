@@ -1,17 +1,16 @@
-<div class="form-group" ng-class="{'has-error': $ctrl.invalid}">
+<div class="form-group" ng-class="{'has-error': $ctrl.form[$ctrl.name].$invalid}">
   <label for="{{$ctrl.name}}">
     <span ng-if="$ctrl.label">{{$ctrl.label}}</span>
     <span ng-if="$ctrl.required" class="label label-required">必須</span>
   </label>
-  <ui-select ng-model="$ctrl.model" theme="bootstrap" reset-search-input="false" on-select="$ctrl.select($item, $model)">
-    <ui-select-match placeholder="一覧から選択するか値を入力してください">
-      {{$ctrl.doTransform($select.selected) || $select.search}}
-    </ui-select-match>
-    <ui-select-choices repeat="d in $ctrl.data | filter: $select.search" refresh="$ctrl.refresh($select)" refresh-delay="0">
-      <div ng-bind-html="$ctrl.doTransform(d) | highlight: $select.search"></div>
-    </ui-select-choices>
-  </ui-select>
-  <div class="form-error" ng-show="$ctrl.invalid">
-    <span>{{$ctrl.message}}</span>
+  <ol class="form-control nya-bs-select" ng-model="$ctrl.model" data-size="7" ng-required="$ctrl.required">
+    <li ng-repeat="option in $ctrl.data" value="{{$ctrl.getValue(option)}}" class="nya-bs-option">
+      <a>{{$ctrl.getLabel(option)}}</a>
+    </li>
+  </ol>
+  <div class="form-error" ng-show="$ctrl.form[$ctrl.name].$invalid" ng-messages="$ctrl.form[$ctrl.name].$error">
+    <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+      <span>{{$ctrl.message}}</span>
+    </div>
   </div>
 </div>

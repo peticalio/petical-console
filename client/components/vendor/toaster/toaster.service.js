@@ -9,6 +9,11 @@
 
     // インフォメッセージを出力する
     info(message) {
+      this.toastr.info(message);
+    }
+
+    // 処理成功メッセージを出力する
+    success(message) {
       this.toastr.success(message);
     }
 

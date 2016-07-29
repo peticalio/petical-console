@@ -13,12 +13,22 @@
           }
         }
       })
-      .state('app.activate', {
+      .state('app.signup.thanks', {
+        url: '/thanks',
+        views: {
+          '@app': {
+            templateUrl:      'app/signup/thanks/thanks.html',
+            controller:       'SignupThanksController',
+            controllerAs:     'ctrl'
+          }
+        }
+      })
+      .state('app.signup.activate', {
         url: '/activate',
         views: {
           '@app': {
-            templateUrl:      'app/signup/finish/finish.html',
-            controller:       'SignupFinishController',
+            templateUrl:      'app/signup/activate/activate.html',
+            controller:       'SignupActivateController',
             controllerAs:     'ctrl'
           }
         }

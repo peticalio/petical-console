@@ -13,6 +13,7 @@
       this.chart = chart;
       this.target = new Date(new Date().setMonth(new Date().getMonth() - 3));
       this.order = 'startDateTime';
+      this.reverse = true;
     }
 
     // ソートキーを指定する

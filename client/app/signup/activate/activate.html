@@ -1,0 +1,67 @@
+<div class="container container-sm">
+  <section class="panel panel-danger bw2" style="margin-top:50px;">
+    <div class="panel-heading bw2">
+      <h1 class="panel-title">アカウントをアクティベート</h1>
+    </div>
+    <div class="panel-body p3">
+      <div class="alert alert-default">
+        <p>アカウントをアクティベートします。<br/>初期セットアップを行うため、あなたの基本情報を入力してください。</p>
+      </div>
+      <form name="form" novalidate="true" ng-submit="ctrl.signup(ctrl.user)">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></span>
+                <input type="text" name="username" ng-model="ctrl.user.username" maxlength="50" ng-required="true" ng-maxlength="50" placeholder="ユーザー名を入力してください" class="form-control input-lg"/>
+              </div>
+              <div class="form-error" ng-show="form.username.$invalid && form.username.$dirty" ng-messages="form.username.$error">
+                <div ng-message-exp="['required', 'minlength', 'maxlength']">
+                  <span>50 文字以内でユーザー名を入力してください。</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 mt2">
+            <div class="form-group">
+              <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="login"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></span>
+                <input type="password" name="password" ng-model="ctrl.user.password" maxlength="100" ng-minlength="6" ng-maxlength="100" ng-pattern="/^[a-zA-Z0-9!-/:-@¥[-`{-~]*$/" ng-required="true" class="form-control input-lg" placeholder="パスワードを入力してください" />
+              </div>
+              <div class="form-error" ng-show="form.password.$invalid && form.password.$dirty" ng-messages="form.password.$error">
+                <div ng-message-exp="['required', 'minlength', 'maxlength', 'min', 'max' 'pattern']">
+                  <span>6 文字以上 100 文字以内の半角英数字記号で新しいパスワードを入力してください。</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 mt2">
+            <div class="form-group">
+              <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="login"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></span>
+                <input type="password" name="confirm" ng-model="ctrl.confirm" maxlength="100" ng-minlength="6" ng-maxlength="100" ng-required="true" ui-validate="{same:'$value === ctrl.user.password'}" class="form-control input-lg" placeholder="確認のためもう一度入力してください。" />
+              </div>
+              <div class="form-error" ng-show="form.confirm.$invalid && form.confirm.$dirty" ng-messages="form.confirm.$error">
+                <div ng-message-exp="['required', 'minlength', 'maxlength', 'min', 'max' 'pattern', 'same']">
+                  <span>新しいパスワードに入力した値と異なっています。</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 text-center mt2">
+            <button class="btn btn-danger btn-lg" type="submit" ng-disabled="form.$invalid">
+              <i class="fa fa-sign-in"></i>
+              アクティベートする
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+</div>

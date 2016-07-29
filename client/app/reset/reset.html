@@ -1,24 +1,44 @@
-<div layout="row" layout-align="center start">
-  <div layout-padding class="container-small flat-card mt3 mb3">
-    <h3>パスワードを再設定する</h3>
-    <div>
-      <form name="form" novalidate="">
-        <div layout-gt-xs="row">
-          <md-input-container class="md-icon-float md-block" flex>
-            <label>ログインID</label>
-            <md-icon class="material-icons" aria-label="Login">mail_outline</md-icon>
-            <input name="login" type="email" ng-model="ctrl.login" ng-required="true" ng-maxlength="100">
-            <div ng-show="form.login.$invalid" ng-messages="form.login.$error">
-              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-                <span>100 文字以内でログインIDを入力してください。</span>
+<div class="container container-sm">
+  <section class="panel panel-danger bw2" style="margin-top:50px;">
+    <div class="panel-heading bw2">
+      <h1 class="panel-title">パスワードをリセット</h1>
+    </div>
+    <div class="panel-body p3">
+      <div class="alert alert-default">
+        <p>ペティカルに登録した際のログインID（またはメールアドレス）宛に、パスワードリセットの手順を記したメールを送信します。</p>
+      </div>
+      <form name="form" novalidate="true" ng-submit="ctrl.reset(ctrl.email)">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="email"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></span>
+                <input type="email" name="email" ng-model="ctrl.email" maxlength="100" ng-required="true" ng-maxlength="100" placeholder="ペティカルのログインIDを入力してください" class="form-control input-lg"/>
+              </div>
+              <div class="form-error" ng-show="form.login.$invalid && form.login.$dirty" ng-messages="form.login.$error">
+                <div ng-message-exp="['required', 'minlength', 'maxlength']">
+                  <span>ペティカルのログインIDを入力してください。</span>
+                </div>
               </div>
             </div>
-          </md-input-container>
+          </div>
         </div>
-        <div layout-gt-xs="row" layout-align="end center">
-          <md-button class="md-primary md-raised" ng-disabled="form.$invalid" ng-click="ctrl.reset(ctrl.login)">再設定する</md-button>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="col-xs-12 text-center mt2">
+              <button class="btn btn-default btn-lg" type="submit" ng-disabled="form.$invalid">
+                <i class="fa fa-pencil-square-o m0"></i>
+                メールを送信
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 text-right mt2">
+            <a ui-sref="app.signup" class="text-muted">もしかして、まだユーザー登録がお済みではありませんか？</a>
+          </div>
         </div>
       </form>
     </div>
-  </div>
+  </section>
 </div>

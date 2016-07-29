@@ -1,0 +1,270 @@
+<div class="container-fluid">
+  <div class="page-header-content">
+    <div class="heading-elements hide-xs">
+      <a class="btn btn-link lnk-submenu" ui-sref="app.dashboard.ticket.detail" ui-sref-opts="{reload: true}">
+        <i class="fa fa-ticket" aria-hidden="true"></i>
+        <p>チケット</p>
+      </a>
+      <a class="btn btn-link lnk-submenu" ng-click="ctrl.calculate()" ng-disabled="ctrl.ticket.state === 'COMPLETED'">
+        <i class="fa fa-calculator" aria-hidden="true"></i>
+        <p>再計算</p>
+      </a>
+      <a class="btn btn-link lnk-submenu" ng-click="ctrl.showPaymentModal(ctrl.ticket)" ng-disabled="ctrl.ticket.state === 'COMPLETED'">
+        <i class="fa fa-credit-card" aria-hidden="true"></i>
+        <p>料金支払</p>
+      </a>
+      <a class="btn btn-link lnk-submenu" ui-sref="app.dashboard.ticket.detail.account.invoice({ticketId: ctrl.ticket.id})" ui-sref-opts="{reload: true}">
+        <i class="fa fa-file-text-o" aria-hidden="true"></i>
+        <p>診療明細</p>
+      </a>
+		</div>
+    <div class="page-title">
+      <h4>お会計 - {{ctrl.ticket.chart.pet.name}} ちゃんのご請求</h4>
+      <ul class="breadcrumb breadcrumb-caret small" ncy-breadcrumb></ul>
+    </div>
+  </div>
+  <section class="panel">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="alert alert-warning" ng-if="ctrl.ticket.state !== 'COMPLETED'">
+            お会計の画面からチケットに戻って診察料や処方を変更した場合は、合計料金が変更になった可能性があるため、必ず「再計算」してください。
+          </div>
+          <div class="alert alert-success" ng-if="ctrl.ticket.state === 'COMPLETED'">
+            料金の支払が完了しているため、このチケットに関する情報は変更できません。
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-2">
+          <i class="fa fa-nav fa-hospital-o"></i>動物病院:
+        </div>
+        <div class="col-sm-4">
+          <p>{{ctrl.clinic.name}}</p>
+        </div>
+        <div class="col-sm-2">
+          <i class="fa fa-nav fa-clock-o"></i>診察日:
+        </div>
+        <div class="col-sm-4">
+          <p>{{ctrl.ticket.startDateTime | date:'yyyy/MM/dd HH:mm'}} - {{ctrl.ticket.endDateTime | date:'HH:mm'}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-2">
+          <i class="fa fa-nav fa-user"></i>飼い主:
+        </div>
+        <div class="col-sm-4">
+          <p>{{ctrl.ticket.chart.customer.user.lastName}} {{ctrl.ticket.chart.customer.user.firstName}} 様</p>
+        </div>
+        <div class="col-sm-2">
+          <i class="fa fa-nav fa-circle-o"></i>ステータス:
+        </div>
+        <div class="col-sm-4">
+          <p>
+            <span ng-if="ctrl.ticket.state === 'RESERVED'" class="label label-info">予約済み</span>
+            <span ng-if="ctrl.ticket.state === 'RECEIPTED'" class="label label-info-outline">受付済み</span>
+            <span ng-if="ctrl.ticket.state === 'DOING'" class="label label-success">診察中</span>
+            <span ng-if="ctrl.ticket.state === 'PAYMENT'" class="label label-warning">会計待ち</span>
+            <span ng-if="ctrl.ticket.state === 'COMPLETED'" class="label label-default">診察終了</span>
+            <span ng-if="ctrl.ticket.state === 'CANCEL'" class="label label-default">キャンセル</span>
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-2">
+          <i class="fa fa-nav fa-heart-o"></i>お名前:
+        </div>
+        <div class="col-sm-4">
+          <p>{{ctrl.ticket.chart.pet.name}} ちゃん（{{ctrl.ticket.chart.pet.type}}）</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-2">
+          <i class="fa fa-nav fa-jpy"></i>請求金額:
+        </div>
+        <div class="col-sm-4">
+          <p><code>{{ctrl.ticket.total | currency:'¥ ':0}}</code></p>
+        </div>
+        <div class="col-sm-2">
+          <i class="fa fa-nav fa-jpy"></i>不足金額:
+        </div>
+        <div class="col-sm-4">
+          <p ng-show="ctrl.ticket.balance !== 0"><code>{{ctrl.ticket.balance | currency:'¥ ':0}}</code></p>
+          <p ng-show="ctrl.ticket.balance === 0"><code>不足金額はありません</code></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-2">
+          <i class="fa fa-nav fa-jpy"></i>消費税:
+        </div>
+        <div class="col-sm-4">
+          <p>{{ctrl.ticket.tax | currency:'¥ ':0}}</p>
+        </div>
+        <div class="col-sm-2">
+          <i class="fa fa-nav fa-jpy"></i>値引き額:
+        </div>
+        <div class="col-sm-4">
+          <p>{{ctrl.ticket.discount | currency:'¥ ':0}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="table-responsive">
+            <table class="table table-striped table-middle">
+              <thead>
+                <tr>
+                  <th class="col-sm-4">
+                    明細
+                  </th>
+                  <th class="col-sm-2">
+                    数量
+                  </th>
+                  <th class="col-sm-2">
+                    単価
+                  </th>
+                  <th class="col-sm-2">
+                    金額
+                  </th>
+                  <th class="col-sm-2">
+                    小計（消費税）
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="account in ctrl.accounts">
+                  <td>
+                    {{account.name}}
+                  </td>
+                  <td>
+                    {{account.quantity}}
+                  </td>
+                  <td>
+                    {{account.price | currency:'¥ ':0}}
+                  </td>
+                  <td>
+                    {{account.amount | currency:'¥ ':0}}
+                  </td>
+                  <td>
+                    {{account.subtotal | currency:'¥ ':0}}
+                    ({{account.tax | currency:'¥ ':0}})
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="panel">
+    <div class="panel-body">
+      <div class="row" ng-if="ctrl.ticket.balance !== 0">
+        <div class="col-sm-12">
+          <div class="alert alert-danger">
+            まだ会計が終わっていない金額が {{ctrl.ticket.balance | currency:'¥ ':0}} あります。「料金支払」より精算してください。
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="table-responsive">
+            <table class="table table-striped table-middle">
+              <thead>
+                <tr>
+                  <th class="col-sm-2">
+                    支払日
+                  </th>
+                  <th class="col-sm-2">
+                    支払方法
+                  </th>
+                  <th class="col-sm-2">
+                    請求金額
+                  </th>
+                  <th class="col-sm-2">
+                    割引
+                  </th>
+                  <th class="col-sm-2">
+                    受領金額
+                  </th>
+                  <th class="col-sm-2">
+                    お釣り
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="payment in ctrl.payments">
+                  <td>
+                    {{payment.date | date:'yyyy/MM/dd'}}
+                  </td>
+                  <td>
+                    <span class="label label-info" ng-show="payment.type === 'CASH'">現金</span>
+                    <span class="label label-warning" ng-show="payment.type === 'CREDIT_CARD'">クレジットカード</span>
+                    <span class="label label-default" ng-show="payment.type === 'OTHER'">その他</span>
+                  </td>
+                  <td>
+                    {{payment.total | currency:'¥ ':0}}
+                  </td>
+                  <td>
+                    {{payment.discount | currency:'¥ ':0}}
+                  </td>
+                  <td>
+                    {{payment.amount | currency:'¥ ':0}}
+                  </td>
+                  <td>
+                    {{payment.changed | currency:'¥ ':0}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script type="text/ng-template" id="payment-modal.html">
+  <div class="modal-header">
+    <h4 class="modal-title">料金支払を登録</h4>
+  </div>
+  <div class="modal-body pt0 pb0">
+    <form name="form" novalidate="true">
+      <div class="row">
+        <div class="col-sm-12 mb3">
+          <h3>
+            <span class="mr2">ご請求金額</span>
+            <code>{{ctrl.ticket.balance | currency:'¥ ':0}}</code>
+          </h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <ptc-input type="date" form="form" name="date" label="支払日" model="ctrl.payment.date" required="true"></ptc-input>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <ptc-select form="form" name="type" label="支払方法" model="ctrl.payment.type" data="ctrl.types" required="true"></ptc-select>
+        </div>
+        <div class="col-sm-6">
+          <ptc-input type="price" form="form" name="discount" label="割引" model="ctrl.payment.discount"></ptc-input>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <ptc-input type="price" form="form" name="amount" label="お預かり金額" model="ctrl.payment.amount" required="true"></ptc-input>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label><span>おつり</span></label>
+            <h4><code>{{-(ctrl.ticket.balance - ctrl.payment.discount - ctrl.payment.amount) | currency:'¥ ':0}}</code></h4>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-disabled="form.$invalid" ng-click="ctrl.save(ctrl.payment)">保存する</button>
+    <button class="btn btn-link" type="button" ng-click="ctrl.close()">キャンセル</button>
+  </div>
+</script>

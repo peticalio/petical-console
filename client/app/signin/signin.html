@@ -1,15 +1,20 @@
 <div class="container container-sm">
-  <section class="panel" style="margin-top:50px;">
-    <div class="panel-body">
-      <h3>サインインしましょう</h3>
-      <p class="text-right mt3 mb3">
-        <a ui-sref="app.signup">会員登録はお済みですか？<br/>会員登録は無料です。登録はたったの３０秒！</a>
+  <section class="panel panel-primary bw2" style="margin-top:50px;">
+    <div class="panel-heading">
+      <h1 class="panel-title">ペティカルにサインイン</h1>
+    </div>
+    <div class="panel-body p3">
+      <p class="text-right mb3">
+        <a ui-sref="app.signup">会員登録はお済みですか？<br/>会員登録は無料。登録は簡単！３０秒でできます。</a>
       </p>
       <form name="form" novalidate="true" ng-submit="ctrl.login(ctrl.login)">
         <div class="row">
           <div class="col-xs-12">
             <div class="form-group">
-              <input type="email" name="login" ng-model="ctrl.login.email" maxlength="100" ng-required="true" ng-maxlength="100" placeholder="ログインIDを入力してください" class="form-control input-lg"/>
+              <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></span>
+                <input type="email" name="login" ng-model="ctrl.login.email" maxlength="100" ng-required="true" ng-maxlength="100" placeholder="ログインIDを入力してください" class="form-control input-lg"/>
+              </div>
               <div class="form-error" ng-show="form.login.$invalid && form.login.$dirty" ng-messages="form.login.$error">
                 <div ng-message-exp="['required', 'minlength', 'maxlength']">
                   <span>100 文字以内で有効なメールアドレスを入力してください。</span>
@@ -19,9 +24,12 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-xs-12">
+          <div class="col-xs-12 mt2">
             <div class="form-group">
-              <input type="password" name="password" ng-model="ctrl.login.password" maxlength="100" ng-required="true" ng-maxlength="100" placeholder="パスワードを入力してください" class="form-control input-lg"/>
+              <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="password"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></span>
+                <input type="password" name="password" ng-model="ctrl.login.password" maxlength="100" ng-required="true" ng-maxlength="100" placeholder="パスワードを入力してください" class="form-control input-lg"/>
+              </div>
               <div class="form-error" ng-show="form.password.$invalid && form.password.$dirty" ng-messages="form.password.$error">
                 <div ng-message-exp="['required', 'minlength', 'maxlength']">
                   <span>100 文字以内でパスワードを入力してください。</span>
@@ -31,12 +39,15 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-xs-12 text-right">
-            <button type="submit" class="btn btn-primary btn-lg" ng-disabled="form.$invalid">サインイン</button>
+          <div class="col-xs-12 text-center mt2">
+            <button type="submit" class="btn btn-warning btn-lg" ng-disabled="form.$invalid">
+              <i class="fa fa-sign-in m0" aria-hidden="true"></i>
+              サインインする
+            </button>
           </div>
         </div>
         <div class="row">
-          <div class="col-xs-12 text-right mt3">
+          <div class="col-xs-12 text-right mt2">
             <a ui-sref="app.reset" class="text-muted">もしかして、パスワードをお忘れですか？</a>
           </div>
         </div>

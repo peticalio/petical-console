@@ -36,7 +36,7 @@
                 <a ng-click="ctrl.sort('chartNo')">カルテ番号</a>
                 <i class="fa ml" ng-show="ctrl.order=='chartNo'" ng-class="{'fa-caret-up':ctrl.reverse, 'fa-caret-down':!ctrl.reverse}"></i>
               </th>
-              <th class="col-sm-4">
+              <th class="col-sm-3">
                 <a ng-click="ctrl.sort('pet.name')">お名前 / 飼い主</a>
                 <i class="fa ml" ng-show="ctrl.order=='pet.name'" ng-class="{'fa-caret-up':ctrl.reverse, 'fa-caret-down':!ctrl.reverse}"></i>
               </th>
@@ -51,6 +51,8 @@
               <th class="col-sm-2">
                 <a ng-click="ctrl.sort('lastModifiedDate')">最終更新日時</a>
                 <i class="fa ml" ng-show="ctrl.order=='lastModifiedDate'" ng-class="{'fa-caret-up':ctrl.reverse, 'fa-caret-down':!ctrl.reverse}"></i>
+              </th>
+              <th class="hide-xs hide-sm">
               </th>
             </tr>
           </thead>
@@ -71,6 +73,9 @@
               </td>
               <td>
                 {{chart.lastModifiedDate | date:'yyyy/MM/dd HH:mm'}}
+              </td>
+              <td class="col-sm-1 hide-xs hide-sm" ui-sref-ignore>
+                <button type="button" class="btn btn-warning btn-sm" ui-sref="app.dashboard.ticket.form({clinicId:this.clinic.id, chartId:chart.id})">予約/受付</button>
               </td>
             </tr>
           </tbody>

@@ -30,6 +30,8 @@ angular.module('petz.core')
         $rootScope.$on('$stateChangeStart', view);
         $rootScope.$on('$stateChangeSuccess', hide);
         $rootScope.$on('$stateChangeError', hide);
+        $rootScope.$on('http:progress', view);
+        $rootScope.$on('http:finish', hide);
       }
     };
   }]);

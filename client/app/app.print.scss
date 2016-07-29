@@ -1,26 +1,33 @@
-section.print-page {
-  width: 180mm;
-  // height: 250mm;
+.panel-paper {
+  @extend .panel;
+  width: 202mm;
+  // height: 297mm;
+  margin: 0 auto 24px auto;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
+  .panel-body {
+    padding: 24px;
+  }
 }
 
 @media print {
+  body {
+    width: 210mm;
+  }
+
   .table-bordered tr td, .table-bordered tr th {
     border-color: #000 !important;
   }
 
-  section.print-page {
+  .panel-paper {
     display: block;
     page-break-after: always;
+    border: 0;
     .print-title {
       margin-top: 0 !important;
     }
   }
-  section.print-page:last-child {
+  .print-page:last-child {
     page-break-after: auto;
-  }
-
-  .flat-card {
-    border-width: 0 !important;
   }
 
   pre code {
@@ -28,8 +35,8 @@ section.print-page {
   }
 
   @page {
-    margin-top: 0.4cm;
-    margin: 0.5cm;
+    margin: 0;
+    size: A4;
   }
 
   p a, code, pre {

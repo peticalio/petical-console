@@ -12,7 +12,7 @@
     save(reset) {
       this.Password.save({}, reset).$promise
         .then(() => {
-          this.toaster.info('パスワードを変更しました。');
+          this.toaster.success('パスワードを変更しました。');
           this.$state.go('app.reset.finish');
         })
         .catch((error) => {
