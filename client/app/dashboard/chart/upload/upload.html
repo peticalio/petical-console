@@ -1,24 +1,26 @@
-<div class="layout-max-width">
-  <section>
-    <md-toolbar md-theme="content" class="pt">
-      <div class="md-toolbar-tools">
-        <h2 class="md-title">
-          カルテ一括登録（データ移行用）
-          <span class="hint--large hint--bounce hint--rounded clickable" data-hint="500件まで、カルテを一度に登録することができます。Excel等で整理したデータをコピー＆ペーストして、一括登録ボタンをクリックしてください。行の追加や削除は右クリックしてください。">
-            <md-icon class="material-icons small">help</md-icon>
-          </span>
-        </h2>
-        <span flex></span>
-        <md-button class="md-icon-button" ui-sref="app.dashboard.chart.list">
-          <md-tooltip>一覧</md-tooltip>
-          <md-icon class="material-icons">list</md-icon>
-        </md-button>
-      </div>
-    </md-toolbar>
-    <div layout-padding>
+<div class="container-fluid">
+  <div class="page-header-content">
+    <div class="heading-elements hide-xs">
+      <a class="btn btn-link lnk-submenu" ui-sref="app.dashboard.chart">
+        <i class="fa fa-search" aria-hidden="true"></i>
+        <p>検索する</p>
+      </a>
+		</div>
+    <div class="page-title">
+      <h4>
+        カルテ - 一括登録（データ移行用）
+        <span class="hint--large hint--bounce hint--rounded clickable" data-hint="500件まで、カルテを一度に登録することができます。Excel等で整理したデータをコピー＆ペーストして、一括登録ボタンをクリックしてください。行の追加や削除は右クリックしてください。">
+          <i class="fa fa-question-circle ml text-muted small"></i>
+        </span>
+      </h4>
+      <ul class="breadcrumb breadcrumb-caret small" ncy-breadcrumb></ul>
+    </div>
+  </div>
+  <section class="panel">
+    <div class="panel-body">
       <ptc-progressbar value="ctrl.progress" ng-show="ctrl.progress > 0"></ptc-progressbar>
-      <div id="upload-table-container" class="p0">
-        <hot-table settings="ctrl.settings" row-headers="false" datarows="ctrl.charts" class="p0" height="ctrl.getHeight()">
+      <div id="upload-table-container" class="p0 mb2">
+        <hot-table settings="ctrl.settings" row-headers="false" datarows="ctrl.charts" class="datagrid-container p0">
           <hot-column width="100" data="customer.customerCode" title="'飼い主コード'" validator="ctrl.requiredNameValidator"></hot-column>
           <hot-column width="100" data="chartNo" title="'カルテ番号'" validator="ctrl.requiredNameValidator"></hot-column>
           <hot-column width="200" data="pet.name" title="'お名前'" validator="ctrl.requiredNameValidator"></hot-column>
@@ -44,9 +46,9 @@
           <hot-column width="100" data="fleaDate" title="'ノミ予防接種日'" validator="ctrl.dateValidator"></hot-column>
         </hot-table>
       </div>
-      <div layout="row" layout-align="end center">
-        <md-button class="md-primary md-raised" ng-disabled="!ctrl.isValid()" ng-click="ctrl.save(ctrl.charts)">一括登録</md-button>
-        <md-button ui-sref="app.dashboard.chart.list">キャンセル</md-button>
+      <div class="text-right">
+        <button class="btn btn-primary" ng-disabled="!ctrl.isValid()" ng-click="ctrl.save(ctrl.charts)">登録する</button>
+        <button class="btn btn-link" ui-sref="app.dashboard.chart">キャンセル</button>
       </div>
     </div>
   </section>

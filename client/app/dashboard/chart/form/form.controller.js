@@ -13,79 +13,40 @@
       this.colors = colors;
       this.bloods = bloods;
       this.tags = tags;
+
       this.chart = chart;
+      this.chart.pet.neutral = this.convert4nya(chart.pet.neutral);
+      this.chart.pet.dead = this.convert4nya(chart.pet.dead);
       this.sexes = [{name:'不明', value:''}, {name:'オス', value:'MALE'}, {name:'メス', value:'FEMALE'}];
-      this.neutrals = [{name:'していない', value:false}, {name:'済み', value:true}];
-      this.deads = [{name:'生存', value:false}, {name:'死亡', value:true}];
+      this.neutrals = [{name:'去勢・避妊手術していない', value:false}, {name:'去勢・避妊手術済み', value:true}];
+      this.deads = [{name:'生存している', value:false}, {name:'死亡している', value:true}];
       this.today = new Date();
     }
 
-    // 種類を取得する（オートコンプリート用）
-    getKinds(text) {
-      return this.kinds.filter((item) => {
-        return (item.indexOf(text) >= 0) ? true : false;
-      });
-    }
-
-    // 品種を取得する（オートコンプリート用）
-    getTypes(text) {
-      return this.types.filter((item) => {
-        return (item.indexOf(text) >= 0) ? true : false;
-      });
-    }
-
-    // 毛色を取得する（オートコンプリート用）
-    getColors(text) {
-      return this.colors.filter((item) => {
-        return (item.indexOf(text) >= 0) ? true : false;
-      });
-    }
-
-    // 血液型を取得する（オートコンプリート用）
-    getBloods(text) {
-      return this.bloods.filter((item) => {
-        return (item.indexOf(text) >= 0) ? true : false;
-      });
+    convert4nya(value) {
+      return (value) ? 'true' : 'false';
     }
 
     // カルテを登録する
     save(chart) {
-      this.supportAutocomplete(chart);
       chart.clinic = this.clinic;
-      return this.ClinicChart.save({clinicId: this.$stateParams.clinicId}, chart).$promise
+      return this.ClinicChart.save({clinicId: this.clinic.id}, chart).$promise
         .then((response) => {
           this.toaster.info('新しくカルテを作成しました。');
-          this.$state.go('app.dashboard.chart.detail', {clinicId: this.$stateParams.clinicId, customerId: this.$stateParams.customerId, chartId: response.data.id});
+          this.$state.go('app.dashboard.chart.detail', {clinicId: this.clinic.id, customerId: this.$stateParams.customerId, chartId: response.data.id});
           return response.$promise;
         });
     }
 
     // カルテを保存する
     update(chart) {
-      this.supportAutocomplete(chart);
       chart.clinic = this.clinic;
-      return this.ClinicChart.update({clinicId: this.$stateParams.clinicId, chartId: chart.id}, chart).$promise
+      return this.ClinicChart.update({clinicId: this.clinic.id, chartId: chart.id}, chart).$promise
         .then((response) => {
           this.toaster.info('カルテを保存しました。');
-          this.$state.go('app.dashboard.chart.detail', {clinicId: this.$stateParams.clinicId, customerId: this.$stateParams.customerId, chartId: response.data.id});
+          this.$state.go('app.dashboard.chart.detail', {clinicId: this.clinic.id, customerId: this.$stateParams.customerId, chartId: response.data.id});
           return response.$promise;
         });
-    }
-
-    // FIXME md-autocompleteにバグがあるため
-    supportAutocomplete(chart) {
-      if (angular.isDefined(this.kindText)) {
-        chart.pet.kind = this.kindText;
-      }
-      if (angular.isDefined(this.typeText)) {
-        chart.pet.type = this.typeText;
-      }
-      if (angular.isDefined(this.colorText)) {
-        chart.pet.color = this.colorText;
-      }
-      if (angular.isDefined(this.bloodText)) {
-        chart.pet.blood = this.bloodText;
-      }
     }
   }
 

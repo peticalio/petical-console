@@ -8,6 +8,8 @@
       this.ClinicStaff = ClinicStaff;
       this.clinic = clinic;
       this.staffs = staffs;
+      this.order = 'lastModifiedDate';
+      this.reverse = false;
     }
 
     // スタッフを取得する
@@ -17,6 +19,12 @@
           this.staffs = response;
           this.toaster.info('スタッフの一覧を更新しました。');
         });
+    }
+
+    // ソートキーを指定する
+    sort(key) {
+      this.order = key;
+      this.reverse = !this.reverse;
     }
   }
 

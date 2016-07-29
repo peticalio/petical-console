@@ -7,19 +7,23 @@ angular
     'petz.api',
     'petz.vendor',
     'petz.env',
-    'ngMaterial',
     'ngCookies',
     'ngResource',
     'ngSanitize',
-    'ngAnimate',
+    'ngFileUpload',
     'ui.router',
     'ui.validate',
     'ui.gravatar',
     'ui.bootstrap',
+    // 'ui.select',
+    'ui.sortable',
+    'toastr',
     'angularMoment',
-    'md.data.table',
+    'angularUtils.directives.dirPagination',
     'mwl.calendar',
+    'ncy-angular-breadcrumb',
     'ngHandsontable',
+    'nya.bootstrap.select',
     'vcRecaptcha',
     'nvd3'
   ])
@@ -28,62 +32,7 @@ angular
   .config(['$urlRouterProvider', '$locationProvider', '$httpProvider', function($urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider.otherwise('/');
     $locationProvider.html5Mode(true).hashPrefix('!');
-
     $httpProvider.interceptors.push('AuthInterceptor');
-  }])
-
-  // angular material theme config
-  .config(['$mdIconProvider', '$mdThemingProvider', function($mdIconProvider, $mdThemingProvider) {
-    $mdIconProvider
-      .fontSet('fa', 'fontawesome')
-      .defaultFontSet('fontawesome')
-      .iconSet('social', 'img/icons/sets/social-icons.svg', 24)
-      .defaultIconSet('img/icons/sets/core-icons.svg', 24);
-
-    $mdThemingProvider
-      .theme('console')
-      .primaryPalette('cyan', {
-        'default': '600'
-      })
-      .accentPalette('yellow')
-      .warnPalette('red')
-      .backgroundPalette('grey');
-
-    $mdThemingProvider
-      .theme('content')
-      .primaryPalette('grey',{
-        'default': '100',
-        'hue-1': '700',
-        'hue-2': '300',
-        'hue-3': '800'
-      })
-      .accentPalette('amber')
-      .warnPalette('red')
-      .backgroundPalette('grey');
-
-    $mdThemingProvider
-      .theme('fab')
-      .primaryPalette('pink')
-      .accentPalette('indigo')
-      .warnPalette('red')
-      .backgroundPalette('grey');
-
-    $mdThemingProvider
-      .theme('sidemenu')
-      .primaryPalette('grey',{
-        'default': '50',
-        'hue-1': '700',
-        'hue-2': '300',
-        'hue-3': '800'
-      });
-
-    $mdThemingProvider
-      .theme('progress')
-      .primaryPalette('grey',{
-        'default': '800'
-      });
-
-    $mdThemingProvider.setDefaultTheme('console');
   }])
 
   // gravator config
@@ -94,6 +43,24 @@ angular
     };
     gravatarServiceProvider.secure = true;
 //    gravatarServiceProvider.protocol = 'https';
+  }])
+
+  // toaster config
+  .config(['toastrConfig', (toastrConfig) => {
+    angular.extend(toastrConfig, {
+      allowHtml:  true,
+      closeButton: true,
+      timeOut: 8000,
+      extendedTimeOut: 1000,
+      autoDismiss: false,
+      containerId: 'toast-container',
+      maxOpened: 8,
+      newestOnTop: true,
+      positionClass: 'toast-top-right',
+      preventDuplicates: false,
+      preventOpenDuplicates: false,
+      target: 'body'
+    });
   }])
 
   // ISO-8601対応（FIXME リファクタリングしても良いかも）
@@ -129,6 +96,36 @@ angular
       });
     }
   ])
+
+  // HTTPのイベントを補足して定義するインタセプタ
+  .factory('httpEventInterceptor', ['$q', '$rootScope',
+    function ($q, $rootScope) {
+      var loadingCount = 0;
+      return {
+        request: function (config) {
+          if (++loadingCount === 1) {
+            $rootScope.$broadcast('http:progress');
+          }
+          return config || $q.when(config);
+        },
+        response: function (response) {
+          if (--loadingCount === 0) {
+            $rootScope.$broadcast('http:finish');
+          }
+          return response || $q.when(response);
+        },
+        responseError: function (response) {
+          if (--loadingCount === 0) {
+            $rootScope.$broadcast('http:finish');
+          }
+          return $q.reject(response);
+        }
+      };
+    }
+  ])
+  .config(['$httpProvider', function ($httpProvider) {
+    $httpProvider.interceptors.push('httpEventInterceptor');
+  }])
 
   .constant('timetable', [
     '00:00',
@@ -180,4 +177,10 @@ angular
     '23:00',
     '23:30'
   ])
+
+  .run(function($rootScope) {
+    $rootScope.$on('$stateChangeSuccess', function(){
+      document.body.scrollTop = document.documentElement.scrollTop = 0;
+    });
+  })
 ;

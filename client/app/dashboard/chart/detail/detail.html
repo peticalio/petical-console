@@ -1,337 +1,283 @@
-<div layout="column" flex>
-  <md-tabs md-dynamic-height md-selected="ctrl.selected" class="md-primary no-print" flex="100">
-    <md-tab label="基本情報" ui-sref="app.dashboard.chart.detail">
-    </md-tab>
-    <md-tab label="診察履歴" ui-sref="app.dashboard.chart.detail.ticket.list">
-    </md-tab>
-    <md-tab label="予約状況" ui-sref="app.dashboard.chart.detail.reservation.list">
-    </md-tab>
-  </md-tabs>
-
-  <div layout="row" layout-align="center start" layout-align-xs="start start" flex="100" ui-view="" class="fadein overflow">
-    <div class="layout-max-width">
-      <md-toolbar md-theme="content" class="pt">
-        <div class="md-toolbar-tools">
-          <h1 class="md-title">{{ctrl.chart.pet.name}} ちゃんのカルテ</h1>
-          <span flex></span>
-          <md-button class="md-icon-button" ui-sref="app.dashboard.chart.list">
-            <md-tooltip md-direction="left">一覧</md-tooltip>
-            <md-icon class="material-icons">list</md-icon>
-          </md-button>
+<div class="container-fluid">
+  <div class="page-header-content">
+    <div class="heading-elements hide-xs">
+      <a class="btn btn-link lnk-submenu" ui-sref="app.dashboard.ticket.form({chartId: ctrl.chart.id})">
+        <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
+        <p>予約・受付</p>
+      </a>
+      <a class="btn btn-link lnk-submenu" ui-sref="app.dashboard.chart">
+        <i class="fa fa-search" aria-hidden="true"></i>
+        <p>検索する</p>
+      </a>
+      <a class="btn btn-link lnk-submenu" ui-sref="app.dashboard.customer.detail({customerId: ctrl.chart.customer.id})">
+        <i class="fa fa-user" aria-hidden="true"></i>
+        <p>飼い主</p>
+      </a>
+      <a class="btn btn-link lnk-submenu" ui-sref="app.dashboard.chart.update({chartId: ctrl.chart.id})">
+        <i class="fa fa-pencil" aria-hidden="true"></i>
+        <p>編集する</p>
+      </a>
+      <a class="btn btn-link lnk-submenu" ng-click="ctrl.delete($event, ctrl.charge)">
+        <i class="fa fa-trash" aria-hidden="true"></i>
+        <p>削除する</p>
+      </a>
+		</div>
+    <div class="page-title">
+      <h4>カルテ - {{ctrl.chart.pet.name}} ちゃんのカルテ</h4>
+      <ul class="breadcrumb breadcrumb-caret small" ncy-breadcrumb></ul>
+    </div>
+  </div>
+  <section class="panel">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-sm-2">
+          <i class="fa fa-nav fa-hospital-o"></i>動物病院:
         </div>
-      </md-toolbar>
-      <div layout-padding>
-        <div layout-gt-xs="row" class="p0 m0" ng-if="ctrl.showMixVaccineAlert() || ctrl.showRabidAlert() || ctrl.showFilariaAlert() || ctrl.showFleaAlert()">
-          <div class="note" flex>
-            <p ng-if="ctrl.showRabidAlert()">狂犬病予防接種のお注射を行う時期です。次回予定日は「{{ctrl.chart.rabidVaccineDate | date:'yyyy/MM/dd'}}」です。</p>
-            <p ng-if="ctrl.showMixVaccineAlert()">混合ワクチン予防接種のお注射を行う時期です。次回予定日は「{{ctrl.chart.mixVaccineDate | date:'yyyy/MM/dd'}}」です。</p>
-            <p ng-if="ctrl.showFilariaAlert()">フィラリア予防のお注射を行う時期です。次回予定日は「{{ctrl.chart.filariaDate | date:'yyyy/MM/dd'}}」です。</p>
-            <p ng-if="ctrl.showFleaAlert()">ノミ予防のお薬の処方を行う時期です。次回予定日は「{{ctrl.chart.fleaDate | date:'yyyy/MM/dd'}}」です。</p>
-          </div>
+        <div class="col-sm-4">
+          <p>{{ctrl.clinic.name}}</p>
         </div>
-        <div layout-gt-xs="row" class="flat-card">
-          <md-list flex>
-            <md-subheader class="md-no-sticky">ペット</md-subheader>
-            <md-list-item>
-              <md-icon class="material-icons">
-                local_hospital
-                <md-tooltip>所属動物病院</md-tooltip>
-              </md-icon>
-              <p>{{ctrl.clinic.name}}</p>
-            </md-list-item>
-            <md-list-item>
-              <md-icon class="material-icons">
-                folder
-                <md-tooltip>カルテ番号</md-tooltip>
-              </md-icon>
-              <p>{{ctrl.chart.chartNo}}</p>
-            </md-list-item>
-            <md-list-item>
-              <md-icon class="material-icons">
-                label
-                <md-tooltip>お名前</md-tooltip>
-              </md-icon>
-              <p>{{ctrl.chart.pet.name}} ちゃん</p>
-            </md-list-item>
-            <md-list-item>
-              <md-icon class="material-icons">
-                label_outline
-                <md-tooltip>お名前（よみがな）</md-tooltip>
-              </md-icon>
-              <p>{{ctrl.chart.pet.nameKana}} ちゃん</p>
-            </md-list-item>
-            <md-list-item>
-              <md-icon class="material-icons">
-                bookmark
-                <md-tooltip>種別</md-tooltip>
-              </md-icon>
-              <p>{{ctrl.chart.pet.kind}}</p>
-            </md-list-item>
-            <md-list-item>
-              <md-icon class="material-icons">
-                bookmark_border
-                <md-tooltip>品種</md-tooltip>
-              </md-icon>
-              <p>{{ctrl.chart.pet.type}}</p>
-            </md-list-item>
-            <md-list-item>
-              <md-icon class="material-icons">
-                invert_colors
-                <md-tooltip>毛色</md-tooltip>
-              </md-icon>
-              <p>{{ctrl.chart.pet.color}}</p>
-            </md-list-item>
-            <md-list-item>
-              <md-icon class="material-icons">
-                today
-                <md-tooltip>生年月日</md-tooltip>
-              </md-icon>
-              <p ng-show="ctrl.chart.pet.birthDate">{{ctrl.chart.pet.birthDate | date:'yyyy/MM/dd'}}</p>
-              <p ng-show="!ctrl.chart.pet.birthDate">未登録</p>
-            </md-list-item>
-            <md-list-item>
-              <md-icon class="material-icons">
-                accessibility
-                <md-tooltip>性別</md-tooltip>
-              </md-icon>
-              <p>
-                <i class="fa fa-mars mr" ng-show="ctrl.chart.pet.sex === 'MALE'"></i>
-                <i class="fa fa-venus mr" ng-show="ctrl.chart.pet.sex === 'FEMALE'"></i>
-                <span ng-show="ctrl.chart.pet.sex === 'MALE'">オス</span>
-                <span ng-show="ctrl.chart.pet.sex === 'FEMALE'">メス</span>
-              </p>
-            </md-list-item>
-            <md-list-item>
-              <md-icon class="material-icons">
-                local_hospital
-                <md-tooltip>血液型</md-tooltip>
-              </md-icon>
-              <p>{{ctrl.chart.pet.blood}}</p>
-            </md-list-item>
-            <md-list-item>
-              <md-icon class="material-icons">
-                call_split
-                <md-tooltip>去勢・避妊</md-tooltip>
-              </md-icon>
-              <p>
-                <span ng-show="ctrl.chart.pet.neutral">済み</span>
-                <span ng-show="!ctrl.chart.pet.neutral">していない</span>
-              </p>
-            </md-list-item>
-            <md-list-item>
-              <md-icon class="material-icons">
-                close
-                <md-tooltip>生死</md-tooltip>
-              </md-icon>
-              <p>
-                <span ng-show="ctrl.chart.pet.dead">死亡</span>
-                <span ng-show="!ctrl.chart.pet.dead">生存</span>
-              </p>
-            </md-list-item>
-          </md-list>
-          <md-list flex>
-            <md-subheader class="md-no-sticky">飼い主さま</md-subheader>
-            <md-list-item>
-              <md-icon class="material-icons">
-                person
-                <md-tooltip>氏名</md-tooltip>
-              </md-icon>
-              <p>{{ctrl.chart.customer.user.lastName}} {{ctrl.chart.customer.user.firstName}} 様</p>
-            </md-list-item>
-            <md-list-item>
-              <md-icon class="material-icons">
-                location_on
-                <md-tooltip>郵便番号</md-tooltip>
-              </md-icon>
-              <p ng-show="ctrl.chart.customer.user.zipCode">〒 {{ctrl.chart.customer.user.zipCode}}</p>
-              <p ng-show="!ctrl.chart.customer.user.zipCode">未登録</p>
-            </md-list-item>
-            <md-list-item>
-              <md-icon class="material-icons">
-                import_contacts
-                <md-tooltip>住所</md-tooltip>
-              </md-icon>
-              <p ng-show="ctrl.chart.customer.user.state">{{ctrl.chart.customer.user.state}}{{ctrl.chart.customer.user.city}}{{ctrl.chart.customer.user.street}}</p>
-              <p ng-show="!ctrl.chart.customer.user.state">未登録</p>
-            </md-list-item>
-            <md-list-item>
-              <md-icon class="material-icons">
-                phone
-                <md-tooltip>電話番号（自宅）</md-tooltip>
-              </md-icon>
-              <p ng-show="ctrl.chart.customer.user.phoneNo">{{ctrl.chart.customer.user.phoneNo}}</p>
-              <p ng-show="!ctrl.chart.customer.user.phoneNo">未登録</p>
-            </md-list-item>
-            <md-list-item>
-              <md-icon class="material-icons">
-                phone_android
-                <md-tooltip>電話番号（携帯）</md-tooltip>
-              </md-icon>
-              <p ng-show="ctrl.chart.customer.user.mobilePhoneNo">{{ctrl.chart.customer.user.mobilePhoneNo}}</p>
-              <p ng-show="!ctrl.chart.customer.user.mobilePhoneNo">未登録</p>
-            </md-list-item>
-            <md-list-item>
-              <md-icon class="material-icons">
-                mail_outline
-                <md-tooltip>メールアドレス</md-tooltip>
-              </md-icon>
-              <p>{{ctrl.chart.customer.user.email}}</p>
-            </md-list-item>
-            <md-subheader class="md-no-sticky">マイクロチップ</md-subheader>
-            <md-list-item>
-              <md-icon class="material-icons">
-                contacts
-                <md-tooltip>埋込日</md-tooltip>
-              </md-icon>
-              <p>
-                <span ng-show="ctrl.chart.pet.microchipDate">{{ctrl.chart.pet.microchipDate | date:'yyyy/MM/dd'}}</span>
-                <span ng-show="!ctrl.chart.pet.microchipDate">していない</span>
-              </p>
-            </md-list-item>
-            <md-list-item>
-              <md-icon class="material-icons">
-                location_on
-                <md-tooltip>マイクロチップ番号</md-tooltip>
-              </md-icon>
-              <p>{{ctrl.chart.pet.microchipNo}}</p>
-            </md-list-item>
-          </md-list>
+        <div class="col-sm-2">
+          <i class="fa fa-nav fa-hashtag"></i>カルテ番号:
+        </div>
+        <div class="col-sm-4">
+          <p>{{ctrl.chart.chartNo}}</p>
         </div>
       </div>
-      <md-toolbar md-theme="content">
-        <div class="md-toolbar-tools">
-          <h1 class="md-title">管理番号</h1>
+      <div class="row">
+        <div class="col-sm-2">
+          <i class="fa fa-nav fa-user"></i>飼い主:
         </div>
-      </md-toolbar>
-      <div layout-padding>
-        <div layout-gt-xs="row" class="flat-card" layout-padding>
-          <md-list flex>
-            <md-list-item>
-              <md-icon class="material-icons">
-                bug_report
-                <md-tooltip>狂犬病登録番号</md-tooltip>
-              </md-icon>
-              <p>{{ctrl.chart.pet.rabidRegisterNo}}</p>
-            </md-list-item>
-          </md-list>
-          <md-list flex>
-            <md-list-item>
-              <md-icon class="material-icons">
-                report
-                <md-tooltip>注射済票番号</md-tooltip>
-              </md-icon>
-              <p>{{ctrl.chart.pet.injectionReportNo}}</p>
-            </md-list-item>
-          </md-list>
+        <div class="col-sm-10">
+          <p>
+            {{ctrl.chart.customer.user.lastName}}&nbsp;{{ctrl.chart.customer.user.firstName}}
+            （{{ctrl.chart.customer.user.lastNameKana}}&nbsp;{{ctrl.chart.customer.user.firstNameKana}}） 様
+          </p>
         </div>
       </div>
-      <md-toolbar md-theme="content">
-        <div class="md-toolbar-tools">
-          <h1 class="md-title">予防接種予定</h1>
+      <div class="row">
+        <div class="col-sm-2">
+          <i class="fa fa-nav fa-home"></i>住所:
         </div>
-      </md-toolbar>
-      <div layout-padding>
-        <div layout-gt-xs="row" class="flat-card" layout-padding>
-          <md-list flex>
-            <md-list-item>
-              <md-icon class="material-icons">
-                today
-                <md-tooltip>狂犬病予防予定日</md-tooltip>
-              </md-icon>
-              <p ng-if="ctrl.chart.rabidVaccineDate">{{ctrl.chart.rabidVaccineDate | date:'yyyy/MM/dd'}}（次回予定日）</p>
-              <p ng-if="!ctrl.chart.rabidVaccineDate">自院実績なし</p>
-            </md-list-item>
-            <md-list-item>
-              <md-icon class="material-icons">
-                colorize
-                <md-tooltip>混合ワクチン名</md-tooltip>
-              </md-icon>
-              <p ng-if="ctrl.chart.mixVaccineName">{{ctrl.chart.mixVaccineName}}</p>
-              <p ng-if="!ctrl.chart.mixVaccineName">自院実績なし</p>
-            </md-list-item>
-            <md-list-item>
-              <md-icon class="material-icons">
-                today
-                <md-tooltip>混合ワクチン予定日</md-tooltip>
-              </md-icon>
-              <p ng-if="ctrl.chart.mixVaccineDate">{{ctrl.chart.mixVaccineDate | date:'yyyy/MM/dd'}}（次回予定日）</p>
-              <p ng-if="!ctrl.chart.mixVaccineDate">自院実績なし</p>
-            </md-list-item>
-          </md-list>
-          <md-list flex>
-            <md-list-item>
-              <md-icon class="material-icons">
-                today
-                <md-tooltip>フィラリア予防予定日</md-tooltip>
-              </md-icon>
-              <p ng-if="ctrl.chart.filariaDate">{{ctrl.chart.filariaDate | date:'yyyy/MM/dd'}}（次回予定日）</p>
-              <p ng-if="!ctrl.chart.filariaDate">自院実績なし</p>
-            </md-list-item>
-            <md-list-item>
-              <md-icon class="material-icons">
-                today
-                <md-tooltip>ノミ予防予定日</md-tooltip>
-              </md-icon>
-              <p ng-if="ctrl.chart.fleaDate">{{ctrl.chart.fleaDate | date:'yyyy/MM/dd'}}（次回予定日）</p>
-              <p ng-if="!ctrl.chart.fleaDate">自院実績なし</p>
-            </md-list-item>
-          </md-list>
+        <div class="col-sm-10">
+          <p>
+            <span ng-show="ctrl.chart.customer.user.zipCode">〒 {{ctrl.chart.customer.user.zipCode}}</span>
+            {{ctrl.chart.customer.user.state}}{{ctrl.chart.customer.user.city}}{{ctrl.chart.customer.user.street}}{{ctrl.chart.customer.user.other}}
+          </p>
         </div>
       </div>
-      <md-toolbar md-theme="content">
-        <div class="md-toolbar-tools">
-          <h1 class="md-title">アレルギー</h1>
+      <div class="row">
+        <div class="col-sm-2">
+          <i class="fa fa-nav fa-heart-o"></i>お名前:
         </div>
-      </md-toolbar>
-      <div layout-padding>
-        <div layout-gt-xs="row" class="flat-card" layout-padding>
-          <p class="pre">{{ctrl.chart.pet.allergia}}</p>
+        <div class="col-sm-4">
+          <p>{{ctrl.chart.pet.name}} ちゃん</p>
         </div>
       </div>
-      <md-toolbar md-theme="content">
-        <div class="md-toolbar-tools">
-          <h1 class="md-title">薬剤に関する注意事項</h1>
+      <div class="row">
+        <div class="col-sm-2">
+          <i class="fa fa-nav fa-bolt"></i>品種・種別:
         </div>
-      </md-toolbar>
-      <div layout-padding>
-        <div layout-gt-xs="row" class="flat-card" layout-padding>
-          <p class="pre">{{ctrl.chart.pet.drug}}</p>
+        <div class="col-sm-4">
+          <p>{{ctrl.chart.pet.kind}}（{{ctrl.chart.pet.type}}）</p>
+        </div>
+        <div class="col-sm-2">
+          <i class="fa fa-nav fa-transgender"></i>性別:
+        </div>
+        <div class="col-sm-4">
+          <p ng-if="!ctrl.chart.pet.sex"><i class="fa fa-neuter mr"></i>不明</p>
+          <p ng-if="ctrl.chart.pet.sex === 'MALE'"><i class="fa fa-mars mr"></i>オス</p>
+          <p ng-if="ctrl.chart.pet.sex === 'FEMALE'"><i class="fa fa-venus mr"></i>メス</p>
         </div>
       </div>
-      <md-toolbar md-theme="content">
-        <div class="md-toolbar-tools">
-          <h1 class="md-title">その他・備考</h1>
+      <div class="row">
+        <div class="col-sm-2">
+          <i class="fa fa-nav fa-birthday-cake"></i>生年月日:
         </div>
-      </md-toolbar>
-      <div layout-padding>
-        <div layout-gt-xs="row" class="flat-card" layout-padding>
-          <p class="pre">{{ctrl.chart.pet.other}}</p>
+        <div class="col-sm-4">
+          <p>{{ctrl.chart.pet.birthDate | date:'yyyy/MM/dd'}}</p>
+        </div>
+        <div class="col-sm-2">
+          <i class="fa fa-nav fa-dot-circle-o"></i>毛色:
+        </div>
+        <div class="col-sm-4">
+          <p>{{ctrl.chart.pet.color}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <uib-tabset active="active">
+            <uib-tab index="0">
+              <uib-tab-heading>
+                <i class="fa m0 fa-file-text-o hide-xs" aria-hidden="true"></i>
+                詳細
+              </uib-tab-heading>
+              <div class="pt2">
+                <h5>管理番号</h5>
+                <div class="row">
+                  <div class="col-sm-2">
+                    <i class="fa fa-nav fa-certificate"></i>狂犬病登録番号:
+                  </div>
+                  <div class="col-sm-4">
+                    <p ng-if="!ctrl.chart.pet.rabidRegisterNo">登録なし</p>
+                    <p ng-if="!!ctrl.chart.pet.rabidRegisterNo">{{ctrl.chart.pet.rabidRegisterNo}}</p>
+                  </div>
+                  <div class="col-sm-2">
+                    <i class="fa fa-nav fa-eyedropper"></i>注射済票番号:
+                  </div>
+                  <div class="col-sm-4">
+                    <p ng-if="!ctrl.chart.pet.injectionReportNo">登録なし</p>
+                    <p ng-if="!!ctrl.chart.pet.injectionReportNo">{{ctrl.chart.pet.injectionReportNo}}</p>
+                  </div>
+                </div>
+                <h5>マイクロチップ情報</h5>
+                <div class="row">
+                  <div class="col-sm-2" ng-if="!!ctrl.chart.pet.microchipNo">
+                    <i class="fa fa-nav fa-sort-numeric-asc"></i>番号:
+                  </div>
+                  <div class="col-sm-4" ng-if="!!ctrl.chart.pet.microchipNo">
+                    <p>{{ctrl.chart.pet.microchipNo}}</p>
+                  </div>
+                  <div class="col-sm-2" ng-if="!!ctrl.chart.pet.microchipNo">
+                    <i class="fa fa-nav fa-calendar-o"></i>施術日:
+                  </div>
+                  <div class="col-sm-4" ng-if="!!ctrl.chart.pet.microchipNo">
+                    <p ng-if="!!ctrl.chart.pet.microchipDate">{{ctrl.chart.pet.microchipDate | date:'yyyy/MM/dd'}}</p>
+                    <p ng-if="!ctrl.chart.pet.microchipDate">不明</p>
+                  </div>
+                  <div class="col-sm-12" ng-if="!ctrl.chart.pet.microchipNo">
+                    <i class="fa fa-nav fa-times text-danger"></i>していない
+                  </div>
+                </div>
+                <h5>去勢・避妊</h5>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <p ng-if="!!ctrl.chart.pet.neutral"><i class="fa fa-nav fa-check text-success"></i>手術済み</p>
+                    <p ng-if="!ctrl.chart.pet.neutral"><i class="fa fa-nav fa-times text-danger"></i>していない</p>
+                  </div>
+                </div>
+                <h5>アレルギー</h5>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <p class="pre" ng-if="!!ctrl.chart.pet.allergia">{{ctrl.chart.pet.allergia}}</p>
+                    <p class="pre" ng-if="!ctrl.chart.pet.allergia">記載なし</p>
+                  </div>
+                </div>
+                <h5>薬剤に関する注意事項</h5>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <p class="pre" ng-if="!!ctrl.chart.pet.drug">{{ctrl.chart.pet.drug}}</p>
+                    <p class="pre" ng-if="!ctrl.chart.pet.drug">記載なし</p>
+                  </div>
+                </div>
+                <h5>特徴・その他</h5>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <p class="pre" ng-if="!!ctrl.chart.pet.other">{{ctrl.chart.pet.other}}</p>
+                    <p class="pre" ng-if="!ctrl.chart.pet.other">記載なし</p>
+                  </div>
+                </div>
+              </div>
+            </uib-tab>
+            <uib-tab index="1">
+              <uib-tab-heading>
+                <i class="fa m0 fa-eyedropper hide-xs" aria-hidden="true"></i>
+                予防接種
+              </uib-tab-heading>
+              <div class="pt2">
+                <div class="alert alert-warning">
+                  予防接種の履歴を管理し、次回予定日を算出する機能を鋭意開発中！これにより飼い主様へのアプローチを自動化します。<br />近日公開予定です。
+                </div>
+              </div>
+            </uib-tab>
+            <uib-tab index="2">
+              <uib-tab-heading>
+                <i class="fa m0 fa-stethoscope hide-xs" aria-hidden="true"></i>
+                健康診断
+              </uib-tab-heading>
+              <div class="pt2">
+                <div class="alert alert-warning">
+                  健康診断の検査結果の履歴を管理し、推移データをグラフ表示する機能を鋭意開発中！これによりペットの健康管理を総合的に行えるようになります。<br />近日公開予定です。
+                </div>
+              </div>
+            </uib-tab>
+            <uib-tab index="3" ng-click="ctrl.loadHistories()">
+              <uib-tab-heading>
+                <i class="fa m0 fa-history hide-xs" aria-hidden="true"></i>
+                診察履歴
+              </uib-tab-heading>
+              <div class="pt2">
+                <div class="table-responsive">
+                  <table class="table table-striped table-hover table-clickable table-sortable table-middle">
+                    <thead>
+                      <tr>
+                        <th class="col-sm-2">
+                          <a ng-click="ctrl.sort('startDateTime')">診察時刻</a>
+                          <i class="fa ml" ng-show="ctrl.order=='startDateTime'" ng-class="{'fa-caret-up':ctrl.reverse, 'fa-caret-down':!ctrl.reverse}"></i>
+                        </th>
+                        <th class="col-sm-2">
+                          <a ng-click="ctrl.sort('state')">ステータス</a>
+                          <i class="fa ml" ng-show="ctrl.order=='state'" ng-class="{'fa-caret-up':ctrl.reverse, 'fa-caret-down':!ctrl.reverse}"></i>
+                        </th>
+                        <th class="col-sm-4">
+                          <a ng-click="ctrl.sort('diacrisis.name')">診断名</a>
+                          <i class="fa ml" ng-show="ctrl.order=='diacrisis.name'" ng-class="{'fa-caret-up':ctrl.reverse, 'fa-caret-down':!ctrl.reverse}"></i>
+                        </th>
+                        <th class="col-sm-2">
+                          <a ng-click="ctrl.sort('billing')">請求金額</a>
+                          <i class="fa ml" ng-show="ctrl.order=='billing'" ng-class="{'fa-caret-up':ctrl.reverse, 'fa-caret-down':!ctrl.reverse}"></i>
+                        </th>
+                        <th class="col-sm-2">
+                          <a ng-click="ctrl.sort('payment')">支払金額</a>
+                          <i class="fa ml" ng-show="ctrl.order=='payment'" ng-class="{'fa-caret-up':ctrl.reverse, 'fa-caret-down':!ctrl.reverse}"></i>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr dir-paginate="ticket in ctrl.histories | orderBy:ctrl.order:ctrl.reverse | itemsPerPage:20" ui-sref="app.dashboard.ticket.detail({ticketId: ticket.id})">
+                        <td>
+                          {{ticket.startDateTime | date:'yyyy/MM/dd HH:mm'}} - {{ticket.endDateTime | date:'HH:mm'}}
+                        </td>
+                        <td>
+                          <span ng-if="ticket.state === 'RESERVED'" class="label label-info">予約済み</span>
+                          <span ng-if="ticket.state === 'RECEIPTED'" class="label label-info-outline">受付済み</span>
+                          <span ng-if="ticket.state === 'DOING'" class="label label-success">診察中</span>
+                          <span ng-if="ticket.state === 'PAYMENT'" class="label label-warning">会計待ち</span>
+                          <span ng-if="ticket.state === 'COMPLETED'" class="label label-default">診察終了</span>
+                          <span ng-if="ticket.state === 'CANCEL'" class="label label-default">キャンセル</span>
+                        </td>
+                        <td>
+                          <span ng-if="!!ticket.diagnosis.name">{{ticket.diagnosis.name}}</span>
+                          <span ng-if="!ticket.diagnosis.name">未定</span>
+                        </td>
+                        <td>
+                          <span>{{ticket.total | currency:'¥ ':0}}</span>
+                        </td>
+                        <td>
+                          <span>{{ticket.total - ticket.balance | currency:'¥ ':0}}</span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="text-center m0">
+                  <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true"></dir-pagination-controls>
+                </div>
+              </div>
+            </uib-tab>
+            <uib-tab index="4">
+              <uib-tab-heading>
+                <i class="fa m0 fa-comments-o hide-xs" aria-hidden="true"></i>
+                コメント
+              </uib-tab-heading>
+              <div class="pt2">
+                <div class="alert alert-warning">
+                  カルテに自由記述でコメントを積み上げられる機能を鋭意開発中！これにより医療関係者との情報連携をスムーズにします。<br />近日公開予定です。
+                </div>
+              </div>
+            </uib-tab>
+          </uib-tabset>
         </div>
       </div>
     </div>
-  </div>
-</div>
-
-<div class="fab" md-theme="fab" ng-show="ctrl.chart.id">
-  <md-fab-speed-dial md-direction="up" md-open="ctrl.isOpen" class="md-scale" ng-mouseenter="ctrl.isOpen=true" ng-mouseleave="ctrl.isOpen=false" ng-cloak>
-    <md-fab-trigger>
-      <md-button aria-label="menu" class="md-fab md-primary">
-        <md-icon class="material-icons">menu</md-icon>
-      </md-button>
-    </md-fab-trigger>
-    <md-fab-actions>
-      <md-button class="md-fab md-raised md-mini" ui-sref="app.dashboard.ticket.form({chartId: ctrl.chart.id})">
-        <md-tooltip md-direction="left">予約する</md-tooltip>
-        <md-icon class="material-icons">today</md-icon>
-      </md-button>
-      <md-button class="md-fab md-raised md-mini" ui-sref="app.dashboard.chart.update({chartId: ctrl.chart.id})">
-        <md-tooltip md-direction="left">編集する</md-tooltip>
-        <md-icon class="material-icons">create</md-icon>
-      </md-button>
-      <md-button class="md-fab md-raised md-mini" ng-click="ctrl.delete($event, ctrl.chart)">
-        <md-tooltip md-direction="left">削除する</md-tooltip>
-        <md-icon class="material-icons">delete</md-icon>
-      </md-button>
-    </md-fab-actions>
-  </md-fab-speed-dial>
+  </section>
 </div>

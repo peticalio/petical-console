@@ -1,0 +1,20 @@
+<div class="form-group" ng-class="{'has-error': $ctrl.form[$ctrl.name].$invalid}">
+  <label for="{{$ctrl.name}}">
+    <span>検査内容</span>
+    <span ng-if="$ctrl.required" class="label label-required">必須</span>
+  </label>
+  <ol class="form-control nya-bs-select" ng-model="$ctrl.model" data-size="10" data-live-search="true" ng-required="$ctrl.required">
+    <li nya-bs-option="option in $ctrl.data group by option.category track by option.id">
+      <span class="dropdown-header">{{$group}}</span>
+      <a>
+        <span>{{option.name}}<small> - {{option.category}}</small></span>
+        <span class="fa fa-check check-mark"></span>
+      </a>
+    </li>
+  </ol>
+  <div class="form-error" ng-show="$ctrl.form[$ctrl.name].$invalid" ng-messages="$ctrl.form[$ctrl.name].$error">
+    <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+      <span>検査内容を選択してください。</span>
+    </div>
+  </div>
+</div>

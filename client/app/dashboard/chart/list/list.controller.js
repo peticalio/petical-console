@@ -8,8 +8,7 @@
       this.toaster = toaster;
       this.ClinicChart = ClinicChart;
       this.charts = charts;
-      this.page = 1;
-      this.limit = 20;
+      this.order = 'chartNo';
     }
 
     // カルテを検索する
@@ -20,6 +19,12 @@
           this.toaster.info('カルテの一覧を更新しました。');
           return response.$promise;
         });
+    }
+
+    // ソートキーを指定する
+    sort(key) {
+      this.order = key;
+      this.reverse = !this.reverse;
     }
   }
 

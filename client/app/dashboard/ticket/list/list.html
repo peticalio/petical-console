@@ -1,51 +1,44 @@
-<div class="layout-max-width">
-  <section>
-    <md-toolbar md-theme="content" class="pt">
-      <div class="md-toolbar-tools">
-        <h2 class="md-title">
-          チケット
-          <span class="hint--large hint--bounce hint--rounded clickable" data-hint="チケットは１回の診察につき１枚発行します。チケットの作成は、カルテの検索から行います。">
-            <md-icon class="material-icons small">help</md-icon>
-          </span>
-        </h2>
-        <span flex></span>
-        <md-button class="md-icon-button" ng-click="ctrl.refresh()">
-          <md-tooltip md-direction="left">更新</md-tooltip>
-          <md-icon class="material-icons">refresh</md-icon>
-        </md-button>
+<div class="container-fluid">
+  <div class="page-header-content">
+    <div class="heading-elements hide-xs">
+      <a class="btn btn-link lnk-submenu" ng-click="ctrl.refresh()">
+        <i class="fa fa-refresh" aria-hidden="true"></i>
+        <p>更新する</p>
+      </a>
+		</div>
+    <div class="page-title">
+      <h4>チケット</h4>
+      <ul class="breadcrumb breadcrumb-caret small" ncy-breadcrumb></ul>
+    </div>
+  </div>
+  <section class="panel">
+    <div class="panel-body p0">
+      <div class="ptc-swimlane">
+        <div class="ptc-swimlane-column dropable-container" ui-sortable="ctrl.waitingListOptions" ng-model="ctrl.waitings">
+          <h5><i class="fa fa-hand-paper-o mr hide-xs" aria-hidden="true"></i>診察待ち</h5>
+          <div id="{{ticket.id}}" class="ptc-sortable ptc-swimlane-content" ng-repeat="ticket in ctrl.waitings">
+            <ptc-ticket ticket="ticket" params="{ticketId: ticket.id}"></ptc-ticket>
+          </div>
+        </div>
+        <div class="ptc-swimlane-column dropable-container" ui-sortable="ctrl.examinationListOptions" ng-model="ctrl.examinatings">
+          <h5><i class="fa fa-stethoscope mr hide-xs" aria-hidden="true"></i>診察中</h5>
+          <div id="{{ticket.id}}" class="ptc-sortable ptc-swimlane-content" ng-repeat="ticket in ctrl.examinatings">
+            <ptc-ticket ticket="ticket" params="{ticketId: ticket.id}"></ptc-ticket>
+          </div>
+        </div>
+        <div class="ptc-swimlane-column dropable-container" ui-sortable="ctrl.accountingListOptions" ng-model="ctrl.accountings">
+          <h5><i class="fa fa-credit-card mr hide-xs" aria-hidden="true"></i>会計待ち</h5>
+          <div id="{{ticket.id}}" class="ptc-sortable ptc-swimlane-content" ng-repeat="ticket in ctrl.accountings">
+            <ptc-ticket ticket="ticket" params="{ticketId: ticket.id}"></ptc-ticket>
+          </div>
+        </div>
+        <div class="ptc-swimlane-column dropable-container b0" ui-sortable="ctrl.completedListOptions" ng-model="ctrl.completed">
+          <h5><i class="fa fa-thumbs-o-up mr hide-xs" aria-hidden="true"></i>完了</h5>
+          <div id="{{ticket.id}}" class="ptc-sortable ptc-swimlane-content" ng-repeat="ticket in ctrl.completed">
+            <ptc-ticket ticket="ticket" params="{ticketId: ticket.id}"></ptc-ticket>
+          </div>
+        </div>
       </div>
-    </md-toolbar>
-    <div layout-padding>
-      <md-table-container class="flat-card">
-        <table md-table class="table-hover table-clickable">
-          <thead md-head>
-            <tr md-row>
-              <th md-column>診察予定日時</th>
-              <th md-column>ステータス</th>
-              <th md-column>お名前</th>
-              <th md-column>飼い主</th>
-            </tr>
-          </thead>
-          <tbody md-body>
-            <tr md-row ng-repeat="ticket in ctrl.tickets" ui-sref="app.dashboard.ticket.detail({ticketId: ticket.id})">
-              <td md-cell>
-                {{ticket.startDateTime | date:'yyyy/MM/dd HH:mm'}} - {{ticket.endDateTime | date:'HH:mm'}}
-              </td>
-              <td md-cell>
-                <ptz-ticket-status value="ticket.state"></ptz-ticket-status>
-              </td>
-              <td md-cell>
-                <a ui-sref-ignore ui-sref="app.dashboard.chart.detail({chartId: ticket.chart.id})">{{ticket.chart.pet.name}}</a> ちゃん<br/>
-                {{ticket.chart.pet.type}}
-              </br/>
-              </td>
-              <td md-cell>
-                <a ui-sref-ignore ui-sref="app.dashboard.customer.detail({customerId: ticket.chart.customer.id})">{{ticket.chart.customer.user.lastName}} {{ticket.chart.customer.user.firstName}}</a> 様
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </md-table-container>
     </div>
   </section>
 </div>

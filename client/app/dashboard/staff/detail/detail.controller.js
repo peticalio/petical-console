@@ -14,10 +14,9 @@
     delete(event, staff) {
       this.dialog.delete(event, staff)
         .then(() => this.ClinicStaff.delete({clinicId: this.clinic.id, staffId: staff.id}))
-        .then(() => this.ClinicStaff.fetch({clinicId: this.clinic.id}))
         .then(() => {
           this.toaster.info('スタッフを削除しました。');
-          this.$state.go('app.dashboard.staff.list');
+          this.$state.go('app.dashboard.staff', {}, {reload: true});
         });
     }
   }

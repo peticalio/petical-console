@@ -1,55 +1,73 @@
-<div class="layout-max-width">
-  <section>
-    <md-toolbar md-theme="content" class="pt">
-      <div class="md-toolbar-tools">
-        <h2 class="md-title">スタッフ</h2>
-        <span flex></span>
-        <md-button class="md-icon-button" ng-click="ctrl.refresh()">
-          <md-tooltip md-direction="left">更新</md-tooltip>
-          <md-icon class="material-icons">refresh</md-icon>
-        </md-button>
-      </div>
-    </md-toolbar>
-    <div layout-padding>
-      <md-table-container class="flat-card">
-        <table md-table class="table-hover table-clickable">
-          <thead md-head>
-            <tr md-row>
-              <th md-column></th>
-              <th md-column><span>スタッフ</span></th>
-              <th md-column><span>メールアドレス</span></th>
-              <th md-column><span>役割</span></th>
-              <th md-column><span>作成日時</span></th>
+<div class="container-fluid">
+  <div class="page-header-content">
+    <div class="heading-elements hide-xs">
+      <a class="btn btn-link lnk-submenu" ui-sref="app.dashboard.staff.form">
+        <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+        <p>招待する</p>
+      </a>
+      <a class="btn btn-link lnk-submenu" ng-click="ctrl.refresh()">
+        <i class="fa fa-refresh" aria-hidden="true"></i>
+        <p>更新する</p>
+      </a>
+		</div>
+    <div class="page-title">
+      <h4>管理 - スタッフ管理</h4>
+      <ul class="breadcrumb breadcrumb-caret small" ncy-breadcrumb></ul>
+    </div>
+  </div>
+  <section class="panel">
+    <div class="panel-body">
+      <form class="col-sm-6 col-md-4 mb2 pl0">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-search"></i></span>
+          <input type="text" class="form-control" ng-model="ctrl.keyword" placeholder="検索キーワードを入力" />
+        </div>
+      </form>
+      <div class="table-responsive">
+        <table class="table table-hover table-clickable table-sortable table-middle">
+          <thead>
+            <tr>
+              <th class="col-sm-4">
+                <a ng-click="ctrl.sort('user.lastName')">スタッフ</a>
+                <i class="fa ml" ng-show="ctrl.order=='user.lastName'" ng-class="{'fa-caret-up':ctrl.reverse, 'fa-caret-down':!ctrl.reverse}"></i>
+              </th>
+              <th class="col-sm-4">
+                <a ng-click="ctrl.sort('user.login')">ログインID</a>
+                <i class="fa ml" ng-show="ctrl.order=='user.login'" ng-class="{'fa-caret-up':ctrl.reverse, 'fa-caret-down':!ctrl.reverse}"></i>
+              </th>
+              <th class="col-sm-2">
+                <a ng-click="ctrl.sort('staff.role')">ロール</a>
+                <i class="fa ml" ng-show="ctrl.order=='staff.role'" ng-class="{'fa-caret-up':ctrl.reverse, 'fa-caret-down':!ctrl.reverse}"></i>
+              </th>
+              <th class="col-sm-2">
+                <a ng-click="ctrl.sort('lastModifiedDate')">最終更新日時</a>
+                <i class="fa ml" ng-show="ctrl.order=='lastModifiedDate'" ng-class="{'fa-caret-up':ctrl.reverse, 'fa-caret-down':!ctrl.reverse}"></i>
+              </th>
             </tr>
           </thead>
-          <tbody md-body>
-            <tr md-row ng-repeat="staff in ctrl.staffs" ui-sref="app.dashboard.staff.detail({staffId: staff.id})">
-              <td md-cell>
-                <img gravatar-src-once="staff.user.login" class="img-circle"/>
-              </td>
-              <td md-cell>
+          <tbody>
+            <tr dir-paginate="staff in ctrl.staffs | filter:ctrl.keyword | orderBy:ctrl.order:ctrl.reverse | itemsPerPage:20" ui-sref="app.dashboard.staff.detail({staffId: staff.id})">
+              <td>
+                <img gravatar-src-once="staff.user.login" class="img-circle mr"/>
                 {{staff.user.lastName}} {{staff.user.firstName}}
               </td>
-              <td md-cell>
-                {{staff.user.email}}
+              <td>
+                {{staff.user.login}}
               </td>
-              <td md-cell>
-                <span class="label label-info">{{staff.role}}<span>
+              <td>
+                <span class="label label-danger" ng-if="staff.role === 'ROLE_OWNER'">オーナー</span>
+                <span class="label label-info" ng-if="staff.role === 'ROLE_STAFF'">スタッフ</span>
               </td>
-              <td md-cell>
-                {{staff.createdDate | date:'yyyy/MM/dd HH:mm'}}
+              <td>
+                {{staff.lastModifiedDate | date:'yyyy/MM/dd HH:mm'}}
               </td>
             </tr>
           </tbody>
         </table>
-      </md-table-container>
+      </div>
+      <div class="text-center m0">
+        <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true"></dir-pagination-controls>
+      </div>
     </div>
   </section>
-</div>
-
-<div class="fab" md-theme="fab">
-  <md-button aria-label="add" class="md-fab md-primary" ui-sref="app.dashboard.staff.form">
-    <md-tooltip md-direction="left">新規追加</md-tooltip>
-    <md-icon class="material-icons">add</md-icon>
-  </md-button>
 </div>

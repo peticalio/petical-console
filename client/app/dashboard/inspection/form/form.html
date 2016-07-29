@@ -1,0 +1,55 @@
+<div class="container-fluid">
+  <div class="page-header-content">
+    <div class="heading-elements hide-xs">
+      <a class="btn btn-link lnk-submenu" ui-sref="app.dashboard.inspection">
+        <i class="fa fa-search" aria-hidden="true"></i>
+        <p>検索する</p>
+      </a>
+		</div>
+    <div class="page-title">
+      <h4>管理 - 診察料金管理</h4>
+      <ul class="breadcrumb breadcrumb-caret small" ncy-breadcrumb></ul>
+    </div>
+  </div>
+  <section class="panel">
+    <div class="panel-body">
+      <form name="form">
+        <div class="row">
+          <div class="col-sm-6 col-xs-12">
+            <ptc-input form="form" name="name" label="診察名" model="ctrl.inspection.name" maxlength="50" required="true" message="50 文字以内で入力してください。"></ptc-input>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 col-xs-12">
+            <ptc-input form="form" name="price" label="診察料金（単価）" model="ctrl.inspection.price" type="price" min="0" max="9999999" required="true" message="0 - 9,999,999 の間の数字で入力してください。"></ptc-input>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 col-xs-12">
+            <ptc-input-select form="form" name="course" label="科目" model="ctrl.inspection.course" data="ctrl.courses" maxlength="50" pattern="" required="true"></ptc-input-select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 col-xs-12">
+            <ptc-input-select form="form" name="category" label="カテゴリ" model="ctrl.inspection.category" data="ctrl.categories" maxlength="50" pattern="" required="true"></ptc-input-select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <ptc-textarea form="form" name="description" label="説明" model="ctrl.inspection.description" maxlength="2000" message="2000文字以内で入力してください。"></ptc-textarea>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 text-right" ng-if="!ctrl.inspection.id">
+            <button class="btn btn-primary" ng-disabled="form.$invalid" ng-click="ctrl.save(ctrl.inspection)">登録する</button>
+            <button class="btn btn-link" ui-sref="app.dashboard.inspection">キャンセル</button>
+          </div>
+          <div class="col-xs-12 text-right" ng-if="ctrl.inspection.id">
+            <button class="btn btn-primary" ng-disabled="form.$invalid" ng-click="ctrl.update(ctrl.inspection)">更新する</button>
+            <button class="btn btn-link" ui-sref="app.dashboard.inspection.detail({inspectionId: ctrl.inspection.id})">キャンセル</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -22,14 +22,7 @@
       // set default form values
       this.customers = [{}];
       this.settings = {contextMenu: ['row_above', 'row_below', 'remove_row']};
-      this.container = document.getElementById('main-content');
       this.progress = 0;
-    }
-
-    // 高さを計算する
-    getHeight() {
-      var height = this.container.offsetHeight;
-      return height - 72 - 72;
     }
 
     // 不正値がないことをチェックする
@@ -50,7 +43,7 @@
       customers.forEach((item) => {
         if (item && item.user && item.user.firstName && item.user.lastName) {
           item.clinic = this.clinic;
-          var promise = this.ClinicCustomer.save({clinicId: this.clinic.id}, item).$promise
+          var promise = this.ClinicCustomer.save({clinicId:this.clinic.id, force:true}, item).$promise
             .then(() => {
               counter++;
               this.progress = Math.ceil(counter / size * 100);

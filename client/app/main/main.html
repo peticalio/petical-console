@@ -1,58 +1,36 @@
-<div class="layout-max-width" md-theme="content">
-  <section>
-    <div layout-padding>
-      <div class="note note-warning" flex ng-if="!ctrl.account.activated">
-        お使いのアカウントはアクティベートされていません。アクティベートして、すべての機能が使えるようにしましょう！<br/>
-        <a ui-sref="app.activate">アクティベートはこちらのページ</a>で行えます。
-      </div>
+<div class="container">
+  <div class="row mt2 mb2">
+    <div class="col-sm-3">
+      <ul class="nav nav-pills nav-stacked">
+        <!-- <li role="presentation"><a href="#">私のペット</a></li>
+        <li role="presentation"><a href="#">私の動物病院</a></li> -->
+        <li role="presentation" class="active"><a href="#">勤務先の動物病院</a></li>
+      </ul>
     </div>
-    <md-toolbar class="pt">
-      <div class="md-toolbar-tools">
-        <h1 class="md-title">わたしのペット</h1>
-        <span flex></span>
-        <!-- <md-button class="md-icon-button" ui-sref="app.dashboard.customer.form">
-          <md-tooltip>新規追加</md-tooltip>
-          <md-icon class="material-icons">add</md-icon>
-        </md-button> -->
-      </div>
-    </md-toolbar>
-    <div layout-padding>
-      <div class="note note-default" flex ng-if="!ctrl.pets || ctrl.pets.length < 1">
-        現在、飼育しているペットはございません。<br/>
-        ペティカルをお使いの動物病院で診察を受けると、ペットの診察情報や診察履歴を見られるようになります。
-      </div>
-      <md-grid-list md-cols="4" md-cols-xs="1" md-cols-sm="3" md-gutter="1em" md-row-height="4:3" class="pt0">
-        <md-grid-tile ng-repeat="pet in ctrl.pets" class="flat-card clickable">
-          <md-grid-tile-footer>
-            <h3>{{pet.name}}</h3>
-          </md-grid-tile-footer>
-        </md-grid-tile>
-      </md-grid-list>
+    <div class="col-sm-9 mt2">
+      <ul class="ptc-digest-container">
+        <li class="col-sm-4 mb2" ng-repeat="clinic in ctrl.clinics">
+          <a ui-sref="app.dashboard({clinicId:clinic.id})">
+            <div class="ptc-digest-box">
+              <img gravatar-src-once="clinic.email" class="img-rounded" gravatar-size="100" style="width:56px;"/>
+              <h5 class="mt2">{{clinic.name}}</h5>
+              <p class="text-left text-muted">
+                <span class="text-ellipsis">{{clinic.state}}{{clinic.city}}{{clinic.street}}</span><br/>
+                <span class="text-ellipsis">院長　{{clinic.lastName}} {{clinic.firstName}}</span>
+              </p>
+            </div>
+          </a>
+        </li>
+        <li class="col-sm-4 mb2">
+          <a ui-sref="app.main.clinic.form">
+            <div class="ptc-digest-box">
+              <i class="fa fa-plus fa-3x" style="width:56px;height:56px;"></i>
+              <h5 class="mt2">追加する</h5>
+              <p class="text-muted">動物病院の管理者は、新しく動物病院を追加することができます。</p>
+            </div>
+          </a>
+        </li>
+      </ul>
     </div>
-  </section>
-
-  <section>
-    <md-toolbar>
-      <div class="md-toolbar-tools">
-        <h1 class="md-title">勤務先動物病院</h1>
-        <span flex></span>
-        <md-button class="md-primary" ui-sref="app.main.clinic.form" ng-if="ctrl.account.activated">
-          追加する
-        </md-button>
-      </div>
-    </md-toolbar>
-    <div layout-padding>
-      <div class="note note-default" flex ng-if="!ctrl.clinics || ctrl.clinics.length < 1">
-        現在、利用できる動物病院はございません。<br/>
-        ご自分が勤務している動物病院を「追加する」か、管理者の方に依頼して「招待」してもらってください。
-      </div>
-      <md-grid-list md-cols="4" md-cols-xs="1" md-cols-sm="3" md-gutter="1em" md-row-height="4:3" class="pt0">
-        <md-grid-tile ng-repeat="clinic in ctrl.clinics" class="flat-card clickable" ui-sref="app.dashboard({clinicId: clinic.id})">
-          <md-grid-tile-footer>
-            <h3>{{clinic.name}}</h3>
-          </md-grid-tile-footer>
-        </md-grid-tile>
-      </md-grid-list>
-    </md-content>
   </div>
 </div>

@@ -23,6 +23,9 @@
             controllerAs: 'ctrl'
           }
         },
+        ncyBreadcrumb: {
+          label: 'ホーム'
+        },
         resolve: {
           clinics:        getMyClinics,
           pets:           getMyPets

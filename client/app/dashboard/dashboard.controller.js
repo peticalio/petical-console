@@ -2,12 +2,12 @@
   'use strict';
 
   class DashboardController {
-    constructor($stateParams, $filter, ClinicOutline, ClinicTicketSummary, ClinicSales, clinics, clinic) {
+    constructor($stateParams, $filter, ClinicOutline, ClinicTicketSummary, ClinicSummary, clinics, clinic) {
       this.$stateParams = $stateParams;
       this.$filter = $filter;
       this.ClinicOutline = ClinicOutline;
       this.ClinicTicketSummary = ClinicTicketSummary;
-      this.ClinicSales = ClinicSales;
+      this.ClinicSummary = ClinicSummary;
       this.clinic = clinic;
       this.clinics = clinics;
       console.log(clinics);
@@ -35,20 +35,24 @@
       this.ClinicTicketSummary.get({clinicId: this.$stateParams.clinicId, type: 'daily'}).$promise
         .then((response) => {
           this.ticketChartData = [{
-            key:    '診察完了',
-            color:  '#999',
-            values: this.transform(response.data, 1, 0)
-          }, {
             key:    '診察中・予約中',
             color:  '#428bca',
+            values: this.transform(response.data, 1, 0)
+          }, {
+            key:    '診察完了',
+            color:  '#5cb85c',
             values: this.transform(response.data, 2, 1)
+          }, {
+            key:    'キャンセル',
+            color:  '#999',
+            values: this.transform(response.data, 3, 2)
           }];
         });
     }
 
     // 日次売上チャートを描画する
     writeDailySalesChart() {
-      this.ClinicSales.get({clinicId: this.$stateParams.clinicId, type: 'daily'}).$promise
+      this.ClinicSummary.load({clinicId:this.clinic.id, category:'sales', type:'daily'}).$promise
         .then((response) => {
           this.dailySalesChartData = [
             this.getSalesAmountChartDefs(response.data),
@@ -59,7 +63,7 @@
 
     // 月次売上チャートを描画する
     writeMonthlySalesChart() {
-      this.ClinicSales.get({clinicId: this.$stateParams.clinicId, type: 'monthly'}).$promise
+      this.ClinicSummary.load({clinicId:this.clinic.id, category:'sales', type:'monthly'}).$promise
         .then((response) => {
           this.monthlySalesChartData = [
             this.getSalesAmountChartDefs(response.data),
@@ -93,7 +97,7 @@
     // グラフデータからD3のチャートデータに変換する
     transform(data, i, series) {
       return data.map((d) => {
-        return {x: d[0], y: d[i], series: series};
+        return {x: moment(d[0]), y: d[i], series: series};
       });
     }
 
@@ -130,7 +134,7 @@
       return {
         chart: {
           type: 'multiChart',
-          height: 300,
+          height: 250,
           useInteractiveGuideline: true,
           margin : {top: 16, right: 40, bottom: 24, left: 40},
           xAxis: {
@@ -150,7 +154,7 @@
     }
   }
 
-  DashboardController.$inject = ['$stateParams', '$filter', 'ClinicOutline', 'ClinicTicketSummary', 'ClinicSales', 'clinics', 'clinic'];
+  DashboardController.$inject = ['$stateParams', '$filter', 'ClinicOutline', 'ClinicTicketSummary', 'ClinicSummary', 'clinics', 'clinic'];
   angular.module('petzApp')
     .controller('DashboardController', DashboardController);
 

@@ -13,17 +13,16 @@
   function InvitationRouter($stateProvider){
     $stateProvider
       .state('app.main.invitation', {
-        abstract:         true,
         url:              '^/invitations',
-      })
-      .state('app.main.invitation.list', {
-        url:              '/list',
         views: {
           '@app': {
             templateUrl:  'app/main/invitation/list/list.html',
             controller:   'InvitationListController',
             controllerAs: 'ctrl'
           }
+        },
+        ncyBreadcrumb: {
+          label: '招待状'
         },
         resolve: {
           invitations:     getInvitations
@@ -37,6 +36,9 @@
             controller:   'InvitationActivationController',
             controllerAs: 'ctrl'
           }
+        },
+        ncyBreadcrumb: {
+          label: 'アクティベーション'
         },
         resolve: {
           invitation:     getInvitation

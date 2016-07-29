@@ -24,13 +24,13 @@ angular.module('petz.core')
           }
           $log.info(response);
         } else if (response.status === 404) {
-          $log.info(response);
+          toaster.error('該当する情報が存在しません。');
+          $log.error(response);
         } else if (response.status === 500) {
           toaster.handle(response);
           $log.error(response);
         } else {
-          toaster.info('タイムアウトしました。もう一度ログインしてください。');
-          // $location.path('/signin').replace();
+          toaster.error('タイムアウトしました。もう一度ログインしてください。');
           $cookieStore.remove('token');
           $injector.get('$state').go('app.signin');
         }

@@ -1,0 +1,410 @@
+// --------------------------------------------------
+// bootstrap container
+// --------------------------------------------------
+.container {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.img-circle {
+  width: 32px;
+}
+
+.breadcrumb {
+  background-color: inherit;
+  a {
+    color: $gray-dark;
+  }
+}
+.breadcrumb > .active {
+  color: $gray-dark;
+  font-weight: bold;
+}
+
+// --------------------------------------------------
+// bootstrap navbar
+// --------------------------------------------------
+.navbar-default {
+  background-color: #fff;
+  border-color: $table-border-color;
+  .navbar-nav > .active > a, .navbar-nav > .active > a:focus, .navbar-nav > .active > a:hover, .navbar-nav > li > a:focus, .navbar-nav > li > a:hover,
+  .navbar-nav > .open > a, .navbar-nav > .open > a:hover, .navbar-nav > .open > a:focus {
+    color: #333;
+    background: $gray-lighter;
+  }
+  .navbar-nav > li > a.active {
+    color: $link-color;
+  }
+}
+.navbar-inverse {
+  background-color: $brand-primary;
+  border: 0;
+  .navbar-nav > li > a {
+    color: #fff;
+  }
+  .navbar-nav > li > a.lnk-gravatar {
+    color: #fff;
+    padding-top: 7px;
+    padding-bottom: 6px;
+  }
+  .navbar-nav > .open > a, .navbar-nav > .open > a:hover, .navbar-nav > .open > a:focus, .navbar-nav > li > a:hover, .navbar-nav > li > a:focus, .navbar-nav > li > a.active {
+    background-color: darken($brand-primary, 13.5%);
+  }
+}
+.navbar-brand {
+  padding: 0;
+}
+.navbar-brand img {
+  height: $navbar-height;
+}
+.navbar-toggle {
+  z-index: 2;
+}
+.navbar-brand-center {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+  text-align:center;
+  margin: auto;
+}
+@media (min-width: 768px) {
+  .navbar-brand-center {
+    margin-left: 0 !important;
+  }
+  .navbar-swich {
+    margin-left: -15px;
+  }
+  .navbar-swith-dropdown-menu {
+    margin-left: -15px;
+  }
+}
+.navbar-swich {
+  color: #fff;
+  font-size: 16px;
+}
+.navbar-swich {
+  color: #fff;
+  font-size: 16px;
+}
+#sub-navbar {
+  z-index: initial;
+}
+
+// --------------------------------------------------
+// bootstrap dropdown
+// --------------------------------------------------
+.dropdown-menu li:focus, .dropdown-menu li a:focus {
+  outline: none !important;
+}
+.dropdown-menu > li > a {
+  padding: 6px 20px;
+}
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:active, .dropdown-menu > li > a:focus {
+  color: #fff;
+  background-color: $brand-primary !important;
+}
+.dropdown-menu > li > a.active {
+  background-color: $gray-lighter;
+}
+@media (min-width: 768px) {
+  .navbar-nav > li > a {
+    padding-top: 13px;
+    padding-bottom: 13px;
+  }
+}
+
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu > .dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  -webkit-border-radius: 0 6px 6px 6px;
+  -moz-border-radius: 0 6px 6px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover > .dropdown-menu {
+  display: block;
+}
+.dropdown-submenu > a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #ccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover > a:after {
+  border-left-color: #fff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left > .dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  -webkit-border-radius: 6px 0 6px 6px;
+  -moz-border-radius: 6px 0 6px 6px;
+  border-radius: 6px 0 6px 6px;
+}
+
+// --------------------------------------------------
+// ui-bootstrap calendar
+// --------------------------------------------------
+.uib-datepicker-popup {
+  padding: 4px;
+}
+.uib-daypicker {
+  outline: none !important;
+}
+
+// --------------------------------------------------
+// bootstrap panel
+// --------------------------------------------------
+.panel {
+  border-color: $table-border-color;
+  box-shadow: none;
+}
+.panel-heading {
+  border-color: $table-border-color;
+  padding: 16px;
+}
+.panel-heading-none {
+  padding-bottom: 0px;
+  border-bottom: 0;
+}
+.panel-body {
+  padding: 24px 16px;
+  .row {
+    p {
+      margin-bottom: 24px;
+    }
+    .fa {
+      margin-right: 16px;
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
+
+// --------------------------------------------------
+// bootstrap alert
+// --------------------------------------------------
+.alert {
+  p {
+    margin-bottom: 0 !important;
+  }
+}
+.alert-default {
+  border: 1px solid $table-border-color;
+}
+.alert-info {
+  background-color: $state-info-border;
+}
+.alert-success {
+  background-color: $state-success-border;
+}
+.alert-warning {
+  background-color: $state-warning-border;
+}
+.alert-danger {
+  background-color: $state-danger-border;
+}
+
+// --------------------------------------------------
+// bootstrap label
+// --------------------------------------------------
+.label-primary {
+  border: 1px solid $brand-primary;
+}
+.label-success {
+  border: 1px solid $brand-success;
+}
+.label-info {
+  border: 1px solid $brand-info;
+}
+.label-warning {
+  border: 1px solid $brand-warning;
+}
+.label-danger {
+  border: 1px solid $brand-danger;
+}
+.label-default {
+  @extend .label-primary;
+  background-color: #999999;
+  border: 1px solid #999999;
+}
+.label-default-outline {
+  @extend .label-default;
+  background-color: #fff;
+  color: #999999;
+  border: 1px solid #999999;
+}
+.label-primary-outline {
+  @extend .label-primary;
+  background-color: #fff;
+  color: $brand-primary;
+  border: 1px solid $brand-primary;
+}
+.label-success-outline {
+  @extend .label-success;
+  background-color: #fff;
+  color: $brand-success;
+  border: 1px solid $brand-success;
+}
+.label-info-outline {
+  @extend .label-info;
+  background-color: #fff;
+  color: $brand-info;
+  border: 1px solid $brand-info;
+}
+.label-warning-outline {
+  @extend .label-warning;
+  background-color: #fff;
+  color: $brand-warning;
+  border: 1px solid $brand-warning;
+}
+.label-danger-outline {
+  @extend .label-danger;
+  background-color: #fff;
+  color: $brand-danger;
+  border: 1px solid $brand-danger;
+}
+.label-required {
+  @extend .label-danger;
+  background-color: $brand-danger;
+  vertical-align: middle;
+  font-weight: normal;
+  font-size: 50%;
+  margin-left: 8px;
+}
+
+// --------------------------------------------------
+// bootstrap table and pagination
+// --------------------------------------------------
+.pagination {
+  margin: 0;
+}
+.table-sortable {
+  th {
+    color: $gray-light;
+    a {
+      color: $gray-dark;
+    }
+  }
+}
+.table-middle tbody tr td {
+  vertical-align: middle;
+}
+
+// --------------------------------------------------
+// bootstrap form
+// --------------------------------------------------
+.form-control, .form-control:focus {
+  box-shadow: none !important;
+  border-width: 2px;
+}
+.form-control:hover {
+  border-color: $gray-light;
+}
+.form-control:focus, .form-control:active {
+  border-color: $brand-primary;
+}
+.form-error {
+  @extend .text-danger;
+  margin-top: 4px;
+}
+// for ui-select (他のパーツと同じになるように微調整)
+.has-error .btn-default {
+  border-color: #a94442;
+}
+.ui-select-match-text {
+  color: #555555;
+}
+
+// --------------------------------------------------
+// bootstrap button
+// --------------------------------------------------
+button {
+  outline: none !important;
+}
+.btn-primary-outline {
+  @extend .btn-primary;
+  color: $brand-primary;
+  background-color: #fff;
+}
+.btn-success-outline {
+  @extend .btn-success;
+  color: $brand-success;
+  background-color: #fff;
+}
+.btn-warning-outline {
+  @extend .btn-warning;
+  color: $brand-warning;
+  background-color: #fff;
+}
+.btn-danger-outline {
+  @extend .btn-danger;
+  color: $brand-danger;
+  background-color: #fff;
+}
+
+// --------------------------------------------------
+// bootstrap modal
+// --------------------------------------------------
+.modal-header {
+  border: 0;
+}
+.modal-footer {
+  border: 0;
+}
+
+// --------------------------------------------------
+// text
+// --------------------------------------------------
+.text-muted {
+  color: #666666;
+}
+// pets original styles
+.text-ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+mark {
+  background-color: $state-danger-bg;
+  padding: 0.3em 0.5em;
+  border-radius: 3px;
+}
+
+// --------------------------------------------------
+// angular toastr
+// --------------------------------------------------
+#toast-container {
+  opacity: 0.9;
+}
+#toast-container > div {
+  -webkit-box-shadow: 0 0 4px #000;
+  box-shadow: 0 0 4px #000;
+  width: 300px;
+}
+.toast-info {
+  background-color: $brand-primary;
+}
+.toast-success {
+  background-color: $brand-success;
+}
+.toast-error {
+  background-color: $brand-danger;
+}
+.toast-message {
+  padding: 4px 0;
+}

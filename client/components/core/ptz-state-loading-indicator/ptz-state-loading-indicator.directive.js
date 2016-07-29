@@ -2,7 +2,17 @@
 
 angular.module('petz.core')
   .directive('ptzStateLoadingIndicator', ['$rootScope', function($rootScope) {
-    var template = '<div ng-show="isStateLoading" layout="row" layout-align="center center" class="state-loading-indicator"><md-progress-circular md-mode="indeterminate" md-theme="progress" md-diameter="120"></md-progress-circular></div>';
+    var template =
+      '<div ng-show="isStateLoading" class="ptc-spinner-container">' +
+      '<div class="ptc-spinner-cell">' +
+      '<ul class="ptc-spinner">' +
+	    '<li></li>' +
+	    '<li></li>' +
+	    '<li></li>' +
+	    '<li></li>' +
+      '</ul>' +
+      '</div>' +
+      '</div>';
 
     return {
       restrict: 'E',
@@ -20,6 +30,8 @@ angular.module('petz.core')
         $rootScope.$on('$stateChangeStart', view);
         $rootScope.$on('$stateChangeSuccess', hide);
         $rootScope.$on('$stateChangeError', hide);
+        $rootScope.$on('http:progress', view);
+        $rootScope.$on('http:finish', hide);
       }
     };
   }]);

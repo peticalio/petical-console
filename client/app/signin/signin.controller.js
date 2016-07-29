@@ -20,10 +20,14 @@
             this.$location.path(path);
           } else {
             this.$cacheFactory.get('$http').removeAll();
-            this.$state.go('app.main', {}, {reload: true});
+            this.$state.go('app.main', {}, {reload:true});
           }
         })
-        .catch(() => this.toaster.info('ログインIDかパスワードが間違っています。'));
+        .catch(() => {
+          this.toaster.error('ログインIDかパスワードが間違っています。');
+          this.login.email = null;
+          this.login.password = null;
+        });
     }
   }
 

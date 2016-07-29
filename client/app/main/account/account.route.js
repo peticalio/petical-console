@@ -15,6 +15,9 @@
             controller:   'AccountFormController',
             controllerAs: 'ctrl'
           }
+        },
+        ncyBreadcrumb: {
+          label: 'アカウント変更'
         }
       })
       .state('app.main.account.password', {
@@ -25,6 +28,9 @@
             controller:   'AccountPasswordFormController',
             controllerAs: 'ctrl'
           }
+        },
+        ncyBreadcrumb: {
+          label: 'パスワード変更'
         }
       })
     ;

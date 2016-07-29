@@ -1,0 +1,33 @@
+<div class="form-group" ng-class="{'has-error': $ctrl.form[$ctrl.name].$invalid}">
+  <label for="{{$ctrl.name}}">
+    <span ng-if="$ctrl.label">{{$ctrl.label}}</span>
+    <span ng-if="$ctrl.hint" class="hint--large hint--bounce hint--rounded clickable hide-xs" data-hint="{{$ctrl.hint}}">
+      <i class="fa fa-question-circle ml text-muted"></i>
+    </span>
+    <span ng-if="$ctrl.required" class="label label-required">必須</span>
+  </label>
+
+  <input ng-if="$ctrl.type !== 'price' && $ctrl.type !== 'date'" type="{{$ctrl.type}}"
+    name="{{$ctrl.name}}" ng-model="$ctrl.model" maxlength="{{$ctrl.maxlength}}" ng-minlength="{{$ctrl.minlength}}" ng-maxlength="$ctrl.maxlength" ng-required="$ctrl.required" ng-pattern="$ctrl.pattern" placeholder="{{$ctrl.message}}" class="form-control"
+    ng-blur="$ctrl.onblur()" ng-click="$ctrl.onclick()" ng-disabled="$ctrl.disabled" />
+
+  <div ng-if="$ctrl.type === 'price'" class="input-group">
+    <span class="input-group-addon">¥</span>
+    <input type="number" name="{{$ctrl.name}}" ng-model="$ctrl.model" ng-min="{{$ctrl.min}}" ng-max="$ctrl.max" ng-required="$ctrl.required" ng-pattern="$ctrl.pattern" placeholder="{{$ctrl.message}}" class="form-control"
+      ng-blur="$ctrl.onblur()" ng-click="$ctrl.onclick()" ng-disabled="$ctrl.disabled" />
+  </div>
+
+  <div ng-if="$ctrl.type === 'date'" class="input-group">
+    <input type="text" name="{{$ctrl.name}}" ng-model="$ctrl.model" maxlength="10" ng-required="$ctrl.required" ng-maxlength="10" ng-pattern="/^(\d{4})-(\d{2})-(\d{2})$/" placeholder="{{$ctrl.message}}" class="form-control"
+      ng-blur="$ctrl.onblur()" ng-click="$ctrl.onclick()" ng-disabled="$ctrl.disabled" uib-datepicker-popup is-open="$ctrl.opend" datepicker-options="$ctrl.datePickerOptions" close-text="Close"/>
+      <span class="input-group-btn">
+        <button type="button" class="btn btn-default" style="padding-bottom:7px;" ng-click="$ctrl.opend = true"><i class="fa fa-calendar m0"></i></button>
+      </span>
+  </div>
+
+  <div class="form-error" ng-show="$ctrl.form[$ctrl.name].$invalid" ng-messages="$ctrl.form[$ctrl.name].$error">
+    <div ng-message-exp="['required', 'minlength', 'maxlength', 'min', 'max' 'pattern']">
+      <span>{{$ctrl.message}}</span>
+    </div>
+  </div>
+</div>

@@ -2,44 +2,70 @@
   'use strict';
 
   class DialogService {
-    constructor($mdDialog, $mdMedia) {
-      this.$mdDialog = $mdDialog;
-      this.$mdMedia = $mdMedia;
+    constructor($uibModal) {
+      this.$uibModal = $uibModal;
     }
 
-    confirm(event, title, message) {
-      var confirm = this.$mdDialog.confirm()
-        .targetEvent(event)
-        .title(title)
-        .textContent(message)
-        .ok('OK')
-        .cancel('CANCEL');
-      return this.$mdDialog.show(confirm);
+    confirm(event, title, message, action) {
+      var modal = this.$uibModal.open({
+        animation: true,
+        templateUrl: 'confirm-modal.html',
+        controller: 'ConfirmModalController',
+        controllerAs: 'ctrl',
+        resolve: {
+          contents: function () {
+            return {title:title, message:message, action:action};
+          }
+        }
+      });
+      return modal.result;
     }
 
     delete(event) {
-      return this.confirm(event, '削除しても良いですか？', '一度削除すると元に戻すことはできません。本当に削除しますか？');
+      return this.confirm(event, '本当に削除してもよろしいですか？', '削除してしまったデータは元に戻すことができません。\n本当に削除してもよろしいですか？', '削除する');
     }
 
-    show(options) {
-      var useFullScreen = this.$mdMedia('sm') || this.$mdMedia('xs');
-      options.parent = angular.element(document.body);
-      options.fullscreen = useFullScreen;
-      options.clickOutsideToClose = true;
-      return this.$mdDialog.show(options);
-    }
-
-    hide(object) {
-      return this.$mdDialog.hide(object);
-    }
-
-    cancel() {
-      this.$mdDialog.cancel();
+    select(contents) {
+      var modal = this.$uibModal.open({
+        animation: true,
+        backdrop: 'static',
+        templateUrl: 'select-modal.html',
+        controller: 'ConfirmModalController',
+        controllerAs: 'ctrl',
+        resolve: {
+          contents: function () {
+            return contents;
+          }
+        }
+      });
+      return modal.result;
     }
   }
 
-  DialogService.$inject = ['$mdDialog', '$mdMedia'];
+  // 確認モーダルのコントローラ
+  class ConfirmModalController {
+    // コンストラクタ
+    constructor($scope, $uibModalInstance, contents) {
+      this.$scope = $scope;
+      this.$uibModalInstance = $uibModalInstance;
+      this.contents = contents;
+    }
+    // OK時の処理
+    execute() {
+      this.$uibModalInstance.close();
+    }
+    // close時の処理
+    close() {
+      this.$uibModalInstance.dismiss('cancel');
+    }
+  }
+
+  DialogService.$inject = ['$uibModal'];
   angular.module('petz.vendor')
     .service('dialog', DialogService);
+
+  ConfirmModalController.$inject = ['$scope', '$uibModalInstance', 'contents'];
+  angular.module('petz.vendor')
+    .controller('ConfirmModalController', ConfirmModalController);
 
 })();
