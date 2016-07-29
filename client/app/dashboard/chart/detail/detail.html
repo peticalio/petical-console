@@ -30,24 +30,24 @@
   <section class="panel">
     <div class="panel-body">
       <div class="row">
-        <div class="col-md-2">
+        <div class="col-sm-2">
           <i class="fa fa-nav fa-hospital-o"></i>動物病院:
         </div>
-        <div class="col-md-4">
+        <div class="col-sm-4">
           <p>{{ctrl.clinic.name}}</p>
         </div>
-        <div class="col-md-2">
+        <div class="col-sm-2">
           <i class="fa fa-nav fa-hashtag"></i>カルテ番号:
         </div>
-        <div class="col-md-4">
+        <div class="col-sm-4">
           <p>{{ctrl.chart.chartNo}}</p>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-2">
+        <div class="col-sm-2">
           <i class="fa fa-nav fa-user"></i>飼い主:
         </div>
-        <div class="col-md-10">
+        <div class="col-sm-10">
           <p>
             {{ctrl.chart.customer.user.lastName}}&nbsp;{{ctrl.chart.customer.user.firstName}}
             （{{ctrl.chart.customer.user.lastNameKana}}&nbsp;{{ctrl.chart.customer.user.firstNameKana}}） 様
@@ -55,10 +55,10 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-2">
+        <div class="col-sm-2">
           <i class="fa fa-nav fa-home"></i>住所:
         </div>
-        <div class="col-md-10">
+        <div class="col-sm-10">
           <p>
             <span ng-show="ctrl.chart.customer.user.zipCode">〒 {{ctrl.chart.customer.user.zipCode}}</span>
             {{ctrl.chart.customer.user.state}}{{ctrl.chart.customer.user.city}}{{ctrl.chart.customer.user.street}}{{ctrl.chart.customer.user.other}}
@@ -66,45 +66,45 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-2">
+        <div class="col-sm-2">
           <i class="fa fa-nav fa-heart-o"></i>お名前:
         </div>
-        <div class="col-md-4">
+        <div class="col-sm-4">
           <p>{{ctrl.chart.pet.name}} ちゃん</p>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-2">
+        <div class="col-sm-2">
           <i class="fa fa-nav fa-bolt"></i>品種・種別:
         </div>
-        <div class="col-md-4">
+        <div class="col-sm-4">
           <p>{{ctrl.chart.pet.kind}}（{{ctrl.chart.pet.type}}）</p>
         </div>
-        <div class="col-md-2">
+        <div class="col-sm-2">
           <i class="fa fa-nav fa-transgender"></i>性別:
         </div>
-        <div class="col-md-4">
+        <div class="col-sm-4">
           <p ng-if="!ctrl.chart.pet.sex"><i class="fa fa-neuter mr"></i>不明</p>
           <p ng-if="ctrl.chart.pet.sex === 'MALE'"><i class="fa fa-mars mr"></i>オス</p>
           <p ng-if="ctrl.chart.pet.sex === 'FEMALE'"><i class="fa fa-venus mr"></i>メス</p>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-2">
+        <div class="col-sm-2">
           <i class="fa fa-nav fa-birthday-cake"></i>生年月日:
         </div>
-        <div class="col-md-4">
+        <div class="col-sm-4">
           <p>{{ctrl.chart.pet.birthDate | date:'yyyy/MM/dd'}}</p>
         </div>
-        <div class="col-md-2">
+        <div class="col-sm-2">
           <i class="fa fa-nav fa-dot-circle-o"></i>毛色:
         </div>
-        <div class="col-md-4">
+        <div class="col-sm-4">
           <p>{{ctrl.chart.pet.color}}</p>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-sm-12">
           <uib-tabset active="active">
             <uib-tab index="0">
               <uib-tab-heading>
@@ -114,25 +114,31 @@
               <div class="pt2">
                 <h5>管理番号</h5>
                 <div class="row">
-                  <div class="col-md-2">
+                  <div class="col-sm-2">
                     <i class="fa fa-nav fa-certificate"></i>狂犬病登録番号:
                   </div>
-                  <div class="col-md-4">
+                  <div class="col-sm-4">
                     <p>{{ctrl.chart.pet.rabidRegisterNo}}</p>
+                  </div>
+                  <div class="col-sm-2">
+                    <i class="fa fa-nav fa-eyedropper"></i>注射済票番号:
+                  </div>
+                  <div class="col-sm-4">
+                    <p>{{ctrl.chart.pet.injectionReportNo}}</p>
                   </div>
                 </div>
                 <h5>マイクロチップ情報</h5>
                 <div class="row">
-                  <div class="col-md-2" ng-if="!!ctrl.chart.pet.microchipNo">
+                  <div class="col-sm-2" ng-if="!!ctrl.chart.pet.microchipNo">
                     <i class="fa fa-nav fa-sort-numeric-asc"></i>番号:
                   </div>
-                  <div class="col-md-4" ng-if="!!ctrl.chart.pet.microchipNo">
+                  <div class="col-sm-4" ng-if="!!ctrl.chart.pet.microchipNo">
                     <p>{{ctrl.chart.pet.microchipNo}}</p>
                   </div>
-                  <div class="col-md-2" ng-if="!!ctrl.chart.pet.microchipNo">
+                  <div class="col-sm-2" ng-if="!!ctrl.chart.pet.microchipNo">
                     <i class="fa fa-nav fa-calendar-o"></i>施術日:
                   </div>
-                  <div class="col-md-4" ng-if="!!ctrl.chart.pet.microchipNo">
+                  <div class="col-sm-4" ng-if="!!ctrl.chart.pet.microchipNo">
                     <p ng-if="!!ctrl.chart.pet.microchipDate">{{ctrl.chart.pet.microchipDate | date:'yyyy/MM/dd'}}</p>
                     <p ng-if="!ctrl.chart.pet.microchipDate">不明</p>
                   </div>
@@ -142,29 +148,29 @@
                 </div>
                 <h5>去勢・避妊</h5>
                 <div class="row">
-                  <div class="col-md-12">
+                  <div class="col-sm-12">
                     <p ng-if="!!ctrl.chart.pet.neutral"><i class="fa fa-nav fa-check text-success"></i>手術済み</p>
                     <p ng-if="!ctrl.chart.pet.neutral"><i class="fa fa-nav fa-times text-danger"></i>していない</p>
                   </div>
                 </div>
                 <h5>アレルギー</h5>
                 <div class="row">
-                  <div class="col-md-12">
-                    <p class="pre" ng-if="!!ctrl.chart.pet.allergia">手術済み</p>
+                  <div class="col-sm-12">
+                    <p class="pre" ng-if="!!ctrl.chart.pet.allergia">{{ctrl.chart.pet.allergia}}</p>
                     <p class="pre" ng-if="!ctrl.chart.pet.allergia">記載なし</p>
                   </div>
                 </div>
                 <h5>薬剤に関する注意事項</h5>
                 <div class="row">
-                  <div class="col-md-12">
-                    <p class="pre" ng-if="!!ctrl.chart.pet.drug">手術済み</p>
+                  <div class="col-sm-12">
+                    <p class="pre" ng-if="!!ctrl.chart.pet.drug">{{ctrl.chart.pet.drug}}</p>
                     <p class="pre" ng-if="!ctrl.chart.pet.drug">記載なし</p>
                   </div>
                 </div>
                 <h5>特徴・その他</h5>
                 <div class="row">
-                  <div class="col-md-12">
-                    <p class="pre" ng-if="!!ctrl.chart.pet.other">手術済み</p>
+                  <div class="col-sm-12">
+                    <p class="pre" ng-if="!!ctrl.chart.pet.other">{{ctrl.chart.pet.other}}</p>
                     <p class="pre" ng-if="!ctrl.chart.pet.other">記載なし</p>
                   </div>
                 </div>
