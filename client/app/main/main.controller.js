@@ -2,15 +2,14 @@
   'use strict';
 
   class MainController {
-    constructor($state, clinics, pets, Auth) {
+    constructor($state, Auth, MyClinic) {
       this.state = $state;
-      this.clinics = clinics;
-      this.pets = pets;
       this.account = Auth.getCurrentUser();
+      MyClinic.query().$promise.then((response) => this.clinics = response);
     }
   }
 
-  MainController.$inject = ['$state', 'clinics', 'pets', 'Auth'];
+  MainController.$inject = ['$state', 'Auth', 'MyClinic'];
   angular.module('petzApp')
     .controller('MainController', MainController);
 

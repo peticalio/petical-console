@@ -35,3 +35,8 @@ NODE_ENV=development node server/app.js
 ## Testing
 
 Running `npm test` will run the unit tests with karma.
+
+
+## Other
+
+sudo lsof -i -P | grep "LISTEN"
