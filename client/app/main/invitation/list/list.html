@@ -18,13 +18,10 @@
         <table class="table table-hover table-clickable table-sortable table-middle">
           <thead>
             <tr>
-              <th class="col-sm-3">
-                招待状の受け取り主
-              </th>
-              <th class="col-sm-3">
+              <th class="col-sm-5">
                 招待状の送り主
               </th>
-              <th class="col-sm-4">
+              <th class="col-sm-5">
                 招待されているクリニック
               </th>
               <th class="col-sm-2">
@@ -34,9 +31,6 @@
           </thead>
           <tbody>
             <tr ng-repeat="invitation in ctrl.invitations" ui-sref="app.main.invitation.activation({invitationId:invitation.id})">
-              <td>
-                {{invitation.invitedUser.lastName}} {{invitation.invitedUser.firstName}} 様
-              </td>
               <td>
                 {{invitation.user.lastName}} {{invitation.user.firstName}} 様
               </td>
