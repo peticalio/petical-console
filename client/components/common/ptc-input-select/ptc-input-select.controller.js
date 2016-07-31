@@ -3,6 +3,7 @@
 
   class PtcInputSelectController {
     constructor() {
+      this.message = '一覧から選択するか新しく入力してください';
     }
   }
 

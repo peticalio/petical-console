@@ -3,6 +3,7 @@
 
   class PtcSelectController {
     constructor() {
+      this.message = '一覧から選択してください';
     }
 
     getLabel(object) {
