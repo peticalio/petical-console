@@ -3,12 +3,6 @@
 
   class PtcTextareaController {
     constructor() {
-      this.label = '項目名';
-      this.required = false;
-      this.minlength = 0;
-      this.maxlength = 2000;
-      this.pattern = '';
-      this.message = '値を入力してください。';
     }
   }
 

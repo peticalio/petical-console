@@ -2,7 +2,7 @@
   'use strict';
 
   class ChartFormController {
-    constructor($state, $stateParams, toaster, ClinicChart, clinic, kinds, types, colors, bloods, tags, chart) {
+    constructor($state, $stateParams, toaster, ClinicChart, clinic, kinds, types, colors, bloods, chart) {
       this.$state = $state;
       this.$stateParams = $stateParams;
       this.toaster = toaster;
@@ -12,7 +12,6 @@
       this.types = types;
       this.colors = colors;
       this.bloods = bloods;
-      this.tags = tags;
 
       this.chart = chart;
       this.chart.pet.neutral = this.convert4nya(chart.pet.neutral);
@@ -50,7 +49,7 @@
     }
   }
 
-  ChartFormController.$inject = ['$state', '$stateParams', 'toaster', 'ClinicChart', 'clinic', 'kinds', 'types', 'colors', 'bloods', 'tags', 'chart'];
+  ChartFormController.$inject = ['$state', '$stateParams', 'toaster', 'ClinicChart', 'clinic', 'kinds', 'types', 'colors', 'bloods', 'chart'];
   angular
     .module('petzApp')
     .controller('ChartFormController', ChartFormController);

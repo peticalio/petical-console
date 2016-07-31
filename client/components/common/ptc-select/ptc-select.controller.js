@@ -3,12 +3,6 @@
 
   class PtcSelectController {
     constructor() {
-      this.label = '項目名';
-      this.data = [];
-      this.maxlength = 250;
-      this.pattern = '';
-      this.message = '一覧から選択するか値を入力してください。';
-      this.required = false;
     }
 
     getLabel(object) {

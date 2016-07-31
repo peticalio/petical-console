@@ -1,6 +1,5 @@
 (() => {
   'use strict';
-
   // ペットの種類を取得する
   function getKinds(Kind) {
     return Kind.query().$promise
@@ -22,12 +21,6 @@
   // ペットの血液型を取得する
   function getBloods(Blood) {
     return Blood.query().$promise
-      .then((response) => response);
-  }
-
-  // ペットのタグを取得する
-  function getTags(Tag) {
-    return Tag.query().$promise
       .then((response) => response);
   }
 
@@ -105,7 +98,6 @@
           types:          getTypes,
           colors:         getColors,
           bloods:         getBloods,
-          tags:           getTags,
           chart:          getChartByCustomer
         }
       })
@@ -127,7 +119,6 @@
           types:          getTypes,
           colors:         getColors,
           bloods:         getBloods,
-          tags:           getTags,
           chart:          getClinicChart
         }
       })
@@ -149,7 +140,6 @@
           types:          getTypes,
           colors:         getColors,
           bloods:         getBloods,
-          tags:           getTags,
           chart:          getChartByPet
         }
       })
