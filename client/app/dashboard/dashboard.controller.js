@@ -2,15 +2,15 @@
   'use strict';
 
   class DashboardController {
-    constructor($stateParams, $filter, ClinicOutline, ClinicTicketSummary, ClinicSummary, clinics, clinic) {
+    constructor($stateParams, $filter, ClinicOutline, ClinicTicketSummary, ClinicSummary, ClinicTicket, clinics, clinic) {
       this.$stateParams = $stateParams;
       this.$filter = $filter;
       this.ClinicOutline = ClinicOutline;
       this.ClinicTicketSummary = ClinicTicketSummary;
       this.ClinicSummary = ClinicSummary;
+      this.ClinicTicket = ClinicTicket;
       this.clinic = clinic;
       this.clinics = clinics;
-      console.log(clinics);
 
       this.today = new Date();
       this.ticketChartOptions = this.getTicketChartOptions();
@@ -19,6 +19,10 @@
       this.writeTicketChart();
       this.writeDailySalesChart();
       this.writeMonthlySalesChart();
+
+      // 完了済みでないチケットをロードする
+      this.ClinicTicket.fetch({clinicId:this.clinic.id, not:['COMPLETED','CANCEL'], to:moment().format('YYYY-MM-DD')}).$promise
+        .then((response) => this.tickets = response);
     }
 
     getClinicOutline() {
@@ -154,7 +158,7 @@
     }
   }
 
-  DashboardController.$inject = ['$stateParams', '$filter', 'ClinicOutline', 'ClinicTicketSummary', 'ClinicSummary', 'clinics', 'clinic'];
+  DashboardController.$inject = ['$stateParams', '$filter', 'ClinicOutline', 'ClinicTicketSummary', 'ClinicSummary', 'ClinicTicket', 'clinics', 'clinic'];
   angular.module('petzApp')
     .controller('DashboardController', DashboardController);
 
